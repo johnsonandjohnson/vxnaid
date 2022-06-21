@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.jnj.vaccinetracker.settings.mock.MockBackendSettingsViewModel" />
+
+        <import type="android.view.View" />
+
+    </data>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingHorizontal="32dp"
+            android:paddingVertical="24dp">
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="@{viewModel.mockAppSettings.showParticipantGenerationCountView ? View.VISIBLE : View.GONE}">
+
+                <EditText
+                    android:id="@+id/edit_participant_generation_count"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    android:layout_marginEnd="8dp"
+                    android:hint="Participant Generation Count"
+                    android:inputType="number" />
+
+                <Button
+                    android:id="@+id/btn_confirm_participant_count"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Generate participants" />
+            </LinearLayout>
+
+
+            <TextView
+                android:id="@+id/text_time_taken"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingBottom="8dp"
+                android:text="@{viewModel.timeTaken}" />
+
+            <TextView
+                android:id="@+id/text_database_size"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingBottom="8dp"
+                android:text="@{`Database Size: ` + viewModel.databaseSize}" />
+
+            <TextView
+                android:id="@+id/text_participant_count"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:text="@{`Participant Count: ` + viewModel.participantCount.toString()}" />
+
+            <TextView
+                android:id="@+id/text_visit_count"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:text="@{`Visit Count: ` + viewModel.visitCount.toString()}" />
+
+            <TextView
+                android:id="@+id/text_image_count"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:text="@{`Image Count: ` + viewModel.imageCount.toString()}" />
+
+            <TextView
+                android:id="@+id/text_template_count"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:text="@{`Template Count: ` + viewModel.templateCount.toString()}" />
+
+            <Button
+                android:id="@+id/btn_share_time_tracker_report"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:text="Share Time Tracker Report" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingBottom="16dp"
+                android:text="@{`P2P Transfer time: ` + viewModel.p2PTransferTime}"
+                android:visibility="@{viewModel.mockAppSettings.showP2pTransferTime ? View.VISIBLE : View.GONE}"
+                tools:text="Template P2P download time: 30:30" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:orientation="horizontal"
+                android:visibility="@{viewModel.mockAppSettings.showGenerateTemplatesView ? View.VISIBLE : View.GONE}">
+
+                <EditText
+                    android:id="@+id/text_generate_participants"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="16dp"
+                    android:layout_weight="1"
+                    android:hint="Generate fat participants"
+                    android:inputType="number"
+                    android:onTextChanged="@{(text,_,__,___)-> viewModel.onFatParticipantAmountChanged(text)}"
+                    android:text="@{viewModel.generateFatParticipantsAmount}" />
+
+                <ProgressBar
+                    android:id="@+id/progress_generate_participants"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_gravity="center|end"
+                    android:visibility="@{viewModel.isGeneratingFatParticipants ? View.VISIBLE : View.GONE}"
+                    tools:visibility="gone" />
+
+                <ImageButton
+                    android:id="@+id/btn_generate_participants"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_gravity="center|end"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:onClick="@{()->viewModel.onGenerateFatParticipantsClick()}"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/ic_save"
+                    android:visibility="@{viewModel.isGeneratingFatParticipants ? View.GONE : View.VISIBLE}" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:orientation="horizontal"
+                android:visibility="@{viewModel.mockAppSettings.showGenerateFatParticipantsView ? View.VISIBLE : View.GONE}">
+
+                <EditText
+                    android:id="@+id/text_generate_templates"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="16dp"
+                    android:layout_weight="1"
+                    android:hint="Generate templates"
+                    android:inputType="number"
+                    android:onTextChanged="@{(text,_,__,___)-> viewModel.onTemplateAmountChanged(text)}"
+                    android:text="@{viewModel.generateTemplatesAmount}" />
+
+                <ProgressBar
+                    android:id="@+id/progress_generate_templates"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_gravity="center|end"
+                    android:visibility="@{viewModel.isGeneratingTemplates ? View.VISIBLE : View.GONE}" />
+
+                <ImageButton
+                    android:id="@+id/btn_generate_templates"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_gravity="center|end"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:onClick="@{()->viewModel.onGenerateTemplatesClick()}"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/ic_save"
+                    android:visibility="@{viewModel.isGeneratingTemplates ? View.GONE : View.VISIBLE}" />
+
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/btn_close"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:layout_marginEnd="8dp"
+                android:text="@string/general_label_close" />
+
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+</layout>

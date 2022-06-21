@@ -1,0 +1,41 @@
+$dokka.format:gfm
+$dokka.linkExtension:md
+$dokka.location:com.jnj.vaccinetracker.common.helpers$addOnPauseObserver(androidx.lifecycle.Lifecycle, kotlin.Function0((kotlin.Unit)))com.jnj.vaccinetracker.common.helpers/androidx.lifecycle.-lifecycle/add-on-pause-observer.md
+$dokka.location:com.jnj.vaccinetracker.common.helpers$addOnStopObserver(androidx.lifecycle.Lifecycle, kotlin.Function0((kotlin.Unit)))com.jnj.vaccinetracker.common.helpers/androidx.lifecycle.-lifecycle/add-on-stop-observer.md
+$dokka.location:com.jnj.vaccinetracker.common.helpers$addStartAndStopObservers(androidx.lifecycle.Lifecycle, kotlin.Function0((kotlin.Unit)), kotlin.Function0((kotlin.Unit)))com.jnj.vaccinetracker.common.helpers/androidx.lifecycle.-lifecycle/add-start-and-stop-observers.md
+$dokka.location:com.jnj.vaccinetracker.common.helpers$disposeOnStop(io.reactivex.rxjava3.disposables.Disposable, androidx.lifecycle.Lifecycle)com.jnj.vaccinetracker.common.helpers/io.reactivex.rxjava3.disposables.-disposable/dispose-on-stop.md
+$dokka.location:com.jnj.vaccinetracker.common.helpers$findChild(androidx.appcompat.app.AppCompatActivity, kotlin.Boolean)com.jnj.vaccinetracker.common.helpers/androidx.appcompat.app.-app-compat-activity/find-child.md
+$dokka.location:com.jnj.vaccinetracker.common.helpers$findChild(androidx.fragment.app.Fragment)com.jnj.vaccinetracker.common.helpers/androidx.fragment.app.-fragment/find-child.md
+$dokka.location:com.jnj.vaccinetracker.common.helpers$findParent(androidx.fragment.app.Fragment, kotlin.Boolean)com.jnj.vaccinetracker.common.helpers/androidx.fragment.app.-fragment/find-parent.md
+$dokka.location:com.jnj.vaccinetracker.common.helpers$hideKeyboard(android.app.Activity)com.jnj.vaccinetracker.common.helpers/android.app.-activity/hide-keyboard.md
+$dokka.location:com.jnj.vaccinetracker.common.helpers$hideKeyboard(android.view.View)com.jnj.vaccinetracker.common.helpers/android.view.-view/hide-keyboard.md
+$dokka.location:com.jnj.vaccinetracker.common.helpers$logDebug(kotlin.Any, kotlin.String, kotlin.Array((kotlin.Any)))com.jnj.vaccinetracker.common.helpers/kotlin.-any/log-debug.md
+$dokka.location:com.jnj.vaccinetracker.common.helpers$logError(kotlin.Any, kotlin.String, kotlin.Array((kotlin.Any)))com.jnj.vaccinetracker.common.helpers/kotlin.-any/log-error.md
+$dokka.location:com.jnj.vaccinetracker.common.helpers$logInfo(kotlin.Any, kotlin.String, kotlin.Array((kotlin.Any)))com.jnj.vaccinetracker.common.helpers/kotlin.-any/log-info.md
+$dokka.location:com.jnj.vaccinetracker.common.helpers$logVerbose(kotlin.Any, kotlin.String, kotlin.Array((kotlin.Any)))com.jnj.vaccinetracker.common.helpers/kotlin.-any/log-verbose.md
+$dokka.location:com.jnj.vaccinetracker.common.helpers$logWarn(kotlin.Any, kotlin.String, kotlin.Array((kotlin.Any)))com.jnj.vaccinetracker.common.helpers/kotlin.-any/log-warn.md
+$dokka.location:com.jnj.vaccinetracker.common.helpers$observe(androidx.databinding.ObservableBoolean, androidx.lifecycle.Lifecycle, kotlin.Function1((kotlin.Boolean, kotlin.Unit)))com.jnj.vaccinetracker.common.helpers/androidx.databinding.-observable-boolean/observe.md
+$dokka.location:com.jnj.vaccinetracker.common.helpers$observe(androidx.databinding.ObservableField((com.jnj.vaccinetracker.common.helpers.observe.T)), androidx.lifecycle.Lifecycle, kotlin.Function1((com.jnj.vaccinetracker.common.helpers.observe.T, kotlin.Unit)))com.jnj.vaccinetracker.common.helpers/androidx.databinding.-observable-field/observe.md
+$dokka.location:com.jnj.vaccinetracker.common.helpers$observe(androidx.databinding.ObservableInt, androidx.lifecycle.Lifecycle, kotlin.Function1((kotlin.Int, kotlin.Unit)))com.jnj.vaccinetracker.common.helpers/androidx.databinding.-observable-int/observe.md
+$dokka.location:com.jnj.vaccinetracker.common.helpers$observe(androidx.databinding.ObservableList((com.jnj.vaccinetracker.common.helpers.observe.T)), androidx.lifecycle.Lifecycle, kotlin.Function1((kotlin.collections.List((com.jnj.vaccinetracker.common.helpers.observe.T)), kotlin.Unit)))com.jnj.vaccinetracker.common.helpers/androidx.databinding.-observable-list/observe.md
+$dokka.location:com.jnj.vaccinetracker.common.helpers$showKeyboard(android.app.Activity)com.jnj.vaccinetracker.common.helpers/android.app.-activity/show-keyboard.md
+$dokka.location:com.jnj.vaccinetracker.common.helpers$showKeyboard(android.view.View)com.jnj.vaccinetracker.common.helpers/android.view.-view/show-keyboard.md
+androidx.databinding
+androidx.databinding.library.baseAdapters
+com.jnj.vaccinetracker
+com.jnj.vaccinetracker.common.data.managers
+com.jnj.vaccinetracker.common.data.models.adapter
+com.jnj.vaccinetracker.common.data.models.api.request
+com.jnj.vaccinetracker.common.data.models.api.response
+com.jnj.vaccinetracker.common.data.network
+com.jnj.vaccinetracker.common.data.repositories
+com.jnj.vaccinetracker.common.di
+com.jnj.vaccinetracker.common.helpers
+com.jnj.vaccinetracker.common.ui
+com.jnj.vaccinetracker.common.ui.databinding
+com.jnj.vaccinetracker.databinding
+com.jnj.vaccinetracker.login
+com.jnj.vaccinetracker.participantflow
+com.jnj.vaccinetracker.participantflow.screens
+com.jnj.vaccinetracker.siteselection
+com.jnj.vaccinetracker.splash

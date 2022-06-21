@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.jnj.vaccinetracker.setup.screens.p2p.transfer.server.SetupP2pDeviceServerTransferViewModel" />
+
+        <import type="android.view.View" />
+    </data>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/imageView_header"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                app:layout_constraintBottom_toTopOf="@+id/textView_connection_header"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:srcCompat="@drawable/ic_sync_alt"
+                app:tint="@color/colorPrimary"/>
+
+            <TextView
+                android:id="@+id/textView_connection_header"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingTop="16dp"
+                android:paddingBottom="16dp"
+                android:text="@string/setup_p2p_transfer_server_title"
+                android:textAppearance="@style/ScreenTitle"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.37" />
+
+            <include
+                android:id="@+id/this_device_container"
+                layout="@layout/this_device_container"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="64dp"
+                app:layout_constraintEnd_toEndOf="@+id/textView_connection_header"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/textView_connection_header"
+                app:layout_constraintTop_toBottomOf="@+id/textView_connection_header" />
+
+            <include
+                android:id="@+id/authenticated_device_container"
+                layout="@layout/authenticated_device_container"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                app:layout_constraintEnd_toEndOf="@+id/textView_connection_header"
+                app:layout_constraintStart_toStartOf="@+id/textView_connection_header"
+                app:layout_constraintTop_toBottomOf="@+id/this_device_container" />
+
+            <TextView
+                android:id="@+id/error_textview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="16dp"
+                android:text="@{viewModel.errorMessage}"
+                android:textColor="@color/errorDark"
+                android:textAppearance="@style/GeneralText"
+                android:visibility="@{viewModel.errorMessage == null ? View.INVISIBLE : View.VISIBLE}"
+                app:layout_constraintEnd_toEndOf="@+id/textView_connection_header"
+                app:layout_constraintStart_toStartOf="@+id/textView_connection_header"
+                app:layout_constraintTop_toBottomOf="@+id/authenticated_device_container"
+                tools:text="Error" />
+
+            <include
+                android:id="@+id/progress_bar_container"
+                layout="@layout/progress_bar_container"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="@+id/textView_connection_header"
+                app:layout_constraintStart_toStartOf="@+id/textView_connection_header"
+                app:layout_constraintTop_toBottomOf="@+id/error_textview"
+                app:layout_constraintWidth_default="spread" />
+
+            <Button
+                android:id="@+id/finish_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="32dp"
+                android:backgroundTint="@color/alertLight"
+                android:textAppearance="@style/ButtonTextStyling"
+                android:text="@string/setup_p2p_btn_stop_broadcast"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
+</layout>

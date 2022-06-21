@@ -1,0 +1,19 @@
+{
+  "results": [
+    {
+      "uuid": "42655fae-3b09-4b15-bb4b-296311546be4",
+      "name": "Bangalore clinic",
+      "country": "India"
+    },
+    {
+      "uuid": "1424ae66-aaa6-4c33-b2b1-9789df1dba64",
+      "name": "Mumbai clinic",
+      "country": "India"
+    },
+    {
+      "uuid": "3ca102e5-2900-438b-9959-d34c079b71bf",
+      "name": "New Delhi hospital",
+      "country": "India"
+    }
+  ]
+}

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="ic_launcher_background">#FFFFFF</color>
+    <color name="colorPrimary">#1E6746</color>
+    <color name="colorPrimaryLight">#819ca9</color>
+    <color name="colorPrimaryLighter">#F2F2F2</color>
+    <color name="colorPrimaryDark">#13422d</color>
+    <color name="colorAccent">#1E6746</color>
+    <color name="colorSecondary">#8CC63F</color>
+    <color name="colorSecondaryLight">#cfff95</color>
+    <color name="colorSecondaryDark">#6b9b37</color>
+    <color name="colorTextOnPrimary">#ffffff</color>
+    <color name="colorTextOnSecondary">#fafafa</color>
+    <color name="colorTextOnLight">#555555</color>
+    <color name="greyed_out">#20000000</color>
+    <color name="participant_bg_selected">#F2F2F2</color>
+    <color name="alertLight">#FFA014</color>
+    <color name="errorLight">#DA5F6A</color>
+    <color name="errorDark">#B61C1C</color>
+    <color name="successDark">#186E00</color>
+    <color name="barcode_field_value">#797979</color>
+    <color name="barcode_field_box_stroke">#757575</color>
+    <color name="barcode_scan_overlay_color">#80000000</color>
+    <color name="shutter_active">#FFFFFFFF</color>
+    <color name="shutter_focused">#DDFFFFFF</color>
+    <color name="shutter_pressed">#AAFFFFFF</color>
+    <color name="time_window_inside">#43A047</color>
+    <color name="time_window_outside">#E53935</color>
+    <color name="sync_complete">#8BC34A</color>
+    <color name="sync_in_progress">#CDCDCD</color>
+    <color name="sync_offline">#2196F3</color>
+    <color name="sync_offline_out_of_sync">#FF9800</color>
+    <color name="sync_error">#B71C1C</color>
+    <drawable name="alert_background">@color/alertLight</drawable>
+    <drawable name="error_background">@color/errorLight</drawable>
+</resources>

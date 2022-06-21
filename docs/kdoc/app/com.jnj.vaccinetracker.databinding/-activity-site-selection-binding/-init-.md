@@ -1,0 +1,6 @@
+[app](../../index.md) / [com.jnj.vaccinetracker.databinding](../index.md) / [ActivitySiteSelectionBinding](index.md) / [&lt;init&gt;](./-init-.md)
+
+# &lt;init&gt;
+
+`protected ActivitySiteSelectionBinding(_bindingComponent: `[`Any`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html)`!, _root: View!, _localFieldCount: `[`Int`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html)`, buttonSubmit: Button!, progressBar: ProgressBar!, siteSelectionExposedDropdown: AutoCompleteTextView!, textInputLayoutSiteSelection: TextInputLayout!, textViewInstructions: TextView!, textViewWelcomeText: TextView!)`
+`protected ActivitySiteSelectionBinding(_bindingComponent: `[`Any`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html)`!, _root: View!, _localFieldCount: `[`Int`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html)`, buttonSubmit: Button!, progressBar: ProgressBar!, siteSelectionExposedDropdown: AutoCompleteTextView!, textInputLayoutSiteSelection: TextInputLayout!, textViewInstructions: TextView!, textViewWelcomeText: TextView!)`

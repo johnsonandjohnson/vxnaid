@@ -1,0 +1,46 @@
+[
+  {
+    "name": "Astra Zeneca vaccine",
+    "numberOfDose": 2,
+    "visits": [
+      {
+        "doseNumber": 1,
+        "nameOfDose": "Dosing",
+        "numberOfFutureVisit": 1,
+        "lowWindow": 0,
+        "midPointWindow": 0,
+        "upWindow": 0
+      },
+      {
+        "doseNumber": 2,
+        "nameOfDose": "Dosing",
+        "numberOfFutureVisit": 0,
+        "lowWindow": 7,
+        "midPointWindow": 84,
+        "upWindow": 7
+      }
+    ]
+  },
+  {
+    "name": "Pfizer vaccine",
+    "numberOfDose": 2,
+    "visits": [
+      {
+        "doseNumber": 1,
+        "nameOfDose": "Dosing",
+        "numberOfFutureVisit": 1,
+        "lowWindow": 0,
+        "midPointWindow": 0,
+        "upWindow": 0
+      },
+      {
+        "doseNumber": 2,
+        "nameOfDose": "Dosing",
+        "numberOfFutureVisit": 0,
+        "lowWindow": 4,
+        "midPointWindow": 35,
+        "upWindow": 3
+      }
+    ]
+  }
+]

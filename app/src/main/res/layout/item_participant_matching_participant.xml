@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="item"
+            type="com.jnj.vaccinetracker.participantflow.screens.ParticipantFlowMatchingViewModel.ParticipantItem" />
+
+        <variable
+            name="selected"
+            type="boolean" />
+
+        <import type="android.view.View" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/participant_item_bg"
+        app:selected="@{selected}">
+
+        <ImageView
+            android:id="@+id/imageView_participantPhoto"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_marginStart="2dp"
+            android:layout_marginTop="2dp"
+            android:layout_marginBottom="2dp"
+            android:adjustViewBounds="true"
+            android:cropToPadding="false"
+            android:scaleType="fitStart"
+            app:imageUiModel="@{item.picture}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_avatar_operator" />
+
+        <TextView
+            android:id="@+id/textView_participantId"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:text="@{item.participant.participantId}"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toTopOf="@+id/textView_gender"
+            app:layout_constraintStart_toEndOf="@+id/imageView_participantPhoto"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="9857432839845764832" />
+
+        <TextView
+            android:id="@+id/textView_gender"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{item.participant.gender == null ? `` : context.getString(item.participant.gender.translation)}"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toTopOf="@+id/textView_yearOfBirth"
+            app:layout_constraintStart_toStartOf="@+id/textView_participantId"
+            app:layout_constraintTop_toBottomOf="@+id/textView_participantId"
+            tools:text="Male" />
+
+        <TextView
+            android:id="@+id/textView_homeLocation"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@{item.participant.homeLocation}"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/textView_vaccine"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/textView_yearOfBirth"
+            app:layout_constraintTop_toBottomOf="@+id/textView_yearOfBirth"
+            tools:text="Belgium, Street 1" />
+
+        <TextView
+            android:id="@+id/textView_vaccine"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@{item.participant.vaccine.display}"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/textView_homeLocation"
+            app:layout_constraintTop_toBottomOf="@+id/textView_homeLocation"
+            tools:text="Vaccine" />
+
+        <TextView
+            android:id="@+id/textView_yearOfBirth"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{String.valueOf(item.participant.yearOfBirth)}"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toTopOf="@+id/textView_homeLocation"
+            app:layout_constraintStart_toStartOf="@+id/textView_gender"
+            app:layout_constraintTop_toBottomOf="@+id/textView_gender"
+            tools:text="1992" />
+
+        <Button
+            android:id="@+id/border"
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_marginTop="8dp"
+            android:background="@color/colorPrimaryLight"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView_vaccine" />
+
+        <ImageView
+            android:id="@+id/imageView_IRISMatch_Icon"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginEnd="32dp"
+            android:visibility="@{item.irisMatch ? View.VISIBLE : View.GONE}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/imageView_PhoneMatch_Icon"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_iris_scan" />
+
+        <ImageView
+            android:id="@+id/imageView_PhoneMatch_Icon"
+            android:layout_width="55dp"
+            android:layout_height="41dp"
+            android:layout_marginEnd="32dp"
+            android:visibility="@{item.participantPhoneMatch ? View.VISIBLE : View.GONE}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/imageView_IDMatch_Icon"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_baseline_phone" />
+
+        <ImageView
+            android:id="@+id/imageView_IDMatch_Icon"
+            android:layout_width="55dp"
+            android:layout_height="41dp"
+            android:layout_marginEnd="32dp"
+            android:visibility="@{item.participantIdMatch ? View.VISIBLE : View.GONE}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_id_card" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

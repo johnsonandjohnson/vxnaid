@@ -1,0 +1,227 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
+apply plugin: 'org.jetbrains.kotlin.plugin.parcelize'
+apply plugin: 'io.gitlab.arturbosch.detekt'
+apply plugin: 'org.jetbrains.dokka'
+
+// Version
+ext.versionMajor = 3
+ext.versionMinor = 0
+ext.versionPatch = 0
+
+// Iris scanner variables
+def productRootDir = "./"
+def productBinDir = new File(productRootDir, "bin")
+def productLibAndroidDir = new File(productRootDir, "libs")
+def archUsed = "armeabi-v7a,x86"
+def usedNdfList = ["Irises.ndf"]
+
+android {
+    compileSdkVersion config.buildConfig.compileSdkVersion
+
+    defaultConfig {
+        applicationId "com.jnj.vaccinetracker"
+        minSdkVersion config.buildConfig.minSdkVersion
+        targetSdkVersion config.buildConfig.targetSdkVersion
+        kapt {
+            arguments {
+                arg("room.schemaLocation", "$projectDir/schemas".toString())
+                arg("room.incremental", "true")
+            }
+            correctErrorTypes = true
+            useBuildCache = true
+        }
+        versionCode generateVersionCode()
+        versionName generateVersionName()
+        setProperty("archivesBaseName", "VMP-$versionName")
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    signingConfigs {
+        release {
+            storeFile file("../support/keystore.jks")
+            storePassword SOLIDARITY_STORE_PASSWORD
+            keyAlias 'releaseKey'
+            keyPassword SOLIDARITY_KEY_PASSWORD
+        }
+    }
+
+    testOptions {
+        unitTests {
+            all {
+                useJUnitPlatform()
+            }
+            includeAndroidResources = true
+        }
+    }
+
+    buildTypes {
+        release {
+            //minifyEnabled true
+            //proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
+            ndk {
+                abiFilters 'armeabi-v7a'
+            }
+        }
+        debug {
+            ndk {
+                abiFilters 'x86', 'armeabi-v7a'
+            }
+            versionNameSuffix "-debug"
+            debuggable true
+        }
+        mockBackend {
+            initWith debug
+            versionNameSuffix "-mockBackend"
+            applicationIdSuffix ".mock"
+        }
+    }
+
+    // Product flavors for how updates are to be made to the app
+    flavorDimensions "updates"
+    productFlavors {
+        MDM {
+            // App updates will be pushed through an MDM tool
+            dimension "updates"
+            applicationIdSuffix ".MDM"
+            versionNameSuffix "-MDM"
+        }
+        manual {
+            // App updates will be checked and downloaded through the application itself
+            dimension "updates"
+        }
+    }
+
+    buildFeatures {
+        dataBinding true
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
+
+    aaptOptions {
+        noCompress "tflite"
+    }
+
+    sourceSets {
+        // Encapsulates configurations for the main source set.
+        release {
+            java.srcDirs = ['src/debug/java']
+            res.srcDirs = ['src/debug/res']
+            manifest.srcFile 'src/debug/AndroidManifest.xml'
+        }
+        androidTest.java.srcDirs += 'src/androidTest/kotlin'
+        androidTest.java.srcDirs += [file("$buildDir/generated/source/kapt/androidTest")]
+        androidTest.java.srcDirs += [file("$buildDir/generated/source/kaptKotlin/androidTest")]
+    }
+}
+
+kapt {
+    correctErrorTypes = true
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.3.1'
+    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.1'
+
+    deps.implementation.each { name, dep ->
+        implementation dep
+    }
+
+    deps.nonTransitiveImplementation.each { name, dep ->
+        implementation(dep) { transitive = false }
+    }
+
+    deps.debugImplementation.each { name, dep ->
+        debugImplementation dep
+        mockBackendImplementation dep
+    }
+
+    deps.releaseImplementation.each { name, dep ->
+        releaseImplementation dep
+    }
+
+    deps.annotationProcessors.each { name, dep ->
+        kapt dep
+    }
+
+    deps.androidTestAnnotationProcessors.each { name, dep ->
+        kaptAndroidTest dep
+    }
+
+    deps.testImplementation.each { name, dep ->
+        testImplementation dep
+    }
+    deps.androidTestImplementation.each { name, dep ->
+        androidTestImplementation dep
+    }
+}
+
+@SuppressWarnings('GrMethodMayBeStatic')
+private Integer generateVersionCode() {
+    return ext.versionMajor * 10000 + ext.versionMinor * 100 + ext.versionPatch
+}
+
+@SuppressWarnings('GrMethodMayBeStatic')
+private String generateVersionName() {
+    return "${ext.versionMajor}.${ext.versionMinor}.${ext.versionPatch}"
+}
+
+tasks.register("detektCheck") {
+    dependsOn tasks.named("detekt")
+}
+
+// Tasks for Iris scanner
+// ----------------------
+// Remove previous ndf files from assets
+task deleteTemporaryFiles(type: Delete) {
+    for (String file : usedNdfList) {
+        delete "${android.sourceSets.main.assets.srcDirs[0]}/data/${file}.jet"
+    }
+    delete "${android.sourceSets.main.jniLibs.srcDirs[0]}"
+}
+// Copy over ndf file to assets
+task prepareNdfFiles(type: Copy) {
+    from "${productBinDir}/data"
+    includes = usedNdfList
+    rename { String fileName ->
+        fileName.replace('.ndf', '.ndf.jet')
+    }
+    into "${android.sourceSets.main.assets.srcDirs[0]}/data"
+}
+// Copy libs files to jnilibs directory
+int counter = 1
+archUsed.split(',').each {
+    String srcDir = "${productLibAndroidDir}/${it}"
+    String dstDir = "${android.sourceSets.main.jniLibs.srcDirs[0]}/${it}"
+    task "prepareNativeLibs$counter"(type: Copy) {
+        from srcDir
+        exclude "**/libgstreamer_android.so"
+        exclude "**/*.Test.so"
+        exclude "**/*.IT.so"
+        into dstDir
+        dependsOn(prepareNdfFiles)
+    }
+    tasks.preBuild.dependsOn("prepareNativeLibs$counter")
+    counter++
+}
+prepareNdfFiles.dependsOn(deleteTemporaryFiles)
+
+dokka {
+    outputFormat = 'gfm' // use 'javadoc' to get standard java docs
+    outputDirectory = "../docs/kdoc"
+    skipEmptyPackages = true
+    skipDeprecated = true
+    reportUndocumented = true
+    includeNonPublic = false
+}

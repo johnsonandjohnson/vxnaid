@@ -1,0 +1,285 @@
+{
+  "syncScope": "site",
+  "operatorCredentialsRetentionTime": 86400000,
+  "operatorOfflineSessionTimeout": 86400000,
+  "vaccine": [
+    {
+      "name": "Covid 1D vaccine",
+      "manufacturers": [
+        "J&J"
+      ]
+    },
+    {
+      "name": "Covid 2D vaccine",
+      "manufacturers": [
+        "Moderna",
+        "Moderna"
+      ]
+    },
+    {
+      "name": "Covid 3D vaccine",
+      "manufacturers": [
+        "AstraZenica",
+        "J&J",
+        "Moderna"
+      ]
+    },
+    {
+      "name": "AHAU-95",
+      "manufacturers": [
+        "Pfizer",
+        "Pfizer"
+      ]
+    },
+    {
+      "name": "test more tha   10 dose",
+      "manufacturers": [
+        "J&J",
+        "J&J",
+        "J&J",
+        "J&J",
+        "J&J",
+        "J&J",
+        "Moderna",
+        "Moderna",
+        "Moderna",
+        "Moderna",
+        "Moderna",
+        "Moderna",
+        "Moderna",
+        "Moderna"
+      ]
+    },
+    {
+      "name": "testreg",
+      "manufacturers": [
+        "testupd1"
+      ]
+    },
+    {
+      "name": "AHAU-86",
+      "manufacturers": [
+        "Moderna",
+        "Moderna"
+      ]
+    },
+    {
+      "name": "AHAU-217",
+      "manufacturers": [
+        "Moderna"
+      ]
+    },
+    {
+      "name": "AHAU-235",
+      "manufacturers": [
+        "Moderna",
+        "Moderna"
+      ]
+    }
+  ],
+  "canUseDifferentManufacturers": true,
+  "manufacturers": [
+    {
+      "name": "J&J",
+      "barcodeRegex": "JNJ[0-9]{13}"
+    },
+    {
+      "name": "Moderna",
+      "barcodeRegex": "M[0-9]{13}"
+    },
+    {
+      "name": "Manufacturer1",
+      "barcodeRegex": "P(0-9)"
+    },
+    {
+      "name": "AstraZenica",
+      "barcodeRegex": "AZ[0-9]{13}"
+    },
+    {
+      "name": "Pfizer",
+      "barcodeRegex": "P[0-9]{13}"
+    },
+    {
+      "name": "testupd1",
+      "barcodeRegex": "bbb"
+    },
+    {
+      "name": "AHAU-201",
+      "barcodeRegex": "P[0-9]{13}"
+    }
+  ],
+  "personLanguages": [
+    {
+      "name": "English"
+    },
+    {
+      "name": "French"
+    },
+    {
+      "name": "Dutch"
+    }
+  ],
+  "authSteps": [
+    {
+      "mandatory": false,
+      "type": "id_card"
+    },
+    {
+      "mandatory": false,
+      "type": "phone"
+    },
+    {
+      "mandatory": false,
+      "type": "iris_scan"
+    }
+  ],
+  "irisScore": 40,
+  "addressFields": {
+    "India": [
+      {
+        "name": "State",
+        "type": "DROPDOWN",
+        "field": "stateProvince",
+        "displayOrder": 1
+      },
+      {
+        "name": "City",
+        "type": "DROPDOWN",
+        "field": "cityVillage",
+        "displayOrder": 2
+      },
+      {
+        "name": "Postal Code",
+        "type": "DROPDOWN",
+        "field": "postalCode",
+        "displayOrder": 3
+      },
+      {
+        "field": "address1",
+        "type": "FREE_INPUT",
+        "name": "Street Name",
+        "displayOrder": 4
+      }
+    ],
+    "Belgium": [
+      {
+        "name": "City",
+        "type": "DROPDOWN",
+        "field": "cityVillage",
+        "displayOrder": 1
+      },
+      {
+        "name": "Postal Code",
+        "type": "DROPDOWN",
+        "field": "postalCode",
+        "displayOrder": 2
+      },
+      {
+        "field": "address1",
+        "type": "FREE_INPUT",
+        "name": "Street Name",
+        "displayOrder": 3
+      },
+      {
+        "field": "address2",
+        "type": "FREE_INPUT",
+        "name": "Street Number",
+        "displayOrder": 4
+      }
+    ],
+    "Switzerland": [
+      {
+        "name": "Postal Code",
+        "type": "DROPDOWN",
+        "field": "postalCode",
+        "displayOrder": 1
+      },
+      {
+        "name": "City",
+        "type": "DROPDOWN",
+        "field": "cityVillage",
+        "displayOrder": 2
+      }
+    ],
+    "Rwanda": [
+      {
+        "name": "District",
+        "type": "DROPDOWN",
+        "field": "countyDistrict",
+        "displayOrder": 1
+      },
+      {
+        "name": "Province",
+        "type": "DROPDOWN",
+        "field": "stateProvince",
+        "displayOrder": 2
+      },
+      {
+        "name": "Sector",
+        "type": "DROPDOWN",
+        "field": "cityVillage",
+        "displayOrder": 3
+      },
+      {
+        "name": "Postal Code",
+        "type": "DROPDOWN",
+        "field": "postalCode",
+        "displayOrder": 4
+      }
+    ],
+    "Philippines": [
+      {
+        "name": "City",
+        "type": "DROPDOWN",
+        "field": "countyDistrict",
+        "displayOrder": 1
+      },
+      {
+        "name": "Greater area",
+        "type": "DROPDOWN",
+        "field": "stateProvince",
+        "displayOrder": 2
+      },
+      {
+        "name": "Village",
+        "type": "DROPDOWN",
+        "field": "cityVillage",
+        "displayOrder": 3
+      },
+      {
+        "name": "Zip Code",
+        "field": "postalCode",
+        "type": "DROPDOWN",
+        "displayOrder": 4
+      }
+    ],
+    "USA": [
+      {
+        "field": "countyDistrict",
+        "type": "DROPDOWN",
+        "name": "city",
+        "displayOrder": 1
+      },
+      {
+        "field": "stateProvince",
+        "type": "DROPDOWN",
+        "name": "State",
+        "displayOrder": 2
+      },
+      {
+        "field": "cityVillage",
+        "type": "DROPDOWN",
+        "name": "City",
+        "displayOrder": 3
+      },
+      {
+        "field": "postalCode",
+        "type": "DROPDOWN",
+        "name": "Zip Code",
+        "displayOrder": 4
+      }
+    ]
+  },
+  "allowManualParticipantIDEntry": true,
+  "participantIDRegex": "[a-z0-9]*"
+}

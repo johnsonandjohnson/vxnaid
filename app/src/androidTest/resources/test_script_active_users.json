@@ -1,0 +1,27 @@
+[
+    {
+        "uuid": "1c3db49d-440a-11e6-a65c-00e04c680037",
+        "display": "Super User",
+        "username": "admin"
+    },
+    {
+        "uuid": "0a3493e8-21f8-11e3-8ad1-1b02b898d14d",
+        "display": "Super User",
+        "username": "scheduler"
+    },
+    {
+        "uuid": "3121e58b-6026-472e-b986-4a0a7ecd2d38",
+        "display": "User Test",
+        "username": "testuser"
+    },
+    {
+        "uuid": "3415b7e5-dc4d-4b42-805a-50cdaa8778bc",
+        "display": "User Sync",
+        "username": "syncadmin"
+    },
+    {
+        "uuid": "0e71b7e9-f61d-4f7f-bb75-3e9e1645497f",
+        "display": "Location testing Location testing",
+        "username": "test123"
+    }
+]

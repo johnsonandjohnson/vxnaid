@@ -1,0 +1,32 @@
+[
+  {
+    "uuid": "1c3db49d-440a-11e6-a65c-00e04c680037",
+    "display": "Super User",
+    "username": "admin"
+  },
+  {
+    "uuid": "4882dd60-0508-11e3-8ffd-0800200c9a66",
+    "display": "John Smith",
+    "username": "clerk"
+  },
+  {
+    "uuid": "564b2790-0508-11e3-8ffd-0800200c9a66",
+    "display": "Jane Smith",
+    "username": "nurse"
+  },
+  {
+    "uuid": "67bfd7f0-0508-11e3-8ffd-0800200c9a66",
+    "display": "Jake Smith",
+    "username": "doctor"
+  },
+  {
+    "uuid": "8295e796-4016-11e4-8e9b-2939a1809c8e",
+    "display": "Julie Smith",
+    "username": "sysadmin"
+  },
+  {
+    "uuid": "0a3493e8-21f8-11e3-8ad1-1b02b898d14d",
+    "display": "Super User",
+    "username": "scheduler"
+  }
+]

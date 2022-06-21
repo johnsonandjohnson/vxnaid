@@ -1,0 +1,6 @@
+[app](../../index.md) / [com.jnj.vaccinetracker.databinding](../index.md) / [ActivityLoginBinding](index.md) / [&lt;init&gt;](./-init-.md)
+
+# &lt;init&gt;
+
+`protected ActivityLoginBinding(_bindingComponent: `[`Any`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html)`!, _root: View!, _localFieldCount: `[`Int`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html)`, btnLogin: Button!, editPassword: EditText!, editUsername: EditText!, errorTextview: TextView!, imgAppIcon: ImageView!, imgPassword: ImageView!, imgUsername: ImageView!, labelMoreInformation: TextView!, progressBar: ProgressBar!, spacer: View!, spacer2: View!, textViewIntro: TextView!)`
+`protected ActivityLoginBinding(_bindingComponent: `[`Any`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html)`!, _root: View!, _localFieldCount: `[`Int`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html)`, btnLogin: Button!, editPassword: EditText!, editUsername: EditText!, errorTextview: TextView!, imgAppIcon: ImageView!, imgPassword: ImageView!, imgUsername: ImageView!, labelMoreInformation: TextView!, progressBar: ProgressBar!, spacer: View!, spacer2: View!, textViewIntro: TextView!)`

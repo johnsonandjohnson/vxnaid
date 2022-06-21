@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.jnj.vaccinetracker.setup.screens.licenses.SetupLicensesViewModel" />
+
+        <import type="android.view.View" />
+    </data>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/imageView_header"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                app:layout_constraintBottom_toTopOf="@+id/textView_connection_header"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:srcCompat="@drawable/ic_license" />
+
+            <TextView
+                android:id="@+id/textView_connection_header"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/setup_menu_item_licenses"
+                android:textAlignment="center"
+                android:textAppearance="@style/ScreenTitle"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.37" />
+
+            <LinearLayout
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:orientation="vertical"
+                android:textAlignment="center"
+                app:layout_constraintBottom_toTopOf="@+id/finish_button"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView_connection_header">
+
+                <ProgressBar
+                    android:id="@+id/progress_bar"
+                    style="?android:attr/progressBarStyleHorizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:indeterminate="true"
+                    android:visibility="@{viewModel.loading ? View.VISIBLE : View.INVISIBLE}" />
+
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/license_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="8dp"
+                        android:layout_gravity="center"
+                        android:text="@string/settings_label_licenses"
+                        android:textAppearance="@style/LabelText"
+                        android:textSize="20sp" />
+
+                    <TextView
+                        android:id="@+id/activated_licenses"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@{viewModel.activeLicenses}"
+                        android:textAppearance="@style/GeneralText"
+                        android:textStyle="normal"
+                        android:layout_gravity="center"
+                        tools:text="No Active licenses" />
+
+                    <TextView
+                        android:id="@+id/error_textview"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:layout_gravity="center"
+                        android:text="@{viewModel.errorMessage}"
+                        android:textColor="@color/errorDark"
+                        android:textAppearance="@style/GeneralText"
+                        android:textStyle="normal"
+                        android:visibility="@{viewModel.errorMessage == null ? View.GONE : View.VISIBLE}"
+                        tools:text="Licenses could not be activated"
+                        tools:visibility="visible" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    android:orientation="horizontal">
+
+                    <Button
+                        android:id="@+id/btn_deactivate"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="16dp"
+                        android:text="@string/settings_label_deactivate"
+
+                        android:backgroundTint="@color/colorPrimary"
+                        android:textAppearance="@style/ButtonTextStyling"
+                        android:visibility="@{viewModel.canDeactivateLicenses? View.VISIBLE : View.GONE}"
+                        tools:visibility="gone" />
+
+                    <Button
+                        android:id="@+id/btn_activate"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/settings_label_activate"
+                        android:backgroundTint="@color/colorPrimary"
+                        android:textAppearance="@style/ButtonTextStyling"
+                        android:visibility="@{viewModel.canActivateLicenses? View.VISIBLE : View.GONE}" />
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/finish_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="32dp"
+                android:onClick="@{() -> viewModel.onFinishButtonClick()}"
+                android:text="@string/setup_btn_done"
+                android:backgroundTint="@color/colorPrimary"
+                android:textAppearance="@style/ButtonTextStyling"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
+</layout>

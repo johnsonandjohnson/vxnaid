@@ -1,0 +1,1283 @@
+{
+  "sessionId": "D5D26E643015FEAB3251238799DF3CCD",
+  "authenticated": true,
+  "user": {
+    "uuid": "1c3db49d-440a-11e6-a65c-00e04c680037",
+    "display": "admin",
+    "username": "admin",
+    "systemId": "admin",
+    "userProperties": {
+      "loginAttempts": "0",
+      "locationUuid": "b1a8b05e-3542-4037-bbd3-998ee9c40574",
+      "emrapi.lastViewedPatientIds": "99,126,1283,9564,111917,111924,111925,9565,9,111928,111967,112245,112246,112247,112283"
+    },
+    "person": {
+      "uuid": "1296b0dc-440a-11e6-a65c-00e04c680037"
+    },
+    "privileges": [
+      {
+        "uuid": "c7e32963-62b9-4cfa-a8b4-4ae891a1ba65",
+        "name": "Manage RESTWS"
+      },
+      {
+        "uuid": "2a284b31-45a6-4c1b-b643-783d599d92be",
+        "name": "Manage Atlas Data"
+      },
+      {
+        "uuid": "129aabc8-440a-11e6-a65c-00e04c680037",
+        "name": "View Report Objects"
+      },
+      {
+        "uuid": "129a9e21-440a-11e6-a65c-00e04c680037",
+        "name": "Delete Report Objects"
+      },
+      {
+        "uuid": "129a9fb2-440a-11e6-a65c-00e04c680037",
+        "name": "Edit People"
+      },
+      {
+        "uuid": "74840916-1c86-4da8-9d2e-cb83fad67b4c",
+        "name": "Generate Batch of Identifiers"
+      },
+      {
+        "uuid": "d456c0e4-9f2e-4347-964b-f3f3513632d9",
+        "name": "Manage Metadata Mapping"
+      },
+      {
+        "uuid": "312210a1-8cbd-43ef-b011-3374d0a61515",
+        "name": "Run Chart Search commands"
+      },
+      {
+        "uuid": "129aa538-440a-11e6-a65c-00e04c680037",
+        "name": "Patient Dashboard - View Forms Section"
+      },
+      {
+        "uuid": "a3f8bdfe-580f-4b29-90e5-6e66ad2ff218",
+        "name": "Get Diagnoses"
+      },
+      {
+        "uuid": "129a9d18-440a-11e6-a65c-00e04c680037",
+        "name": "Delete Observations"
+      },
+      {
+        "uuid": "1eb65628-e441-4573-b21e-54b1665af09e",
+        "name": "Purge Device Attribute Types"
+      },
+      {
+        "uuid": "31889d58-cd72-4865-ac4a-fc17abeb0385",
+        "name": "Edit Visits"
+      },
+      {
+        "uuid": "20808550-d1ab-48ba-85d4-3fd265dd6735",
+        "name": "Provider Management Dashboard - Edit Patients"
+      },
+      {
+        "uuid": "788643a3-583a-4fb7-af46-1e0730ecafd1",
+        "name": "Get Order Sets"
+      },
+      {
+        "uuid": "b72f7022-550a-4495-a143-f6814ce78ea3",
+        "name": "Edit Diagnoses"
+      },
+      {
+        "uuid": "ee1809f0-b147-4947-8793-2c324ce9b1e0",
+        "name": "View Rule Definitions"
+      },
+      {
+        "uuid": "dcabdfc5-6b23-4fba-bb05-009c8ab0f99e",
+        "name": "Provider Management Dashboard - Edit Providers"
+      },
+      {
+        "uuid": "2778e56f-1484-4c81-aed3-a956bb2a4c66",
+        "name": "Purge Devices"
+      },
+      {
+        "uuid": "7dba7b52-322a-47cc-ae7a-63573f23e33e",
+        "name": "Request Appointments"
+      },
+      {
+        "uuid": "814328c5-e092-46ca-84ce-79da588c10fb",
+        "name": "Provider Management Dashboard - View Providers"
+      },
+      {
+        "uuid": "0fd8e147-54d0-45cb-bd3c-39a57f951a69",
+        "name": "Add HL7 Inbound Queue"
+      },
+      {
+        "uuid": "83ed9545-09c1-4da6-93d6-2029ac9cd0f3",
+        "name": "View Metadata Via Mapping"
+      },
+      {
+        "uuid": "129a9d89-440a-11e6-a65c-00e04c680037",
+        "name": "Delete Patient Programs"
+      },
+      {
+        "uuid": "129aa31d-440a-11e6-a65c-00e04c680037",
+        "name": "Manage Global Properties"
+      },
+      {
+        "uuid": "9730055d-9e85-4118-9712-067e257abff1",
+        "name": "Manage Licenses"
+      },
+      {
+        "uuid": "af6fc3e5-2256-4ce6-8db6-b46525354b30",
+        "name": "Manage Synonym Groups"
+      },
+      {
+        "uuid": "e922953f-5370-4710-a749-fec9480829d4",
+        "name": "Provider Management Dashboard - View Patients"
+      },
+      {
+        "uuid": "129aaa2e-440a-11e6-a65c-00e04c680037",
+        "name": "View Patient Cohorts"
+      },
+      {
+        "uuid": "129a9a2f-440a-11e6-a65c-00e04c680037",
+        "name": "Add Concept Proposals"
+      },
+      {
+        "uuid": "45963956-423e-4b9c-87d1-beeb4498fd37",
+        "name": "Provider Management - Admin"
+      },
+      {
+        "uuid": "ce105808-fcfa-462b-9f2e-6f4657991519",
+        "name": "Manage Auto Generation Options"
+      },
+      {
+        "uuid": "129aa428-440a-11e6-a65c-00e04c680037",
+        "name": "Manage Programs"
+      },
+      {
+        "uuid": "129aa01f-440a-11e6-a65c-00e04c680037",
+        "name": "Edit Reports"
+      },
+      {
+        "uuid": "129a9ffa-440a-11e6-a65c-00e04c680037",
+        "name": "Edit Report Objects"
+      },
+      {
+        "uuid": "18fdeefa-65cb-4da4-a2e5-bba479694a33",
+        "name": "Manage Provider Schedules"
+      },
+      {
+        "uuid": "2bdf783c-a131-4c69-961b-44582548e184",
+        "name": "Manage Dimension Definitions"
+      },
+      {
+        "uuid": "129aa875-440a-11e6-a65c-00e04c680037",
+        "name": "View Data Entry Statistics"
+      },
+      {
+        "uuid": "e6ae0588-b5cc-4293-b1db-fd93dc7195ee",
+        "name": "Manage Rule Definitions"
+      },
+      {
+        "uuid": "361fefd3-f117-45b8-9f6d-fb2df7f4657d",
+        "name": "Manage OWA"
+      },
+      {
+        "uuid": "129a9af6-440a-11e6-a65c-00e04c680037",
+        "name": "Add Orders"
+      },
+      {
+        "uuid": "129a9daf-440a-11e6-a65c-00e04c680037",
+        "name": "Delete Patients"
+      },
+      {
+        "uuid": "61307a3e-1429-4ae6-a85e-65c92eac7a73",
+        "name": "Manage Encounter Roles"
+      },
+      {
+        "uuid": "129aa805-440a-11e6-a65c-00e04c680037",
+        "name": "View Concept Proposals"
+      },
+      {
+        "uuid": "129a9b30-440a-11e6-a65c-00e04c680037",
+        "name": "Add Patient Identifiers"
+      },
+      {
+        "uuid": "fa15cf48-ae39-49bd-b007-415e9607ec36",
+        "name": "Configure Visits"
+      },
+      {
+        "uuid": "129aa38b-440a-11e6-a65c-00e04c680037",
+        "name": "Manage Modules"
+      },
+      {
+        "uuid": "2c2d8023-3b3d-4183-808d-fc3dbd59c0f9",
+        "name": "Purge License Types"
+      },
+      {
+        "uuid": "d709b11e-2629-4eee-ba94-9bcbfc6eaed0",
+        "name": "Manage Reports"
+      },
+      {
+        "uuid": "ed3c3f96-6118-4073-8adb-9ef1b7485967",
+        "name": "Manage Location Attribute Types"
+      },
+      {
+        "uuid": "ba946f37-e186-4527-a365-5f97d3ce1fb1",
+        "name": "Upload Batch of Identifiers"
+      },
+      {
+        "uuid": "f0ea0ac9-f639-41e0-9fba-c134b11a0c41",
+        "name": "View Appointments Blocks"
+      },
+      {
+        "uuid": "129a9d62-440a-11e6-a65c-00e04c680037",
+        "name": "Delete Patient Identifiers"
+      },
+      {
+        "uuid": "129aa82c-440a-11e6-a65c-00e04c680037",
+        "name": "View Concept Sources"
+      },
+      {
+        "uuid": "3c75e763-6a1b-4e2b-807e-fdb4da56ffb9",
+        "name": "View Concept Reference Terms"
+      },
+      {
+        "uuid": "129a991e-440a-11e6-a65c-00e04c680037",
+        "name": "Add Cohorts"
+      },
+      {
+        "uuid": "129aa661-440a-11e6-a65c-00e04c680037",
+        "name": "View Administration Functions"
+      },
+      {
+        "uuid": "129a9c7c-440a-11e6-a65c-00e04c680037",
+        "name": "Add Users"
+      },
+      {
+        "uuid": "1945abd3-f367-4852-a8d5-431571881d9c",
+        "name": "App: registrationapp.registerPatient"
+      },
+      {
+        "uuid": "3dba9a6c-3ff3-46da-acfc-18a3d3e281a2",
+        "name": "Edit Allergies"
+      },
+      {
+        "uuid": "345851ba-c374-49c7-a35d-39ac5c841890",
+        "name": "Patient Overview - View Patient Flags"
+      },
+      {
+        "uuid": "d038935c-4343-4d71-87e9-7846bee5184d",
+        "name": "ETL Settings Privilege"
+      },
+      {
+        "uuid": "af5e608e-521c-4785-a1c4-3bc3a4782fb0",
+        "name": "Get Care Settings"
+      },
+      {
+        "uuid": "129a9fd7-440a-11e6-a65c-00e04c680037",
+        "name": "Edit Relationships"
+      },
+      {
+        "uuid": "129aa99d-440a-11e6-a65c-00e04c680037",
+        "name": "View Navigation Menu"
+      },
+      {
+        "uuid": "e1cd6044-06a4-49a1-af8c-09e875f81c58",
+        "name": "Delete Diagnoses"
+      },
+      {
+        "uuid": "5ed2efed-0fad-49f2-94dd-c22892d61dc9",
+        "name": "Get License Types"
+      },
+      {
+        "uuid": "d73a9b2a-eb12-41f3-9837-50e92d684631",
+        "name": "Add HL7 Inbound Archive"
+      },
+      {
+        "uuid": "6567818a-52ed-48b7-a4cd-8021534e02ee",
+        "name": "View RESTWS"
+      },
+      {
+        "uuid": "b8ec567c-ec17-448a-8294-f99673ca3b4d",
+        "name": "App: atlas.manage"
+      },
+      {
+        "uuid": "129a9cf2-440a-11e6-a65c-00e04c680037",
+        "name": "Delete Encounters"
+      },
+      {
+        "uuid": "c8f22ace-31c3-422f-98fe-4dba4eb928d1",
+        "name": "View HL7 Inbound Queue"
+      },
+      {
+        "uuid": "a3df5c70-c951-4c23-a7c8-00167bb6bd1c",
+        "name": "View Location Attribute Types"
+      },
+      {
+        "uuid": "129aa044-440a-11e6-a65c-00e04c680037",
+        "name": "Edit User Passwords"
+      },
+      {
+        "uuid": "129aa3b1-440a-11e6-a65c-00e04c680037",
+        "name": "Manage Order Types"
+      },
+      {
+        "uuid": "c731489f-e34b-48fe-8234-8faca33fe9ee",
+        "name": "Edit Conditions"
+      },
+      {
+        "uuid": "e17e9f4a-72ce-4a9f-8d13-4e2ce6b3b3af",
+        "name": "View HL7 Source"
+      },
+      {
+        "uuid": "129aabee-440a-11e6-a65c-00e04c680037",
+        "name": "View Reports"
+      },
+      {
+        "uuid": "526456b1-9166-4663-9be8-e25c59ef21eb",
+        "name": "Schedule Appointments"
+      },
+      {
+        "uuid": "558e3983-b9c3-4769-8e1b-423da4db7032",
+        "name": "Patient Dashboard - View Chart Search Section"
+      },
+      {
+        "uuid": "0c08bd17-ea8b-4b98-8f00-8322d8b7d323",
+        "name": "Get Device Attribute Types"
+      },
+      {
+        "uuid": "f82294e8-57d5-4f05-9b3e-05671ad5da20",
+        "name": "View Visit Types"
+      },
+      {
+        "uuid": "eeaac1a1-4b3c-4599-9155-e3a8f9ed3e09",
+        "name": "App: coreapps.configuremetadata"
+      },
+      {
+        "uuid": "129a9a7a-440a-11e6-a65c-00e04c680037",
+        "name": "Add Encounters"
+      },
+      {
+        "uuid": "36d42d70-ced5-4cab-a514-113ca31ed2d1",
+        "name": "Delete Notes"
+      },
+      {
+        "uuid": "129aa50c-440a-11e6-a65c-00e04c680037",
+        "name": "Patient Dashboard - View Encounters Section"
+      },
+      {
+        "uuid": "7bbbcea0-d2fa-419c-9da8-8c09bdca1604",
+        "name": "View Token Registrations"
+      },
+      {
+        "uuid": "129aa06c-440a-11e6-a65c-00e04c680037",
+        "name": "Edit Users"
+      },
+      {
+        "uuid": "0d6eafd1-926a-48f5-95aa-9bbf3316dbd4",
+        "name": "Manage Scheduled Report Tasks"
+      },
+      {
+        "uuid": "9eaea865-cde9-467d-bf10-499eb20b0c07",
+        "name": "Manage Data Set Definitions"
+      },
+      {
+        "uuid": "951a5868-5829-44a9-b305-597f2cdb8e8b",
+        "name": "View Provider Schedules"
+      },
+      {
+        "uuid": "129aa499-440a-11e6-a65c-00e04c680037",
+        "name": "Manage Roles"
+      },
+      {
+        "uuid": "129a9eb2-440a-11e6-a65c-00e04c680037",
+        "name": "Edit Concept Proposals"
+      },
+      {
+        "uuid": "129aa4bd-440a-11e6-a65c-00e04c680037",
+        "name": "Manage Scheduler"
+      },
+      {
+        "uuid": "03070066-4e23-469f-8429-f4897c097f06",
+        "name": "ETL Mappings Privilege"
+      },
+      {
+        "uuid": "69ea1f85-488f-43d4-a05c-e70b068881cb",
+        "name": "Edit Notes"
+      },
+      {
+        "uuid": "5652e96c-1718-4f95-8985-89a149e24d3d",
+        "name": "Manage Providers"
+      },
+      {
+        "uuid": "129aaa54-440a-11e6-a65c-00e04c680037",
+        "name": "View Patient Identifiers"
+      },
+      {
+        "uuid": "4f6756a2-c927-41ce-99ed-4bf3d4a14072",
+        "name": "App: formentryapp.forms"
+      },
+      {
+        "uuid": "7f4b5ff3-2328-4ed5-9c83-21363619f3c3",
+        "name": "Manage Cohort Definitions"
+      },
+      {
+        "uuid": "a286b7ad-cae7-44e3-a02c-7c3920a73ee2",
+        "name": "Manage License Types"
+      },
+      {
+        "uuid": "129aab11-440a-11e6-a65c-00e04c680037",
+        "name": "View Privileges"
+      },
+      {
+        "uuid": "674c571b-dc22-4950-a2ad-276f867ed9d9",
+        "name": "Update HL7 Source"
+      },
+      {
+        "uuid": "3504beb1-a3ad-4a1a-9b1f-ca643df86ec3",
+        "name": "Manage Concept Attribute Types"
+      },
+      {
+        "uuid": "a36d7ba0-35c1-4a48-af2a-ed35ac8ba09e",
+        "name": "Purge Licenses"
+      },
+      {
+        "uuid": "d05118c6-2490-4d78-a41a-390e3596a215",
+        "name": "Get Visit Types"
+      },
+      {
+        "uuid": "cb04f1fc-edde-42e3-896c-9d0aa77fab9c",
+        "name": "View Concept Map Types"
+      },
+      {
+        "uuid": "d05118c6-2490-4d78-a41a-390e3596a216",
+        "name": "Get HL7 Inbound Exception"
+      },
+      {
+        "uuid": "404919ba-2342-406a-aa77-1a534fcb22c9",
+        "name": "View Encounter Roles"
+      },
+      {
+        "uuid": "d05118c6-2490-4d78-a41a-390e3596a213",
+        "name": "Get Visit Attribute Types"
+      },
+      {
+        "uuid": "d05118c6-2490-4d78-a41a-390e3596a214",
+        "name": "Get Visits"
+      },
+      {
+        "uuid": "d05118c6-2490-4d78-a41a-390e3596a211",
+        "name": "Get Providers"
+      },
+      {
+        "uuid": "d05118c6-2490-4d78-a41a-390e3596a212",
+        "name": "Get Location Attribute Types"
+      },
+      {
+        "uuid": "d05118c6-2490-4d78-a41a-390e3596a210",
+        "name": "Get Encounter Roles"
+      },
+      {
+        "uuid": "af316667-3fa7-4fc0-82e3-27a86d9f3bd8",
+        "name": "App: appointmentschedulingui.appointmentTypes"
+      },
+      {
+        "uuid": "9b73181b-921a-4e41-adeb-baa8c9cf91dd",
+        "name": "View HL7 Inbound Archive"
+      },
+      {
+        "uuid": "0b3cdc84-b9a5-4206-8524-ccd2bb5b141c",
+        "name": "Manage Report Designs"
+      },
+      {
+        "uuid": "9fb1431a-23cd-4c9f-94f5-1024cc5da6fd",
+        "name": "Callflows Privilege"
+      },
+      {
+        "uuid": "ef7e9169-405b-455b-8c70-f935b8e04e6b",
+        "name": "Delete HL7 Inbound Archive"
+      },
+      {
+        "uuid": "129aa474-440a-11e6-a65c-00e04c680037",
+        "name": "Manage Relationships"
+      },
+      {
+        "uuid": "d05118c6-2490-4d78-a41a-390e3596a219",
+        "name": "Get HL7 Source"
+      },
+      {
+        "uuid": "811c6f3c-cd84-449a-b69e-231965988883",
+        "name": "Patient Dashboard - View Visits Section"
+      },
+      {
+        "uuid": "129aaa0a-440a-11e6-a65c-00e04c680037",
+        "name": "View Orders"
+      },
+      {
+        "uuid": "d05118c6-2490-4d78-a41a-390e3596a217",
+        "name": "Get HL7 Inbound Archive"
+      },
+      {
+        "uuid": "d05118c6-2490-4d78-a41a-390e3596a218",
+        "name": "Get HL7 Inbound Queue"
+      },
+      {
+        "uuid": "a3da4731-b4bd-4f87-a64c-f823e6e1ebf1",
+        "name": "Manage Indicator Definitions"
+      },
+      {
+        "uuid": "129aa8c1-440a-11e6-a65c-00e04c680037",
+        "name": "View Encounters"
+      },
+      {
+        "uuid": "0e435497-6e2a-4b1f-9270-850983aaa165",
+        "name": "Run Reports"
+      },
+      {
+        "uuid": "e85bf2ff-319c-41a7-833f-4a3a51eb9cdf",
+        "name": "Update HL7 Inbound Archive"
+      },
+      {
+        "uuid": "129aaba4-440a-11e6-a65c-00e04c680037",
+        "name": "View Relationships"
+      },
+      {
+        "uuid": "129aa0ca-440a-11e6-a65c-00e04c680037",
+        "name": "Manage Alerts"
+      },
+      {
+        "uuid": "129aa68c-440a-11e6-a65c-00e04c680037",
+        "name": "View Allergies"
+      },
+      {
+        "uuid": "15f0be20-9f92-4a20-8660-32992b0e2b7b",
+        "name": "Share Metadata"
+      },
+      {
+        "uuid": "d9ce463b-dbe4-49e5-a138-4bd2443238e4",
+        "name": "Get Conditions"
+      },
+      {
+        "uuid": "2f5a1eb3-05ab-40bd-83fb-3f36499bb67d",
+        "name": "Manage Address Hierarchy"
+      },
+      {
+        "uuid": "129aa4e2-440a-11e6-a65c-00e04c680037",
+        "name": "Patient Dashboard - View Demographics Section"
+      },
+      {
+        "uuid": "129a9c0a-440a-11e6-a65c-00e04c680037",
+        "name": "Add Relationships"
+      },
+      {
+        "uuid": "129aa7dc-440a-11e6-a65c-00e04c680037",
+        "name": "View Concept Datatypes"
+      },
+      {
+        "uuid": "129aa403-440a-11e6-a65c-00e04c680037",
+        "name": "Manage Privileges"
+      },
+      {
+        "uuid": "129aa343-440a-11e6-a65c-00e04c680037",
+        "name": "Manage Identifier Types"
+      },
+      {
+        "uuid": "4215be25-34e7-4427-b85b-e68ea4aef1a7",
+        "name": "Manage Concept Reference Terms"
+      },
+      {
+        "uuid": "129aab59-440a-11e6-a65c-00e04c680037",
+        "name": "View Programs"
+      },
+      {
+        "uuid": "96e0c2c6-a387-4ef4-b6a0-9a6ca8e850f2",
+        "name": "Manage Concept Stop Words"
+      },
+      {
+        "uuid": "1f1ca308-60f3-4533-834c-15ee6d9d59a2",
+        "name": "Update HL7 Inbound Exception"
+      },
+      {
+        "uuid": "008e893c-6a30-4b62-902d-0ad744f18a93",
+        "name": "Manage Token Registrations"
+      },
+      {
+        "uuid": "71c9da1f-1dea-49ec-bc2a-4d52038c118c",
+        "name": "Provider Management API"
+      },
+      {
+        "uuid": "d4e8e30b-37a7-4abb-8c76-35b277e330c8",
+        "name": "Messages schedule privilege"
+      },
+      {
+        "uuid": "129aa8e5-440a-11e6-a65c-00e04c680037",
+        "name": "View Field Types"
+      },
+      {
+        "uuid": "b955b96f-28b8-4265-9a78-fdc58959c793",
+        "name": "Get Concept Attribute Types"
+      },
+      {
+        "uuid": "129a9e6a-440a-11e6-a65c-00e04c680037",
+        "name": "Delete Users"
+      },
+      {
+        "uuid": "3ac740ea-5c53-474f-a1a0-553cd113c64a",
+        "name": "Delete Conditions"
+      },
+      {
+        "uuid": "129a9efb-440a-11e6-a65c-00e04c680037",
+        "name": "Edit Observations"
+      },
+      {
+        "uuid": "d05118c6-2490-4d78-a41a-390e3596a237",
+        "name": "Get Concept Datatypes"
+      },
+      {
+        "uuid": "d05118c6-2490-4d78-a41a-390e3596a238",
+        "name": "Get Concept Classes"
+      },
+      {
+        "uuid": "d05118c6-2490-4d78-a41a-390e3596a235",
+        "name": "Get Roles"
+      },
+      {
+        "uuid": "d05118c6-2490-4d78-a41a-390e3596a236",
+        "name": "Get Privileges"
+      },
+      {
+        "uuid": "129aa89c-440a-11e6-a65c-00e04c680037",
+        "name": "View Encounter Types"
+      },
+      {
+        "uuid": "d05118c6-2490-4d78-a41a-390e3596a233",
+        "name": "Get Order Types"
+      },
+      {
+        "uuid": "129a9ca2-440a-11e6-a65c-00e04c680037",
+        "name": "Delete Cohorts"
+      },
+      {
+        "uuid": "d05118c6-2490-4d78-a41a-390e3596a234",
+        "name": "Get Field Types"
+      },
+      {
+        "uuid": "d05118c6-2490-4d78-a41a-390e3596a231",
+        "name": "Get Concept Sources"
+      },
+      {
+        "uuid": "129aa3d4-440a-11e6-a65c-00e04c680037",
+        "name": "Manage Person Attribute Types"
+      },
+      {
+        "uuid": "d05118c6-2490-4d78-a41a-390e3596a232",
+        "name": "Get Relationship Types"
+      },
+      {
+        "uuid": "129aab35-440a-11e6-a65c-00e04c680037",
+        "name": "View Problems"
+      },
+      {
+        "uuid": "cdc103ef-3a0d-4849-8415-46a27d98e3e5",
+        "name": "View Appointments"
+      },
+      {
+        "uuid": "d05118c6-2490-4d78-a41a-390e3596a239",
+        "name": "Get Identifier Types"
+      },
+      {
+        "uuid": "129aa367-440a-11e6-a65c-00e04c680037",
+        "name": "Manage Locations"
+      },
+      {
+        "uuid": "9259ce98-1e5e-45ad-afc5-7c064454391d",
+        "name": "Biometric Privilege"
+      },
+      {
+        "uuid": "129aaa7b-440a-11e6-a65c-00e04c680037",
+        "name": "View Patient Programs"
+      },
+      {
+        "uuid": "70ec37f2-93e6-4218-919d-a32d16bb9460",
+        "name": "Manage Search Index"
+      },
+      {
+        "uuid": "3cf44904-8561-4823-a8d1-412b9bdac855",
+        "name": "App: appointmentschedulingui.home"
+      },
+      {
+        "uuid": "a6b70c83-c469-484a-a26e-ec786c11496a",
+        "name": "View Calculations"
+      },
+      {
+        "uuid": "54aeff6b-ac7b-49ac-a1bb-d815e7a3c7db",
+        "name": "Manage synonym group"
+      },
+      {
+        "uuid": "d05118c6-2490-4d78-a41a-390e3596a240",
+        "name": "Get Forms"
+      },
+      {
+        "uuid": "d05118c6-2490-4d78-a41a-390e3596a241",
+        "name": "Get Orders"
+      },
+      {
+        "uuid": "27cb9394-d387-4d7f-81e3-297debcd31f4",
+        "name": "Remove Allergies"
+      },
+      {
+        "uuid": "c6fe41a5-0daf-4047-b579-5c06c136bb8a",
+        "name": "Add Visits"
+      },
+      {
+        "uuid": "129aaac5-440a-11e6-a65c-00e04c680037",
+        "name": "View People"
+      },
+      {
+        "uuid": "88c4f7c1-e062-44eb-b2ec-1d01f5c4c922",
+        "name": "Add Problems"
+      },
+      {
+        "uuid": "d05118c6-2490-4d78-a41a-390e3596a226",
+        "name": "Get Global Properties"
+      },
+      {
+        "uuid": "d05118c6-2490-4d78-a41a-390e3596a227",
+        "name": "Get Patient Programs"
+      },
+      {
+        "uuid": "fdcc981a-5102-4294-b16b-4f9230d7aa17",
+        "name": "Delete Visits"
+      },
+      {
+        "uuid": "d05118c6-2490-4d78-a41a-390e3596a224",
+        "name": "Get People"
+      },
+      {
+        "uuid": "d05118c6-2490-4d78-a41a-390e3596a225",
+        "name": "Get Person Attribute Types"
+      },
+      {
+        "uuid": "25e5779a-dd62-4e64-b958-e5f5b3ebfc8a",
+        "name": "Manage Tokens"
+      },
+      {
+        "uuid": "d05118c6-2490-4d78-a41a-390e3596a222",
+        "name": "Get Database Changes"
+      },
+      {
+        "uuid": "d05118c6-2490-4d78-a41a-390e3596a223",
+        "name": "Get Relationships"
+      },
+      {
+        "uuid": "d05118c6-2490-4d78-a41a-390e3596a220",
+        "name": "Get Allergies"
+      },
+      {
+        "uuid": "d05118c6-2490-4d78-a41a-390e3596a221",
+        "name": "Get Problems"
+      },
+      {
+        "uuid": "129a9cc7-440a-11e6-a65c-00e04c680037",
+        "name": "Delete Concept Proposals"
+      },
+      {
+        "uuid": "129a9e8f-440a-11e6-a65c-00e04c680037",
+        "name": "Edit Cohorts"
+      },
+      {
+        "uuid": "129a9abd-440a-11e6-a65c-00e04c680037",
+        "name": "Add Observations"
+      },
+      {
+        "uuid": "b62812fa-101e-400b-a9e4-75d295768787",
+        "name": "Update Appointment Status"
+      },
+      {
+        "uuid": "df85a567-dff7-4c9e-b37d-59a27bb4ee7e",
+        "name": "Manage Flags"
+      },
+      {
+        "uuid": "d05118c6-2490-4d78-a41a-390e3596a228",
+        "name": "Get Programs"
+      },
+      {
+        "uuid": "d05118c6-2490-4d78-a41a-390e3596a229",
+        "name": "Get Concept Reference Terms"
+      },
+      {
+        "uuid": "eb4ee68c-fa64-4b26-93aa-603543ae5980",
+        "name": "Manage Appointments Settings"
+      },
+      {
+        "uuid": "129aa19d-440a-11e6-a65c-00e04c680037",
+        "name": "Manage Concept Datatypes"
+      },
+      {
+        "uuid": "79b8dcb8-100e-4ca3-a2cf-bfad249a5e2b",
+        "name": "Messages manage privilege"
+      },
+      {
+        "uuid": "d05118c6-2490-4d78-a41a-390e3596a230",
+        "name": "Get Concept Map Types"
+      },
+      {
+        "uuid": "129a9dd5-440a-11e6-a65c-00e04c680037",
+        "name": "Delete People"
+      },
+      {
+        "uuid": "8202e173-7d10-4da9-b279-424f056ee7ec",
+        "name": "View Providers"
+      },
+      {
+        "uuid": "c5358453-a37a-4aae-ba5f-70c2a476f763",
+        "name": "Manage Appointment Types"
+      },
+      {
+        "uuid": "129aa2d2-440a-11e6-a65c-00e04c680037",
+        "name": "Manage FormEntry XSN"
+      },
+      {
+        "uuid": "6bb71fbb-b1c6-4530-8637-67cfc65aa27e",
+        "name": "Manage Location Tags"
+      },
+      {
+        "uuid": "d4a8ac21-6d07-4adc-ac4b-4db3cb614a71",
+        "name": "Manage Order Frequencies"
+      },
+      {
+        "uuid": "129aaaa0-440a-11e6-a65c-00e04c680037",
+        "name": "View Patients"
+      },
+      {
+        "uuid": "f6c05108-dffd-46be-8a0b-de8d838481ea",
+        "name": "Manage Identifier Sources"
+      },
+      {
+        "uuid": "3a5f0c6f-b876-4b12-9ff4-0baec9607dc1",
+        "name": "App: coreapps.patientDashboard"
+      },
+      {
+        "uuid": "a2d1789b-f032-4438-9db0-19af0fc57372",
+        "name": "Manage HL7 Messages"
+      },
+      {
+        "uuid": "2ad89b40-02b4-4c89-a911-90cd28735262",
+        "name": "View Patient Appointment History"
+      },
+      {
+        "uuid": "129a9d3c-440a-11e6-a65c-00e04c680037",
+        "name": "Delete Orders"
+      },
+      {
+        "uuid": "8aaa264d-63d3-41c7-91d1-357323ea73c6",
+        "name": "App: appointmentschedulingui.providerSchedules"
+      },
+      {
+        "uuid": "1fa3f3a5-8352-49c9-a5e5-9c7775435fde",
+        "name": "View Database Changes"
+      },
+      {
+        "uuid": "d05118c6-2490-4d78-a41a-390e3596a262",
+        "name": "Patient Overview - View Relationships"
+      },
+      {
+        "uuid": "129aab7d-440a-11e6-a65c-00e04c680037",
+        "name": "View Relationship Types"
+      },
+      {
+        "uuid": "5953079c-09f1-4b7a-9315-c84b3448671d",
+        "name": "Add HL7 Source"
+      },
+      {
+        "uuid": "d05118c6-2490-4d78-a41a-390e3596a263",
+        "name": "Patient Overview - View Programs"
+      },
+      {
+        "uuid": "d05118c6-2490-4d78-a41a-390e3596a260",
+        "name": "Patient Overview - View Problem List"
+      },
+      {
+        "uuid": "d05118c6-2490-4d78-a41a-390e3596a261",
+        "name": "Patient Overview - View Allergies"
+      },
+      {
+        "uuid": "5ec6d080-c576-48c2-b289-b46b1266d4ec",
+        "name": "Update HL7 Inbound Queue"
+      },
+      {
+        "uuid": "1c5a4e99-91da-4a94-ac45-3fb1857bbd66",
+        "name": "Delete HL7 Inbound Exception"
+      },
+      {
+        "uuid": "d05118c6-2490-4d78-a41a-390e3596a248",
+        "name": "Get Encounters"
+      },
+      {
+        "uuid": "d05118c6-2490-4d78-a41a-390e3596a249",
+        "name": "Get Users"
+      },
+      {
+        "uuid": "129aa08f-440a-11e6-a65c-00e04c680037",
+        "name": "Form Entry"
+      },
+      {
+        "uuid": "d05118c6-2490-4d78-a41a-390e3596a246",
+        "name": "Get Locations"
+      },
+      {
+        "uuid": "d05118c6-2490-4d78-a41a-390e3596a247",
+        "name": "Get Encounter Types"
+      },
+      {
+        "uuid": "d05118c6-2490-4d78-a41a-390e3596a244",
+        "name": "Get Patients"
+      },
+      {
+        "uuid": "d05118c6-2490-4d78-a41a-390e3596a245",
+        "name": "Get Observations"
+      },
+      {
+        "uuid": "7622dbba-06a0-450b-b93d-e1985e922a16",
+        "name": "Manage Order Sets"
+      },
+      {
+        "uuid": "d05118c6-2490-4d78-a41a-390e3596a242",
+        "name": "Get Patient Cohorts"
+      },
+      {
+        "uuid": "d05118c6-2490-4d78-a41a-390e3596a243",
+        "name": "Get Patient Identifiers"
+      },
+      {
+        "uuid": "6ed39527-c5e0-4267-afb2-263dcd2c300b",
+        "name": "View Visit Attribute Types"
+      },
+      {
+        "uuid": "129aaaeb-440a-11e6-a65c-00e04c680037",
+        "name": "View Person Attribute Types"
+      },
+      {
+        "uuid": "129a9b6f-440a-11e6-a65c-00e04c680037",
+        "name": "Add Patient Programs"
+      },
+      {
+        "uuid": "129aa44c-440a-11e6-a65c-00e04c680037",
+        "name": "Manage Relationship Types"
+      },
+      {
+        "uuid": "129aa63c-440a-11e6-a65c-00e04c680037",
+        "name": "Upload XSN"
+      },
+      {
+        "uuid": "b4a7d60d-17b1-473f-87b7-f17ba78e2783",
+        "name": "Provider Management API - Read-only"
+      },
+      {
+        "uuid": "bcaa6134-30d5-4faf-8aba-2faf522baf0e",
+        "name": "View HL7 Inbound Exception"
+      },
+      {
+        "uuid": "0b67ced8-a59c-4476-af36-25498b096c8f",
+        "name": "View Visits"
+      },
+      {
+        "uuid": "6cb87054-6929-4615-9387-f061ff5ff143",
+        "name": "App: coreapps.activeVisits"
+      },
+      {
+        "uuid": "e2b5ce59-9b8f-4ca7-9394-7f55b4fce59e",
+        "name": "Delete HL7 Inbound Queue"
+      },
+      {
+        "uuid": "129a9e45-440a-11e6-a65c-00e04c680037",
+        "name": "Delete Reports"
+      },
+      {
+        "uuid": "d05118c6-2490-4d78-a41a-390e3596a251",
+        "name": "Get Concepts"
+      },
+      {
+        "uuid": "129aac63-440a-11e6-a65c-00e04c680037",
+        "name": "View Users"
+      },
+      {
+        "uuid": "d05118c6-2490-4d78-a41a-390e3596a250",
+        "name": "Get Concept Proposals"
+      },
+      {
+        "uuid": "eb3c8909-1f36-45b2-b4fd-c452c74072a5",
+        "name": "Manage Implementation Id"
+      },
+      {
+        "uuid": "bff672e1-c274-4bf2-9415-a3b86f0c1971",
+        "name": "View FHIR Client"
+      },
+      {
+        "uuid": "129a9c58-440a-11e6-a65c-00e04c680037",
+        "name": "Add Reports"
+      },
+      {
+        "uuid": "129a9f68-440a-11e6-a65c-00e04c680037",
+        "name": "Edit Patient Programs"
+      },
+      {
+        "uuid": "129aa954-440a-11e6-a65c-00e04c680037",
+        "name": "View Identifier Types"
+      },
+      {
+        "uuid": "ef25faac-b5bf-4519-bbaa-1e3e80919cc7",
+        "name": "Test Flags"
+      },
+      {
+        "uuid": "ef98fb61-1417-4b0d-adb4-e5084060b228",
+        "name": "Provider Management Dashboard - View Historical"
+      },
+      {
+        "uuid": "129a9c32-440a-11e6-a65c-00e04c680037",
+        "name": "Add Report Objects"
+      },
+      {
+        "uuid": "129aa27e-440a-11e6-a65c-00e04c680037",
+        "name": "Manage Encounter Types"
+      },
+      {
+        "uuid": "129aa5e3-440a-11e6-a65c-00e04c680037",
+        "name": "Patient Dashboard - View Regimen Section"
+      },
+      {
+        "uuid": "7d0ffe49-8bf3-43dd-aec2-2cb156016a31",
+        "name": "Get Order Frequencies"
+      },
+      {
+        "uuid": "129aa5b8-440a-11e6-a65c-00e04c680037",
+        "name": "Patient Dashboard - View Patient Summary"
+      },
+      {
+        "uuid": "129aa1f0-440a-11e6-a65c-00e04c680037",
+        "name": "Manage Concept Sources"
+      },
+      {
+        "uuid": "129aa979-440a-11e6-a65c-00e04c680037",
+        "name": "View Locations"
+      },
+      {
+        "uuid": "4caae075-f00a-4eed-ab73-06af91321a0f",
+        "name": "Manage Report Definitions"
+      },
+      {
+        "uuid": "df29939d-d3fd-47a5-b706-c1a3e1dea4da",
+        "name": "Assign System Developer Role"
+      },
+      {
+        "uuid": "129aa561-440a-11e6-a65c-00e04c680037",
+        "name": "Patient Dashboard - View Graphs Section"
+      },
+      {
+        "uuid": "129aa10e-440a-11e6-a65c-00e04c680037",
+        "name": "Manage Concept Classes"
+      },
+      {
+        "uuid": "25fc10e8-0d6d-4b9b-8377-fae82b56616a",
+        "name": "Manage Devices"
+      },
+      {
+        "uuid": "8e3d1944-1366-4362-9083-2f0f14343669",
+        "name": "Get Licenses"
+      },
+      {
+        "uuid": "58e22b94-4d63-4b37-b05e-763d87cba490",
+        "name": "Manage Concept Name tags"
+      },
+      {
+        "uuid": "b48e0d22-663c-4b17-81ce-de7d7215d233",
+        "name": "View Appointments Statistics"
+      },
+      {
+        "uuid": "d05118c6-2490-4d78-a41a-390e3596a264",
+        "name": "Patient Overview - View Patient Actions"
+      },
+      {
+        "uuid": "129aa9e7-440a-11e6-a65c-00e04c680037",
+        "name": "View Order Types"
+      },
+      {
+        "uuid": "129a9f1f-440a-11e6-a65c-00e04c680037",
+        "name": "Edit Orders"
+      },
+      {
+        "uuid": "129aa2f8-440a-11e6-a65c-00e04c680037",
+        "name": "Manage Forms"
+      },
+      {
+        "uuid": "129aa90b-440a-11e6-a65c-00e04c680037",
+        "name": "View Forms"
+      },
+      {
+        "uuid": "129aa850-440a-11e6-a65c-00e04c680037",
+        "name": "View Concepts"
+      },
+      {
+        "uuid": "9191cf01-dddd-49e9-a23c-1af42629fee8",
+        "name": "Add HL7 Inbound Exception"
+      },
+      {
+        "uuid": "4134d3bf-cc02-4983-b150-bfe2695002ff",
+        "name": "Manage Device Attribute Types"
+      },
+      {
+        "uuid": "129aac3a-440a-11e6-a65c-00e04c680037",
+        "name": "View Unpublished Forms"
+      },
+      {
+        "uuid": "129a9be1-440a-11e6-a65c-00e04c680037",
+        "name": "Add People"
+      },
+      {
+        "uuid": "a073dbf0-fa16-4fc7-bb11-56818df07693",
+        "name": "Get Devices"
+      },
+      {
+        "uuid": "129aac14-440a-11e6-a65c-00e04c680037",
+        "name": "View Roles"
+      },
+      {
+        "uuid": "60e6deb6-f876-4c24-997d-27f5e11e7137",
+        "name": "View Appointment Types"
+      },
+      {
+        "uuid": "a4eb0598-6d0c-486a-8e0e-7092eac26ee6",
+        "name": "Get Notes"
+      },
+      {
+        "uuid": "75ad24c1-a338-4978-8685-dfaf7257e1fc",
+        "name": "Manage Visit Types"
+      },
+      {
+        "uuid": "129a9f8d-440a-11e6-a65c-00e04c680037",
+        "name": "Edit Patients"
+      },
+      {
+        "uuid": "69cb3944-e328-4155-b34a-b4e90068d341",
+        "name": "Manage Concept Map Types"
+      },
+      {
+        "uuid": "129aa7b0-440a-11e6-a65c-00e04c680037",
+        "name": "View Concept Classes"
+      },
+      {
+        "uuid": "b62faa38-42f1-4aed-aa3a-207e4e67383c",
+        "name": "Manage Visit Attribute Types"
+      },
+      {
+        "uuid": "129aa92f-440a-11e6-a65c-00e04c680037",
+        "name": "View Global Properties"
+      },
+      {
+        "uuid": "129aa9c2-440a-11e6-a65c-00e04c680037",
+        "name": "View Observations"
+      },
+      {
+        "uuid": "660daea0-d95b-46e0-910b-bf14a3682bb8",
+        "name": "App: referenceapplication.legacyAdmin"
+      },
+      {
+        "uuid": "129a9ed8-440a-11e6-a65c-00e04c680037",
+        "name": "Edit Encounters"
+      },
+      {
+        "uuid": "129aa22e-440a-11e6-a65c-00e04c680037",
+        "name": "Manage Concepts"
+      },
+      {
+        "uuid": "129aa612-440a-11e6-a65c-00e04c680037",
+        "name": "Purge Field Types"
+      },
+      {
+        "uuid": "ca605a31-de8a-4e68-b027-dad31f5334f0",
+        "name": "Add Allergies"
+      },
+      {
+        "uuid": "129a9bab-440a-11e6-a65c-00e04c680037",
+        "name": "Add Patients"
+      },
+      {
+        "uuid": "129a9f43-440a-11e6-a65c-00e04c680037",
+        "name": "Edit Patient Identifiers"
+      },
+      {
+        "uuid": "129aa58b-440a-11e6-a65c-00e04c680037",
+        "name": "Patient Dashboard - View Overview Section"
+      },
+      {
+        "uuid": "97991baf-803b-43a1-a92c-e70565a3a4d6",
+        "name": "App: coreapps.systemAdministration"
+      },
+      {
+        "uuid": "cac723f7-1253-4dd9-a025-cd0376be12bd",
+        "name": "SMS module Privilege"
+      },
+      {
+        "uuid": "129aa2ae-440a-11e6-a65c-00e04c680037",
+        "name": "Manage Field Types"
+      },
+      {
+        "uuid": "02ddc03c-c8b3-4a23-a8b3-0ad1696ceaad",
+        "name": "Manage Address Templates"
+      },
+      {
+        "uuid": "129a9dfa-440a-11e6-a65c-00e04c680037",
+        "name": "Delete Relationships"
+      },
+      {
+        "uuid": "b6f4d61f-fe31-48ac-9cb4-bae94f459053",
+        "name": "Remove Problems"
+      },
+      {
+        "uuid": "72725628-b493-4a50-8bd1-24dddfc2ea38",
+        "name": "Edit Problems"
+      },
+      {
+        "uuid": "8c4f5968-eabd-424a-ba0c-3cefedf3e12b",
+        "name": "Squeezing Appointments"
+      }
+    ],
+    "roles": [
+      {
+        "uuid": "103a0f28-51da-46c7-a346-9edb1e7dddf9",
+        "name": "Application: Administers System"
+      },
+      {
+        "uuid": "8d94f852-c2cc-11de-8d13-0010c6dffd0f",
+        "name": "System Developer"
+      },
+      {
+        "uuid": "3d20a525-4be9-41ef-b48a-640783927afe",
+        "name": "Application: Has Super User Privileges"
+      },
+      {
+        "uuid": "5dfc2d1e-e857-4e92-b1dd-2372abff15b0",
+        "name": "Application: Registers Patients"
+      },
+      {
+        "uuid": "10111e68-0cab-40f8-bad4-1e4b81f98cdb",
+        "name": "Application: Configures Metadata"
+      },
+      {
+        "uuid": "d83f877d-0ce6-4617-ab53-23753c881b15",
+        "name": "Organizational: System Administrator"
+      },
+      {
+        "uuid": "ab2160f6-0941-430c-9752-6714353fbd3c",
+        "name": "Privilege Level: Full"
+      },
+      {
+        "uuid": "8d94f280-c2cc-11de-8d13-0010c6dffd0f",
+        "name": "Provider"
+      }
+    ]
+  },
+  "locale": "en_GB",
+  "allowedLocales": [
+    "en",
+    "es",
+    "fr",
+    "it",
+    "pt"
+  ],
+  "sessionLocation": null
+}

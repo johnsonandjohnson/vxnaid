@@ -1,0 +1,77 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <style name="AppTheme" parent="Theme.MaterialComponents.Light.DarkActionBar">
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorSecondary">@color/colorSecondary</item>
+    </style>
+
+    <style name="AppTheme.NoActionBar" parent="Theme.MaterialComponents.Light.NoActionBar" />
+
+    <style name="CustomAutoSizeText" tools:ignore="NewApi">
+        <item name="android:autoSizeMinTextSize">10sp</item>
+        <item name="android:autoSizeMaxTextSize">24sp</item>
+        <item name="android:autoSizeStepGranularity">2sp</item>
+        <item name="android:autoSizeTextType">uniform</item>
+    </style>
+
+    <style name="CustomAutoSizeHeader" tools:ignore="NewApi">
+        <item name="android:autoSizeMinTextSize">20sp</item>
+        <item name="android:autoSizeMaxTextSize">48sp</item>
+        <item name="android:autoSizeStepGranularity">2sp</item>
+        <item name="android:autoSizeTextType">uniform</item>
+        <item name="android:textSize">36sp</item>
+        <item name="android:fontFamily">roboto-black</item>
+        <item name="android:textColor">@color/colorPrimaryDark</item>
+    </style>
+
+    <style name="AppTheme.Barcode" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <item name="colorPrimary">@android:color/white</item>
+        <item name="colorPrimaryDark">@android:color/black</item>
+    </style>
+
+    <style name="ScreenTitle">
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">36sp</item>
+        <item name="android:textColor">@color/colorTextOnLight</item>
+        <item name="android:textAlignment">center</item>
+    </style>
+
+    <style name="DescriptionText">
+        <item name="android:textSize">20sp</item>
+        <item name="android:textColor">@color/colorTextOnLight</item>
+        <item name="android:textAlignment">center</item>
+    </style>
+
+    <style name="GeneralText">
+        <item name="android:textSize">18sp</item>
+        <item name="android:textColor">@color/colorTextOnLight</item>
+    </style>
+
+    <style name="LabelText">
+        <item name="android:textSize">18sp</item>
+        <item name="android:textColor">@color/colorTextOnLight</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="ButtonTextStyling">
+        <item name="android:textSize">15sp</item>
+        <item name="android:fontFamily">@android/roboto</item>
+        <item name="android:textAllCaps">true</item>
+    </style>
+
+    <style name="PopupTitle">
+        <item name="android:textSize">22sp</item>
+        <item name="android:textColor">@color/colorTextOnLight</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="progressBarCustom" parent="@android:style/Widget.ProgressBar.Horizontal">
+        <item name="android:color">@color/barcode_field_value</item>
+        <item name="android:colorAccent">@color/sync_complete</item>
+        <item name="android:progressBackgroundTint">@color/barcode_field_value</item>
+        <item name="android:progressTint">@color/sync_complete</item>
+    </style>
+
+</resources>

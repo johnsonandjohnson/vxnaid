@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.jnj.vaccinetracker.participantflow.screens.ParticipantFlowParticipantIdViewModel" />
+
+        <import type="android.view.View" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/label_intro"
+            style="@style/CustomAutoSizeText"
+            android:layout_width="0dp"
+            android:layout_height="100dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:text="@string/participant_flow_participant_id_description"
+            android:textAppearance="@style/DescriptionText"
+            app:layout_constraintEnd_toStartOf="@+id/img_id_card"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/img_id_card"
+            android:layout_width="107dp"
+            android:layout_height="0dp"
+            android:layout_marginEnd="32dp"
+            android:adjustViewBounds="false"
+            android:cropToPadding="false"
+            android:scaleType="fitStart"
+            app:layout_constraintBottom_toBottomOf="@+id/label_intro"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/label_intro"
+            app:layout_constraintVertical_bias="0.0"
+            app:srcCompat="@drawable/ic_id_card" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginEnd="32dp"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toTopOf="@+id/btn_skip"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/label_intro">
+
+            <TextView
+                android:id="@+id/textView_manualIDSubtitle"
+                style="@style/CustomAutoSizeText"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:layout_marginTop="32dp"
+                android:layout_weight="0"
+                android:text="@string/participant_flow_participant_id_label_manual_entry"
+                android:textAppearance="@style/ScreenTitle"/>
+
+            <EditText
+                android:id="@+id/edit_id_number"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:ems="10"
+                android:hint="@string/participant_flow_participant_id_input_hint"
+                android:inputType="textVisiblePassword"
+                android:longClickable="false"
+                android:textIsSelectable="false"
+                android:textSize="18sp"
+                tools:ignore="TextFields" />
+
+            <TextView
+                android:id="@+id/textView_divider"
+                style="@style/CustomAutoSizeText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="32dp"
+                android:gravity="center_horizontal"
+                android:text="@string/participant_flow_participant_id_label_or"
+                android:textSize="24sp"
+                android:textColor="@color/colorTextOnLight"/>
+
+            <TextView
+                android:id="@+id/textView_QRScannerSubtitle"
+                style="@style/CustomAutoSizeText"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:layout_marginTop="32dp"
+                android:layout_weight="0"
+                android:text="@string/participant_flow_participant_id_label_scan_code"
+                android:textAppearance="@style/ScreenTitle"/>
+
+            <ImageButton
+                android:id="@+id/btn_scan_code"
+                android:layout_width="121dp"
+                android:layout_height="152dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="16dp"
+                android:adjustViewBounds="true"
+                android:background="@null"
+                android:scaleType="fitCenter"
+                app:layout_constraintHeight_percent="2"
+                app:layout_constraintWidth_percent="0.2"
+                app:srcCompat="@drawable/ic_scan_barcode" />
+
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/btn_skip"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginBottom="16dp"
+            android:backgroundTint="@color/colorTextOnLight"
+            android:textAppearance="@style/ButtonTextStyling"
+            android:text="@string/general_label_skip"
+            android:textColor="@color/colorTextOnSecondary"
+            android:textSize="14sp"
+            android:visibility="@{viewModel.canSkip ? View.VISIBLE : View.GONE}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <Button
+            android:id="@+id/btn_submit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="32dp"
+            android:layout_marginBottom="16dp"
+            android:backgroundTint="@color/colorPrimary"
+            android:textAppearance="@style/ButtonTextStyling"
+            android:text="@string/general_label_submit"
+            android:textColor="@color/colorTextOnSecondary"
+            android:textSize="14sp"
+            android:visibility="@{viewModel.canSubmit ? View.VISIBLE : View.GONE}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

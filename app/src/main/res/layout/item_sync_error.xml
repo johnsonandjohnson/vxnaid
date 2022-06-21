@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="item"
+            type="com.jnj.vaccinetracker.common.ui.dialog.SyncErrorOverviewUiModel" />
+
+        <import type="android.view.View" />
+
+    </data>
+
+    <LinearLayout
+        android:id="@+id/constraintLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="8dp"
+        android:background="@drawable/participant_item_bg"
+        android:minHeight="?android:listPreferredItemHeightSmall"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/textView_error_message"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:text="@{item.displayErrorMessage(context)}"
+            android:textAppearance="@style/LabelText"
+            tools:text="Error saving configuration." />
+
+        <TextView
+            android:id="@+id/textView_error_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:paddingTop="8dp"
+            android:text="@{item.displayDate}"
+            android:textAppearance="@style/GeneralText"
+            tools:text="01/05/2021 13:01" />
+
+    </LinearLayout>
+
+</layout>

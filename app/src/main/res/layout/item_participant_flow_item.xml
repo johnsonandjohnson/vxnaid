@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="label"
+            type="String" />
+
+        <variable
+            name="stepIndex"
+            type="String" />
+    </data>
+
+    <LinearLayout
+        android:id="@+id/linear_layout"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+
+            android:orientation="vertical"
+
+            android:layout_alignParentLeft="true"
+            app:layout_constraintBottom_toTopOf="@+id/finish_button"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:gravity="center"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView_connection_header">
+
+            <TextView
+                android:id="@+id/step_id"
+                style="@style/CustomAutoSizeText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:text="@{stepIndex}"
+                android:textAppearance="@style/LabelText"
+                tools:text="@string/match_or_register_patient_step_index" />
+
+            <TextView
+                android:id="@+id/label_id"
+                style="@style/CustomAutoSizeText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:text="@{label}"
+                android:textAppearance="@style/GeneralText"
+                tools:text="@string/match_or_register_patient_step_visit" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+        <ImageView
+            android:id="@+id/img_id"
+            android:layout_width="110dp"
+            android:layout_height="110dp"
+            android:gravity="right"
+
+            android:layout_alignParentRight="true" />
+    </LinearLayout>
+</layout>

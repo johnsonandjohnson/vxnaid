@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.jnj.vaccinetracker.login.LoginViewModel" />
+
+        <import type="android.view.View" />
+
+    </data>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/img_header"
+            android:layout_width="match_parent"
+            android:layout_height="140dp"
+            android:background="@color/errorDark"
+            android:paddingTop="30dp"
+            android:paddingBottom="30dp"
+            android:scaleType="centerInside"
+            android:src="@drawable/ic_x_circle"
+            app:tint="@color/colorTextOnPrimary" />
+
+        <ProgressBar
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:indeterminate="true"
+            android:visibility="@{viewModel.loading ? View.VISIBLE : View.GONE}" />
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:gravity="center_horizontal"
+            android:text="@string/dialog_login_title"
+            android:textAppearance="@style/PopupTitle" />
+
+        <TextView
+            android:id="@+id/textView_description"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:gravity="center_horizontal"
+            android:text="@string/dialog_login_description"
+            android:textAppearance="@style/GeneralText" />
+
+        <EditText
+            android:id="@+id/editText_username"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginRight="10dp"
+            android:autofillHints="@string/login_label_username"
+            android:gravity="center_horizontal"
+            android:hint="@string/login_label_username"
+            android:inputType="textEmailAddress"
+            android:longClickable="false"
+            android:textIsSelectable="false" />
+
+        <EditText
+            android:id="@+id/editText_password"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginRight="10dp"
+            android:autofillHints="@string/login_label_password"
+            android:gravity="center_horizontal"
+            android:hint="@string/login_label_password"
+            android:inputType="textPassword" />
+
+
+        <TextView
+            android:id="@+id/error_textview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="@{viewModel.errorMessage}"
+            android:textColor="@color/errorDark"
+            android:visibility="@{viewModel.errorMessage == null ? View.INVISIBLE : View.VISIBLE}"
+            android:textAppearance="@style/GeneralText"
+            tools:text="Invalid credentials! Please try again." />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/button_reset"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="8dp"
+                android:backgroundTint="@color/colorPrimary"
+                android:textAppearance="@style/ButtonTextStyling"
+                android:enabled="@{!viewModel.loading}"
+                android:text="@string/dialog_login_btn_terminate"
+                android:textColor="@color/colorTextOnSecondary" />
+
+            <Button
+                android:id="@+id/button_login"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="2dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="8dp"
+                android:backgroundTint="@color/colorPrimary"
+                android:textAppearance="@style/ButtonTextStyling"
+                android:enabled="@{!viewModel.loading}"
+                android:text="@string/dialog_login_btn_renew"
+                android:textColor="@color/colorTextOnSecondary" />
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+</layout>

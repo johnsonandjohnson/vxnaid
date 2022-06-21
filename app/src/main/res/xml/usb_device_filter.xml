@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--  Iritech IriShield USB MK 2120U  -->
+    <usb-device
+        product-id="61441"
+        vendor-id="8035" />
+    <!--  Iritech IriShield-USB BK 2121U  -->
+    <usb-device
+        product-id="61442"
+        vendor-id="8035" />
+    <!--  Mantra MIS100V2  -->
+    <usb-device
+        product-id="8448"
+        vendor-id="11279" />
+</resources>

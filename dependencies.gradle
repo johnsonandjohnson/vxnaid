@@ -1,0 +1,159 @@
+def versions = [
+        buildtools       : '4.2.0',
+        kotlin           : '1.5.30',
+        detekt           : '1.20.0-RC1',
+        fragmentKtx      : '1.2.5',
+        activityKtx      : '1.1.0',
+        lifecycle        : '2.2.0',
+        appcompat        : '1.2.0',
+        recyclerView     : '1.2.1',
+        cardView         : '1.0.0',
+        constraintLayout : '2.0.4',
+        material         : '1.2.1',
+        retrofit         : '2.9.0',
+        okhttp           : '4.9.1',
+        niddler          : '1.3.2',
+        dagger           : '2.29.1',
+        moshi            : '1.12.0',
+        glide            : '4.11.0',
+        dokka            : '0.9.18',
+        cameraX          : '1.1.0-alpha11',
+        cameraView       : '1.0.0-alpha31',
+        countryCodePicker: '2.4.2',
+        libphonenumber   : '8.12.13',
+        exifInterface    : '1.3.2',
+        coroutines       : '1.5.2',
+        preference       : '1.1.0',
+        flowPreferences  : '1.3.4',
+        room             : '2.4.0-beta02',
+        klock            : '2.4.1',
+        sqlCypher        : '4.5.0',
+        security         : '1.1.0-alpha03',
+        test             : '1.3.0',
+        testExt          : '1.1.2',
+        espresso         : '3.3.0',
+        uiAutomator      : '2.2.0',
+        junit            : '4.12',
+        mockk            : '1.12.0',
+        kotest           : '4.6.3',
+        bcrypt           : '0.9.0',
+        moshiSealed      : '0.14.0',
+        archComponents   : '1.1.1',
+        barcodeScanning  : '17.0.0',
+]
+
+ext.versions = versions
+
+def gradlePlugins = [
+        buildTools: "com.android.tools.build:gradle:${versions.buildtools}",
+        kotlin    : "org.jetbrains.kotlin:kotlin-gradle-plugin:${versions.kotlin}",
+        detekt    : "io.gitlab.arturbosch.detekt:detekt-gradle-plugin:${versions.detekt}",
+        dokka     : "org.jetbrains.dokka:dokka-android-gradle-plugin:${versions.dokka}"
+]
+
+def annotationProcessors = [
+        lifecycleAnotationProcessor: "android.arch.lifecycle:compiler:${versions.archComponents}",
+        daggerAndroidProcessor     : "com.google.dagger:dagger-android-processor:${versions.dagger}",
+        daggerCompiler             : "com.google.dagger:dagger-compiler:${versions.dagger}",
+        moshiCodeGen               : "com.squareup.moshi:moshi-kotlin-codegen:${versions.moshi}",
+        glideCompiler              : "com.github.bumptech.glide:compiler:${versions.glide}",
+        roomCompiler               : "androidx.room:room-compiler:${versions.room}",
+        moshiSealedCodeGen         : "dev.zacsweers.moshix:moshi-sealed-codegen:${versions.moshiSealed}",
+]
+
+def androidTestAnnotationProcessors = [
+        daggerCompiler        : annotationProcessors.daggerCompiler,
+        daggerAndroidProcessor: annotationProcessors.daggerAndroidProcessor,
+]
+
+def implementation = [
+        lifecycleViewModel  : "androidx.lifecycle:lifecycle-viewmodel:${versions.lifecycle}",
+        lifecycleProcess    : "androidx.lifecycle:lifecycle-process:${versions.lifecycle}",
+        lifecycleRuntime    : "androidx.lifecycle:lifecycle-runtime:${versions.lifecycle}",
+        lifecycleExtensions : "androidx.lifecycle:lifecycle-extensions:${versions.lifecycle}",
+        fragmentKtx         : "androidx.fragment:fragment-ktx:${versions.fragmentKtx}",
+        activityKtx         : "androidx.activity:activity-ktx:${versions.activityKtx}",
+        appCompat           : "androidx.appcompat:appcompat:${versions.appcompat}",
+        cardView            : "androidx.cardview:cardview:${versions.cardView}",
+        recyclerView        : "androidx.recyclerview:recyclerview:${versions.recyclerView}",
+        constraintLayout    : "androidx.constraintlayout:constraintlayout:${versions.constraintLayout}",
+        design              : "com.google.android.material:material:${versions.material}",
+        retrofit            : "com.squareup.retrofit2:retrofit:${versions.retrofit}",
+        okhttp              : "com.squareup.okhttp3:okhttp:${versions.okhttp}",
+        loggingInterceptor  : "com.squareup.okhttp3:logging-interceptor:${versions.okhttp}",
+        dagger              : "com.google.dagger:dagger:${versions.dagger}",
+        daggerAndroid       : "com.google.dagger:dagger-android:${versions.dagger}",
+        daggerAndroidSupport: "com.google.dagger:dagger-android-support:${versions.dagger}",
+        moshi               : "com.squareup.moshi:moshi:${versions.moshi}",
+        moshiAdapters       : "com.squareup.moshi:moshi-adapters:${versions.moshi}",
+        moshiKotlin         : "com.squareup.moshi:moshi-kotlin:${versions.moshi}",
+        moshiConverter      : "com.squareup.retrofit2:converter-moshi:${versions.retrofit}",
+        glide               : "com.github.bumptech.glide:glide:${versions.glide}",
+        kotlinStdLib        : "org.jetbrains.kotlin:kotlin-stdlib:${versions.kotlin}",
+        kotlinReflect       : "org.jetbrains.kotlin:kotlin-reflect:${versions.kotlin}",
+        cameraXCore         : "androidx.camera:camera-core:${versions.cameraX}",
+        cameraXCamera2      : "androidx.camera:camera-camera2:${versions.cameraX}",
+        cameraXLifecycle    : "androidx.camera:camera-lifecycle:${versions.cameraX}",
+        cameraView          : "androidx.camera:camera-view:${versions.cameraView}",
+        cameraExtensions    : "androidx.camera:camera-extensions:${versions.cameraView}",
+        countryCodePicker   : "com.hbb20:ccp:${versions.countryCodePicker}",
+        libphonenumber      : "io.michaelrocks:libphonenumber-android:${versions.libphonenumber}",
+        exifInterface       : "androidx.exifinterface:exifinterface:${versions.exifInterface}",
+        coroutinesAndroid   : "org.jetbrains.kotlinx:kotlinx-coroutines-android:${versions.coroutines}",
+        peference           : "androidx.preference:preference-ktx:${versions.preference}",
+        flowPreferences     : "com.github.tfcporciuncula.flow-preferences:flow-preferences:${versions.flowPreferences}",
+        roomCommon          : "androidx.room:room-common:${versions.room}",
+        roomRuntime         : "androidx.room:room-runtime:${versions.room}",
+        roomKtx             : "androidx.room:room-ktx:${versions.room}",
+        sqlCypher           : "net.zetetic:android-database-sqlcipher:${versions.sqlCypher}",
+        security            : "androidx.security:security-crypto:${versions.security}",
+        klock               : "com.soywiz.korlibs.klock:klock:${versions.klock}",
+        bcrypt              : "at.favre.lib:bcrypt:${versions.bcrypt}",
+        moshiSealed         : "dev.zacsweers.moshix:moshi-sealed-runtime:${versions.moshiSealed}",
+        barcodeScanning     : "com.google.mlkit:barcode-scanning:${versions.barcodeScanning}",
+]
+
+def debugImplementation = [
+        niddler: "com.icapps.niddler:niddler:${versions.niddler}",
+]
+
+def releaseImplementation = [
+        //niddler: "com.icapps.niddler:niddler:${versions.niddler}",
+        niddlerNoOp: "com.icapps.niddler:niddler-noop:${versions.niddler}",
+]
+
+def nonTransitiveImplementation = []
+
+def testImplementation = [
+        junit               : "junit:junit:${versions.junit}",
+        testCoroutines      : "org.jetbrains.kotlinx:kotlinx-coroutines-test:${versions.coroutines}",
+        mockk               : "io.mockk:mockk:${versions.mockk}",
+        mockk_agent         : "io.mockk:mockk-agent-jvm:${versions.mockk}",
+        kotestRunnerJunit5  : "io.kotest:kotest-runner-junit5:${versions.kotest}", // for kotest framework
+        kotestAssertionsCore: "io.kotest:kotest-assertions-core:${versions.kotest}", // for kotest core jvm assertions
+]
+
+def androidTestImplementation = [
+        testRunner     : "androidx.test:runner:${versions.test}",
+        testRules      : "androidx.test:rules:${versions.test}",
+        testExt        : "androidx.test.ext:junit:${versions.testExt}",
+        junit          : "junit:junit:${versions.junit}",
+        espressoCore   : "androidx.test.espresso:espresso-core:${versions.espresso}",
+        espressoIntents: "androidx.test.espresso:espresso-intents:${versions.espresso}",
+        espressoContrib: "androidx.test.espresso:espresso-contrib:${versions.espresso}",
+        uiAutomator    : "androidx.test.uiautomator:uiautomator:${versions.uiAutomator}",
+        kotestAssertionsCore: "io.kotest:kotest-assertions-core:${versions.kotest}", // for kotest core jvm assertions
+]
+
+ext.deps = [
+        "implementation"                 : implementation,
+        "debugImplementation"            : debugImplementation,
+        "releaseImplementation"          : releaseImplementation,
+        'nonTransitiveImplementation'    : nonTransitiveImplementation,
+        "gradlePlugins"                  : gradlePlugins,
+        "annotationProcessors"           : annotationProcessors,
+        "androidTestAnnotationProcessors": androidTestAnnotationProcessors,
+        "testImplementation"             : testImplementation,
+        "androidTestImplementation"      : androidTestImplementation,
+
+]

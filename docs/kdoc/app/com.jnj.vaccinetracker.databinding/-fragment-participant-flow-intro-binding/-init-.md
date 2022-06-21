@@ -1,0 +1,6 @@
+[app](../../index.md) / [com.jnj.vaccinetracker.databinding](../index.md) / [FragmentParticipantFlowIntroBinding](index.md) / [&lt;init&gt;](./-init-.md)
+
+# &lt;init&gt;
+
+`protected FragmentParticipantFlowIntroBinding(_bindingComponent: `[`Any`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html)`!, _root: View!, _localFieldCount: `[`Int`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html)`, btnContinue: Button!, divider: Button!, divider2: Button!, divider3: Button!, imageViewEyeLeft: ImageView!, imageViewEyeRight: ImageView!, imgId: ImageView!, imgVisit: ImageView!, labelId: TextView!, labelIdentify: TextView!, labelIntroduction: TextView!, labelIrisScan: TextView!, labelParticipantVisit: TextView!, labelWelcome: TextView!)`
+`protected FragmentParticipantFlowIntroBinding(_bindingComponent: `[`Any`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html)`!, _root: View!, _localFieldCount: `[`Int`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html)`, btnContinue: Button!, divider: Button!, divider2: Button!, divider3: Button!, imageViewEyeLeft: ImageView!, imageViewEyeRight: ImageView!, imgId: ImageView!, imgVisit: ImageView!, labelId: TextView!, labelIdentify: TextView!, labelIntroduction: TextView!, labelIrisScan: TextView!, labelParticipantVisit: TextView!, labelWelcome: TextView!)`

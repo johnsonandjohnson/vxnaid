@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <dimen name="scan_overlay_cutout_corner_radius">12dp</dimen>
+    <dimen name="scan_overlay_cutout_stroke_width">1.5dp</dimen>
+    <integer name="int_match_parent">-1</integer>
+    <integer name="int_wrap_content">-2</integer>
+    <dimen name="match_parent" tools:ignore="ReferenceType">@integer/int_match_parent</dimen>
+    <dimen name="wrap_content" tools:ignore="ReferenceType">@integer/int_wrap_content</dimen>
+    <dimen name="login_input_field_width">@dimen/match_parent</dimen>
+</resources>

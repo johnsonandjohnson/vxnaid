@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="item"
+            type="com.jnj.vaccinetracker.participantflow.screens.ParticipantFlowMatchingViewModel.OtherSiteParticipantItem" />
+
+    </data>
+
+    <LinearLayout
+        android:id="@+id/constraintLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/greyed_out"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/textView_participantId"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:text="@{item.participant.participantId}"
+            android:textAppearance="@style/GeneralText"
+            tools:text="9857432839845764832" />
+
+        <TextView
+            android:id="@+id/textView_siteLocation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:text="@{item.siteName.display}"
+            android:textAppearance="@style/GeneralText"
+            tools:text="UZA Antwerpen" />
+
+        <Button
+            android:id="@+id/border"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="8dp"
+            android:background="@color/colorPrimaryLight" />
+
+    </LinearLayout>
+
+</layout>

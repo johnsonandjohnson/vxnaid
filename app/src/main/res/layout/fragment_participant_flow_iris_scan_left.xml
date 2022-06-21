@@ -1,0 +1,271 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <Button
+            android:id="@+id/btn_skip"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginBottom="16dp"
+            android:backgroundTint="@color/colorTextOnLight"
+            android:textAppearance="@style/ButtonTextStyling"
+            android:text="@string/general_label_skip"
+            android:textColor="@color/colorTextOnSecondary"
+            android:textSize="14sp"
+            android:visibility="@{viewModel.canSkip ? View.VISIBLE : View.GONE}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <Button
+            android:id="@+id/btn_submit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="32dp"
+            android:layout_marginBottom="16dp"
+            android:backgroundTint="@color/colorPrimary"
+            android:textAppearance="@style/ButtonTextStyling"
+            android:text="@string/general_label_submit"
+            android:textColor="@color/colorTextOnSecondary"
+            android:textSize="14sp"
+            android:visibility="@{viewModel.canSubmit ? View.VISIBLE : View.GONE}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <Button
+            android:id="@+id/btn_capture"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="32dp"
+            android:layout_marginBottom="16dp"
+            android:backgroundTint="@color/colorPrimary"
+            android:textAppearance="@style/ButtonTextStyling"
+            android:text="@string/iris_scan_label_capture"
+            android:textColor="@color/colorTextOnSecondary"
+            android:textSize="14sp"
+            android:visibility="@{viewModel.canCapture ? View.VISIBLE : View.GONE}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <Button
+            android:id="@+id/btn_load_image"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:backgroundTint="@color/colorTextOnLight"
+            android:textAppearance="@style/ButtonTextStyling"
+            android:text="@string/iris_scan_label_load_image"
+            android:textColor="@color/colorTextOnSecondary"
+            android:textSize="14sp"
+            android:visibility="@{BuildConfig.DEBUG &amp;&amp; viewModel.canLoadImage ? View.VISIBLE : View.GONE}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <Button
+            android:id="@+id/btn_stop_scanning"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:backgroundTint="@color/colorTextOnLight"
+            android:textAppearance="@style/ButtonTextStyling"
+            android:text="@string/iris_scan_label_stop_capture"
+            android:textColor="@color/colorTextOnSecondary"
+            android:textSize="14sp"
+            android:visibility="@{viewModel.canStopScanning ? View.VISIBLE : View.GONE}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <Button
+            android:id="@+id/btn_redo_capture"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:backgroundTint="@color/colorTextOnLight"
+            android:textAppearance="@style/ButtonTextStyling"
+            android:text="@string/iris_scan_label_redo_capture"
+            android:textColor="@color/colorTextOnSecondary"
+            android:textSize="14sp"
+            android:visibility="@{viewModel.canRedoCapture ? View.VISIBLE : View.GONE}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <ImageView
+            android:id="@+id/imageView_glasses"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="32dp"
+            android:layout_marginBottom="16dp"
+            android:adjustViewBounds="true"
+            android:contentDescription="@string/iris_scan_glasses_description"
+            android:scaleType="centerCrop"
+            app:layout_constraintBottom_toBottomOf="@+id/btn_skip"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_eyeglasses" />
+
+        <LinearLayout
+            android:id="@+id/intro_left"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:gravity="end"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/imageView_icon_left"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="8dp"
+                android:adjustViewBounds="false"
+                android:contentDescription="@string/iris_scan_icon_description"
+                android:cropToPadding="false"
+                android:scaleType="fitCenter"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/include"
+                app:srcCompat="@drawable/iris_scan" />
+
+            <TextView
+                android:id="@+id/textView_intro_left"
+                style="@style/CustomAutoSizeText"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="32dp"
+                android:text="@string/iris_scan_intro_left"
+                android:textAlignment="textEnd"
+                android:textAppearance="@style/DescriptionText"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toEndOf="@+id/imageView_icon"
+                app:layout_constraintTop_toTopOf="parent" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/iris_background"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="66dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="66dp"
+            android:baselineAligned="false"
+            android:orientation="horizontal"
+            android:weightSum="1"
+            app:layout_constraintBottom_toBottomOf="@+id/imageView_glasses"
+            app:layout_constraintEnd_toEndOf="@+id/imageView_glasses"
+            app:layout_constraintStart_toStartOf="@+id/imageView_glasses"
+            app:layout_constraintTop_toTopOf="@+id/imageView_glasses">
+
+            <ImageView
+                android:id="@+id/iris_background_right"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.5"
+                android:orientation="horizontal"
+                android:padding="32dp"/>
+
+            <ImageView
+                android:id="@+id/iris_background_left"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:layout_weight="0.5"
+                android:cropToPadding="false"
+                android:orientation="horizontal"
+                android:padding="32dp"
+                app:srcCompat="@drawable/ic_iris_scan" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/iris"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="66dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="66dp"
+            android:baselineAligned="false"
+            android:orientation="horizontal"
+            android:weightSum="1"
+            app:layout_constraintBottom_toBottomOf="@+id/imageView_glasses"
+            app:layout_constraintEnd_toEndOf="@+id/imageView_glasses"
+            app:layout_constraintStart_toStartOf="@+id/imageView_glasses"
+            app:layout_constraintTop_toTopOf="@+id/imageView_glasses">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/iris_view_right"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.5"
+                android:orientation="horizontal" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/iris_view_left"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.5"
+                android:orientation="horizontal" />
+
+        </LinearLayout>
+
+        <ProgressBar
+            android:id="@+id/progress_bar"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:indeterminate="true"
+            android:visibility="@{viewModel.loading ? View.VISIBLE : View.INVISIBLE}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/iris_info_view"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="16dp"
+            android:layout_weight="1"
+            android:text="@{viewModel.infoMessage}"
+            android:textAlignment="center"
+            android:textColor="@{viewModel.sufficientQuality ? @color/successDark : @color/errorDark}"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toTopOf="@+id/btn_skip"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="1.0" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <import type="com.jnj.vaccinetracker.BuildConfig" />
+
+        <variable
+            name="viewModel"
+            type="com.jnj.vaccinetracker.participantflow.screens.ParticipantFlowIrisScanViewModel" />
+
+    </data>
+
+</layout>

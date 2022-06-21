@@ -1,0 +1,46 @@
+{
+  "localization": {
+    "fr": {
+      "State": "État",
+      "City": "Ville",
+      "Postal Code": "code postal",
+      "Province": "Province",
+      "District": "Quartier",
+      "ZIP Code": "Code postal",
+      "Greater area": "Grande zone",
+      "Street": "rue",
+      "Manufacturer": "Fabricant",
+      "Covid 1D vaccine": "Vaccin Covid 1D",
+      "Covid 2D vaccine": "Vaccin Covid 2D",
+      "Covid 3D vaccine": "Vaccin Covid 3D"
+    },
+    "nl": {
+      "State": "Staat",
+      "City": "stad",
+      "Postal Code": "Postcode",
+      "Province": "Provincie",
+      "District": "Wijk",
+      "ZIP Code": "Postcode",
+      "Greater area": "Groter gebied",
+      "Street": "Straat",
+      "Manufacturer": "Fabrikant",
+      "Covid 1D vaccine": "Covid 1D-vaccin",
+      "Covid 2D vaccine": "Covid 2D-vaccin",
+      "Covid 3D vaccine": "Covid 3D-vaccin"
+    },
+    "hi": {
+      "State": "राज्य",
+      "City": "शहर",
+      "Postal Code": "डाक कोड",
+      "Province": "प्रांत",
+      "District": "जिला",
+      "ZIP Code": "ज़िप कोड",
+      "Greater area": "value2",
+      "Street": "मार्ग",
+      "Manufacturer": "उत्पादक",
+      "Covid 1D vaccine": "कोविद 1 डी वैक्सीन",
+      "Covid 2D vaccine": "कोविद 2 डी वैक्सीन",
+      "Covid 3D vaccine": "कोविद 3 डी वैक्सीन"
+    }
+  }
+}

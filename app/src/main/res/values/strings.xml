@@ -1,0 +1,324 @@
+<resources>
+    <string name="app_name">Vxnaid</string>
+    <string name="update_version">Downloading app update</string>
+    <string name="general_label_na">N/A</string>
+    <string name="general_label_close">Close</string>
+    <string name="general_label_error">Something went wrong. Please try again.</string>
+    <string name="general_label_log_out">Log out</string>
+    <string name="general_label_retry">Retry</string>
+    <string name="general_label_skip">Skip</string>
+    <string name="general_label_submit">Submit</string>
+    <string name="general_label_cancel">Cancel</string>
+    <string name="general_label_confirm">Confirm</string>
+    <string name="general_label_save">Save</string>
+    <string name="general_label_restart_workflow">Restart Workflow</string>
+    <string name="general_label_ok">OK</string>
+    <string name="general_label_yes">Yes</string>
+    <string name="general_label_no">No</string>
+    <string name="general_label_update">Update</string>
+    <string name="general_label_cancel_setup">Exit Setup Wizard</string>
+    <string name="general_label_continue_setup">Continue Setup</string>
+    <string name="update_error_no_network">No network connection available. Please connect to the internet. If download is in progress, it will be resumed automatically.</string>
+    <string name="login_label_intro">Welcome operator, please login below to get started:</string>
+    <string name="login_label_sign_in">Sign in</string>
+    <string name="login_label_username">Username</string>
+    <string name="login_label_password">Password</string>
+    <string name="settings_label_backend_url">Backend URL</string>
+    <string name="settings_label_licenses">Biometric Licenses</string>
+    <string name="settings_label_deviceId">Device ID</string>
+    <string name="settings_label_no_licenses">No active licenses</string>
+    <string name="settings_label_deactivate">Deactivate</string>
+    <string name="settings_msg_no_network_cannot_deactive">Cannot deactivate licenses without a network connection.</string>
+    <string name="settings_msg_no_network_cannot_activate">Cannot activate licenses without a network connection.</string>
+    <string name="settings_msg_error_cannot_activate">Cannot activate licenses.</string>
+    <string name="settings_msg_error_cannot_deactivate">Cannot deactivate licenses.</string>
+    <string name="settings_msg_error_cannot_activate_some_licenses">Some licenses could not be obtained. Please try activating them again.</string>
+    <string name="settings_msg_copied_deviceID">Device ID copied to clipboard</string>
+    <string name="settings_label_settings">Settings</string>
+    <string name="settings_label_activate">Activate</string>
+    <string name="settings_label_setup">Setup</string>
+    <string name="settings_label_rerun_wizard">Re-run Setup Wizard</string>
+    <string name="settings_label_sync_now">Sync Now</string>
+    <string name="settings_label_share_logs" translatable="false">Share Logs</string>
+    <string name="settings_label_clear_logs" translatable="false">Clear Logs</string>
+    <string name="update_label_title">Update Application</string>
+    <string name="update_label_description">A new update is available for the application. Please update as soon as possible.</string>
+    <string name="update_label_current_version">Current Version: %s</string>
+    <string name="update_label_new_version">Latest Version: %s</string>
+    <string name="update_label_downloading">Downloading (%s)</string>
+    <string name="update_error_version_check">Error retrieving latest application version</string>
+    <string name="update_error_downloading">Error while downloading application file</string>
+    <string name="login_label_more_information">Note: You need login credentials provided by your administration. It is not possible to register an account or reset a password through this app.</string>
+    <string name="login_label_error">Login failed. Please try again.</string>
+    <string name="login_label_error_offline">Login failed. Operator username not present in offline database, credentials may have expired. Network connection required to log in again with this username.</string>
+    <string name="login_label_error_sync_admin_role_not_allowed">You\’re not allowed to login here as a Sync Admin. Please login via the setup wizard.</string>
+    <string name="login_label_error_opertor_role_not_allowed">You\’re not allowed to login here as an Operator. Please login via the operator login screen.</string>
+    <string name="login_label_error_opertor_role_required">You must be an Operator to login here.</string>
+    <string name="login_label_error_sync_admin_role_required">You must be a Sync Admin to login here.</string>
+    <string name="login_label_error_not_authenticated">Login failed (unauthenticated). Please try again.</string>
+    <string name="login_label_validation_no_username">Please enter your username</string>
+    <string name="login_label_validation_no_password">Please enter your password</string>
+    <string name="login_label_validation_no_backend_url">Please enter a valid backend URL</string>
+    <string name="dialog_login_title">Session expired</string>
+    <string name="dialog_login_description">Your session has expired. Please provide operator password to logon again or terminate current session.</string>
+    <string name="dialog_login_btn_terminate">Terminate session</string>
+    <string name="dialog_login_btn_renew">Renew login</string>
+    <string name="site_selection_title">Welcome operator</string>
+    <string name="site_selection_description">Please find and select your site location from the list below to get started:</string>
+    <string name="site_selection_input_hint">Select site location</string>
+    <string name="site_selection_btn_submit">Submit</string>
+    <string name="site_selection_error_no_site_selected">Please select a site</string>
+    <string name="match_or_register_patient_welcome">Welcome operator %s, you are currently at site %s</string>
+    <string name="match_or_register_patient_step_id_card">Scan or enter the participant\'s ID number</string>
+    <string name="match_or_register_patient_step_phone">Enter the participant\'s phone number</string>
+    <string name="match_or_register_patient_step_iris_scan">Iris scan the participant\'s eye(s)</string>
+    <string name="match_or_register_patient_step_identify">Identify or register the participant</string>
+    <string name="match_or_register_patient_step_visit">Follow-up on participant\'s visits</string>
+    <string name="match_or_register_patient_step_index">Step %s</string>
+    <string name="match_or_register_patient_btn_continue">Start participant workflow</string>
+    <string name="match_or_register_patient_intro">You will be guided step-by-step to identify or register the participant</string>
+    <string name="match_or_register_patient_intro_title">Homescreen</string>
+    <string name="iris_scan_left_title">Iris scan - Left eye</string>
+    <string name="iris_scan_right_title">Iris scan - Right eye</string>
+    <string name="participant_matching_title">Participant matching</string>
+    <string name="participant_flow_participant_id_title">Participant ID</string>
+    <string name="participant_flow_participant_id_scanned">The format of the ID is not supported</string>
+    <string name="participant_flow_participant_id_description">Please scan the participant vaccination card with a QR-Code or manually enter the participant ID number:</string>
+    <string name="participant_flow_participant_id_label_manual_entry">Manual ID Entry</string>
+    <string name="participant_flow_participant_id_input_hint">#1234567890</string>
+    <string name="participant_flow_participant_id_label_or">- OR -</string>
+    <string name="participant_flow_participant_id_label_scan_code">QR-Code Scan</string>
+    <string name="participant_flow_phone_title">Participant Mobile Phone</string>
+    <string name="participant_flow_phone_description">Please enter the participant mobile phone number:</string>
+    <string name="participant_flow_no_phone_description">Please confirm that the participant has no mobile phone. This will significantly increase the matching time.</string>
+    <string name="iris_scan_icon_description">Icon of iris scan</string>
+    <string name="iris_scan_intro_right">Please scan the participant\'s RIGHT eye</string>
+    <string name="iris_scan_intro_left">Please scan the participant\'s LEFT eye</string>
+    <string name="iris_scan_glasses_description">Image of glasses</string>
+    <string name="iris_scan_label_capture">Capture Iris</string>
+    <string name="iris_scan_label_load_image">Load Image</string>
+    <string name="iris_scan_label_redo_capture">Redo Capture</string>
+    <string name="iris_scan_label_stop_capture">Stop Scanning</string>
+    <string name="iris_scan_msg_quality_indication">Successful scan. Quality: %1$s%%</string>
+    <string name="iris_scan_msg_quality_fail">Insufficient scan quality: (%1$s%%). Please rescan.</string>
+    <string name="iris_scan_msg_capturing_device_is_unavailable">No iris capturing device available. Please make sure it is connected.</string>
+    <string name="iris_scan_msg_no_iris_license">No iris license could be obtained, cannot perform iris scan.</string>
+    <string name="msg_no_iris_license_must_force_close">App must be force closed and restarted before iris licenses can be obtained. Do this when sync is not in progress.</string>
+    <string name="iris_scan_prompt_scanner_connected">Iris scanner successfully connected.</string>
+    <string name="iris_scan_prompt_license_obtained">Biometrics license successfully obtained.</string>
+    <string name="iris_scan_prompt_not_all_licensed_obtained">Not all licenses were obtained.</string>
+    <string name="scan_barcode_label_raw_value">Raw value</string>
+    <string name="scan_barcode_hint">Point your camera at a barcode</string>
+    <string name="scan_barcode_permission_message">To be able to scan barcodes, you will need to give access to your camera.</string>
+    <string name="scan_barcode_grant_permission">Grant permission</string>
+    <string name="participant_matching_msg_no_iris_license">No iris license could be obtained, cannot perform matching.</string>
+    <string name="participant_matching_description">Please select matching participant or register a new participant:</string>
+    <string name="participant_matching_btn_new_participant">New participant</string>
+    <string name="participant_matching_btn_match_selected">Match selected participant</string>
+    <string name="participant_matching_label_no_results_this_site">No match found within your site.</string>
+    <string name="participant_matching_label_other_results">The following matches were found outside your site:</string>
+    <string name="participant_matching_label_amount_of_results">Total matches: %d</string>
+    <string name="participant_registration_picture_title">New participant photo</string>
+    <string name="participant_registration_details_title">New participant details</string>
+    <string name="participant_registration_label_take_picture">Please take a clear and well-lit photo of the participant</string>
+    <string name="participant_registration_label_confirm_photo_or_try_again">Would you like to submit this photo or try again?</string>
+    <string name="participant_registration_details_action_register_participant">Register participant</string>
+    <string name="participant_registration_details_description">Please provide the new participant\'s details below:</string>
+    <string name="participant_registration_details_label_participant_id">Participant ID</string>
+    <string name="participant_registration_details_label_confirm_participant_id">Confirm Participant ID</string>
+    <string name="participant_registration_details_label_iris_id">Iris ID</string>
+    <string name="participant_registration_details_label_gender">Gender</string>
+    <string name="participant_registration_details_error_country_api">Could not load address fields. Please contact your administrator.</string>
+    <string name="gender_male">Male</string>
+    <string name="gender_female">Female</string>
+    <string name="gender_other">Other</string>
+    <string name="participant_registration_details_label_year_of_birth">Year of birth</string>
+    <string name="participant_registration_details_year_of_birth_hint" translatable="false">xxxx</string>
+    <string name="participant_registration_details_label_telephone">Mobile phone</string>
+    <string name="participant_registration_details_telephone_hint">Enter participant mobile phone</string>
+    <string name="participant_registration_details_label_home_location">Home location</string>
+    <string name="participant_registration_details_home_location_hint">Enter the participant\'s home location</string>
+    <string name="participant_registration_details_action_set_home_location">Set home location</string>
+    <string name="participant_registration_details_label_vaccine">Regimen</string>
+    <string name="participant_registration_details_label_select_vaccine">Select regimen</string>
+    <string name="participant_registration_details_label_language">Language</string>
+    <string name="participant_registration_details_label_select_language">Select language</string>
+    <string name="participant_registration_details_error_no_participant_id">Please enter a participant ID</string>
+    <string name="participant_registration_details_error_invalid_participant_id">Please enter a valid participant ID</string>
+    <string name="participant_registration_details_error_not_same_participant_id">Participant ID\'s do not match</string>
+    <string name="participant_registration_details_error_no_gender">Please select a gender</string>
+    <string name="participant_registration_details_error_no_year_of_birth">Please enter a valid year of birth</string>
+    <string name="participant_registration_details_error_no_phone">Please enter a valid phone number with only numbers and spaces</string>
+    <string name="participant_registration_details_error_no_home_location">Please select a home location</string>
+    <string name="participant_registration_details_error_no_vaccine">Please select a regimen</string>
+    <string name="participant_registration_details_error_no_language">Please select a language</string>
+    <string name="participant_registration_details_error_participant_already_exists">A participant with this ID already exists</string>
+    <string name="participant_registration_label_success">Participant successfully registered</string>
+    <string name="participant_registration_label_telephone_number_title">Missing Mobile Phone Number</string>
+    <string name="participant_registration_label_telephone_number_desc">Please confirm that this participant will be registered without a mobile phone number.</string>
+    <string name="participant_registration_label_id_not_matching_title">Re-enter participant ID</string>
+    <string name="participant_registration_label_id_not_matching_desc">The entered participant ID\'s do not match. Please correct before submitting the participant.</string>
+    <string name="home_location_picker_label_country">Country</string>
+    <string name="home_location_picker_title">Home location</string>
+    <string name="home_location_picker_error_enter_x">Enter %s</string>
+    <string name="home_location_picker_error_select_x">Select %s</string>
+    <string name="participant_registration_button_continue_visit">Continue with visit</string>
+    <string name="participant_registration_button_finish_workflow">Finish workflow</string>
+    <string name="participant_registration_button_cancel_submit">Cancel</string>
+    <string name="participant_registration_button_close_submit">OK</string>
+    <string name="participant_registration_button_confirm_no_telephone">Confirm</string>
+    <string name="dialog_cancel_workflow_title">Restart participant workflow</string>
+    <string name="dialog_cancel_workflow_description">Are you sure you want to remove all unsubmitted data from the current participant and restart the workflow?</string>
+    <string name="dialog_missing_identifiers_title">Missing participant identifiers</string>
+    <string name="dialog_missing_identifiers_description">Please enter participant ID or perform an iris scan.</string>
+    <string name="dialog_mandatory_iris_title">Iris scan required for identification</string>
+    <string name="dialog_mandatory_iris_description">Your administrator has configured iris scan as a mandatory participant identifier. Please scan one or both eyes to proceed.</string>
+    <string name="dialog_cancel_setup_title">Cancel Setup</string>
+    <string name="dialog_cancel_setup_description">Are you sure you want to exit the setup wizard and return to the operator login screen? Changes made in completed steps will be retained.</string>
+    <string name="visit_label_year_of_birth">Year of birth</string>
+    <string name="visit_label_gender">Gender</string>
+    <string name="visit_label_participant_id">Participant ID</string>
+    <string name="visit_label_vaccine">Regimen</string>
+    <string name="visit_label_visit_type">Please select the appropriate visit type</string>
+    <string name="visit_label_title">Select visit</string>
+    <string name="visit_dosing_label_scan_or_manual_entry">Please scan the barcode vial or enter it manually below:</string>
+    <string name="visit_dosing_label_dosing_number">Dosing number:</string>
+    <string name="visit_dosing_label_time_window">Time window:</string>
+    <string name="visit_dosing_title_history">Dosing History:</string>
+    <string name="visit_dosing_label_scan_barcode">Scan barcode</string>
+    <string name="visit_dosing_label_manufacturer">Manufacturer</string>
+    <string name="visit_dosing_label_select_manufacturer">Select vaccine manufacturer</string>
+    <string name="visit_dosing_label_or">- OR -</string>
+    <string name="visit_dosing_hint_vial_barcode">#1234567890</string>
+    <string name="visit_dosing_label_no_dosing_visit">There is no dosing visit available in the schedule for this participant.</string>
+    <string name="visit_dosing_label_loading">Loading available visits…</string>
+    <string name="visit_dosing_tab_dosing_visit">Dosing visit</string>
+    <string name="visit_dosing_tab_other_visit">Other visit</string>
+    <string name="visit_dosing_error_no_vial_barcode">Please enter or scan a vial barcode</string>
+    <string name="visit_dosing_error_no_manufacturer">Please select a manufacturer</string>
+    <string name="visit_dosing_label_success">Visit successfully registered!</string>
+    <string name="visit_dosing_warning_out_of_time_window_description">Please confirm that this participant is receiving a dosage outside of the indicated time window.</string>
+    <string name="visit_dosing_warning_out_of_time_window_title">Dosing outside of window</string>
+    <string name="visit_dosing_error_different_manufacturer_description">The manufacturer selected is different from the one indicated in the regimen and should not be administered.</string>
+    <string name="visit_dosing_warning_different_manufacturer_description">The manufacturer selected is different from the one indicated in the regimen. Please confirm you will administer a different vaccine.</string>
+    <string name="visit_dosing_warning_different_manufacturer_title">Different Manufacturer Expected</string>
+    <string name="upcoming_visit_title">Next visit</string>
+    <string name="upcoming_visit_type_follow_up">In Person Follow Up</string>
+    <string name="upcoming_visit_type_dosing">Dosing</string>
+    <string name="visit_other_title">No additional steps required, please click submit to finish the participant workflow</string>
+    <string name="sync_service_name" translatable="false">Vaccine Monitoring Sync</string>
+    <string name="sync_service_notification_title">Vaccine Monitoring Sync</string>
+    <string name="sync_status_idle">Idle</string>
+    <string name="sync_status_online_in_sync">Online. In sync.</string>
+    <string name="sync_status_complete">Sync finished at %s</string>
+    <string name="sync_status_syncing">Sync in Progress</string>
+    <string name="sync_status_offline">Working Offline. Last Sync Date: %s</string>
+    <string name="sync_status_sync_error">Sync Error: Tap for details</string>
+    <string name="sync_status_sync_error_no_tap">Sync Error</string>
+    <string name="setup_intro_title">Vaccine Monitoring Platform</string>
+    <string name="setup_intro_description">Welcome to the Vxnaid app. Before first use, we\'ll need to set up some configuration. Click the button below to get started.</string>
+    <string name="setup_btn_get_started">Get Started</string>
+    <string name="setup_backend_credentials_description">Enter credentials for the synchronization account</string>
+    <string name="setup_backend_title">Backend Connection</string>
+    <string name="setup_p2p_transfer_section_this_device">This Device</string>
+    <string name="setup_p2p_transfer_section_connected_device">Connected Device</string>
+    <string name="setup_p2p_transfer_section_authenticated_device">Authenticated Device</string>
+    <string name="setup_p2p_transfer_device_not_found">No nearby device found. Make sure you have this screen with sender role open on the other device.</string>
+    <string name="setup_p2p_transfer_device_not_authenticated">No devices authenticated</string>
+    <string name="setup_p2p_transfer_client_start">Start Transfer</string>
+    <string name="setup_p2p_transfer_client_title">Download participant data from another device</string>
+    <string name="setup_p2p_transfer_server_title">Upload participant data to another device</string>
+    <string name="setup_main_menu_title">Setup Menu</string>
+    <string name="setup_main_menu_error_no_site_selected">Please select a site before P2P transfer</string>
+    <string name="setup_p2p_device_role_title">P2P Device Role</string>
+    <string name="setup_p2p_select_role">Select a device Role</string>
+    <string name="setup_p2p_description">Transfer data between a nearby device. Both devices should be on the same WIFI network.\nSelect a fully synced device as the sender and an unconfigured device as the receiver.</string>
+    <string name="setup_p2p_device_role_sender">Sender</string>
+    <string name="setup_p2p_device_role_receiver">Receiver</string>
+    <string name="dialog_p2p_confirm_stop_service_title">Confirm Stop P2P Service</string>
+    <string name="dialog_p2p_confirm_stop_service_description">Are you sure you want to stop the P2P service?</string>
+    <string name="setup_btn_continue">Continue</string>
+    <string name="setup_btn_finish">Finish</string>
+    <string name="setup_btn_submit" translatable="false">@string/general_label_submit</string>
+    <string name="setup_btn_done">Done</string>
+    <string name="setup_p2p_btn_stop_broadcast">Stop Broadcast</string>
+    <string name="setup_sync_retention_hint"># hours to keep offline credentials</string>
+    <string name="setup_sync_site_description">Select the site at which this device will be used</string>
+    <string name="setup_sync_retention_description">For how long should operator credentials be cached while offline? (hours)</string>
+    <string name="setup_sync_title">Synchronization Settings</string>
+    <string name="setup_site_title">Site Settings</string>
+    <string name="setup_error_retention_time">Please enter a correct retention time in hours</string>
+    <string name="setup_error_no_network">No network connection available. Please connect to the internet and try again.</string>
+    <string name="setup_permission_title">Device Permissions</string>
+    <string name="setup_permission_doze_title">Bypass Battery Optimizations</string>
+    <string name="setup_permission_doze_description">(Optional) Disable battery optimizations for this app, so synchronization can continue while the device is not in use for longer periods of time (e.g. overnight).</string>
+    <string name="setup_permission_camera_title">Camera</string>
+    <string name="setup_permission_camera_description">Allow use of camera for taking participant photos.</string>
+    <string name="setup_permission_install_title">Install applications</string>
+    <string name="setup_permission_install_description">Allows the app to install updated versions.</string>
+    <string name="setup_btn_enable">Enable</string>
+    <string name="sync_error_btn_share">Share</string>
+    <string name="sync_error_btn_delete_all">Delete All</string>
+    <string name="sync_error_dialog_title">Sync Errors</string>
+    <string name="sync_error_dialog_share_failure">Error building sync errors file to share</string>
+    <string name="sync_error_dialog_last_sync_date_label">Last Sync Date: </string>
+    <string name="encounter" translatable="false">encounter</string>
+    <string name="biometric_template" translatable="false">biometric template</string>
+    <string name="image" translatable="false">image</string>
+    <string name="visit" translatable="false">visit</string>
+    <string name="participant" translatable="false">participant</string>
+    <string name="iris_license_matching" translatable="false">Iris matching license</string>
+    <string name="iris_license_client" translatable="false">Iris client license</string>
+    <string name="configuration" translatable="false">configuration</string>
+    <string name="sites" translatable="false">sites</string>
+    <string name="localization" translatable="false">localization</string>
+    <string name="address_hierarchy" translatable="false">address hierarchy</string>
+    <string name="vaccine_schedule" translatable="false">vaccine schedule</string>
+    <string name="store_participant_sync_record_error" translatable="false">Failed to download %s with participantUuid %s.</string>
+    <string name="store_visit_sync_record_error" translatable="false">Failed to download %s with participantUuid %s and visitUuid %s.</string>
+    <string name="upload_participant_pending_call_error" translatable="false">Failed to upload %s with participantUuid %s.</string>
+    <string name="upload_participant_pending_call_error_with_participant_id" translatable="false">Failed to upload %s with participantId %s.</string>
+    <string name="upload_visit_pending_call_error" translatable="false">Failed to upload %s with participantUuid %s and visitUuid %s.</string>
+    <string name="get_all_sync_records_call_error" translatable="false">Get all %s records call failed.</string>
+    <string name="get_all_sync_records_validation_error" translatable="false">Get all %s records response validation failed.</string>
+    <string name="get_master_data_updates_call_error" translatable="false">Get master data updates call failed.</string>
+    <string name="find_all_drafts_pending_upload_error" translatable="false">Error finding drafts to upload.</string>
+    <string name="get_master_data_call_error" translatable="false">Failed to get %s from backend.</string>
+    <string name="map_master_data_error" translatable="false">Failed to map %s from backend.</string>
+    <string name="read_persisted_master_data_error" translatable="false">Failed to read cached %s.</string>
+    <string name="persist_master_data_error" translatable="false">Failed to store %s.</string>
+    <string name="get_license_call_error" translatable="false">Get %s call failed.</string>
+    <string name="release_license_call_error" translatable="false">Release %s call failed.</string>
+    <string name="activate_license_call_error" translatable="false">Activate %s failed.</string>
+    <string name="deactivate_license_call_error" translatable="false">Deactivate %s failed.</string>
+    <string name="obtain_license_call_error" translatable="false">Obtain %s failed.</string>
+    <string name="report_sync_completed_date_error" translatable="false">Failed to report sync completed date.</string>
+    <string name="get_device_name_by_site_uuid_call_error" translatable="false">Get device name call failed.</string>
+    <string name="get_sync_records_by_uuids_call_error" translatable="false">Get sync records by uuids call failed.</string>
+    <string name="upload_biometrics_template_error" translatable="false">Failed to upload biometrics template with participantUuid %s.</string>
+    <string name="upload_biometrics_templates_error" translatable="false">Failed to upload biometrics template of %d participant(s).</string>
+    <string name="p2p_client_progress_completed_success">Transfer completed successfully</string>
+    <string name="p2p_client_progress_logging_in">Logging in</string>
+    <string name="p2p_client_progress_importing_secrets">Importing Secrets</string>
+    <string name="p2p_client_progress_importing_database">Importing Database</string>
+    <string name="p2p_client_progress_downloading_templates">Downloading Templates</string>
+    <string name="p2p_client_progress_downloading_draft_templates" translatable="false">@string/p2p_client_progress_downloading_templates</string>
+    <string name="p2p_client_progress_downloading_images">Downloading Images</string>
+    <string name="p2p_client_progress_downloading_draft_images" translatable="false">@string/p2p_client_progress_downloading_images</string>
+    <string name="p2p_client_progress_downloading_secrets">Downloading Secrets</string>
+    <string name="p2p_client_progress_downloading_database">Downloading database</string>
+    <string name="p2p_client_transfer_error">Error occurred during \'%s\'. Please try again</string>
+    <string name="p2p_client_progress_await_database_idle">Awaiting Database Idle</string>
+    <string name="p2p_transfer_timeout_error">Message timeout. Please try again.</string>
+    <string name="setup_menu_item_p2p_transfer">P2P Transfer</string>
+    <string name="setup_menu_item_licenses">Manage Biometric Licenses</string>
+    <string name="setup_menu_item_site_selection">Select Site</string>
+    <string name="setup_menu_item_permissions">Grant Permissions</string>
+    <string name="p2p_client_unauthenticated_error">Sync admin credentials do not match with credentials on other device</string>
+    <string name="p2p_client_site_mismatch_error">Required site is \'%s\' but current site is \'%s\'</string>
+    <string name="p2p_client_authentication_error">Authentication error. Please try again.</string>
+    <string name="p2p_client_server_out_of_space_error">Connected device is out of disk space</string>
+    <string name="p2p_client_this_device_out_of_space_error">This device is out of disk space</string>
+    <string name="p2p_wifi_not_available_error">Not connected to WIFI. Please connect to WIFI and try again.</string>
+    <string name="p2p_could_not_send_message_error">Could not send message. Please try again.</string>
+</resources>

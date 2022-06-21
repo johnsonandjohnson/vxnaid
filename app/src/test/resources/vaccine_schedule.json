@@ -1,0 +1,808 @@
+[
+  {
+    "numberOfDose": 1,
+    "visits": [
+      {
+        "doseNumber": 1,
+        "nameOfDose": "Dosing",
+        "lowWindow": 0,
+        "numberOfFutureVisit": 28,
+        "midPointWindow": 7,
+        "upWindow": 0
+      },
+      {
+        "doseNumber": 1,
+        "nameOfDose": "In person follow-up",
+        "lowWindow": 0,
+        "numberOfFutureVisit": 0,
+        "midPointWindow": 7,
+        "upWindow": 0
+      },
+      {
+        "doseNumber": 1,
+        "nameOfDose": "Virtual follow-up",
+        "lowWindow": 0,
+        "numberOfFutureVisit": 0,
+        "midPointWindow": 13,
+        "upWindow": 0
+      },
+      {
+        "doseNumber": 1,
+        "nameOfDose": "Virtual follow-up",
+        "lowWindow": 0,
+        "numberOfFutureVisit": 0,
+        "midPointWindow": 27,
+        "upWindow": 0
+      },
+      {
+        "doseNumber": 1,
+        "nameOfDose": "Virtual follow-up",
+        "lowWindow": 0,
+        "numberOfFutureVisit": 0,
+        "midPointWindow": 41,
+        "upWindow": 0
+      },
+      {
+        "doseNumber": 1,
+        "nameOfDose": "Virtual follow-up",
+        "lowWindow": 0,
+        "numberOfFutureVisit": 0,
+        "midPointWindow": 55,
+        "upWindow": 0
+      },
+      {
+        "doseNumber": 1,
+        "nameOfDose": "Virtual follow-up",
+        "lowWindow": 0,
+        "numberOfFutureVisit": 0,
+        "midPointWindow": 69,
+        "upWindow": 0
+      },
+      {
+        "doseNumber": 1,
+        "nameOfDose": "Virtual follow-up",
+        "lowWindow": 0,
+        "numberOfFutureVisit": 0,
+        "midPointWindow": 83,
+        "upWindow": 0
+      },
+      {
+        "doseNumber": 1,
+        "nameOfDose": "Virtual follow-up",
+        "lowWindow": 0,
+        "numberOfFutureVisit": 0,
+        "midPointWindow": 97,
+        "upWindow": 0
+      },
+      {
+        "doseNumber": 1,
+        "nameOfDose": "Virtual follow-up",
+        "lowWindow": 0,
+        "numberOfFutureVisit": 0,
+        "midPointWindow": 111,
+        "upWindow": 0
+      },
+      {
+        "doseNumber": 1,
+        "nameOfDose": "Virtual follow-up",
+        "lowWindow": 0,
+        "numberOfFutureVisit": 0,
+        "midPointWindow": 125,
+        "upWindow": 0
+      },
+      {
+        "doseNumber": 1,
+        "nameOfDose": "Virtual follow-up",
+        "lowWindow": 0,
+        "numberOfFutureVisit": 0,
+        "midPointWindow": 139,
+        "upWindow": 0
+      },
+      {
+        "doseNumber": 1,
+        "nameOfDose": "Virtual follow-up",
+        "lowWindow": 0,
+        "numberOfFutureVisit": 0,
+        "midPointWindow": 153,
+        "upWindow": 0
+      },
+      {
+        "doseNumber": 1,
+        "nameOfDose": "Virtual follow-up",
+        "lowWindow": 0,
+        "numberOfFutureVisit": 0,
+        "midPointWindow": 167,
+        "upWindow": 0
+      },
+      {
+        "doseNumber": 1,
+        "nameOfDose": "Engagement 1",
+        "lowWindow": 0,
+        "numberOfFutureVisit": 0,
+        "midPointWindow": 173,
+        "upWindow": 0
+      },
+      {
+        "doseNumber": 1,
+        "nameOfDose": "Virtual follow-up",
+        "lowWindow": 0,
+        "numberOfFutureVisit": 0,
+        "midPointWindow": 181,
+        "upWindow": 0
+      },
+      {
+        "doseNumber": 1,
+        "nameOfDose": "Virtual follow-up",
+        "lowWindow": 0,
+        "numberOfFutureVisit": 0,
+        "midPointWindow": 195,
+        "upWindow": 0
+      },
+      {
+        "doseNumber": 1,
+        "nameOfDose": "Virtual follow-up",
+        "lowWindow": 0,
+        "numberOfFutureVisit": 0,
+        "midPointWindow": 209,
+        "upWindow": 0
+      },
+      {
+        "doseNumber": 1,
+        "nameOfDose": "Virtual follow-up",
+        "lowWindow": 0,
+        "numberOfFutureVisit": 0,
+        "midPointWindow": 223,
+        "upWindow": 0
+      },
+      {
+        "doseNumber": 1,
+        "nameOfDose": "Virtual follow-up",
+        "lowWindow": 0,
+        "numberOfFutureVisit": 0,
+        "midPointWindow": 237,
+        "upWindow": 0
+      },
+      {
+        "doseNumber": 1,
+        "nameOfDose": "Virtual follow-up",
+        "lowWindow": 0,
+        "numberOfFutureVisit": 0,
+        "midPointWindow": 251,
+        "upWindow": 0
+      },
+      {
+        "doseNumber": 1,
+        "nameOfDose": "Virtual follow-up",
+        "lowWindow": 0,
+        "numberOfFutureVisit": 0,
+        "midPointWindow": 265,
+        "upWindow": 0
+      },
+      {
+        "doseNumber": 1,
+        "nameOfDose": "Virtual follow-up",
+        "lowWindow": 0,
+        "numberOfFutureVisit": 0,
+        "midPointWindow": 279,
+        "upWindow": 0
+      },
+      {
+        "doseNumber": 1,
+        "nameOfDose": "Engagement 2",
+        "lowWindow": 0,
+        "numberOfFutureVisit": 0,
+        "midPointWindow": 285,
+        "upWindow": 0
+      },
+      {
+        "doseNumber": 1,
+        "nameOfDose": "Virtual follow-up",
+        "lowWindow": 0,
+        "numberOfFutureVisit": 0,
+        "midPointWindow": 293,
+        "upWindow": 0
+      },
+      {
+        "doseNumber": 1,
+        "nameOfDose": "Virtual follow-up",
+        "lowWindow": 0,
+        "numberOfFutureVisit": 0,
+        "midPointWindow": 307,
+        "upWindow": 0
+      },
+      {
+        "doseNumber": 1,
+        "nameOfDose": "Virtual follow-up",
+        "lowWindow": 0,
+        "numberOfFutureVisit": 0,
+        "midPointWindow": 321,
+        "upWindow": 0
+      },
+      {
+        "doseNumber": 1,
+        "nameOfDose": "Virtual follow-up",
+        "lowWindow": 0,
+        "numberOfFutureVisit": 0,
+        "midPointWindow": 335,
+        "upWindow": 0
+      },
+      {
+        "doseNumber": 1,
+        "nameOfDose": "Goodbye",
+        "lowWindow": 0,
+        "numberOfFutureVisit": 0,
+        "midPointWindow": 336,
+        "upWindow": 0
+      }
+    ],
+    "name": "Covid 1D vaccine"
+  },
+  {
+    "numberOfDose": 2,
+    "visits": [
+      {
+        "doseNumber": 1,
+        "nameOfDose": "Dosing",
+        "lowWindow": 0,
+        "numberOfFutureVisit": 2,
+        "midPointWindow": 0,
+        "upWindow": 0
+      },
+      {
+        "doseNumber": 1,
+        "nameOfDose": "In person follow-up",
+        "lowWindow": 0,
+        "numberOfFutureVisit": 0,
+        "midPointWindow": 7,
+        "upWindow": 0
+      },
+      {
+        "doseNumber": 2,
+        "nameOfDose": "Dosing",
+        "lowWindow": 1,
+        "numberOfFutureVisit": 28,
+        "midPointWindow": 10,
+        "upWindow": 3
+      },
+      {
+        "doseNumber": 2,
+        "nameOfDose": "In person follow-up",
+        "lowWindow": 5,
+        "numberOfFutureVisit": 0,
+        "midPointWindow": 7,
+        "upWindow": 10
+      },
+      {
+        "doseNumber": 2,
+        "nameOfDose": "Virtual follow-up",
+        "lowWindow": 0,
+        "numberOfFutureVisit": 0,
+        "midPointWindow": 13,
+        "upWindow": 0
+      },
+      {
+        "doseNumber": 2,
+        "nameOfDose": "Virtual follow-up",
+        "lowWindow": 0,
+        "numberOfFutureVisit": 0,
+        "midPointWindow": 27,
+        "upWindow": 0
+      },
+      {
+        "doseNumber": 2,
+        "nameOfDose": "Virtual follow-up",
+        "lowWindow": 0,
+        "numberOfFutureVisit": 0,
+        "midPointWindow": 41,
+        "upWindow": 0
+      },
+      {
+        "doseNumber": 2,
+        "nameOfDose": "Virtual follow-up",
+        "lowWindow": 0,
+        "numberOfFutureVisit": 0,
+        "midPointWindow": 55,
+        "upWindow": 0
+      },
+      {
+        "doseNumber": 2,
+        "nameOfDose": "Virtual follow-up",
+        "lowWindow": 0,
+        "numberOfFutureVisit": 0,
+        "midPointWindow": 69,
+        "upWindow": 0
+      },
+      {
+        "doseNumber": 2,
+        "nameOfDose": "Virtual follow-up",
+        "lowWindow": 0,
+        "numberOfFutureVisit": 0,
+        "midPointWindow": 83,
+        "upWindow": 0
+      },
+      {
+        "doseNumber": 2,
+        "nameOfDose": "Virtual follow-up",
+        "lowWindow": 0,
+        "numberOfFutureVisit": 0,
+        "midPointWindow": 97,
+        "upWindow": 0
+      },
+      {
+        "doseNumber": 2,
+        "nameOfDose": "Virtual follow-up",
+        "lowWindow": 0,
+        "numberOfFutureVisit": 0,
+        "midPointWindow": 111,
+        "upWindow": 0
+      },
+      {
+        "doseNumber": 2,
+        "nameOfDose": "Virtual follow-up",
+        "lowWindow": 0,
+        "numberOfFutureVisit": 0,
+        "midPointWindow": 125,
+        "upWindow": 0
+      },
+      {
+        "doseNumber": 2,
+        "nameOfDose": "Virtual follow-up",
+        "lowWindow": 0,
+        "numberOfFutureVisit": 0,
+        "midPointWindow": 139,
+        "upWindow": 0
+      },
+      {
+        "doseNumber": 2,
+        "nameOfDose": "Virtual follow-up",
+        "lowWindow": 0,
+        "numberOfFutureVisit": 0,
+        "midPointWindow": 153,
+        "upWindow": 0
+      },
+      {
+        "doseNumber": 2,
+        "nameOfDose": "Virtual follow-up",
+        "lowWindow": 0,
+        "numberOfFutureVisit": 0,
+        "midPointWindow": 167,
+        "upWindow": 0
+      },
+      {
+        "doseNumber": 2,
+        "nameOfDose": "Engagement 1",
+        "lowWindow": 0,
+        "numberOfFutureVisit": 0,
+        "midPointWindow": 173,
+        "upWindow": 0
+      },
+      {
+        "doseNumber": 2,
+        "nameOfDose": "Virtual follow-up",
+        "lowWindow": 0,
+        "numberOfFutureVisit": 0,
+        "midPointWindow": 181,
+        "upWindow": 0
+      },
+      {
+        "doseNumber": 2,
+        "nameOfDose": "Virtual follow-up",
+        "lowWindow": 0,
+        "numberOfFutureVisit": 0,
+        "midPointWindow": 195,
+        "upWindow": 0
+      },
+      {
+        "doseNumber": 2,
+        "nameOfDose": "Virtual follow-up",
+        "lowWindow": 0,
+        "numberOfFutureVisit": 0,
+        "midPointWindow": 209,
+        "upWindow": 0
+      },
+      {
+        "doseNumber": 2,
+        "nameOfDose": "Virtual follow-up",
+        "lowWindow": 0,
+        "numberOfFutureVisit": 0,
+        "midPointWindow": 223,
+        "upWindow": 0
+      },
+      {
+        "doseNumber": 2,
+        "nameOfDose": "Virtual follow-up",
+        "lowWindow": 0,
+        "numberOfFutureVisit": 0,
+        "midPointWindow": 237,
+        "upWindow": 0
+      },
+      {
+        "doseNumber": 2,
+        "nameOfDose": "Virtual follow-up",
+        "lowWindow": 0,
+        "numberOfFutureVisit": 0,
+        "midPointWindow": 251,
+        "upWindow": 0
+      },
+      {
+        "doseNumber": 2,
+        "nameOfDose": "Virtual follow-up",
+        "lowWindow": 0,
+        "numberOfFutureVisit": 0,
+        "midPointWindow": 265,
+        "upWindow": 0
+      },
+      {
+        "doseNumber": 2,
+        "nameOfDose": "Virtual follow-up",
+        "lowWindow": 0,
+        "numberOfFutureVisit": 0,
+        "midPointWindow": 279,
+        "upWindow": 0
+      },
+      {
+        "doseNumber": 2,
+        "nameOfDose": "Engagement 2",
+        "lowWindow": 0,
+        "numberOfFutureVisit": 0,
+        "midPointWindow": 285,
+        "upWindow": 0
+      },
+      {
+        "doseNumber": 2,
+        "nameOfDose": "Virtual follow-up",
+        "lowWindow": 0,
+        "numberOfFutureVisit": 0,
+        "midPointWindow": 293,
+        "upWindow": 0
+      },
+      {
+        "doseNumber": 2,
+        "nameOfDose": "Virtual follow-up",
+        "lowWindow": 0,
+        "numberOfFutureVisit": 0,
+        "midPointWindow": 307,
+        "upWindow": 0
+      },
+      {
+        "doseNumber": 2,
+        "nameOfDose": "Virtual follow-up",
+        "lowWindow": 0,
+        "numberOfFutureVisit": 0,
+        "midPointWindow": 321,
+        "upWindow": 0
+      },
+      {
+        "doseNumber": 2,
+        "nameOfDose": "Virtual follow-up",
+        "lowWindow": 0,
+        "numberOfFutureVisit": 0,
+        "midPointWindow": 335,
+        "upWindow": 0
+      },
+      {
+        "doseNumber": 2,
+        "nameOfDose": "Goodbye",
+        "lowWindow": 0,
+        "numberOfFutureVisit": 0,
+        "midPointWindow": 336,
+        "upWindow": 0
+      }
+    ],
+    "name": "Covid 2D vaccine"
+  },
+  {
+    "numberOfDose": 3,
+    "visits": [
+      {
+        "doseNumber": 1,
+        "nameOfDose": "Dosing",
+        "lowWindow": 0,
+        "numberOfFutureVisit": 2,
+        "midPointWindow": 0,
+        "upWindow": 0
+      },
+      {
+        "doseNumber": 1,
+        "nameOfDose": "In person follow-up",
+        "lowWindow": 0,
+        "numberOfFutureVisit": 0,
+        "midPointWindow": 7,
+        "upWindow": 0
+      },
+      {
+        "doseNumber": 2,
+        "nameOfDose": "Dosing",
+        "lowWindow": 2,
+        "numberOfFutureVisit": 2,
+        "midPointWindow": 3,
+        "upWindow": 5
+      },
+      {
+        "doseNumber": 2,
+        "nameOfDose": "In person follow-up",
+        "lowWindow": 2,
+        "numberOfFutureVisit": 0,
+        "midPointWindow": 7,
+        "upWindow": 5
+      },
+      {
+        "doseNumber": 3,
+        "nameOfDose": "Dosing",
+        "lowWindow": 3,
+        "numberOfFutureVisit": 28,
+        "midPointWindow": 20,
+        "upWindow": 3
+      },
+      {
+        "doseNumber": 3,
+        "nameOfDose": "In person follow-up",
+        "lowWindow": 3,
+        "numberOfFutureVisit": 0,
+        "midPointWindow": 7,
+        "upWindow": 3
+      },
+      {
+        "doseNumber": 3,
+        "nameOfDose": "Virtual follow-up",
+        "lowWindow": 0,
+        "numberOfFutureVisit": 0,
+        "midPointWindow": 13,
+        "upWindow": 0
+      },
+      {
+        "doseNumber": 3,
+        "nameOfDose": "Virtual follow-up",
+        "lowWindow": 0,
+        "numberOfFutureVisit": 0,
+        "midPointWindow": 27,
+        "upWindow": 0
+      },
+      {
+        "doseNumber": 3,
+        "nameOfDose": "Virtual follow-up",
+        "lowWindow": 0,
+        "numberOfFutureVisit": 0,
+        "midPointWindow": 41,
+        "upWindow": 0
+      },
+      {
+        "doseNumber": 3,
+        "nameOfDose": "Virtual follow-up",
+        "lowWindow": 0,
+        "numberOfFutureVisit": 0,
+        "midPointWindow": 55,
+        "upWindow": 0
+      },
+      {
+        "doseNumber": 3,
+        "nameOfDose": "Virtual follow-up",
+        "lowWindow": 0,
+        "numberOfFutureVisit": 0,
+        "midPointWindow": 69,
+        "upWindow": 0
+      },
+      {
+        "doseNumber": 3,
+        "nameOfDose": "Virtual follow-up",
+        "lowWindow": 0,
+        "numberOfFutureVisit": 0,
+        "midPointWindow": 83,
+        "upWindow": 0
+      },
+      {
+        "doseNumber": 3,
+        "nameOfDose": "Virtual follow-up",
+        "lowWindow": 0,
+        "numberOfFutureVisit": 0,
+        "midPointWindow": 97,
+        "upWindow": 0
+      },
+      {
+        "doseNumber": 3,
+        "nameOfDose": "Virtual follow-up",
+        "lowWindow": 0,
+        "numberOfFutureVisit": 0,
+        "midPointWindow": 111,
+        "upWindow": 0
+      },
+      {
+        "doseNumber": 3,
+        "nameOfDose": "Virtual follow-up",
+        "lowWindow": 0,
+        "numberOfFutureVisit": 0,
+        "midPointWindow": 125,
+        "upWindow": 0
+      },
+      {
+        "doseNumber": 3,
+        "nameOfDose": "Virtual follow-up",
+        "lowWindow": 0,
+        "numberOfFutureVisit": 0,
+        "midPointWindow": 139,
+        "upWindow": 0
+      },
+      {
+        "doseNumber": 3,
+        "nameOfDose": "Virtual follow-up",
+        "lowWindow": 0,
+        "numberOfFutureVisit": 0,
+        "midPointWindow": 153,
+        "upWindow": 0
+      },
+      {
+        "doseNumber": 3,
+        "nameOfDose": "Virtual follow-up",
+        "lowWindow": 0,
+        "numberOfFutureVisit": 0,
+        "midPointWindow": 167,
+        "upWindow": 0
+      },
+      {
+        "doseNumber": 3,
+        "nameOfDose": "Engagement 1",
+        "lowWindow": 0,
+        "numberOfFutureVisit": 0,
+        "midPointWindow": 173,
+        "upWindow": 0
+      },
+      {
+        "doseNumber": 3,
+        "nameOfDose": "Virtual follow-up",
+        "lowWindow": 0,
+        "numberOfFutureVisit": 0,
+        "midPointWindow": 181,
+        "upWindow": 0
+      },
+      {
+        "doseNumber": 3,
+        "nameOfDose": "Virtual follow-up",
+        "lowWindow": 0,
+        "numberOfFutureVisit": 0,
+        "midPointWindow": 195,
+        "upWindow": 0
+      },
+      {
+        "doseNumber": 3,
+        "nameOfDose": "Virtual follow-up",
+        "lowWindow": 0,
+        "numberOfFutureVisit": 0,
+        "midPointWindow": 209,
+        "upWindow": 0
+      },
+      {
+        "doseNumber": 3,
+        "nameOfDose": "Virtual follow-up",
+        "lowWindow": 0,
+        "numberOfFutureVisit": 0,
+        "midPointWindow": 223,
+        "upWindow": 0
+      },
+      {
+        "doseNumber": 3,
+        "nameOfDose": "Virtual follow-up",
+        "lowWindow": 0,
+        "numberOfFutureVisit": 0,
+        "midPointWindow": 237,
+        "upWindow": 0
+      },
+      {
+        "doseNumber": 3,
+        "nameOfDose": "Virtual follow-up",
+        "lowWindow": 0,
+        "numberOfFutureVisit": 0,
+        "midPointWindow": 251,
+        "upWindow": 0
+      },
+      {
+        "doseNumber": 3,
+        "nameOfDose": "Virtual follow-up",
+        "lowWindow": 0,
+        "numberOfFutureVisit": 0,
+        "midPointWindow": 265,
+        "upWindow": 0
+      },
+      {
+        "doseNumber": 3,
+        "nameOfDose": "Virtual follow-up",
+        "lowWindow": 0,
+        "numberOfFutureVisit": 0,
+        "midPointWindow": 279,
+        "upWindow": 0
+      },
+      {
+        "doseNumber": 3,
+        "nameOfDose": "Engagement 2",
+        "lowWindow": 0,
+        "numberOfFutureVisit": 0,
+        "midPointWindow": 285,
+        "upWindow": 0
+      },
+      {
+        "doseNumber": 3,
+        "nameOfDose": "Virtual follow-up",
+        "lowWindow": 0,
+        "numberOfFutureVisit": 0,
+        "midPointWindow": 293,
+        "upWindow": 0
+      },
+      {
+        "doseNumber": 3,
+        "nameOfDose": "Virtual follow-up",
+        "lowWindow": 0,
+        "numberOfFutureVisit": 0,
+        "midPointWindow": 307,
+        "upWindow": 0
+      },
+      {
+        "doseNumber": 3,
+        "nameOfDose": "Virtual follow-up",
+        "lowWindow": 0,
+        "numberOfFutureVisit": 0,
+        "midPointWindow": 321,
+        "upWindow": 0
+      },
+      {
+        "doseNumber": 3,
+        "nameOfDose": "Virtual follow-up",
+        "lowWindow": 0,
+        "numberOfFutureVisit": 0,
+        "midPointWindow": 335,
+        "upWindow": 0
+      },
+      {
+        "doseNumber": 3,
+        "nameOfDose": "Goodbye",
+        "lowWindow": 0,
+        "numberOfFutureVisit": 0,
+        "midPointWindow": 336,
+        "upWindow": 0
+      }
+    ],
+    "name": "Covid 3D vaccine"
+  },
+  {
+    "name": "testD",
+    "numberOfDose": 2,
+    "visits": [
+      {
+        "doseNumber": 1,
+        "nameOfDose": "Dosing",
+        "numberOfFutureVisit": 1,
+        "lowWindow": 0,
+        "midPointWindow": 0,
+        "upWindow": 0
+      },
+      {
+        "doseNumber": 2,
+        "nameOfDose": "Dosing",
+        "numberOfFutureVisit": 0,
+        "lowWindow": 2,
+        "midPointWindow": 6,
+        "upWindow": 3
+      }
+    ]
+  },
+  {
+    "name": "MMR vaccine",
+    "numberOfDose": 2,
+    "visits": [
+      {
+        "doseNumber": 1,
+        "nameOfDose": "Dosing",
+        "numberOfFutureVisit": 1,
+        "lowWindow": 0,
+        "midPointWindow": 0,
+        "upWindow": 0
+      },
+      {
+        "doseNumber": 2,
+        "nameOfDose": "Dosing",
+        "numberOfFutureVisit": 0,
+        "lowWindow": 2,
+        "midPointWindow": 6,
+        "upWindow": 3
+      }
+    ]
+  }
+]

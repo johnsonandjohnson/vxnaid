@@ -1,0 +1,51 @@
+buildscript {
+    apply from: './configuration.gradle'
+    apply from: './dependencies.gradle'
+
+    repositories {
+        maven { url 'https://maven.google.com' }
+        google()
+        mavenCentral()
+        maven { url 'https://repo1.maven.org/maven2/' }
+        maven { url "https://jitpack.io" }
+        maven { url "https://plugins.gradle.org/m2/" }
+        maven { url "https://dl.bintray.com/icapps/maven" }
+    }
+
+    dependencies {
+        classpath deps.gradlePlugins.buildTools
+        classpath deps.gradlePlugins.kotlin
+        classpath deps.gradlePlugins.detekt
+        classpath deps.gradlePlugins.dokka
+    }
+}
+
+allprojects {
+    repositories {
+        maven { url 'https://maven.google.com' }
+        google()
+        mavenCentral()
+        maven { url 'https://repo1.maven.org/maven2/' }
+        maven { url "https://jitpack.io" }
+        maven { url "https://plugins.gradle.org/m2/" }
+        maven { url "https://dl.bintray.com/icapps/maven" }
+    }
+
+    tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).all {
+        kotlinOptions {
+            freeCompilerArgs += ['-Xjvm-default=compatibility',
+                                 '-Xallow-result-return-type', '-Xopt-in=kotlin.RequiresOptIn',]
+            jvmTarget = "1.8"
+        }
+    }
+
+    configurations.all {
+        resolutionStrategy {
+            force deps.implementation.coroutinesAndroid
+        }
+    }
+}
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}

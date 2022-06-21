@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="flowViewModel"
+            type="com.jnj.vaccinetracker.setup.SetupFlowViewModel" />
+
+        <variable
+            name="viewModel"
+            type="com.jnj.vaccinetracker.setup.screens.SetupPermissionsViewModel" />
+
+        <import type="android.view.View" />
+
+    </data>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ProgressBar
+                android:id="@+id/progress_bar"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:indeterminate="true"
+                android:visibility="@{viewModel.loading ? View.VISIBLE : View.INVISIBLE}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/imageView_header"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                app:layout_constraintBottom_toTopOf="@+id/textView_permissions_header"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:srcCompat="@drawable/ic_baseline_checklist"
+                app:tint="@color/colorPrimary" />
+
+            <TextView
+                android:id="@+id/textView_permissions_header"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:text="@string/setup_permission_title"
+                android:textAlignment="center"
+                android:textAppearance="@style/ScreenTitle"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.37" />
+
+            <ImageView
+                android:id="@+id/img_permission_doze"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_weight="1"
+                android:visibility="@{viewModel.showPermissionDoze ? View.VISIBLE : View.GONE}"
+                app:imageDrawable="@{viewModel.permissionDoze ? @drawable/ic_idmatch_correct : @drawable/ic_idmatch_incorrect}"
+                app:layout_constraintEnd_toStartOf="@+id/textView_doze_title"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/textView_doze_title"
+                tools:src="@drawable/ic_idmatch_correct" />
+
+            <TextView
+                android:id="@+id/textView_doze_title"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:maxWidth="155dp"
+                android:maxLines="1"
+                android:minWidth="155dp"
+                android:text="@string/setup_permission_doze_title"
+                android:textAppearance="@style/LabelText"
+                android:visibility="@{viewModel.showPermissionDoze ? View.VISIBLE : View.GONE}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView_permissions_header" />
+
+            <TextView
+                android:id="@+id/textView_doze_description"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="32dp"
+                android:text="@string/setup_permission_doze_description"
+                android:visibility="@{viewModel.showPermissionDoze ? View.VISIBLE : View.GONE}"
+                android:textAppearance="@style/GeneralText"
+                app:layout_constraintEnd_toStartOf="@+id/btn_request_doze"
+                app:layout_constraintStart_toStartOf="@+id/textView_doze_title"
+                app:layout_constraintTop_toBottomOf="@+id/textView_doze_title" />
+
+            <Button
+                android:id="@+id/btn_request_doze"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:text="@string/setup_btn_enable"
+                android:backgroundTint="@color/colorPrimary"
+                android:textAppearance="@style/ButtonTextStyling"
+                android:visibility="@{viewModel.showPermissionDoze &amp;&amp; !viewModel.permissionDoze ? View.VISIBLE : View.GONE}"
+                app:layout_constraintStart_toEndOf="@+id/textView_doze_title"
+                app:layout_constraintTop_toTopOf="@+id/textView_doze_title" />
+
+
+            <ImageView
+                android:id="@+id/img_permission_camera"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_weight="1"
+                app:imageDrawable="@{viewModel.permissionCamera ? @drawable/ic_idmatch_correct : @drawable/ic_idmatch_incorrect}"
+                app:layout_constraintEnd_toStartOf="@+id/textView_camera_title"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/textView_camera_title"
+                tools:src="@drawable/ic_idmatch_correct" />
+
+            <TextView
+                android:id="@+id/textView_camera_title"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:maxWidth="155dp"
+                android:maxLines="1"
+                android:minWidth="155dp"
+                android:text="@string/setup_permission_camera_title"
+                android:textAppearance="@style/LabelText"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView_doze_description" />
+
+            <Button
+                android:id="@+id/btn_request_camera"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:text="@string/setup_btn_enable"
+                android:backgroundTint="@color/colorPrimary"
+                android:textAppearance="@style/ButtonTextStyling"
+                android:visibility="@{!viewModel.permissionCamera ? View.VISIBLE : View.GONE}"
+                app:layout_constraintStart_toEndOf="@+id/textView_camera_title"
+                app:layout_constraintTop_toTopOf="@+id/textView_camera_title" />
+
+            <TextView
+                android:id="@+id/textView_camera_description"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="32dp"
+                android:text="@string/setup_permission_camera_description"
+                android:textAppearance="@style/GeneralText"
+                app:layout_constraintEnd_toStartOf="@+id/btn_request_doze"
+                app:layout_constraintStart_toStartOf="@+id/textView_camera_title"
+                app:layout_constraintTop_toBottomOf="@+id/textView_camera_title" />
+
+            <ImageView
+                android:id="@+id/img_permission_install"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_weight="1"
+                android:visibility="@{viewModel.showPermissionInstall ? View.VISIBLE : View.GONE}"
+                app:imageDrawable="@{viewModel.permissionInstall ? @drawable/ic_idmatch_correct : @drawable/ic_idmatch_incorrect}"
+                app:layout_constraintEnd_toStartOf="@+id/textView_install_title"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/textView_install_title"
+                tools:src="@drawable/ic_idmatch_correct" />
+
+            <TextView
+                android:id="@+id/textView_install_title"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:maxWidth="155dp"
+                android:maxLines="1"
+                android:minWidth="155dp"
+                android:text="@string/setup_permission_install_title"
+                android:textAppearance="@style/LabelText"
+                android:visibility="@{viewModel.showPermissionInstall ? View.VISIBLE : View.GONE}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView_camera_description" />
+
+            <Button
+                android:id="@+id/btn_request_install"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:text="@string/setup_btn_enable"
+                android:backgroundTint="@color/colorPrimary"
+                android:textAppearance="@style/ButtonTextStyling"
+                android:visibility="@{viewModel.showPermissionInstall &amp;&amp; !viewModel.permissionInstall ? View.VISIBLE : View.GONE}"
+                app:layout_constraintStart_toEndOf="@+id/textView_install_title"
+                app:layout_constraintTop_toTopOf="@+id/textView_install_title" />
+
+            <TextView
+                android:id="@+id/textView_install_description"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="32dp"
+                android:text="@string/setup_permission_install_description"
+                android:textAppearance="@style/GeneralText"
+                android:visibility="@{viewModel.showPermissionInstall ? View.VISIBLE : View.GONE}"
+                app:layout_constraintEnd_toStartOf="@+id/btn_request_doze"
+                app:layout_constraintStart_toStartOf="@+id/textView_install_title"
+                app:layout_constraintTop_toBottomOf="@+id/textView_install_title" />
+
+            <Button
+                android:id="@+id/finish_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="32dp"
+                android:backgroundTint="@color/colorPrimary"
+                android:textAppearance="@style/ButtonTextStyling"
+                android:enabled="@{viewModel.canDone}"
+                android:text="@string/setup_btn_done"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
+</layout>

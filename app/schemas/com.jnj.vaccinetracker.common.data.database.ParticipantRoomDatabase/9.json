@@ -1,0 +1,1528 @@
+{
+  "formatVersion": 1,
+  "database": {
+    "version": 9,
+    "identityHash": "200ab7eda2c30f3deee9416123521600",
+    "entities": [
+      {
+        "tableName": "participant",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`participantUuid` TEXT NOT NULL, `participantId` TEXT NOT NULL COLLATE NOCASE, `phone` TEXT, `gender` TEXT NOT NULL, `birthDate` INTEGER NOT NULL, `dateModified` INTEGER NOT NULL, `locationUuid` TEXT, PRIMARY KEY(`participantUuid`))",
+        "fields": [
+          {
+            "fieldPath": "participantUuid",
+            "columnName": "participantUuid",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "participantId",
+            "columnName": "participantId",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "phone",
+            "columnName": "phone",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "gender",
+            "columnName": "gender",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "birthDate",
+            "columnName": "birthDate",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "dateModified",
+            "columnName": "dateModified",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "locationUuid",
+            "columnName": "locationUuid",
+            "affinity": "TEXT",
+            "notNull": false
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "participantUuid"
+          ],
+          "autoGenerate": false
+        },
+        "indices": [
+          {
+            "name": "index_participant_participantId",
+            "unique": true,
+            "columnNames": [
+              "participantId"
+            ],
+            "createSql": "CREATE UNIQUE INDEX IF NOT EXISTS `index_participant_participantId` ON `${TABLE_NAME}` (`participantId`)"
+          },
+          {
+            "name": "index_participant_phone",
+            "unique": false,
+            "columnNames": [
+              "phone"
+            ],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_participant_phone` ON `${TABLE_NAME}` (`phone`)"
+          },
+          {
+            "name": "index_participant_dateModified",
+            "unique": false,
+            "columnNames": [
+              "dateModified"
+            ],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_participant_dateModified` ON `${TABLE_NAME}` (`dateModified`)"
+          },
+          {
+            "name": "index_participant_locationUuid",
+            "unique": false,
+            "columnNames": [
+              "locationUuid"
+            ],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_participant_locationUuid` ON `${TABLE_NAME}` (`locationUuid`)"
+          }
+        ],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "participant_biometrics_template",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`participantUuid` TEXT NOT NULL, `biometricsTemplateFileName` TEXT NOT NULL, `dateModified` INTEGER NOT NULL, PRIMARY KEY(`participantUuid`))",
+        "fields": [
+          {
+            "fieldPath": "participantUuid",
+            "columnName": "participantUuid",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "biometricsTemplateFileName",
+            "columnName": "biometricsTemplateFileName",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "dateModified",
+            "columnName": "dateModified",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "participantUuid"
+          ],
+          "autoGenerate": false
+        },
+        "indices": [
+          {
+            "name": "index_participant_biometrics_template_dateModified",
+            "unique": false,
+            "columnNames": [
+              "dateModified"
+            ],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_participant_biometrics_template_dateModified` ON `${TABLE_NAME}` (`dateModified`)"
+          }
+        ],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "participant_image",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`participantUuid` TEXT NOT NULL, `imageFileName` TEXT NOT NULL, `dateModified` INTEGER NOT NULL, PRIMARY KEY(`participantUuid`))",
+        "fields": [
+          {
+            "fieldPath": "participantUuid",
+            "columnName": "participantUuid",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "imageFileName",
+            "columnName": "imageFileName",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "dateModified",
+            "columnName": "dateModified",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "participantUuid"
+          ],
+          "autoGenerate": false
+        },
+        "indices": [
+          {
+            "name": "index_participant_image_dateModified",
+            "unique": false,
+            "columnNames": [
+              "dateModified"
+            ],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_participant_image_dateModified` ON `${TABLE_NAME}` (`dateModified`)"
+          }
+        ],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "participant_address",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`participantUuid` TEXT NOT NULL, `address1` TEXT, `address2` TEXT, `cityVillage` TEXT, `stateProvince` TEXT, `country` TEXT, `countyDistrict` TEXT, `postalCode` TEXT, PRIMARY KEY(`participantUuid`), FOREIGN KEY(`participantUuid`) REFERENCES `participant`(`participantUuid`) ON UPDATE NO ACTION ON DELETE CASCADE )",
+        "fields": [
+          {
+            "fieldPath": "participantUuid",
+            "columnName": "participantUuid",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "address1",
+            "columnName": "address1",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "address2",
+            "columnName": "address2",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "cityVillage",
+            "columnName": "cityVillage",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "stateProvince",
+            "columnName": "stateProvince",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "country",
+            "columnName": "country",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "countyDistrict",
+            "columnName": "countyDistrict",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "postalCode",
+            "columnName": "postalCode",
+            "affinity": "TEXT",
+            "notNull": false
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "participantUuid"
+          ],
+          "autoGenerate": false
+        },
+        "indices": [],
+        "foreignKeys": [
+          {
+            "table": "participant",
+            "onDelete": "CASCADE",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "participantUuid"
+            ],
+            "referencedColumns": [
+              "participantUuid"
+            ]
+          }
+        ]
+      },
+      {
+        "tableName": "participant_attribute",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`value` TEXT NOT NULL, `participantUuid` TEXT NOT NULL, `type` TEXT NOT NULL, PRIMARY KEY(`participantUuid`, `type`), FOREIGN KEY(`participantUuid`) REFERENCES `participant`(`participantUuid`) ON UPDATE NO ACTION ON DELETE CASCADE )",
+        "fields": [
+          {
+            "fieldPath": "value",
+            "columnName": "value",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "id.participantUuid",
+            "columnName": "participantUuid",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "id.type",
+            "columnName": "type",
+            "affinity": "TEXT",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "participantUuid",
+            "type"
+          ],
+          "autoGenerate": false
+        },
+        "indices": [],
+        "foreignKeys": [
+          {
+            "table": "participant",
+            "onDelete": "CASCADE",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "participantUuid"
+            ],
+            "referencedColumns": [
+              "participantUuid"
+            ]
+          }
+        ]
+      },
+      {
+        "tableName": "visit",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`visitUuid` TEXT NOT NULL, `participantUuid` TEXT NOT NULL, `visitType` TEXT NOT NULL, `startDatetime` INTEGER NOT NULL, `dateModified` INTEGER NOT NULL, PRIMARY KEY(`visitUuid`))",
+        "fields": [
+          {
+            "fieldPath": "visitUuid",
+            "columnName": "visitUuid",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "participantUuid",
+            "columnName": "participantUuid",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "visitType",
+            "columnName": "visitType",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "startDatetime",
+            "columnName": "startDatetime",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "dateModified",
+            "columnName": "dateModified",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "visitUuid"
+          ],
+          "autoGenerate": false
+        },
+        "indices": [
+          {
+            "name": "index_visit_participantUuid",
+            "unique": false,
+            "columnNames": [
+              "participantUuid"
+            ],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_visit_participantUuid` ON `${TABLE_NAME}` (`participantUuid`)"
+          },
+          {
+            "name": "index_visit_dateModified",
+            "unique": false,
+            "columnNames": [
+              "dateModified"
+            ],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_visit_dateModified` ON `${TABLE_NAME}` (`dateModified`)"
+          }
+        ],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "visit_attribute",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`value` TEXT NOT NULL, `visitUuid` TEXT NOT NULL, `type` TEXT NOT NULL, PRIMARY KEY(`visitUuid`, `type`), FOREIGN KEY(`visitUuid`) REFERENCES `visit`(`visitUuid`) ON UPDATE NO ACTION ON DELETE CASCADE )",
+        "fields": [
+          {
+            "fieldPath": "value",
+            "columnName": "value",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "id.visitUuid",
+            "columnName": "visitUuid",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "id.type",
+            "columnName": "type",
+            "affinity": "TEXT",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "visitUuid",
+            "type"
+          ],
+          "autoGenerate": false
+        },
+        "indices": [],
+        "foreignKeys": [
+          {
+            "table": "visit",
+            "onDelete": "CASCADE",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "visitUuid"
+            ],
+            "referencedColumns": [
+              "visitUuid"
+            ]
+          }
+        ]
+      },
+      {
+        "tableName": "visit_observation",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`value` TEXT NOT NULL, `dateTime` INTEGER NOT NULL, `visitUuid` TEXT NOT NULL, `name` TEXT NOT NULL, PRIMARY KEY(`visitUuid`, `name`), FOREIGN KEY(`visitUuid`) REFERENCES `visit`(`visitUuid`) ON UPDATE NO ACTION ON DELETE CASCADE )",
+        "fields": [
+          {
+            "fieldPath": "value",
+            "columnName": "value",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "dateTime",
+            "columnName": "dateTime",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "id.visitUuid",
+            "columnName": "visitUuid",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "id.name",
+            "columnName": "name",
+            "affinity": "TEXT",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "visitUuid",
+            "name"
+          ],
+          "autoGenerate": false
+        },
+        "indices": [],
+        "foreignKeys": [
+          {
+            "table": "visit",
+            "onDelete": "CASCADE",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "visitUuid"
+            ],
+            "referencedColumns": [
+              "visitUuid"
+            ]
+          }
+        ]
+      },
+      {
+        "tableName": "failed_visit_download",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`visitUuid` TEXT NOT NULL, `participantUuid` TEXT NOT NULL, `dateLastDownloadAttempt` INTEGER NOT NULL, `dateModified` INTEGER NOT NULL, PRIMARY KEY(`visitUuid`))",
+        "fields": [
+          {
+            "fieldPath": "visitUuid",
+            "columnName": "visitUuid",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "participantUuid",
+            "columnName": "participantUuid",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "dateLastDownloadAttempt",
+            "columnName": "dateLastDownloadAttempt",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "dateModified",
+            "columnName": "dateModified",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "visitUuid"
+          ],
+          "autoGenerate": false
+        },
+        "indices": [
+          {
+            "name": "index_failed_visit_download_participantUuid",
+            "unique": false,
+            "columnNames": [
+              "participantUuid"
+            ],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_failed_visit_download_participantUuid` ON `${TABLE_NAME}` (`participantUuid`)"
+          },
+          {
+            "name": "index_failed_visit_download_dateLastDownloadAttempt",
+            "unique": false,
+            "columnNames": [
+              "dateLastDownloadAttempt"
+            ],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_failed_visit_download_dateLastDownloadAttempt` ON `${TABLE_NAME}` (`dateLastDownloadAttempt`)"
+          },
+          {
+            "name": "index_failed_visit_download_dateModified",
+            "unique": false,
+            "columnNames": [
+              "dateModified"
+            ],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_failed_visit_download_dateModified` ON `${TABLE_NAME}` (`dateModified`)"
+          }
+        ],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "failed_participant_download",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`participantUuid` TEXT NOT NULL, `dateLastDownloadAttempt` INTEGER NOT NULL, `dateModified` INTEGER NOT NULL, PRIMARY KEY(`participantUuid`))",
+        "fields": [
+          {
+            "fieldPath": "participantUuid",
+            "columnName": "participantUuid",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "dateLastDownloadAttempt",
+            "columnName": "dateLastDownloadAttempt",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "dateModified",
+            "columnName": "dateModified",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "participantUuid"
+          ],
+          "autoGenerate": false
+        },
+        "indices": [
+          {
+            "name": "index_failed_participant_download_dateLastDownloadAttempt",
+            "unique": false,
+            "columnNames": [
+              "dateLastDownloadAttempt"
+            ],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_failed_participant_download_dateLastDownloadAttempt` ON `${TABLE_NAME}` (`dateLastDownloadAttempt`)"
+          },
+          {
+            "name": "index_failed_participant_download_dateModified",
+            "unique": false,
+            "columnNames": [
+              "dateModified"
+            ],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_failed_participant_download_dateModified` ON `${TABLE_NAME}` (`dateModified`)"
+          }
+        ],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "failed_image_download",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`participantUuid` TEXT NOT NULL, `dateLastDownloadAttempt` INTEGER NOT NULL, `dateModified` INTEGER NOT NULL, PRIMARY KEY(`participantUuid`))",
+        "fields": [
+          {
+            "fieldPath": "participantUuid",
+            "columnName": "participantUuid",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "dateLastDownloadAttempt",
+            "columnName": "dateLastDownloadAttempt",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "dateModified",
+            "columnName": "dateModified",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "participantUuid"
+          ],
+          "autoGenerate": false
+        },
+        "indices": [
+          {
+            "name": "index_failed_image_download_dateLastDownloadAttempt",
+            "unique": false,
+            "columnNames": [
+              "dateLastDownloadAttempt"
+            ],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_failed_image_download_dateLastDownloadAttempt` ON `${TABLE_NAME}` (`dateLastDownloadAttempt`)"
+          },
+          {
+            "name": "index_failed_image_download_dateModified",
+            "unique": false,
+            "columnNames": [
+              "dateModified"
+            ],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_failed_image_download_dateModified` ON `${TABLE_NAME}` (`dateModified`)"
+          }
+        ],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "failed_biometrics_template_download",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`participantUuid` TEXT NOT NULL, `dateLastDownloadAttempt` INTEGER NOT NULL, `dateModified` INTEGER NOT NULL, PRIMARY KEY(`participantUuid`))",
+        "fields": [
+          {
+            "fieldPath": "participantUuid",
+            "columnName": "participantUuid",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "dateLastDownloadAttempt",
+            "columnName": "dateLastDownloadAttempt",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "dateModified",
+            "columnName": "dateModified",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "participantUuid"
+          ],
+          "autoGenerate": false
+        },
+        "indices": [
+          {
+            "name": "index_failed_biometrics_template_download_dateLastDownloadAttempt",
+            "unique": false,
+            "columnNames": [
+              "dateLastDownloadAttempt"
+            ],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_failed_biometrics_template_download_dateLastDownloadAttempt` ON `${TABLE_NAME}` (`dateLastDownloadAttempt`)"
+          },
+          {
+            "name": "index_failed_biometrics_template_download_dateModified",
+            "unique": false,
+            "columnNames": [
+              "dateModified"
+            ],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_failed_biometrics_template_download_dateModified` ON `${TABLE_NAME}` (`dateModified`)"
+          }
+        ],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "deleted_visit",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`visitUuid` TEXT NOT NULL, `participantUuid` TEXT NOT NULL, `dateModified` INTEGER NOT NULL, PRIMARY KEY(`visitUuid`))",
+        "fields": [
+          {
+            "fieldPath": "visitUuid",
+            "columnName": "visitUuid",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "participantUuid",
+            "columnName": "participantUuid",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "dateModified",
+            "columnName": "dateModified",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "visitUuid"
+          ],
+          "autoGenerate": false
+        },
+        "indices": [
+          {
+            "name": "index_deleted_visit_dateModified",
+            "unique": false,
+            "columnNames": [
+              "dateModified"
+            ],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_deleted_visit_dateModified` ON `${TABLE_NAME}` (`dateModified`)"
+          }
+        ],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "deleted_participant",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`participantUuid` TEXT NOT NULL, `dateModified` INTEGER NOT NULL, PRIMARY KEY(`participantUuid`))",
+        "fields": [
+          {
+            "fieldPath": "participantUuid",
+            "columnName": "participantUuid",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "dateModified",
+            "columnName": "dateModified",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "participantUuid"
+          ],
+          "autoGenerate": false
+        },
+        "indices": [
+          {
+            "name": "index_deleted_participant_dateModified",
+            "unique": false,
+            "columnNames": [
+              "dateModified"
+            ],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_deleted_participant_dateModified` ON `${TABLE_NAME}` (`dateModified`)"
+          }
+        ],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "deleted_participant_image",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`participantUuid` TEXT NOT NULL, `dateModified` INTEGER NOT NULL, PRIMARY KEY(`participantUuid`))",
+        "fields": [
+          {
+            "fieldPath": "participantUuid",
+            "columnName": "participantUuid",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "dateModified",
+            "columnName": "dateModified",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "participantUuid"
+          ],
+          "autoGenerate": false
+        },
+        "indices": [
+          {
+            "name": "index_deleted_participant_image_dateModified",
+            "unique": false,
+            "columnNames": [
+              "dateModified"
+            ],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_deleted_participant_image_dateModified` ON `${TABLE_NAME}` (`dateModified`)"
+          }
+        ],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "deleted_participant_biometrics_template",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`participantUuid` TEXT NOT NULL, `dateModified` INTEGER NOT NULL, PRIMARY KEY(`participantUuid`))",
+        "fields": [
+          {
+            "fieldPath": "participantUuid",
+            "columnName": "participantUuid",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "dateModified",
+            "columnName": "dateModified",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "participantUuid"
+          ],
+          "autoGenerate": false
+        },
+        "indices": [
+          {
+            "name": "index_deleted_participant_biometrics_template_dateModified",
+            "unique": false,
+            "columnNames": [
+              "dateModified"
+            ],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_deleted_participant_biometrics_template_dateModified` ON `${TABLE_NAME}` (`dateModified`)"
+          }
+        ],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "draft_participant",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`participantUuid` TEXT NOT NULL, `phone` TEXT, `participantId` TEXT NOT NULL COLLATE NOCASE, `gender` TEXT NOT NULL, `birthDate` INTEGER NOT NULL, `registrationDate` INTEGER NOT NULL, `draftState` TEXT NOT NULL, `locationUuid` TEXT, PRIMARY KEY(`participantUuid`))",
+        "fields": [
+          {
+            "fieldPath": "participantUuid",
+            "columnName": "participantUuid",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "phone",
+            "columnName": "phone",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "participantId",
+            "columnName": "participantId",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "gender",
+            "columnName": "gender",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "birthDate",
+            "columnName": "birthDate",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "registrationDate",
+            "columnName": "registrationDate",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "draftState",
+            "columnName": "draftState",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "locationUuid",
+            "columnName": "locationUuid",
+            "affinity": "TEXT",
+            "notNull": false
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "participantUuid"
+          ],
+          "autoGenerate": false
+        },
+        "indices": [
+          {
+            "name": "index_draft_participant_participantId",
+            "unique": true,
+            "columnNames": [
+              "participantId"
+            ],
+            "createSql": "CREATE UNIQUE INDEX IF NOT EXISTS `index_draft_participant_participantId` ON `${TABLE_NAME}` (`participantId`)"
+          },
+          {
+            "name": "index_draft_participant_phone",
+            "unique": false,
+            "columnNames": [
+              "phone"
+            ],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_draft_participant_phone` ON `${TABLE_NAME}` (`phone`)"
+          },
+          {
+            "name": "index_draft_participant_draftState",
+            "unique": false,
+            "columnNames": [
+              "draftState"
+            ],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_draft_participant_draftState` ON `${TABLE_NAME}` (`draftState`)"
+          },
+          {
+            "name": "index_draft_participant_locationUuid",
+            "unique": false,
+            "columnNames": [
+              "locationUuid"
+            ],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_draft_participant_locationUuid` ON `${TABLE_NAME}` (`locationUuid`)"
+          }
+        ],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "draft_participant_address",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`participantUuid` TEXT NOT NULL, `address1` TEXT, `address2` TEXT, `cityVillage` TEXT, `stateProvince` TEXT, `country` TEXT, `countyDistrict` TEXT, `postalCode` TEXT, PRIMARY KEY(`participantUuid`), FOREIGN KEY(`participantUuid`) REFERENCES `draft_participant`(`participantUuid`) ON UPDATE NO ACTION ON DELETE CASCADE )",
+        "fields": [
+          {
+            "fieldPath": "participantUuid",
+            "columnName": "participantUuid",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "address1",
+            "columnName": "address1",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "address2",
+            "columnName": "address2",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "cityVillage",
+            "columnName": "cityVillage",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "stateProvince",
+            "columnName": "stateProvince",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "country",
+            "columnName": "country",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "countyDistrict",
+            "columnName": "countyDistrict",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "postalCode",
+            "columnName": "postalCode",
+            "affinity": "TEXT",
+            "notNull": false
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "participantUuid"
+          ],
+          "autoGenerate": false
+        },
+        "indices": [],
+        "foreignKeys": [
+          {
+            "table": "draft_participant",
+            "onDelete": "CASCADE",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "participantUuid"
+            ],
+            "referencedColumns": [
+              "participantUuid"
+            ]
+          }
+        ]
+      },
+      {
+        "tableName": "draft_participant_attribute",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`value` TEXT NOT NULL, `participantUuid` TEXT NOT NULL, `type` TEXT NOT NULL, PRIMARY KEY(`participantUuid`, `type`), FOREIGN KEY(`participantUuid`) REFERENCES `draft_participant`(`participantUuid`) ON UPDATE NO ACTION ON DELETE CASCADE )",
+        "fields": [
+          {
+            "fieldPath": "value",
+            "columnName": "value",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "id.participantUuid",
+            "columnName": "participantUuid",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "id.type",
+            "columnName": "type",
+            "affinity": "TEXT",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "participantUuid",
+            "type"
+          ],
+          "autoGenerate": false
+        },
+        "indices": [],
+        "foreignKeys": [
+          {
+            "table": "draft_participant",
+            "onDelete": "CASCADE",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "participantUuid"
+            ],
+            "referencedColumns": [
+              "participantUuid"
+            ]
+          }
+        ]
+      },
+      {
+        "tableName": "draft_participant_biometrics_template",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`participantUuid` TEXT NOT NULL, `biometricsTemplateFileName` TEXT NOT NULL, `draftState` TEXT NOT NULL, PRIMARY KEY(`participantUuid`))",
+        "fields": [
+          {
+            "fieldPath": "participantUuid",
+            "columnName": "participantUuid",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "biometricsTemplateFileName",
+            "columnName": "biometricsTemplateFileName",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "draftState",
+            "columnName": "draftState",
+            "affinity": "TEXT",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "participantUuid"
+          ],
+          "autoGenerate": false
+        },
+        "indices": [],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "draft_participant_image",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`participantUuid` TEXT NOT NULL, `imageFileName` TEXT NOT NULL, `draftState` TEXT NOT NULL, PRIMARY KEY(`participantUuid`))",
+        "fields": [
+          {
+            "fieldPath": "participantUuid",
+            "columnName": "participantUuid",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "imageFileName",
+            "columnName": "imageFileName",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "draftState",
+            "columnName": "draftState",
+            "affinity": "TEXT",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "participantUuid"
+          ],
+          "autoGenerate": false
+        },
+        "indices": [],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "draft_visit",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`visitUuid` TEXT NOT NULL, `participantUuid` TEXT NOT NULL, `visitType` TEXT NOT NULL, `startDatetime` INTEGER NOT NULL, `locationUuid` TEXT NOT NULL, `draftState` TEXT NOT NULL, PRIMARY KEY(`visitUuid`))",
+        "fields": [
+          {
+            "fieldPath": "visitUuid",
+            "columnName": "visitUuid",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "participantUuid",
+            "columnName": "participantUuid",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "visitType",
+            "columnName": "visitType",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "startDatetime",
+            "columnName": "startDatetime",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "locationUuid",
+            "columnName": "locationUuid",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "draftState",
+            "columnName": "draftState",
+            "affinity": "TEXT",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "visitUuid"
+          ],
+          "autoGenerate": false
+        },
+        "indices": [
+          {
+            "name": "index_draft_visit_participantUuid",
+            "unique": false,
+            "columnNames": [
+              "participantUuid"
+            ],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_draft_visit_participantUuid` ON `${TABLE_NAME}` (`participantUuid`)"
+          },
+          {
+            "name": "index_draft_visit_draftState",
+            "unique": false,
+            "columnNames": [
+              "draftState"
+            ],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_draft_visit_draftState` ON `${TABLE_NAME}` (`draftState`)"
+          }
+        ],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "draft_visit_attribute",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`value` TEXT NOT NULL, `visitUuid` TEXT NOT NULL, `type` TEXT NOT NULL, PRIMARY KEY(`visitUuid`, `type`), FOREIGN KEY(`visitUuid`) REFERENCES `draft_visit`(`visitUuid`) ON UPDATE NO ACTION ON DELETE CASCADE )",
+        "fields": [
+          {
+            "fieldPath": "value",
+            "columnName": "value",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "id.visitUuid",
+            "columnName": "visitUuid",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "id.type",
+            "columnName": "type",
+            "affinity": "TEXT",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "visitUuid",
+            "type"
+          ],
+          "autoGenerate": false
+        },
+        "indices": [],
+        "foreignKeys": [
+          {
+            "table": "draft_visit",
+            "onDelete": "CASCADE",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "visitUuid"
+            ],
+            "referencedColumns": [
+              "visitUuid"
+            ]
+          }
+        ]
+      },
+      {
+        "tableName": "draft_visit_encounter",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`visitUuid` TEXT NOT NULL, `startDatetime` INTEGER NOT NULL, `locationUuid` TEXT NOT NULL, `draftState` TEXT NOT NULL, `participantUuid` TEXT NOT NULL, PRIMARY KEY(`visitUuid`))",
+        "fields": [
+          {
+            "fieldPath": "visitUuid",
+            "columnName": "visitUuid",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "startDatetime",
+            "columnName": "startDatetime",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "locationUuid",
+            "columnName": "locationUuid",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "draftState",
+            "columnName": "draftState",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "participantUuid",
+            "columnName": "participantUuid",
+            "affinity": "TEXT",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "visitUuid"
+          ],
+          "autoGenerate": false
+        },
+        "indices": [
+          {
+            "name": "index_draft_visit_encounter_draftState",
+            "unique": false,
+            "columnNames": [
+              "draftState"
+            ],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_draft_visit_encounter_draftState` ON `${TABLE_NAME}` (`draftState`)"
+          },
+          {
+            "name": "index_draft_visit_encounter_participantUuid",
+            "unique": false,
+            "columnNames": [
+              "participantUuid"
+            ],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_draft_visit_encounter_participantUuid` ON `${TABLE_NAME}` (`participantUuid`)"
+          }
+        ],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "draft_visit_encounter_observation",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`value` TEXT NOT NULL, `visitUuid` TEXT NOT NULL, `name` TEXT NOT NULL, PRIMARY KEY(`visitUuid`, `name`), FOREIGN KEY(`visitUuid`) REFERENCES `draft_visit_encounter`(`visitUuid`) ON UPDATE NO ACTION ON DELETE CASCADE )",
+        "fields": [
+          {
+            "fieldPath": "value",
+            "columnName": "value",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "id.visitUuid",
+            "columnName": "visitUuid",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "id.name",
+            "columnName": "name",
+            "affinity": "TEXT",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "visitUuid",
+            "name"
+          ],
+          "autoGenerate": false
+        },
+        "indices": [],
+        "foreignKeys": [
+          {
+            "table": "draft_visit_encounter",
+            "onDelete": "CASCADE",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "visitUuid"
+            ],
+            "referencedColumns": [
+              "visitUuid"
+            ]
+          }
+        ]
+      },
+      {
+        "tableName": "draft_visit_encounter_attribute",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`value` TEXT NOT NULL, `visitUuid` TEXT NOT NULL, `type` TEXT NOT NULL, PRIMARY KEY(`visitUuid`, `type`), FOREIGN KEY(`visitUuid`) REFERENCES `draft_visit_encounter`(`visitUuid`) ON UPDATE NO ACTION ON DELETE CASCADE )",
+        "fields": [
+          {
+            "fieldPath": "value",
+            "columnName": "value",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "id.visitUuid",
+            "columnName": "visitUuid",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "id.type",
+            "columnName": "type",
+            "affinity": "TEXT",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "visitUuid",
+            "type"
+          ],
+          "autoGenerate": false
+        },
+        "indices": [],
+        "foreignKeys": [
+          {
+            "table": "draft_visit_encounter",
+            "onDelete": "CASCADE",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "visitUuid"
+            ],
+            "referencedColumns": [
+              "visitUuid"
+            ]
+          }
+        ]
+      },
+      {
+        "tableName": "sync_scope",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`siteUuid` TEXT NOT NULL, `level` TEXT NOT NULL, `country` TEXT, `cluster` TEXT, `dateCreated` INTEGER NOT NULL, `id` INTEGER NOT NULL, PRIMARY KEY(`id`))",
+        "fields": [
+          {
+            "fieldPath": "siteUuid",
+            "columnName": "siteUuid",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "level",
+            "columnName": "level",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "country",
+            "columnName": "country",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "cluster",
+            "columnName": "cluster",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "dateCreated",
+            "columnName": "dateCreated",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "id"
+          ],
+          "autoGenerate": false
+        },
+        "indices": [],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "operator",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`uuid` TEXT NOT NULL, `username` TEXT NOT NULL COLLATE NOCASE, `display` TEXT NOT NULL, `passwordHash` TEXT NOT NULL, `dateCreated` INTEGER NOT NULL, PRIMARY KEY(`uuid`))",
+        "fields": [
+          {
+            "fieldPath": "uuid",
+            "columnName": "uuid",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "username",
+            "columnName": "username",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "display",
+            "columnName": "display",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "passwordHash",
+            "columnName": "passwordHash",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "dateCreated",
+            "columnName": "dateCreated",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "uuid"
+          ],
+          "autoGenerate": false
+        },
+        "indices": [
+          {
+            "name": "index_operator_username",
+            "unique": true,
+            "columnNames": [
+              "username"
+            ],
+            "createSql": "CREATE UNIQUE INDEX IF NOT EXISTS `index_operator_username` ON `${TABLE_NAME}` (`username`)"
+          }
+        ],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "sync_error",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` TEXT NOT NULL, `type` TEXT NOT NULL, `metadataJson` TEXT NOT NULL, `stackTrace` TEXT NOT NULL, `dateCreated` INTEGER NOT NULL, `syncErrorState` INTEGER NOT NULL, PRIMARY KEY(`id`))",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "type",
+            "columnName": "type",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "metadataJson",
+            "columnName": "metadataJson",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "stackTrace",
+            "columnName": "stackTrace",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "dateCreated",
+            "columnName": "dateCreated",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "syncErrorState",
+            "columnName": "syncErrorState",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "id"
+          ],
+          "autoGenerate": false
+        },
+        "indices": [
+          {
+            "name": "index_sync_error_type",
+            "unique": false,
+            "columnNames": [
+              "type"
+            ],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_sync_error_type` ON `${TABLE_NAME}` (`type`)"
+          },
+          {
+            "name": "index_sync_error_syncErrorState",
+            "unique": false,
+            "columnNames": [
+              "syncErrorState"
+            ],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_sync_error_syncErrorState` ON `${TABLE_NAME}` (`syncErrorState`)"
+          }
+        ],
+        "foreignKeys": []
+      }
+    ],
+    "views": [],
+    "setupQueries": [
+      "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '200ab7eda2c30f3deee9416123521600')"
+    ]
+  }
+}
