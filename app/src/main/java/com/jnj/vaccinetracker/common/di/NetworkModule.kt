@@ -106,6 +106,8 @@ class NetworkModule {
         return OkHttpClient.Builder()
             .addInterceptor(baseUrlInterceptor)
             .addInterceptor(deviceIdInterceptor)
+            .connectTimeout(SYNC_READ_TIMEOUT, TimeUnit.MILLISECONDS)
+            .writeTimeout(SYNC_READ_TIMEOUT, TimeUnit.MILLISECONDS)
             .readTimeout(SYNC_READ_TIMEOUT, TimeUnit.MILLISECONDS)
             .runIfLoggingEnabled {
                 addInterceptor(loggingInterceptor())

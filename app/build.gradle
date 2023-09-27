@@ -7,7 +7,7 @@ apply plugin: 'org.jetbrains.dokka'
 
 // Version
 ext.versionMajor = 3
-ext.versionMinor = 0
+ext.versionMinor = 2
 ext.versionPatch = 0
 
 // Iris scanner variables
@@ -133,7 +133,7 @@ dependencies {
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.3.1'
     implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.1'
-
+    implementation 'com.google.code.gson:gson:2.10.1'
     deps.implementation.each { name, dep ->
         implementation dep
     }

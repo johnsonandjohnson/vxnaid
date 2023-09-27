@@ -40,7 +40,7 @@ import okhttp3.OkHttpClient
 @OptIn(ExperimentalCoroutinesApi::class)
 class DownloadSyncRecordsUseCaseIntegrationTest : FunSpec({
     // SETTINGS
-    val backendUrl = "https://demo-iris.jnj.connect-for-life.org"
+    val backendUrl = "https://vxnaid-development.jnj.connect-for-life.org"
     val siteUuid = "1424ae66-aaa6-4c33-b2b1-9789df1dba64"
     val syncScopeLevel = SyncScopeLevel.SITE
 

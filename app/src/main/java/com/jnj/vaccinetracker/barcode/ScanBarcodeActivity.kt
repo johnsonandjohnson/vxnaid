@@ -2,26 +2,31 @@ package com.jnj.vaccinetracker.barcode
 
 import android.Manifest
 import android.annotation.SuppressLint
+import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.viewModels
 import androidx.camera.core.*
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.activityViewModels
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.mlkit.common.MlKitException
 import com.google.mlkit.vision.barcode.BarcodeScanner
 import com.google.mlkit.vision.barcode.BarcodeScanning
 import com.google.mlkit.vision.common.InputImage
 import com.jnj.vaccinetracker.R
+import com.jnj.vaccinetracker.common.data.encryption.SharedPreference
 import com.jnj.vaccinetracker.common.helpers.logError
 import com.jnj.vaccinetracker.common.helpers.logInfo
 import com.jnj.vaccinetracker.common.ui.BaseActivity
 import com.jnj.vaccinetracker.databinding.ActivityScanBarcodeBinding
+import com.jnj.vaccinetracker.visit.VisitViewModel
 
 /**
  * @author maartenvangiel
@@ -31,15 +36,23 @@ class ScanBarcodeActivity : BaseActivity() {
 
     companion object {
         const val EXTRA_BARCODE = "barcode"
+        const val FLAG = "FLag"
+        const val PARTICIPANT="PARTICIPANT"
+        const val MANUFACTURER="MANUFACTURER"
         private const val REQ_CAMERA_PERMISSION = 13
         private val REQUIRED_PERMISSIONS = arrayOf(Manifest.permission.CAMERA)
 
-        fun create(context: Context): Intent {
-            return Intent(context, ScanBarcodeActivity::class.java)
+        var flag=""
+
+        fun create(context: Context,string:String): Intent {
+            var intent=Intent(context, ScanBarcodeActivity::class.java)
+            intent.putExtra(FLAG,string)
+            return Intent(intent)
         }
     }
 
     private val viewModel: ScanBarcodeViewModel by viewModels { viewModelFactory }
+    private val visitviewModel: VisitViewModel by viewModels { viewModelFactory }
     private lateinit var binding: ActivityScanBarcodeBinding
     private var previewUseCase: Preview? = null
     private var barcodeScanUseCase: ImageAnalysis? = null
@@ -50,6 +63,13 @@ class ScanBarcodeActivity : BaseActivity() {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_scan_barcode)
         binding.lifecycleOwner = this
         binding.viewModel = viewModel
+
+
+        flag= getIntent().getStringExtra(FLAG)!!
+
+        Log.e("flag","is " + flag)
+
+
         binding.buttonSubmit.setOnClickListener {
             if (viewModel.barcodeValid.value) {
                 setResult(RESULT_OK, Intent().putExtra(EXTRA_BARCODE, viewModel.scannedBarcode.value.orEmpty()))
@@ -132,7 +152,16 @@ class ScanBarcodeActivity : BaseActivity() {
                             .map { it.rawValue }
                             .lastOrNull()
                         if (barcode != null) {
-                            viewModel.onBarcodeScanned(barcode)
+
+                           /* if(flag.equals(ScanBarcodeActivity.MANUFACTURER)){
+                                visitviewModel.validateIdManufracturer(barcode)
+                               *//* var intent=Intent()
+                                intent.putExtra(EXTRA_BARCODE,barcode)
+                                setResult(Activity.RESULT_OK,intent)
+                                finish()*//*
+                            }else {*/
+                                viewModel.onBarcodeScanned(barcode, flag,SharedPreference(this).getManufracterList())
+                           // }
                         }
                     }
                     .addOnFailureListener {
@@ -197,5 +226,8 @@ class ScanBarcodeActivity : BaseActivity() {
         }
 
     }
+
+
+
 
 }

@@ -29,12 +29,12 @@ class InternetConnectivityKtTest : FunSpec({
     }
 
     test("test demo iris full without slash") {
-        val hasIp = InternetConnectivity.hasIpAddress("https://demo-iris.jnj.connect-for-life.org")
+        val hasIp = InternetConnectivity.hasIpAddress("https://vxnaid-development.jnj.connect-for-life.org")
         hasIp shouldBe true
     }
 
     test("test demo iris full with slash at end") {
-        val hasIp = InternetConnectivity.hasIpAddress("https://demo-iris.jnj.connect-for-life.org/")
+        val hasIp = InternetConnectivity.hasIpAddress("https://vxnaid-development.jnj.connect-for-life.org/")
         hasIp shouldBe true
     }
 

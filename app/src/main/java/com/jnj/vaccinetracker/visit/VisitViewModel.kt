@@ -54,12 +54,13 @@ class VisitViewModel @Inject constructor(
     val errorMessage = mutableLiveData<String>()
     val vialValidationMessage = mutableLiveData<String>()
     val selectedManufacturer = mutableLiveData<String>()
-    val manufacturerList = mutableLiveData<List<String>>()
+    var manufacturerList = mutableLiveData<List<String>>()
     val manufacturerValidationMessage = mutableLiveData<String>()
     val differentManufacturerAllowed = mutableLiveBoolean()
     private val manufacturerRegexes = mutableLiveData<List<Manufacturer>>()
     val upcomingVisit = mutableLiveData<UpcomingVisit?>()
 
+    private var manufacturersList: MutableList<Manufacturer> = mutableListOf<Manufacturer>()
     init {
         initState()
     }
@@ -89,7 +90,9 @@ class VisitViewModel @Inject constructor(
             val manufacturers = configurationManager.getVaccineManufacturers(participantSummary.vaccine.value)
             val config = configurationManager.getConfiguration()
             onVisitsLoaded(visits)
-            onManufacturersLoaded(manufacturers)
+        //    onManufacturersLoaded(manufacturers)
+            onManufacturerLoaded(config.manufacturers)
+            onManufacturersDataLoaded(config.manufacturers)
             differentManufacturerAllowed.set(config.canUseDifferentManufacturers)
             manufacturerRegexes.set(config.manufacturers)
             loading.set(false)
@@ -161,6 +164,30 @@ class VisitViewModel @Inject constructor(
         if (manufacturers.size == 1) {
             this.selectedManufacturer.set(manufacturers[0])
         }
+    }
+
+    private fun onManufacturerLoaded(manufacturers: List<Manufacturer>) {
+        val productNameList = manufacturers.map { it.name }
+
+        this.manufacturerList.set(productNameList)
+
+        // If only one manufacturer possible, default to this value.
+        if (productNameList.size == 1) {
+            this.selectedManufacturer.set(productNameList[0])
+        }
+    }
+
+    private fun onManufacturersDataLoaded(manufacturers: List<Manufacturer>) {
+        this.manufacturersList.addAll(manufacturers)
+
+        // If only one manufacturer possible, default to this value.
+        if (manufacturers.size == 1) {
+            // this.selectedManufacturer.set(manufacturers[0])
+        }
+    }
+
+    fun getManufactuerList():kotlin.collections.List<Manufacturer>{
+        return manufacturersList
     }
 
     /**

@@ -14,6 +14,8 @@ import androidx.lifecycle.LifecycleOwner
 import com.google.android.material.snackbar.Snackbar
 import com.jnj.vaccinetracker.R
 import com.jnj.vaccinetracker.barcode.ScanBarcodeActivity
+import com.jnj.vaccinetracker.barcode.ScanBarcodeViewModel
+import com.jnj.vaccinetracker.common.data.encryption.SharedPreference
 import com.jnj.vaccinetracker.common.helpers.hideKeyboard
 import com.jnj.vaccinetracker.common.ui.BaseFragment
 import com.jnj.vaccinetracker.databinding.*
@@ -23,6 +25,7 @@ import com.jnj.vaccinetracker.visit.dialog.DifferentManufacturerExpectedDialog
 import com.jnj.vaccinetracker.visit.dialog.DosingOutOfWindowDialog
 import com.jnj.vaccinetracker.visit.dialog.VisitRegisteredSuccessDialog
 import kotlinx.coroutines.flow.onEach
+
 
 /**
  * @author maartenvangiel
@@ -42,6 +45,7 @@ class VisitDosingFragment : BaseFragment(),
     }
 
     private val viewModel: VisitViewModel by activityViewModels { viewModelFactory }
+    private val scanviewModel: ScanBarcodeViewModel by activityViewModels { viewModelFactory }
     private lateinit var binding: FragmentVisitDosingBinding
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
@@ -51,7 +55,7 @@ class VisitDosingFragment : BaseFragment(),
         binding.root.setOnClickListener { activity?.currentFocus?.hideKeyboard() }
 
         binding.imageButtonBarcodeScanner.setOnClickListener {
-            startActivityForResult(ScanBarcodeActivity.create(requireContext()), REQ_SCAN_BARCODE)
+            startActivityForResult(ScanBarcodeActivity.create(requireContext(),ScanBarcodeActivity.MANUFACTURER), REQ_SCAN_BARCODE)
         }
         binding.btnSubmit.setOnClickListener {
             submitDosingVisit()
@@ -70,6 +74,8 @@ class VisitDosingFragment : BaseFragment(),
                 }
         }
 
+
+
         return binding.root
     }
 
@@ -77,7 +83,11 @@ class VisitDosingFragment : BaseFragment(),
         viewModel.manufacturerList.observe(lifecycleOwner) { manufacturers ->
             val adapter = ArrayAdapter(requireContext(), R.layout.item_dropdown, manufacturers?.distinct().orEmpty())
             binding.dropdownManufacturer.setAdapter(adapter)
+
+            SharedPreference(context!!).saveManufracterList(viewModel.getManufactuerList())
+            SharedPreference(context!!).saveManufracterList(scanviewModel.getManufactuerList())
         }
+
         viewModel.visitEvents
             .asFlow()
             .onEach { success ->

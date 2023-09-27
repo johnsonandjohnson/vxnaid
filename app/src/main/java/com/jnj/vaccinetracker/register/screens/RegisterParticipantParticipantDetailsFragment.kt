@@ -176,7 +176,7 @@ class RegisterParticipantParticipantDetailsFragment : BaseFragment(),
             it.requestFocus()
         }
         binding.btnScanParticipantId.setOnClickListener {
-            startActivityForResult(ScanBarcodeActivity.create(requireContext()), REQ_BARCODE)
+            startActivityForResult(ScanBarcodeActivity.create(requireContext(),ScanBarcodeActivity.PARTICIPANT), REQ_BARCODE)
         }
     }
 

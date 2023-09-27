@@ -1,4 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="default_base_url" translatable="false">https://demo-iris.jnj.connect-for-life.org</string>
+    <string name="default_base_url" translatable="false">https://vxnaid-development.jnj.connect-for-life.org</string>
 </resources>

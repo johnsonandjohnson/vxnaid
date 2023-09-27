@@ -51,7 +51,7 @@ class ParticipantFlowParticipantIdFragment : BaseFragment() {
             }
         }
         binding.btnScanCode.setOnClickListener {
-            startActivityForResult(ScanBarcodeActivity.create(requireContext()), REQ_BARCODE)
+            startActivityForResult(ScanBarcodeActivity.create(requireContext(),ScanBarcodeActivity.PARTICIPANT), REQ_BARCODE)
         }
         binding.btnSkip.setOnClickListener {
             flowViewModel.confirmParticipantId(null, manual = false)

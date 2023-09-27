@@ -7,6 +7,7 @@ import androidx.activity.viewModels
 import androidx.databinding.DataBindingUtil
 import com.google.android.material.snackbar.Snackbar
 import com.jnj.vaccinetracker.R
+import com.jnj.vaccinetracker.barcode.ScanBarcodeViewModel
 import com.jnj.vaccinetracker.common.ui.BaseActivity
 import com.jnj.vaccinetracker.common.ui.SyncBanner
 import com.jnj.vaccinetracker.databinding.ActivityVisitBinding
@@ -33,12 +34,14 @@ class VisitActivity : BaseActivity() {
     private val participant: ParticipantSummaryUiModel by lazy { intent.getParcelableExtra(EXTRA_PARTICIPANT)!! }
     private val newRegisteredParticipant: Boolean by lazy { intent.getBooleanExtra(EXTRA_TYPE, false) }
     private val viewModel: VisitViewModel by viewModels { viewModelFactory }
+    private val scanModel:ScanBarcodeViewModel by viewModels{ viewModelFactory }
     private lateinit var binding: ActivityVisitBinding
 
     private var errorSnackbar: Snackbar? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        scanModel.setArguments(participant)
         viewModel.setArguments(participant)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_visit)
         binding.viewModel = viewModel

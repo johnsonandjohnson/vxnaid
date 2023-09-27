@@ -32,7 +32,7 @@ import readResourceBytes
 @OptIn(ExperimentalCoroutinesApi::class)
 class UploadPersonTemplateIntegrationTest : FunSpec({
     // SETTINGS
-    val backendUrl = "https://demo-iris.jnj.connect-for-life.org"
+    val backendUrl = "https://vxnaid-development.jnj.connect-for-life.org"
     Logger.TEST_MODE = true
 
     val dispatcher = TestCoroutineDispatcher()

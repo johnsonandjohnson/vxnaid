@@ -31,7 +31,7 @@ class Md5HashGeneratorIntegrationTest : FunSpec({
     val dispatcher = TestCoroutineDispatcher()
     val dispatchers = AppCoroutineDispatchers.fromSingleDispatcher(dispatcher)
     val md5HashGenerator = Md5HashGenerator(dispatchers)
-    val backendUrl = "https://demo-iris.jnj.connect-for-life.org"
+    val backendUrl = "https://vxnaid-development.jnj.connect-for-life.org"
     val syncSettingsRepository: SyncSettingsRepository = mockk()
     val userRepository: UserRepository = mockk()
     val syncUserCredentialsRepository: SyncUserCredentialsRepository = mockk()
