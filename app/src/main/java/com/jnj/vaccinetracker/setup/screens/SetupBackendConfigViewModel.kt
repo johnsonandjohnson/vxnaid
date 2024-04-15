@@ -84,7 +84,7 @@ class SetupBackendConfigViewModel @Inject constructor(
         var validated = true
         backendUrlValidationMessage.set(null)
 
-        if (backendUrl.isNullOrEmpty() || !(backendUrl.startsWith("http://") || (backendUrl.startsWith("https://")))) {
+        if (backendUrl.isNullOrEmpty()) {
             validated = false
             backendUrlValidationMessage.set(resourcesWrapper.getString(R.string.login_label_validation_no_backend_url))
         }
