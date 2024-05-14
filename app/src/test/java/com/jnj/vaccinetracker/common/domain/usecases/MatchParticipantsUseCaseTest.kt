@@ -64,16 +64,17 @@ class MatchParticipantsUseCaseTest : FunSpec({
         return ParticipantMatchDto(uuid, participantId, matchingScore, Gender.OTHER, BirthDate.yearOfBirth(2000).toDto(), null, emptyList())
     }
 
-    fun participant(uuid: String = uuid(), participantId: String = "", phone: String? = null, gender: Gender = Gender.MALE, withTemplate: Boolean = true) =
-        Participant(uuid, DateEntity(), null, if (withTemplate) ParticipantBiometricsTemplateFile.newFile(uuid) else null, participantId, gender, BirthDate.yearOfBirth(2000),
+    fun participant(uuid: String = uuid(), participantId: String = "", nin: String = "", phone: String? = null, gender: Gender = Gender.MALE, withTemplate: Boolean = true) =
+        Participant(uuid, DateEntity(), null, if (withTemplate) ParticipantBiometricsTemplateFile.newFile(uuid) else null, participantId, nin, gender, BirthDate.yearOfBirth(2000),
             mapOf<String, String>().withPhone(phone), null)
 
-    fun draftParticipant(uuid: String = uuid(), participantId: String = "", phone: String? = null, gender: Gender = Gender.FEMALE, withTemplate: Boolean = true) =
+    fun draftParticipant(uuid: String = uuid(), participantId: String = "", nin: String = "", phone: String? = null, gender: Gender = Gender.FEMALE, withTemplate: Boolean = true) =
         DraftParticipant(uuid,
             DateEntity(),
             null,
             if (withTemplate) DraftParticipantBiometricsTemplateFile.newFile(uuid) else null,
             participantId,
+            nin,
             gender,
             BirthDate.yearOfBirth(2000),
             mapOf<String, String>().withPhone(phone),

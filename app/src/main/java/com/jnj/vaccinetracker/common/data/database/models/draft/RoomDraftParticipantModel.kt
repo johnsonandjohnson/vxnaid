@@ -15,6 +15,7 @@ data class RoomDraftParticipantModel(
     override val participantUuid: String,
     override val phone: String?,
     override val participantId: String,
+    override val nin: String?,
     override val gender: GenderEntity,
     override val birthDate: BirthDateEntity,
     @Relation(parentColumn = DraftParticipantEntity.ID, entityColumn = DraftParticipantEntity.ID)

@@ -278,4 +278,5 @@
     <string name="p2p_client_this_device_out_of_space_error">Cet appareil n\'a plus d\'espace disque</string>
     <string name="p2p_wifi_not_available_error">Non connecté au WIFI. Veuillez vous connecter au WIFI et réessayer.</string>
     <string name="p2p_could_not_send_message_error">Impossible d\'envoyer le message. Veuillez réessayer.</string>
+    <string name="participant_registration_details_label_National_Identification_Number">NIN</string>
 </resources>

@@ -129,6 +129,11 @@ class RegisterParticipantParticipantDetailsFragment : BaseFragment(),
             viewModel.setConfirmParticipantId(formattedText)
         }
 
+        binding.editParticipantNin.doAfterTextChanged {
+            val text = binding.editParticipantNin.text.toString()
+            viewModel.setNin(text)
+        }
+
         binding.editParticipantId.doAfterTextChanged {
             val text = binding.editParticipantId.text.toString()
             val formattedText = formatParticipantId(text)

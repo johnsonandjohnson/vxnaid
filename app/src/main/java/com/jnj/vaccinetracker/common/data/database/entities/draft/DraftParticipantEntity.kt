@@ -16,6 +16,7 @@ data class DraftParticipantEntity(
     override val phone: String?,
     @ColumnInfo(collate = ColumnInfo.NOCASE)
     override val participantId: String,
+    override val nin: String?,
     override val gender: GenderEntity,
     override val birthDate: BirthDateEntity,
     override val registrationDate: DateEntity,

@@ -45,6 +45,7 @@ class StoreParticipantSyncRecordUseCase @Inject constructor(
         image = null,
         biometricsTemplate = null,
         participantId = participantId,
+        nin = nin,
         gender = gender,
         birthDate = birthDate.toDomain(),
         attributes = attributes.toMap(),

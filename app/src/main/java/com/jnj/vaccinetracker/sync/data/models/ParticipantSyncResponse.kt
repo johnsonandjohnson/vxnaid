@@ -23,6 +23,7 @@ sealed class ParticipantSyncRecord : SyncRecordBase {
         override val participantUuid: String,
         override val dateModified: SyncDate,
         val participantId: String,
+        val nin: String?,
         val gender: Gender,
         val birthDate: BirthDateDto,
         val attributes: List<AttributeDto>,

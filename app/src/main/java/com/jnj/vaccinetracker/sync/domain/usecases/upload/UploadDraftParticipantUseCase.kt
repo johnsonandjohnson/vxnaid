@@ -83,6 +83,7 @@ class UploadDraftParticipantUseCase @Inject constructor(
 
     private fun DraftParticipant.toDto(imageBase64: String?) = RegisterParticipantRequest(
         participantId = participantId,
+        nin = nin,
         gender = gender,
         birthdate = birthDate.toDto(),
         addresses = listOfNotNull(address?.toDto()),

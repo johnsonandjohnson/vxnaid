@@ -96,6 +96,7 @@ class DraftParticipantScript {
             println("creating participant with id: $participantId")
             val draftParticipant = participantManager.registerParticipant(
                 participantId = participantId,
+                nin = "NIN$participantId",
                 gender = gender,
                 yearOfBirth = yearOfBirth.toString(),
                 telephone = telephone,

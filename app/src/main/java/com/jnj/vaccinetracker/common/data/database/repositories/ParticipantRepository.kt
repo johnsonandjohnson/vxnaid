@@ -38,6 +38,7 @@ class ParticipantRepository @Inject constructor(
     private fun RoomParticipantModel.toDomain(imageFile: ParticipantImageFile?, templateFile: ParticipantBiometricsTemplateFile?) = Participant(
         participantUuid = participantUuid,
         participantId = participantId,
+        nin = nin,
         gender = gender,
         birthDate = birthDate,
         address = address?.toDomain(),
@@ -53,6 +54,7 @@ class ParticipantRepository @Inject constructor(
         participantUuid = participantUuid,
         phone = phone,
         participantId = participantId,
+        nin = nin,
         gender = gender,
         birthDate = birthDate,
         dateModified = dateModified,

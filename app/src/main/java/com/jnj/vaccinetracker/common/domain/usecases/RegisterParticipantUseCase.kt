@@ -42,6 +42,7 @@ class RegisterParticipantUseCase @Inject constructor(
         participantImageFile: DraftParticipantImageFile?,
     ) = DraftParticipant(
         participantUuid = participantUuid,
+        nin = nin,
         registrationDate = registrationDate,
         image = participantImageFile,
         biometricsTemplate = participantBiometricsTemplateFile,

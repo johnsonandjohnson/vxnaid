@@ -7,6 +7,7 @@ import com.jnj.vaccinetracker.common.data.models.Constants
 
 sealed class ParticipantBase {
     abstract val participantUuid: String
+    abstract val nin: String?
     abstract val image: ParticipantImageFileBase?
     abstract val biometricsTemplate: ParticipantBiometricsTemplateFileBase?
     abstract val participantId: String
@@ -27,6 +28,7 @@ data class Participant(
     override val image: ParticipantImageFile?,
     override val biometricsTemplate: ParticipantBiometricsTemplateFile?,
     override val participantId: String,
+    override val nin: String?,
     override val gender: Gender,
     override val birthDate: BirthDate,
     override val attributes: Map<String, String>,
@@ -39,6 +41,7 @@ data class DraftParticipant(
     override val image: DraftParticipantImageFile?,
     override val biometricsTemplate: DraftParticipantBiometricsTemplateFile?,
     override val participantId: String,
+    override val nin: String?,
     override val gender: Gender,
     override val birthDate: BirthDate,
     override val attributes: Map<String, String>,
@@ -69,6 +72,7 @@ fun DraftParticipant.toParticipantWithoutAssets(): Participant = Participant(
     image = null,
     biometricsTemplate = null,
     participantId = participantId,
+    nin = nin,
     gender = gender,
     birthDate = birthDate,
     attributes = attributes,

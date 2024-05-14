@@ -65,6 +65,7 @@ class RegisterParticipantUseCaseTest : FunSpec({
         image = ImageBytes(ByteArray(1)),
         biometricsTemplate = BiometricsTemplateBytes(ByteArray(1)),
         participantId = participantUuid,
+        nin = participantUuid,
         gender = Gender.OTHER,
         birthdate = BirthDate.yearOfBirth(1994),
         address = Address(
@@ -86,6 +87,7 @@ class RegisterParticipantUseCaseTest : FunSpec({
         image = DraftParticipantImageFile(participantUuid, "$participantUuid.jpg", DraftState.UPLOAD_PENDING),
         biometricsTemplate = DraftParticipantBiometricsTemplateFile(participantUuid, "$participantUuid.dat", DraftState.UPLOAD_PENDING, dateNow()),
         participantId = registerParticipant.participantId,
+        nin = "NIN$registerParticipant.participantId",
         gender = registerParticipant.gender,
         birthDate = registerParticipant.birthdate,
         attributes = registerParticipant.attributes,
@@ -99,6 +101,7 @@ class RegisterParticipantUseCaseTest : FunSpec({
         image = DraftParticipantImageFile(participantUuid, "$participantUuid.jpg", DraftState.UPLOADED),
         biometricsTemplate = DraftParticipantBiometricsTemplateFile(participantUuid, "$participantUuid.dat", DraftState.UPLOADED, dateNow()),
         participantId = registerParticipant.participantId,
+        nin = "NIN$registerParticipant.participantId",
         gender = registerParticipant.gender,
         birthDate = registerParticipant.birthdate,
         attributes = registerParticipant.attributes,

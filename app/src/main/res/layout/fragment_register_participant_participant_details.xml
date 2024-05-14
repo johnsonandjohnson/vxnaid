@@ -133,65 +133,44 @@
 
             </LinearLayout>
 
+            <!-- National Identification Number Input Group -->
             <LinearLayout
-                android:id="@+id/input_group_iris_id"
+                android:id="@+id/input_group_NIN"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
                 android:gravity="center_vertical"
                 android:orientation="horizontal">
 
+                <!-- Label for National Identification Number -->
                 <TextView
-                    android:id="@+id/label_iris_id"
-                    android:layout_width="wrap_content"
+                    android:id="@+id/participant_registration_details_label_nin"
+                    android:layout_width="155dp"
                     android:layout_height="wrap_content"
-                    android:maxWidth="155dp"
-                    android:maxLines="1"
-                    android:minWidth="155dp"
-                    android:text="@string/participant_registration_details_label_iris_id"
+                    android:maxLines="2"
+                    android:text="@string/participant_registration_details_label_National_Identification_Number"
                     android:textAppearance="@style/LabelText" />
 
-                <ImageView
-                    android:id="@+id/img_right_eye"
-                    android:layout_width="wrap_content"
+                <!-- Scan button (empty space) -->
+                <View
+                    android:id="@+id/scan_button_empty_nin"
+                    android:layout_width="45dp"
                     android:layout_height="45dp"
-                    android:layout_weight="2"
-                    android:scaleType="fitCenter"
-                    app:srcCompat="@drawable/eyeglasses_right" />
+                    android:layout_marginEnd="8dp" />
 
-                <ImageView
-                    android:id="@+id/img_right_eye_indicator"
-                    android:layout_width="wrap_content"
-                    android:layout_height="30dp"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginBottom="8dp"
+                <!-- EditText for National Identification Number -->
+                <EditText
+                    android:id="@+id/edit_participant_nin"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="4dp"
                     android:layout_weight="1"
-                    android:paddingStart="8dp"
-                    android:paddingEnd="16dp"
-                    android:scaleType="fitStart"
-                    app:imageDrawable="@{viewModel.rightIrisScanned ? @drawable/ic_idmatch_correct : @drawable/ic_idmatch_incorrect}"
-                    tools:src="@drawable/ic_idmatch_correct" />
-
-                <ImageView
-                    android:id="@+id/img_left_eye"
-                    android:layout_width="wrap_content"
-                    android:layout_height="45dp"
-                    android:layout_weight="2"
-                    android:scaleType="fitCenter"
-                    app:srcCompat="@drawable/eyeglasses_left" />
-
-                <ImageView
-                    android:id="@+id/img_left_eye_indicator"
-                    android:layout_width="wrap_content"
-                    android:layout_height="30dp"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginBottom="8dp"
-                    android:layout_weight="1"
-                    android:paddingStart="8dp"
-                    android:paddingEnd="16dp"
-                    android:scaleType="fitStart"
-                    app:imageDrawable="@{viewModel.leftIrisScanned ? @drawable/ic_idmatch_correct : @drawable/ic_idmatch_incorrect}"
-                    tools:src="@drawable/ic_idmatch_incorrect" />
+                    android:hint="@string/participant_registration_details_label_National_Identification_Number"
+                    android:inputType="textVisiblePassword"
+                    android:longClickable="false"
+                    android:text="@{viewModel.nin}"
+                    android:textSize="18sp"
+                    app:error="@{viewModel.ninValidationMessage}" />
 
             </LinearLayout>
 
