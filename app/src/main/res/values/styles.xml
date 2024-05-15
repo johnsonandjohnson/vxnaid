@@ -74,4 +74,8 @@
         <item name="android:progressTint">@color/sync_complete</item>
     </style>
 
+    <style name="DatePickerStyle">
+        <item name="android:textSize">15sp</item>
+    </style>
+
 </resources>
