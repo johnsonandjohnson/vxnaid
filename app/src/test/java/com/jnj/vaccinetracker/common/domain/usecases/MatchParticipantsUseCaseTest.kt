@@ -57,11 +57,11 @@ class MatchParticipantsUseCaseTest : FunSpec({
 
     fun ParticipantBiometricsTemplateFileBase.toMatch(matchingScore: Int) = BiometricsFileMatch(this, matchingScore)
     fun participantMatch(uuid: String = uuid(), participantId: String, matchingScore: Int? = null): ParticipantMatch {
-        return ParticipantMatch(uuid, participantId, matchingScore, Gender.OTHER, BirthDate.yearOfBirth(2000), null, emptyMap())
+        return ParticipantMatch(uuid, participantId, matchingScore, BirthDate.yearOfBirth(2000), null, emptyMap())
     }
 
     fun participantMatchDto(uuid: String = uuid(), participantId: String, matchingScore: Int? = null): ParticipantMatchDto {
-        return ParticipantMatchDto(uuid, participantId, matchingScore, Gender.OTHER, BirthDate.yearOfBirth(2000).toDto(), null, emptyList())
+        return ParticipantMatchDto(uuid, participantId, matchingScore, BirthDate.yearOfBirth(2000).toDto(), null, emptyList())
     }
 
     fun participant(uuid: String = uuid(), participantId: String = "", phone: String? = null, gender: Gender = Gender.MALE, withTemplate: Boolean = true) =

@@ -121,7 +121,6 @@
     <string name="participant_registration_details_error_country_api">Impossible de charger les données. Veuillez contacter votre administrateur.</string>
     <string name="gender_male">Masculin</string>
     <string name="gender_female">Féminin</string>
-    <string name="gender_other">Autre</string>
     <string name="participant_registration_details_label_year_of_birth">Année de naissance</string>
     <string name="participant_registration_details_label_telephone">Numéro de téléphone portable</string>
     <string name="participant_registration_details_telephone_hint">Veuillez entrez le numéro de téléphone portable du participant</string>

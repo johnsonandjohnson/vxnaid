@@ -12,16 +12,12 @@ enum class Gender(@StringRes val translation: Int) : Parcelable {
     MALE(R.string.gender_male),
 
     @field:Json(name = "F")
-    FEMALE(R.string.gender_female),
-
-    @field:Json(name = "O")
-    OTHER(R.string.gender_other);
+    FEMALE(R.string.gender_female);
 
     val code: String
         get() = when (this) {
             MALE -> "M"
             FEMALE -> "F"
-            OTHER -> "O"
         }
 
     companion object {

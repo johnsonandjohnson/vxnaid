@@ -169,9 +169,6 @@ class RegisterParticipantParticipantDetailsFragment : BaseFragment(),
         binding.rbGenderFemale.setOnClickListener {
             updateGender()
         }
-        binding.rbGenderOther.setOnClickListener {
-            updateGender()
-        }
         binding.genderError.setOnClickListener {
             it.requestFocus()
         }
@@ -220,7 +217,6 @@ class RegisterParticipantParticipantDetailsFragment : BaseFragment(),
         val gender = when {
             binding.rbGenderMale.isChecked -> Gender.MALE
             binding.rbGenderFemale.isChecked -> Gender.FEMALE
-            binding.rbGenderOther.isChecked -> Gender.OTHER
             else -> return
         }
         viewModel.setGender(gender)

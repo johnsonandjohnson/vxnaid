@@ -65,7 +65,6 @@ class RegisterParticipantUseCaseTest : FunSpec({
         image = ImageBytes(ByteArray(1)),
         biometricsTemplate = BiometricsTemplateBytes(ByteArray(1)),
         participantId = participantUuid,
-        gender = Gender.OTHER,
         birthdate = BirthDate.yearOfBirth(1994),
         address = Address(
             address1 = "Koekoekstraat",
