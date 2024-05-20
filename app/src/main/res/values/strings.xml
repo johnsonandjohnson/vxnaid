@@ -81,7 +81,7 @@
     <string name="iris_scan_left_title">Iris scan - Left eye</string>
     <string name="iris_scan_right_title">Iris scan - Right eye</string>
     <string name="participant_matching_title">Participant matching</string>
-    <string name="participant_flow_participant_id_title">Participant ID</string>
+    <string name="participant_flow_participant_id_title">Child Number</string>
     <string name="participant_flow_participant_id_scanned">The format of the ID is not supported</string>
     <string name="participant_flow_participant_id_description">Please scan the participant vaccination card with a QR-Code or manually enter the participant ID number:</string>
     <string name="participant_flow_participant_id_label_manual_entry">Manual ID Entry</string>
@@ -124,31 +124,32 @@
     <string name="participant_registration_label_confirm_photo_or_try_again">Would you like to submit this photo or try again?</string>
     <string name="participant_registration_details_action_register_participant">Register participant</string>
     <string name="participant_registration_details_description">Please provide the new participant\'s details below:</string>
-    <string name="participant_registration_details_label_participant_id">Participant ID</string>
-    <string name="participant_registration_details_label_confirm_participant_id">Confirm Participant ID</string>
+    <string name="participant_registration_details_label_participant_id">Child Number</string>
+    <string name="participant_registration_details_label_confirm_participant_id">Confirm Child Number</string>
     <string name="participant_registration_details_label_iris_id">Iris ID</string>
     <string name="participant_registration_details_label_gender">Gender</string>
     <string name="participant_registration_details_error_country_api">Could not load address fields. Please contact your administrator.</string>
     <string name="gender_male">Male</string>
     <string name="gender_female">Female</string>
     <string name="participant_registration_details_label_year_of_birth">Year of birth</string>
+    <string name="participant_registration_details_label_National_Identification_Number">NIN</string>
     <string name="participant_registration_details_year_of_birth_hint" translatable="false">xxxx</string>
     <string name="participant_registration_details_label_telephone">Mobile phone</string>
     <string name="participant_registration_details_telephone_hint">Enter participant mobile phone</string>
-    <string name="participant_registration_details_label_home_location">Home location</string>
-    <string name="participant_registration_details_home_location_hint">Enter the participant\'s home location</string>
-    <string name="participant_registration_details_action_set_home_location">Set home location</string>
+    <string name="participant_registration_details_label_home_location">Address</string>
+    <string name="participant_registration_details_home_location_hint">Enter the participant\'s address</string>
+    <string name="participant_registration_details_action_set_home_location">Set address</string>
     <string name="participant_registration_details_label_vaccine">Regimen</string>
     <string name="participant_registration_details_label_select_vaccine">Select regimen</string>
     <string name="participant_registration_details_label_language">Language</string>
     <string name="participant_registration_details_label_select_language">Select language</string>
     <string name="participant_registration_details_error_no_participant_id">Please enter a participant ID</string>
     <string name="participant_registration_details_error_invalid_participant_id">Please enter a valid participant ID</string>
-    <string name="participant_registration_details_error_not_same_participant_id">Participant ID\'s do not match</string>
+    <string name="participant_registration_details_error_not_same_participant_id">Child Number\'s do not match</string>
     <string name="participant_registration_details_error_no_gender">Please select a gender</string>
     <string name="participant_registration_details_error_no_year_of_birth">Please enter a valid year of birth</string>
     <string name="participant_registration_details_error_no_phone">Please enter a valid phone number with only numbers and spaces</string>
-    <string name="participant_registration_details_error_no_home_location">Please select a home location</string>
+    <string name="participant_registration_details_error_no_home_location">Please select a address</string>
     <string name="participant_registration_details_error_no_vaccine">Please select a regimen</string>
     <string name="participant_registration_details_error_no_language">Please select a language</string>
     <string name="participant_registration_details_error_participant_already_exists">A participant with this ID already exists</string>
@@ -158,7 +159,7 @@
     <string name="participant_registration_label_id_not_matching_title">Re-enter participant ID</string>
     <string name="participant_registration_label_id_not_matching_desc">The entered participant ID\'s do not match. Please correct before submitting the participant.</string>
     <string name="home_location_picker_label_country">Country</string>
-    <string name="home_location_picker_title">Home location</string>
+    <string name="home_location_picker_title">Address</string>
     <string name="home_location_picker_error_enter_x">Enter %s</string>
     <string name="home_location_picker_error_select_x">Select %s</string>
     <string name="participant_registration_button_continue_visit">Continue with visit</string>
@@ -176,7 +177,7 @@
     <string name="dialog_cancel_setup_description">Are you sure you want to exit the setup wizard and return to the operator login screen? Changes made in completed steps will be retained.</string>
     <string name="visit_label_year_of_birth">Year of birth</string>
     <string name="visit_label_gender">Gender</string>
-    <string name="visit_label_participant_id">Participant ID</string>
+    <string name="visit_label_participant_id">Child Number</string>
     <string name="visit_label_vaccine">Regimen</string>
     <string name="visit_label_visit_type">Please select the appropriate visit type</string>
     <string name="visit_label_title">Select visit</string>
@@ -320,4 +321,10 @@
     <string name="p2p_client_this_device_out_of_space_error">This device is out of disk space</string>
     <string name="p2p_wifi_not_available_error">Not connected to WIFI. Please connect to WIFI and try again.</string>
     <string name="p2p_could_not_send_message_error">Could not send message. Please try again.</string>
+    <string name="participant_registration_details_label_child_name">Name of Child</string>
+    <string name="participant_registration_details_label_mother_name">Name of Mother</string>
+    <string name="participant_registration_details_label_father_name">Name of Father</string>
+    <string name="participant_registration_details_label_child_category">Child category</string>
+    <string name="participant_registration_details_label_select_child_category">Select child category</string>
+    <string name="participant_registration_details_label_date_of_birth">Date of birth</string>
 </resources>

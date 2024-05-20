@@ -74,6 +74,7 @@ class ParticipantManager @Inject constructor(
     @SuppressWarnings("LongParameterList")
     suspend fun registerParticipant(
         participantId: String,
+        nin: String?,
         gender: Gender,
         yearOfBirth: String,
         telephone: String?,
@@ -97,6 +98,7 @@ class ParticipantManager @Inject constructor(
         }
         val request = RegisterParticipant(
             participantId = participantId,
+            nin = nin,
             gender = gender,
             birthdate = BirthDate.yearOfBirth(yearOfBirth),
             address = address,

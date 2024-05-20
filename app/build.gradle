@@ -41,9 +41,9 @@ android {
     signingConfigs {
         release {
             storeFile file("../support/keystore.jks")
-            storePassword SOLIDARITY_STORE_PASSWORD
+            storePassword "SOLIDARITY_STORE_PASSWORD"
             keyAlias 'releaseKey'
-            keyPassword SOLIDARITY_KEY_PASSWORD
+            keyPassword "SOLIDARITY_KEY_PASSWORD"
         }
     }
 

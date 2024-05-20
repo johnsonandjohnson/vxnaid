@@ -15,6 +15,7 @@ import java.util.*
 data class RegisterParticipantRequest(
     val participantUuid: String,
     val participantId: String?,
+    val nin: String?,
     val registrationDate: Date,
     val gender: Gender,
     val birthdate: BirthDateDto,

@@ -133,8 +133,15 @@
 
             </LinearLayout>
 
+            <View
+                android:id="@+id/separator"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_marginVertical="16dp"
+                android:background="@color/colorPrimary" />
+
             <LinearLayout
-                android:id="@+id/input_group_iris_id"
+                android:id="@+id/input_group_NIN"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
@@ -142,65 +149,265 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    android:id="@+id/label_iris_id"
-                    android:layout_width="wrap_content"
+                    android:id="@+id/participant_registration_details_label_nin"
+                    android:layout_width="155dp"
                     android:layout_height="wrap_content"
-                    android:maxWidth="155dp"
-                    android:maxLines="1"
-                    android:minWidth="155dp"
-                    android:text="@string/participant_registration_details_label_iris_id"
+                    android:maxLines="2"
+                    android:text="@string/participant_registration_details_label_National_Identification_Number"
                     android:textAppearance="@style/LabelText" />
 
-                <ImageView
-                    android:id="@+id/img_right_eye"
-                    android:layout_width="wrap_content"
-                    android:layout_height="45dp"
-                    android:layout_weight="2"
-                    android:scaleType="fitCenter"
-                    app:srcCompat="@drawable/eyeglasses_right" />
-
-                <ImageView
-                    android:id="@+id/img_right_eye_indicator"
-                    android:layout_width="wrap_content"
-                    android:layout_height="30dp"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginBottom="8dp"
+                <EditText
+                    android:id="@+id/edit_participant_nin"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="4dp"
                     android:layout_weight="1"
-                    android:paddingStart="8dp"
-                    android:paddingEnd="16dp"
-                    android:scaleType="fitStart"
-                    app:imageDrawable="@{viewModel.rightIrisScanned ? @drawable/ic_idmatch_correct : @drawable/ic_idmatch_incorrect}"
-                    tools:src="@drawable/ic_idmatch_correct" />
+                    android:hint="@string/participant_registration_details_label_National_Identification_Number"
+                    android:inputType="textVisiblePassword"
+                    android:longClickable="false"
+                    android:text="@{viewModel.nin}"
+                    android:textSize="18sp"
+                    app:error="@{viewModel.ninValidationMessage}" />
+            </LinearLayout>
 
-                <ImageView
-                    android:id="@+id/img_left_eye"
-                    android:layout_width="wrap_content"
-                    android:layout_height="45dp"
-                    android:layout_weight="2"
-                    android:scaleType="fitCenter"
-                    app:srcCompat="@drawable/eyeglasses_left" />
+            <LinearLayout
+                android:id="@+id/input_group_child_name"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
 
-                <ImageView
-                    android:id="@+id/img_left_eye_indicator"
-                    android:layout_width="wrap_content"
-                    android:layout_height="30dp"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginBottom="8dp"
+                <TextView
+                    android:id="@+id/participant_registration_details_label_child_name"
+                    android:layout_width="155dp"
+                    android:layout_height="wrap_content"
+                    android:maxLines="2"
+                    android:text="@string/participant_registration_details_label_child_name"
+                    android:textAppearance="@style/LabelText" />
+
+                <EditText
+                    android:id="@+id/edit_child_name"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="4dp"
                     android:layout_weight="1"
-                    android:paddingStart="8dp"
-                    android:paddingEnd="16dp"
-                    android:scaleType="fitStart"
-                    app:imageDrawable="@{viewModel.leftIrisScanned ? @drawable/ic_idmatch_correct : @drawable/ic_idmatch_incorrect}"
-                    tools:src="@drawable/ic_idmatch_incorrect" />
+                    android:hint="@string/participant_registration_details_label_child_name"
+                    android:inputType="textVisiblePassword"
+                    android:longClickable="false"
+                    android:text="@{viewModel.name}"
+                    android:textSize="18sp"
+                    app:error="@{viewModel.nameValidationMessage}" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/input_group_mother_name"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/participant_registration_details_label_mother_name"
+                    android:layout_width="155dp"
+                    android:layout_height="wrap_content"
+                    android:maxLines="2"
+                    android:text="@string/participant_registration_details_label_mother_name"
+                    android:textAppearance="@style/LabelText" />
+
+                <EditText
+                    android:id="@+id/edit_mother_name"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="4dp"
+                    android:layout_weight="1"
+                    android:hint="@string/participant_registration_details_label_mother_name"
+                    android:inputType="textVisiblePassword"
+                    android:longClickable="false"
+                    android:text="@{viewModel.mothersName}"
+                    android:textSize="18sp"
+                    app:error="@{viewModel.mothersNameValidationMessage}" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/input_group_father_name"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/participant_registration_details_label_father_name"
+                    android:layout_width="155dp"
+                    android:layout_height="wrap_content"
+                    android:maxLines="2"
+                    android:text="@string/participant_registration_details_label_father_name"
+                    android:textAppearance="@style/LabelText" />
+
+                <EditText
+                    android:id="@+id/edit_fathers_name"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="4dp"
+                    android:layout_weight="1"
+                    android:hint="@string/participant_registration_details_label_father_name"
+                    android:inputType="textVisiblePassword"
+                    android:longClickable="false"
+                    android:text="@{viewModel.fathersName}"
+                    android:textSize="18sp"
+                    app:error="@{viewModel.fathersNameValidationMessage}" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/input_group_phone"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/label_phone"
+                    android:layout_width="155dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/participant_registration_details_label_telephone"
+                    android:textAppearance="@style/LabelText" />
+
+                <com.hbb20.CountryCodePicker
+                    android:id="@+id/country_code_picker_phone"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:ccp_countryPreference="ug" />
+
+                <EditText
+                    android:id="@+id/edit_telephone"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:hint="@string/participant_registration_details_telephone_hint"
+                    android:inputType="phone"
+                    android:longClickable="false"
+                    android:text="@{viewModel.phone}"
+                    android:textIsSelectable="false"
+                    android:textSize="18sp"
+                    app:error="@{viewModel.phoneValidationMessage}" />
 
             </LinearLayout>
 
-            <View
-                android:id="@+id/separator"
+            <LinearLayout
+                android:id="@+id/input_group_home_location"
                 android:layout_width="match_parent"
-                android:layout_height="2dp"
-                android:layout_marginVertical="16dp"
-                android:background="@color/colorPrimary" />
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/label_home_location"
+                    android:layout_width="155dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/participant_registration_details_label_home_location"
+                    android:textAppearance="@style/LabelText" />
+
+                <TextView
+                    android:id="@+id/textView_participantHomeLocation"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="16dp"
+                    android:layout_weight="1"
+                    android:hint="@string/participant_registration_details_home_location_hint"
+                    android:maxHeight="70sp"
+                    android:text="@{viewModel.homeLocationLabel == null ? `` : viewModel.homeLocationLabel}"
+                    android:textColor="@{viewModel.homeLocationValidationMessage == null ?  @color/colorPrimary : @color/errorLight}"
+                    android:textColorHint="@{viewModel.homeLocationValidationMessage == null ?  @color/colorPrimary : @color/errorLight}"
+                    android:textSize="18sp"
+                    app:error="@{viewModel.homeLocationValidationMessage}" />
+
+                <Button
+                    android:id="@+id/btn_set_home_location"
+                    style="@style/Widget.AppCompat.Button.Small"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:backgroundTint="@color/colorPrimary"
+                    android:text="@string/participant_registration_details_action_set_home_location"
+                    android:textAppearance="@style/ButtonTextStyling" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/input_group_child_category"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/participant_registration_details_label_child_category"
+                    android:layout_width="155dp"
+                    android:layout_height="wrap_content"
+                    android:maxLines="2"
+                    android:text="@string/participant_registration_details_label_child_category"
+                    android:textAppearance="@style/LabelText" />
+
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    app:error="@{viewModel.childCategoryValidationMessage}">
+
+                    <AutoCompleteTextView
+                        android:id="@+id/dropdown_child_category"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/participant_registration_details_label_select_child_category"
+                        android:inputType="none"
+                        android:text="@{viewModel.childCategory.display}" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/input_group_year_of_birth"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/label_date_of_birth"
+                    android:layout_width="155dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/participant_registration_details_label_date_of_birth"
+                    android:textAppearance="@style/LabelText" />
+
+                <TextView
+                    android:id="@+id/textView_participant_date_of_birth"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="16dp"
+                    android:layout_weight="1"
+                    android:hint="@string/participant_registration_details_home_location_hint"
+                    android:maxHeight="70sp"
+                    android:text="2024/03/02"
+                    android:textSize="18sp"
+                    app:error="@{viewModel.homeLocationValidationMessage}" />
+
+                <Button
+                    android:id="@+id/btn_pick_date"
+                    style="@style/Widget.AppCompat.Button.Small"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:backgroundTint="@color/colorPrimary"
+                    android:textAppearance="@style/ButtonTextStyling"
+                    android:text="SET Date" />
+            </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/input_group_gender"
@@ -263,113 +470,6 @@
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/input_group_year_of_birth"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                android:gravity="center_vertical"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:id="@+id/label_year_of_birth"
-                    android:layout_width="155dp"
-                    android:layout_height="wrap_content"
-                    android:text="@string/participant_registration_details_label_year_of_birth"
-                    android:textAppearance="@style/LabelText" />
-
-                <EditText
-                    android:id="@+id/edit_year_of_birth"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:hint="@string/participant_registration_details_year_of_birth_hint"
-                    android:inputType="date"
-                    android:longClickable="false"
-                    android:text="@{viewModel.yearOfBirth}"
-                    android:textIsSelectable="false"
-                    android:textSize="18sp"
-                    app:error="@{viewModel.yearOfBirthValidationMessage}" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/input_group_phone"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                android:gravity="center_vertical"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:id="@+id/label_phone"
-                    android:layout_width="155dp"
-                    android:layout_height="wrap_content"
-                    android:text="@string/participant_registration_details_label_telephone"
-                    android:textAppearance="@style/LabelText" />
-
-                <com.hbb20.CountryCodePicker
-                    android:id="@+id/country_code_picker_phone"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    app:ccp_countryPreference="us,in" />
-
-                <EditText
-                    android:id="@+id/edit_telephone"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:hint="@string/participant_registration_details_telephone_hint"
-                    android:inputType="phone"
-                    android:longClickable="false"
-                    android:text="@{viewModel.phone}"
-                    android:textIsSelectable="false"
-                    android:textSize="18sp"
-                    app:error="@{viewModel.phoneValidationMessage}" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/input_group_home_location"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                android:gravity="center_vertical"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:id="@+id/label_home_location"
-                    android:layout_width="155dp"
-                    android:layout_height="wrap_content"
-                    android:text="@string/participant_registration_details_label_home_location"
-                    android:textAppearance="@style/LabelText" />
-
-                <TextView
-                    android:id="@+id/textView_participantHomeLocation"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="16dp"
-                    android:layout_weight="1"
-                    android:hint="@string/participant_registration_details_home_location_hint"
-                    android:maxHeight="70sp"
-                    android:text="@{viewModel.homeLocationLabel == null ? `` : viewModel.homeLocationLabel}"
-                    android:textColor="@{viewModel.homeLocationValidationMessage == null ?  @color/colorPrimary : @color/errorLight}"
-                    android:textColorHint="@{viewModel.homeLocationValidationMessage == null ?  @color/colorPrimary : @color/errorLight}"
-                    android:textSize="18sp"
-                    app:error="@{viewModel.homeLocationValidationMessage}" />
-
-                <Button
-                    android:id="@+id/btn_set_home_location"
-                    style="@style/Widget.AppCompat.Button.Small"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:backgroundTint="@color/colorPrimary"
-                    android:textAppearance="@style/ButtonTextStyling"
-                    android:text="@string/participant_registration_details_action_set_home_location" />
-
-            </LinearLayout>
-
-            <LinearLayout
                 android:id="@+id/input_group_vaccine"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
@@ -403,41 +503,6 @@
 
             </LinearLayout>
 
-            <LinearLayout
-                android:id="@+id/input_group_language"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                android:gravity="center_vertical"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:id="@+id/label_language"
-                    android:layout_width="155dp"
-                    android:layout_height="wrap_content"
-                    android:text="@string/participant_registration_details_label_language"
-                    android:textAppearance="@style/LabelText" />
-
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/textInputLayout_language"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    app:error="@{viewModel.languageValidationMessage}">
-
-                    <AutoCompleteTextView
-                        android:id="@+id/dropdown_language"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="@string/participant_registration_details_label_select_language"
-                        android:inputType="none"
-                        android:text="@{viewModel.language.display}" />
-
-                </com.google.android.material.textfield.TextInputLayout>
-
-            </LinearLayout>
-
             <Button
                 android:id="@+id/btn_submit"
                 android:layout_width="wrap_content"
@@ -445,8 +510,8 @@
                 android:layout_gravity="center_horizontal|bottom"
                 android:layout_marginTop="8dp"
                 android:backgroundTint="@color/colorPrimary"
-                android:textAppearance="@style/ButtonTextStyling"
-                android:text="@string/participant_registration_details_action_register_participant" />
+                android:text="@string/participant_registration_details_action_register_participant"
+                android:textAppearance="@style/ButtonTextStyling" />
 
         </LinearLayout>
 
@@ -460,5 +525,4 @@
             android:visibility="@{viewModel.loading ? View.VISIBLE : View.GONE}" />
 
     </FrameLayout>
-
 </layout>

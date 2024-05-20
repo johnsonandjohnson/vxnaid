@@ -39,6 +39,7 @@ class RegisterParticipantParticipantDetailsFragment : BaseFragment(),
 
     private companion object {
         private const val TAG_HOME_LOCATION_PICKER = "homeLocationPicker"
+        private const val TAG_DATE_PICKER = "datePicker";
         private const val TAG_SUCCESS_DIALOG = "successDialog"
         private const val TAG_NO_PHONE_DIALOG = "confirmNoPhoneDialog"
         private const val TAG_NO_MATCHING_ID = "noMatchingIdDialog"
@@ -81,9 +82,9 @@ class RegisterParticipantParticipantDetailsFragment : BaseFragment(),
             val adapter = ArrayAdapter(requireContext(), R.layout.item_dropdown, vaccineNames.orEmpty().map { it.display })
             binding.dropdownVaccine.setAdapter(adapter)
         }
-        viewModel.languages.observe(lifecycleOwner) { languages ->
-            val adapter = ArrayAdapter(requireContext(), R.layout.item_dropdown, languages.orEmpty().map { it.display })
-            binding.dropdownLanguage.setAdapter(adapter)
+        viewModel.childCategoryNames.observe(lifecycleOwner) { childCategoryNames ->
+            val adapter = ArrayAdapter(requireContext(), R.layout.item_dropdown, childCategoryNames.orEmpty().map { it.display })
+            binding.dropdownChildCategory.setAdapter(adapter)
         }
         viewModel.genderValidationMessage.observe(lifecycleOwner) { genderValidationMessage ->
             logDebug("validate gender" + genderValidationMessage)
@@ -129,6 +130,11 @@ class RegisterParticipantParticipantDetailsFragment : BaseFragment(),
             viewModel.setConfirmParticipantId(formattedText)
         }
 
+        binding.editParticipantNin.doAfterTextChanged {
+            val text = binding.editParticipantNin.text.toString()
+            viewModel.setNin(text)
+        }
+
         binding.editParticipantId.doAfterTextChanged {
             val text = binding.editParticipantId.text.toString()
             val formattedText = formatParticipantId(text)
@@ -142,9 +148,9 @@ class RegisterParticipantParticipantDetailsFragment : BaseFragment(),
             viewModel.setPhone(it?.toString().orEmpty())
         }
 
-        binding.editYearOfBirth.doAfterTextChanged {
-            viewModel.setYearOfBirth(it?.toString().orEmpty())
-        }
+//        binding.editYearOfBirth.doAfterTextChanged {
+//            viewModel.setYearOfBirth(it?.toString().orEmpty())
+//        }
     }
 
     private fun setupPhoneInput() {
@@ -159,6 +165,9 @@ class RegisterParticipantParticipantDetailsFragment : BaseFragment(),
     private fun setupClickListeners() {
         binding.btnSetHomeLocation.setOnClickListener {
             HomeLocationPickerDialog().show(childFragmentManager, TAG_HOME_LOCATION_PICKER)
+        }
+        binding.btnPickDate.setOnClickListener {
+            DatePickerFragment().show(childFragmentManager, TAG_DATE_PICKER);
         }
         binding.btnSubmit.setOnClickListener {
             submitRegistration()
@@ -190,9 +199,9 @@ class RegisterParticipantParticipantDetailsFragment : BaseFragment(),
             val vaccineName = viewModel.vaccineNames.value?.get(position) ?: return@setOnItemClickListener
             viewModel.setSelectedVaccine(vaccineName)
         }
-        binding.dropdownLanguage.setOnItemClickListener { _, _, position, _ ->
-            val languageName = viewModel.languages.value?.get(position) ?: return@setOnItemClickListener
-            viewModel.setSelectedLanguage(languageName)
+        binding.dropdownChildCategory.setOnItemClickListener { _, _, position, _ ->
+            val childCategoryName = viewModel.childCategoryNames.value?.get(position) ?: return@setOnItemClickListener
+            viewModel.setSelectedChildCategory(childCategoryName)
         }
     }
 
