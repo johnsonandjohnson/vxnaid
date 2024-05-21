@@ -21,7 +21,6 @@ class RegisterParticipantDetailsRobot : BaseRobot() {
         val resId = when (gender) {
             Gender.MALE -> R.id.rb_gender_male
             Gender.FEMALE -> R.id.rb_gender_female
-            Gender.OTHER -> R.id.rb_gender_other
         }
         click on withId(resId)
     }
