@@ -66,7 +66,7 @@ class RegisterParticipantUseCaseTest : FunSpec({
         biometricsTemplate = BiometricsTemplateBytes(ByteArray(1)),
         participantId = participantUuid,
         nin = participantUuid,
-        gender = Gender.OTHER,
+        gender = Gender.MALE,
         birthdate = BirthDate.yearOfBirth(1994),
         address = Address(
             address1 = "Koekoekstraat",
@@ -213,4 +213,3 @@ private fun createDraftParticipantRepository(draftParticipants: MutableList<Draf
     }
     return repo
 }
-

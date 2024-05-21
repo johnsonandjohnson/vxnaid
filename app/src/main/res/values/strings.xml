@@ -131,7 +131,6 @@
     <string name="participant_registration_details_error_country_api">Could not load address fields. Please contact your administrator.</string>
     <string name="gender_male">Male</string>
     <string name="gender_female">Female</string>
-    <string name="gender_other">Other</string>
     <string name="participant_registration_details_label_year_of_birth">Year of birth</string>
     <string name="participant_registration_details_label_National_Identification_Number">NIN</string>
     <string name="participant_registration_details_year_of_birth_hint" translatable="false">xxxx</string>

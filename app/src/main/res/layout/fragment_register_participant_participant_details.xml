@@ -455,17 +455,6 @@
                         android:checked="@{viewModel.gender == Gender.FEMALE}"
                         android:text="@string/gender_female"
                         android:textSize="18sp" />
-
-                    <RadioButton
-                        android:id="@+id/rb_gender_other"
-                        style="@android:style/Widget.Material.CompoundButton.RadioButton"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:checked="@{viewModel.gender == Gender.OTHER}"
-                        android:text="@string/gender_other"
-                        android:textSize="18sp" />
-
                 </RadioGroup>
 
                 <TextView
