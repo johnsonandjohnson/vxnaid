@@ -1,5 +1,6 @@
 package com.jnj.vaccinetracker.register.screens
 
+import android.annotation.SuppressLint
 import androidx.collection.ArrayMap
 import com.jnj.vaccinetracker.R
 import com.jnj.vaccinetracker.common.data.database.typealiases.yearNow
@@ -16,6 +17,7 @@ import com.jnj.vaccinetracker.common.exceptions.OperatorUuidNotAvailableExceptio
 import com.jnj.vaccinetracker.common.exceptions.ParticipantAlreadyExistsException
 import com.jnj.vaccinetracker.common.helpers.*
 import com.jnj.vaccinetracker.common.ui.model.DisplayValue
+import com.jnj.vaccinetracker.common.validators.NinValidator
 import com.jnj.vaccinetracker.common.validators.ParticipantIdValidator
 import com.jnj.vaccinetracker.common.validators.PhoneValidator
 import com.jnj.vaccinetracker.common.viewmodel.ViewModelBase
@@ -35,6 +37,7 @@ import javax.inject.Inject
 @SuppressWarnings("TooManyFunctions")
 class RegisterParticipantParticipantDetailsViewModel @Inject constructor(
     private val phoneValidator: PhoneValidator,
+    private val ninValidator : NinValidator,
     private val syncSettingsRepository: SyncSettingsRepository,
     private val configurationManager: ConfigurationManager,
     private val resourcesWrapper: ResourcesWrapper,
@@ -72,6 +75,7 @@ class RegisterParticipantParticipantDetailsViewModel @Inject constructor(
     val registerSuccessEvents = eventFlow<ParticipantSummaryUiModel>()
     val registerFailedEvents = eventFlow<String>()
     val registerNoPhoneEvents = eventFlow<Unit>()
+    val registerNoNinEvent = eventFlow<Unit>()
     val registerNoMatchingIdEvents = eventFlow<Unit>()
 
     val loading = mutableLiveBoolean()
@@ -127,6 +131,7 @@ class RegisterParticipantParticipantDetailsViewModel @Inject constructor(
     val languages = mutableLiveData<List<DisplayValue>>()
 
     var canSkipPhone = false
+    val canSkipNin = false
     private val irisScans = ArrayMap<IrisPosition, Boolean>()
 
     private var validatePhoneJob: Job? = null
@@ -208,6 +213,7 @@ class RegisterParticipantParticipantDetailsViewModel @Inject constructor(
         }
     }
 
+    @SuppressLint("SuspiciousIndentation")
     private suspend fun doRegistration(
         picture: ParticipantImageUiModel?,
     ) {
@@ -216,7 +222,7 @@ class RegisterParticipantParticipantDetailsViewModel @Inject constructor(
         val vaccine: DisplayValue? = vaccine.get()
         val language: DisplayValue? = language.get()
         val participantId = participantId.get()
-        val nin = nin.get()
+        var nin = nin.get()
         val gender = gender.get()
         val yearOfBirth = yearOfBirth.get()
         val fullPhoneNumber = createFullPhone()
@@ -245,7 +251,20 @@ class RegisterParticipantParticipantDetailsViewModel @Inject constructor(
         }
         if (!isValidInput)
             return
+        loading.set(true)
 
+    // validate Nin
+    if (isValidInput && nin.isNullOrEmpty() && !canSkipNin) {
+        registerNoNinEvent.tryEmit(Unit)
+        return
+    } else if (!nin.isNullOrEmpty() && !ninValidator.validate(nin)) {
+        ninValidationMessage.set("Please enter a valid Nin Number starting with CM")
+        return
+    } else if (!nin.isNullOrEmpty()) {
+        nin = nin
+    }
+    if (!isValidInput)
+        return
         loading.set(true)
 
         val loc = configurationManager.getLocalization()

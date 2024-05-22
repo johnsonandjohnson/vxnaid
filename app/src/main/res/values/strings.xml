@@ -150,6 +150,7 @@
     <string name="participant_registration_details_error_no_gender">Please select a gender</string>
     <string name="participant_registration_details_error_no_year_of_birth">Please enter a valid year of birth</string>
     <string name="participant_registration_details_error_no_phone">Please enter a valid phone number with only numbers and spaces</string>
+        <string name="participant_registration_details_error_no_nin">Please enter a valid National Identification Number</string>
     <string name="participant_registration_details_error_no_home_location">Please select a address</string>
     <string name="participant_registration_details_error_no_vaccine">Please select a regimen</string>
     <string name="participant_registration_details_error_no_language">Please select a language</string>
@@ -328,4 +329,5 @@
     <string name="participant_registration_details_label_child_category">Child category</string>
     <string name="participant_registration_details_label_select_child_category">Select child category</string>
     <string name="participant_registration_details_label_date_of_birth">Date of birth</string>
+    <string name="participant_registration_details_error_invalid_nin" />
 </resources>

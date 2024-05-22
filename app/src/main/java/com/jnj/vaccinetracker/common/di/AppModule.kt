@@ -52,3 +52,4 @@ class AppModule {
     @Singleton
     fun provideBase64(impl: Base64Impl): Base64 = impl
 }
+
