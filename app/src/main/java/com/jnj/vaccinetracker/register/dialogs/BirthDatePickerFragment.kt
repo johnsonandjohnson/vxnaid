@@ -5,10 +5,11 @@ import android.app.Dialog
 import android.os.Bundle
 import android.widget.DatePicker
 import androidx.fragment.app.DialogFragment
+import com.jnj.vaccinetracker.common.helpers.findParent
+import com.soywiz.klock.DateTime
 import java.util.Calendar
 
-class DatePickerFragment : DialogFragment(), DatePickerDialog.OnDateSetListener {
-
+class BirthDatePickerFragment : DialogFragment(), DatePickerDialog.OnDateSetListener {
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         // Use the current date as the default date in the picker.
         val c = Calendar.getInstance()
@@ -21,6 +22,12 @@ class DatePickerFragment : DialogFragment(), DatePickerDialog.OnDateSetListener 
     }
 
     override fun onDateSet(view: DatePicker, year: Int, month: Int, day: Int) {
-        // Do something with the date the user picks.
+        findParent<BirthDatePickerListener>()?.onBirthDatePicked(
+            DateTime(year, month, day)
+        )
+    }
+
+    interface BirthDatePickerListener {
+        fun onBirthDatePicked(birthDate: DateTime)
     }
 }

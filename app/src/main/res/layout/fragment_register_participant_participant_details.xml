@@ -392,11 +392,11 @@
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="16dp"
                     android:layout_weight="1"
-                    android:hint="@string/participant_registration_details_home_location_hint"
                     android:maxHeight="70sp"
-                    android:text="2024/03/02"
+                    android:hint="@string/participant_registration_details_birth_date_hint"
+                    android:text="@{viewModel.birthDateText}"
                     android:textSize="18sp"
-                    app:error="@{viewModel.homeLocationValidationMessage}" />
+                    app:error="@{viewModel.birthDateValidationMessage}" />
 
                 <Button
                     android:id="@+id/btn_pick_date"
@@ -406,7 +406,7 @@
                     android:layout_weight="1"
                     android:backgroundTint="@color/colorPrimary"
                     android:textAppearance="@style/ButtonTextStyling"
-                    android:text="SET Date" />
+                    android:text="@string/participant_registration_details_action_set_birth_date" />
             </LinearLayout>
 
             <LinearLayout

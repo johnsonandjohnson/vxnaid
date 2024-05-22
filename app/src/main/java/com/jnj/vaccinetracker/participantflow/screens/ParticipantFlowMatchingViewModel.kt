@@ -21,6 +21,7 @@ import com.jnj.vaccinetracker.participantflow.model.ParticipantImageUiModel.Comp
 import com.jnj.vaccinetracker.participantflow.model.ParticipantSummaryUiModel
 import com.jnj.vaccinetracker.participantflow.model.ParticipantUiModel
 import com.jnj.vaccinetracker.sync.data.repositories.SyncSettingsRepository
+import com.soywiz.klock.DateFormat
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -210,7 +211,7 @@ class ParticipantFlowMatchingViewModel @Inject constructor(
                         participantUUID = participant.uuid,
                         participantId = participant.participantId,
                         irisMatchingScore = participant.matchingScore,
-                        yearOfBirth = participant.yearOfBirth,
+                        birthDateText = participant.birthDate.toDateTime().format(DateFormat.FORMAT_DATE),
                         gender = participant.gender,
                         telephone = participant.telephoneNumber,
                         homeLocation = participant.address?.toDomain()?.toStringList(addressMasterDataOrder)?.translate(),
@@ -271,7 +272,7 @@ class ParticipantFlowMatchingViewModel @Inject constructor(
                 participantUuid = it.participantUUID ?: return null,
                 participantId = it.participantId ?: return null,
                 gender = it.gender ?: return null,
-                yearOfBirth = it.yearOfBirth?.toString() ?: return null,
+                birthDateText = it.birthDateText ?: return null,
                 vaccine = it.vaccine ?: return null,
                 participantPicture = selectedParticipantImage.get()
             )

@@ -7,7 +7,7 @@ data class ParticipantUiModel(
     val participantUUID: String?,
     val participantId: String?,
     val irisMatchingScore: Int?,
-    val yearOfBirth: Int?,
+    val birthDateText: String?,
     val gender: Gender?,
     val telephone: String?,
     val homeLocation: String?,

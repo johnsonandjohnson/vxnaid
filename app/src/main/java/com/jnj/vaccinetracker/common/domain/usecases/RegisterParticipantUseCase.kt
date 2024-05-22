@@ -48,7 +48,7 @@ class RegisterParticipantUseCase @Inject constructor(
         biometricsTemplate = participantBiometricsTemplateFile,
         participantId = participantId,
         gender = gender,
-        birthDate = birthdate,
+        birthDate = birthDate,
         attributes = attributes,
         address = address,
         draftState = DraftState.initialState()

@@ -328,4 +328,6 @@
     <string name="participant_registration_details_label_child_category">Child category</string>
     <string name="participant_registration_details_label_select_child_category">Select child category</string>
     <string name="participant_registration_details_label_date_of_birth">Date of birth</string>
+    <string name="participant_registration_details_birth_date_hint">Enter the child\'s date of birth</string>
+    <string name="participant_registration_details_action_set_birth_date">Set date</string>
 </resources>

@@ -103,7 +103,7 @@
             android:id="@+id/textView_yearOfBirth"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="@{viewModel.participant.yearOfBirth == null ? `` : String.valueOf(viewModel.participant.yearOfBirth)}"
+            android:text="@{viewModel.participant.birthDateText == null ? `` : String.valueOf(viewModel.participant.birthDateText)}"
             android:textAppearance="@style/GeneralText"
             app:layout_constraintBaseline_toBaselineOf="@+id/textView_pre_yearOfBirth"
             app:layout_constraintEnd_toEndOf="@+id/textView_gender"
