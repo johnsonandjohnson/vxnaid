@@ -20,7 +20,7 @@ data class DraftParticipantEntity(
     override val gender: GenderEntity,
     override val birthDate: BirthDateEntity,
     @ColumnInfo(index = true)
-    override val isBirthDateAnApproximation: Boolean?,
+    override val isBirthDateEstimated: Boolean?,
     override val registrationDate: DateEntity,
     @ColumnInfo(index = true)
     override val draftState: DraftState = DraftState.initialState(),

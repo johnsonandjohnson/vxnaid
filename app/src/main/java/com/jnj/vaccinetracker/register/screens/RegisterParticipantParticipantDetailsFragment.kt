@@ -37,7 +37,7 @@ import kotlinx.coroutines.flow.onEach
 @SuppressWarnings("TooManyFunctions")
 class RegisterParticipantParticipantDetailsFragment : BaseFragment(),
     HomeLocationPickerDialog.HomeLocationPickerListener,
-    BirthDatePickerFragment.BirthDatePickerListener,
+    BirthDatePickerDialog.BirthDatePickerListener,
     RegisterParticipantSuccessfulDialog.RegisterParticipationCompletionListener,
     RegisterParticipantConfirmNoTelephoneDialog.RegisterParticipationNoTelephoneConfirmationListener {
 
@@ -55,7 +55,7 @@ class RegisterParticipantParticipantDetailsFragment : BaseFragment(),
     private lateinit var binding: FragmentRegisterParticipantParticipantDetailsBinding
 
     private var birthDatePicked: DateTime? = null
-    private var isBirthDateApproxChecked: Boolean = false
+    private var isBirthDateEstimatedChecked: Boolean = false
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -195,8 +195,8 @@ class RegisterParticipantParticipantDetailsFragment : BaseFragment(),
             HomeLocationPickerDialog().show(childFragmentManager, TAG_HOME_LOCATION_PICKER)
         }
         binding.btnPickDate.setOnClickListener {
-            BirthDatePickerFragment(
-                    birthDatePicked, isBirthDateApproxChecked
+            BirthDatePickerDialog(
+                    birthDatePicked, isBirthDateEstimatedChecked
             ).show(childFragmentManager, TAG_DATE_PICKER);
         }
         binding.btnSubmit.setOnClickListener {
@@ -297,7 +297,7 @@ class RegisterParticipantParticipantDetailsFragment : BaseFragment(),
 
     override fun onBirthDatePicked(birthDate: DateTime, isChecked: Boolean) {
         birthDatePicked = birthDate
-        isBirthDateApproxChecked = isChecked
+        isBirthDateEstimatedChecked = isChecked
         viewModel.setBirthDate(birthDate, isChecked)
     }
 

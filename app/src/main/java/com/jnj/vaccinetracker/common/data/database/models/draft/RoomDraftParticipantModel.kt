@@ -18,7 +18,7 @@ data class RoomDraftParticipantModel(
     override val nin: String?,
     override val gender: GenderEntity,
     override val birthDate: BirthDateEntity,
-    override val isBirthDateAnApproximation: Boolean,
+    override val isBirthDateEstimated: Boolean? = false,
     @Relation(parentColumn = DraftParticipantEntity.ID, entityColumn = DraftParticipantEntity.ID)
     val attributes: List<DraftParticipantAttributeEntity>,
     @Embedded

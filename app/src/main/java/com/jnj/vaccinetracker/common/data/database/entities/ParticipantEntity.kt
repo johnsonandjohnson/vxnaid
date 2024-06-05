@@ -17,7 +17,7 @@ data class ParticipantEntity(
     override val gender: GenderEntity,
     override val birthDate: BirthDateEntity,
     @ColumnInfo(index = true)
-    override val isBirthDateAnApproximation: Boolean?,
+    override val isBirthDateEstimated: Boolean?,
     @ColumnInfo(index = true)
     override val dateModified: DateEntity,
     @ColumnInfo(index = true)

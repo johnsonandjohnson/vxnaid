@@ -329,5 +329,5 @@
     <string name="participant_registration_details_label_date_of_birth">Date of birth</string>
     <string name="participant_registration_details_birth_date_hint">Enter the child\'s date of birth</string>
     <string name="participant_registration_details_action_set_birth_date">Set date</string>
-    <string name="participant_registration_details_label_is_birth_date_an_approximation">Is Birth Date an Approximation?</string>
+    <string name="participant_registration_details_label_is_birth_date_estimated">Is Birth Date Estimated?</string>
 </resources>

@@ -20,7 +20,7 @@ sealed class ParticipantBase {
     val locationUuid: String? get() = attributes[Constants.ATTRIBUTE_LOCATION]
     val originalParticipantId: String? get() = attributes[Constants.ATTRIBUTE_ORIGINAL_PARTICIPANT_ID]
     val regimen: String? get() = attributes[Constants.ATTRIBUTE_VACCINE]
-    val isBirthDateAnApproximation: Boolean? get() = attributes[Constants.ATTRIBUTE_IS_BIRTH_DATE_AN_APPROXIMATION]?.toBoolean()
+    val isBirthDateEstimated: Boolean? get() = attributes[Constants.ATTRIBUTE_IS_BIRTH_DATE_ESTIMATED]?.toBoolean()
 }
 
 data class Participant(
@@ -67,12 +67,12 @@ fun Map<String, String>.withLocationUuid(locationUuid: String?): Map<String, Str
     return locationUuid?.let { this + mapOf(locationKey to it) } ?: filterKeys { it != locationKey }
 }
 
-fun Map<String, String>.withIsBirthDayAnApproximation(isBirthDateAnApproximation: Boolean?): Map<String, String> {
-    val birthdayApproxKey = Constants.ATTRIBUTE_IS_BIRTH_DATE_AN_APPROXIMATION
-    return if (isBirthDateAnApproximation != null) {
-        this + mapOf(birthdayApproxKey to isBirthDateAnApproximation.toString())
+fun Map<String, String>.withIsBirthDateEstimated(isBirthDateEstimated: Boolean?): Map<String, String> {
+    val birthdayEstimatedKey = Constants.ATTRIBUTE_IS_BIRTH_DATE_ESTIMATED
+    return if (isBirthDateEstimated != null) {
+        this + mapOf(birthdayEstimatedKey to isBirthDateEstimated.toString())
     } else {
-        filterKeys { it != birthdayApproxKey }
+        filterKeys { it != birthdayEstimatedKey }
     }
 }
 

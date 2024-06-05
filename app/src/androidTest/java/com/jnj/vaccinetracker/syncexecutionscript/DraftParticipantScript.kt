@@ -88,7 +88,7 @@ class DraftParticipantScript {
         val image = pictureResourceName?.let { readPicture(it) }
         val telephone: String? = null
         val birthDate = DateTime(1999, 6, 6)
-        val isBirthDateAnApproximation = false
+        val isBirthDateEstimated = false
         val lang = "en"
         val gender = Gender.MALE
         val template: BiometricsTemplateBytes? = readAssetsTemplate()
@@ -101,7 +101,7 @@ class DraftParticipantScript {
                 nin = "NIN$participantId",
                 gender = gender,
                 birthDate = birthDate,
-                isBirthDateAnApproximation = isBirthDateAnApproximation,
+                isBirthDateEstimated = isBirthDateEstimated,
                 telephone = telephone,
                 siteUuid = siteUuid,
                 language = lang,
