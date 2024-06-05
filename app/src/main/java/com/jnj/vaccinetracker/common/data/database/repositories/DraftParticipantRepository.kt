@@ -46,7 +46,8 @@ class DraftParticipantRepository @Inject constructor(
         registrationDate = registrationDate,
         attributes = attributes.toMap()
             .withPhone(phone)
-            .withLocationUuid(locationUuid),
+            .withLocationUuid(locationUuid)
+            .withIsBirthDayAnApproximation(isBirthDateAnApproximation),
         draftState = draftState
     )
 
@@ -57,6 +58,7 @@ class DraftParticipantRepository @Inject constructor(
         nin = nin,
         gender = gender,
         birthDate = birthDate,
+        isBirthDateAnApproximation = isBirthDateAnApproximation,
         draftState = DraftState.initialState(),
         registrationDate = dateModified,
         locationUuid = locationUuid

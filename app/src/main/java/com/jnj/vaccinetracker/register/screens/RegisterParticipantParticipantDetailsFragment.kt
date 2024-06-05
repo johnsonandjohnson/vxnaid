@@ -16,6 +16,7 @@ import com.google.android.material.snackbar.Snackbar
 import com.jnj.vaccinetracker.R
 import com.jnj.vaccinetracker.barcode.ScanBarcodeActivity
 import com.jnj.vaccinetracker.barcode.formatParticipantId
+import com.jnj.vaccinetracker.common.domain.entities.BirthDate
 import com.jnj.vaccinetracker.common.domain.entities.Gender
 import com.jnj.vaccinetracker.common.helpers.*
 import com.jnj.vaccinetracker.common.ui.BaseActivity
@@ -25,6 +26,8 @@ import com.jnj.vaccinetracker.participantflow.model.ParticipantSummaryUiModel
 import com.jnj.vaccinetracker.register.RegisterParticipantFlowActivity
 import com.jnj.vaccinetracker.register.RegisterParticipantFlowViewModel
 import com.jnj.vaccinetracker.register.dialogs.*
+import com.soywiz.klock.DateFormat
+import com.soywiz.klock.DateTime
 import kotlinx.coroutines.flow.onEach
 
 /**
@@ -34,6 +37,7 @@ import kotlinx.coroutines.flow.onEach
 @SuppressWarnings("TooManyFunctions")
 class RegisterParticipantParticipantDetailsFragment : BaseFragment(),
     HomeLocationPickerDialog.HomeLocationPickerListener,
+    BirthDatePickerFragment.BirthDatePickerListener,
     RegisterParticipantSuccessfulDialog.RegisterParticipationCompletionListener,
     RegisterParticipantConfirmNoTelephoneDialog.RegisterParticipationNoTelephoneConfirmationListener {
 
@@ -50,8 +54,20 @@ class RegisterParticipantParticipantDetailsFragment : BaseFragment(),
     private val viewModel: RegisterParticipantParticipantDetailsViewModel by viewModels { viewModelFactory }
     private lateinit var binding: FragmentRegisterParticipantParticipantDetailsBinding
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_register_participant_participant_details, container, false)
+    private var birthDatePicked: DateTime? = null
+    private var isBirthDateApproxChecked: Boolean = false
+
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        binding = DataBindingUtil.inflate(
+            inflater,
+            R.layout.fragment_register_participant_participant_details,
+            container,
+            false
+        )
         binding.viewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
         binding.flowViewModel = flowViewModel
@@ -79,11 +95,17 @@ class RegisterParticipantParticipantDetailsFragment : BaseFragment(),
             }
         }
         viewModel.vaccineNames.observe(lifecycleOwner) { vaccineNames ->
-            val adapter = ArrayAdapter(requireContext(), R.layout.item_dropdown, vaccineNames.orEmpty().map { it.display })
+            val adapter = ArrayAdapter(
+                requireContext(),
+                R.layout.item_dropdown,
+                vaccineNames.orEmpty().map { it.display })
             binding.dropdownVaccine.setAdapter(adapter)
         }
         viewModel.childCategoryNames.observe(lifecycleOwner) { childCategoryNames ->
-            val adapter = ArrayAdapter(requireContext(), R.layout.item_dropdown, childCategoryNames.orEmpty().map { it.display })
+            val adapter = ArrayAdapter(
+                requireContext(),
+                R.layout.item_dropdown,
+                childCategoryNames.orEmpty().map { it.display })
             binding.dropdownChildCategory.setAdapter(adapter)
         }
         viewModel.genderValidationMessage.observe(lifecycleOwner) { genderValidationMessage ->
@@ -105,12 +127,18 @@ class RegisterParticipantParticipantDetailsFragment : BaseFragment(),
         registerNoPhoneEvents
             .asFlow()
             .onEach {
-                RegisterParticipantConfirmNoTelephoneDialog().show(childFragmentManager, TAG_NO_PHONE_DIALOG)
+                RegisterParticipantConfirmNoTelephoneDialog().show(
+                    childFragmentManager,
+                    TAG_NO_PHONE_DIALOG
+                )
             }.launchIn(lifecycleOwner)
         registerNoMatchingIdEvents
             .asFlow()
             .onEach {
-                RegisterParticipantIdNotMatchingDialog().show(childFragmentManager, TAG_NO_MATCHING_ID)
+                RegisterParticipantIdNotMatchingDialog().show(
+                    childFragmentManager,
+                    TAG_NO_MATCHING_ID
+                )
             }.launchIn(lifecycleOwner)
         registerFailedEvents
             .asFlow()
@@ -167,7 +195,9 @@ class RegisterParticipantParticipantDetailsFragment : BaseFragment(),
             HomeLocationPickerDialog().show(childFragmentManager, TAG_HOME_LOCATION_PICKER)
         }
         binding.btnPickDate.setOnClickListener {
-            DatePickerFragment().show(childFragmentManager, TAG_DATE_PICKER);
+            BirthDatePickerFragment(
+                    birthDatePicked, isBirthDateApproxChecked
+            ).show(childFragmentManager, TAG_DATE_PICKER);
         }
         binding.btnSubmit.setOnClickListener {
             submitRegistration()
@@ -182,25 +212,33 @@ class RegisterParticipantParticipantDetailsFragment : BaseFragment(),
             it.requestFocus()
         }
         binding.btnScanParticipantId.setOnClickListener {
-            startActivityForResult(ScanBarcodeActivity.create(requireContext(),ScanBarcodeActivity.PARTICIPANT), REQ_BARCODE)
+            startActivityForResult(
+                ScanBarcodeActivity.create(
+                    requireContext(),
+                    ScanBarcodeActivity.PARTICIPANT
+                ), REQ_BARCODE
+            )
         }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == REQ_BARCODE && resultCode == Activity.RESULT_OK) {
-            val participantIdBarcode = data?.getStringExtra(ScanBarcodeActivity.EXTRA_BARCODE) ?: return
+            val participantIdBarcode =
+                data?.getStringExtra(ScanBarcodeActivity.EXTRA_BARCODE) ?: return
             viewModel.onParticipantIdScanned(participantIdBarcode)
         }
     }
 
     private fun setupDropdowns() {
         binding.dropdownVaccine.setOnItemClickListener { _, _, position, _ ->
-            val vaccineName = viewModel.vaccineNames.value?.get(position) ?: return@setOnItemClickListener
+            val vaccineName =
+                viewModel.vaccineNames.value?.get(position) ?: return@setOnItemClickListener
             viewModel.setSelectedVaccine(vaccineName)
         }
         binding.dropdownChildCategory.setOnItemClickListener { _, _, position, _ ->
-            val childCategoryName = viewModel.childCategoryNames.value?.get(position) ?: return@setOnItemClickListener
+            val childCategoryName =
+                viewModel.childCategoryNames.value?.get(position) ?: return@setOnItemClickListener
             viewModel.setSelectedChildCategory(childCategoryName)
         }
     }
@@ -237,7 +275,10 @@ class RegisterParticipantParticipantDetailsFragment : BaseFragment(),
 
     override fun continueWithParticipantVisit(participant: ParticipantSummaryUiModel) {
         (requireActivity() as BaseActivity).run {
-            setResult(Activity.RESULT_OK, Intent().putExtra(RegisterParticipantFlowActivity.EXTRA_PARTICIPANT, participant))
+            setResult(
+                Activity.RESULT_OK,
+                Intent().putExtra(RegisterParticipantFlowActivity.EXTRA_PARTICIPANT, participant)
+            )
             finish()
         }
     }
@@ -252,6 +293,12 @@ class RegisterParticipantParticipantDetailsFragment : BaseFragment(),
     override fun confirmNoTelephone() {
         viewModel.canSkipPhone = true
         submitRegistration()
+    }
+
+    override fun onBirthDatePicked(birthDate: DateTime, isChecked: Boolean) {
+        birthDatePicked = birthDate
+        isBirthDateApproxChecked = isChecked
+        viewModel.setBirthDate(birthDate, isChecked)
     }
 
 }

@@ -1,5 +1,6 @@
 package com.jnj.vaccinetracker.register.screens
 
+import android.content.Context
 import androidx.collection.ArrayMap
 import com.jnj.vaccinetracker.R
 import com.jnj.vaccinetracker.common.data.database.typealiases.yearNow
@@ -23,6 +24,8 @@ import com.jnj.vaccinetracker.participantflow.model.ParticipantImageUiModel
 import com.jnj.vaccinetracker.participantflow.model.ParticipantImageUiModel.Companion.toDomain
 import com.jnj.vaccinetracker.participantflow.model.ParticipantSummaryUiModel
 import com.jnj.vaccinetracker.sync.data.repositories.SyncSettingsRepository
+import com.soywiz.klock.DateFormat
+import com.soywiz.klock.DateTime
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.filterNotNull
@@ -98,13 +101,15 @@ class RegisterParticipantParticipantDetailsViewModel @Inject constructor(
     val childCategoryValidationMessage = mutableLiveData<String>()
     val childCategoryNames = mutableLiveData<List<DisplayValue>>()
 
-    val dateOfBirth = mutableLiveData<String>()
-    val dateOfBirthValidationMessage = mutableLiveData<String>()
+    val birthDate = mutableLiveData<DateTime>()
+    val birthDateText = mutableLiveData<String>()
+    val birthDateValidationMessage = mutableLiveData<String>()
+
+    val isBirthDateAnApproximation = mutableLiveData<Boolean>()
 
     val leftIrisScanned = mutableLiveBoolean()
     val rightIrisScanned = mutableLiveBoolean()
     val gender = mutableLiveData<Gender>()
-    val yearOfBirth = mutableLiveData<String>()
     val defaultPhoneCountryCode = mutableLiveData<String>()
     private val phoneCountryCode = mutableLiveData<String>()
     val phone = mutableLiveData<String>()
@@ -117,7 +122,6 @@ class RegisterParticipantParticipantDetailsViewModel @Inject constructor(
     val confirmParticipantIdValidationMessage = mutableLiveData<String>()
 
     val genderValidationMessage = mutableLiveData<String>()
-    val yearOfBirthValidationMessage = mutableLiveData<String>()
     val phoneValidationMessage = mutableLiveData<String>()
     val homeLocationValidationMessage = mutableLiveData<String>()
     val vaccineValidationMessage = mutableLiveData<String>()
@@ -214,14 +218,14 @@ class RegisterParticipantParticipantDetailsViewModel @Inject constructor(
         val siteUuid = syncSettingsRepository.getSiteUuid() ?: return logWarn("Cannot submit registration: no site UUID known")
         val homeLocation = homeLocation.get()
         val vaccine: DisplayValue? = vaccine.get()
-        val language: DisplayValue? = language.get()
         val participantId = participantId.get()
         val nin = nin.get()
         val gender = gender.get()
-        val yearOfBirth = yearOfBirth.get()
+        val birthDate = birthDate.get()
+        val isBirthDateAnApproximation = isBirthDateAnApproximation.get()
         val fullPhoneNumber = createFullPhone()
 
-        val isValidInput = validateInput(participantId, gender, yearOfBirth, homeLocation, vaccine?.value, language?.value)
+        val isValidInput = validateInput(participantId, gender, homeLocation, vaccine?.value)
 
         var phoneNumberToSubmit: String? = null
 
@@ -256,10 +260,11 @@ class RegisterParticipantParticipantDetailsViewModel @Inject constructor(
                 participantId = participantId!!,
                 nin = nin,
                 gender = gender!!,
-                yearOfBirth = yearOfBirth!!,
+                birthDate = birthDate!!,
+                isBirthDateAnApproximation = isBirthDateAnApproximation!!,
                 telephone = phoneNumberToSubmit,
                 siteUuid = siteUuid,
-                language = language?.value!!,
+                language = "English",
                 vaccine = vaccine?.value!!,
                 address = homeLocation!!,
                 picture = compressedImage,
@@ -271,7 +276,7 @@ class RegisterParticipantParticipantDetailsViewModel @Inject constructor(
                     result.participantUuid,
                     participantId,
                     gender,
-                    yearOfBirth,
+                    birthDate.format(DateFormat.FORMAT_DATE),
                     vaccine.value.let { DisplayValue(it, loc[it]) },
                     compressedImage?.let { ParticipantImageUiModel(it.bytes) }
                 )
@@ -302,10 +307,8 @@ class RegisterParticipantParticipantDetailsViewModel @Inject constructor(
     private suspend fun validateInput(
         participantId: String?,
         gender: Gender?,
-        yearOfBirth: String?,
         homeLocation: Address?,
         vaccine: String?,
-        language: String?,
     ): Boolean {
         var isValid = true
         resetValidationMessages()
@@ -318,14 +321,9 @@ class RegisterParticipantParticipantDetailsViewModel @Inject constructor(
             participantIdValidationMessage.set(resourcesWrapper.getString(R.string.participant_registration_details_error_invalid_participant_id))
         }
 
-
         if (gender == null) {
             isValid = false
             genderValidationMessage.set(resourcesWrapper.getString(R.string.participant_registration_details_error_no_gender))
-        }
-
-        if (!validateYearOfBirth(yearOfBirth, false)) {
-            isValid = false
         }
 
         if (homeLocation?.isEmpty() != false) {
@@ -338,11 +336,6 @@ class RegisterParticipantParticipantDetailsViewModel @Inject constructor(
             vaccineValidationMessage.set(resourcesWrapper.getString(R.string.participant_registration_details_error_no_vaccine))
         }
 
-        if (language.isNullOrEmpty()) {
-            isValid = false
-            languageValidationMessage.set(resourcesWrapper.getString(R.string.participant_registration_details_error_no_language))
-        }
-
         return isValid
     }
 
@@ -351,7 +344,7 @@ class RegisterParticipantParticipantDetailsViewModel @Inject constructor(
         confirmParticipantIdValidationMessage.set(null)
         ninValidationMessage.set(null)
         genderValidationMessage.set(null)
-        yearOfBirthValidationMessage.set(null)
+        birthDateValidationMessage.set(null)
         phoneValidationMessage.set(null)
         homeLocationValidationMessage.set(null)
         vaccineValidationMessage.set(null)
@@ -427,12 +420,12 @@ class RegisterParticipantParticipantDetailsViewModel @Inject constructor(
             }
         }
     }
-
-    fun setYearOfBirth(yearOfBirth: String) {
-        if (this.yearOfBirth.get() == yearOfBirth) return
-        this.yearOfBirth.set(yearOfBirth)
-        yearOfBirthValidationMessage.set(null)
-        validateYearOfBirth(this.yearOfBirth.value, true)
+    fun setBirthDate(birthDate: DateTime, isChecked: Boolean) {
+        if (this.birthDate.get() == birthDate) return
+        this.birthDate.set(birthDate)
+        this.birthDateText.set(birthDate.format(DateFormat.FORMAT_DATE))
+        birthDateValidationMessage.set(null)
+        isBirthDateAnApproximation.set(isChecked)
     }
 
     private fun createFullPhone(): String {
@@ -484,18 +477,4 @@ class RegisterParticipantParticipantDetailsViewModel @Inject constructor(
         this.homeLocationLabel.set(stringRepresentation)
         homeLocationValidationMessage.set(null)
     }
-
-    private fun validateYearOfBirth(yearOfBirth: String?, isInlineValidation: Boolean): Boolean {
-        val parsedYearOfBirth = yearOfBirth?.toIntOrNull()
-        return if (isInlineValidation && yearOfBirth?.length ?: 0 < YEAR_OF_BIRTH_LENGTH) {
-            true
-        } else if (parsedYearOfBirth == null || yearOfBirth.length != YEAR_OF_BIRTH_LENGTH
-            || parsedYearOfBirth < YEAR_OF_BIRTH_MIN_VALUE || parsedYearOfBirth > YEAR_OF_BIRTH_MAX_VALUE
-        ) {
-            yearOfBirthValidationMessage.set(resourcesWrapper.getString(R.string.participant_registration_details_error_no_year_of_birth))
-            false
-        } else
-            true
-    }
-
 }

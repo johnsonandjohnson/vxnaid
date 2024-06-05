@@ -45,7 +45,8 @@ class ParticipantRepository @Inject constructor(
         dateModified = dateModified,
         attributes = attributes.toMap()
             .withPhone(phone)
-            .withLocationUuid(locationUuid),
+            .withLocationUuid(locationUuid)
+            .withIsBirthDayAnApproximation(isBirthDateAnApproximation),
         biometricsTemplate = templateFile,
         image = imageFile
     )
@@ -58,7 +59,8 @@ class ParticipantRepository @Inject constructor(
         gender = gender,
         birthDate = birthDate,
         dateModified = dateModified,
-        locationUuid = locationUuid
+        locationUuid = locationUuid,
+        isBirthDateAnApproximation = isBirthDateAnApproximation,
     )
 
     override suspend fun findAllByPhone(phone: String?): List<Participant> {

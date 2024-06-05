@@ -6,7 +6,7 @@ data class RegisterParticipant(
     val participantId: String,
     val nin: String?,
     val gender: Gender,
-    val birthdate: BirthDate,
+    val birthDate: BirthDate,
     val address: Address,
     val attributes: Map<String, String>,
     val image: ImageBytes?,

@@ -32,7 +32,7 @@ import javax.inject.Inject
 import kotlin.coroutines.CoroutineContext
 
 object ParticipantRoomDatabaseConfig {
-    const val CURRENT_VERSION = 11
+    const val CURRENT_VERSION = 12
     const val FILE_NAME = "participants.db"
 }
 
@@ -73,7 +73,13 @@ object ParticipantRoomDatabaseConfig {
     ],
     version = ParticipantRoomDatabaseConfig.CURRENT_VERSION,
     exportSchema = true,
-    autoMigrations = [AutoMigration(from = 7, to = 8), AutoMigration(from = 8, to = 9), AutoMigration(from = 9, to = 10), AutoMigration(from = 10, to = 11)]
+    autoMigrations = [
+        AutoMigration(from = 7, to = 8),
+        AutoMigration(from = 8, to = 9),
+        AutoMigration(from = 9, to = 10),
+        AutoMigration(from = 10, to = 11),
+        AutoMigration(from = 11, to = 12),
+    ]
 )
 @TypeConverters(
     DateConverter::class,

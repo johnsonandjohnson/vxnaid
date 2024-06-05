@@ -11,6 +11,7 @@ import com.jnj.vaccinetracker.common.exceptions.NoSiteUuidAvailableException
 import com.jnj.vaccinetracker.common.exceptions.OperatorUuidNotAvailableException
 import com.jnj.vaccinetracker.common.helpers.NetworkConnectivity
 import com.jnj.vaccinetracker.sync.data.repositories.SyncSettingsRepository
+import com.soywiz.klock.DateTime
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -76,7 +77,8 @@ class ParticipantManager @Inject constructor(
         participantId: String,
         nin: String?,
         gender: Gender,
-        yearOfBirth: String,
+        birthDate: DateTime,
+        isBirthDateAnApproximation: Boolean,
         telephone: String?,
         siteUuid: String,
         language: String,
@@ -92,6 +94,7 @@ class ParticipantManager @Inject constructor(
             Constants.ATTRIBUTE_LANGUAGE to language,
             Constants.ATTRIBUTE_VACCINE to vaccine,
             Constants.ATTRIBUTE_OPERATOR to operatorUUid,
+            Constants.ATTRIBUTE_IS_BIRTH_DATE_AN_APPROXIMATION to isBirthDateAnApproximation.toString(),
         )
         if (telephone != null) {
             personAttributes[Constants.ATTRIBUTE_TELEPHONE] = telephone
@@ -100,7 +103,7 @@ class ParticipantManager @Inject constructor(
             participantId = participantId,
             nin = nin,
             gender = gender,
-            birthdate = BirthDate.yearOfBirth(yearOfBirth),
+            birthDate = BirthDate(birthDate.unixMillisLong),
             address = address,
             attributes = personAttributes,
             image = picture,

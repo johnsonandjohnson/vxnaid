@@ -278,4 +278,6 @@
     <string name="p2p_wifi_not_available_error">Non connecté au WIFI. Veuillez vous connecter au WIFI et réessayer.</string>
     <string name="p2p_could_not_send_message_error">Impossible d\'envoyer le message. Veuillez réessayer.</string>
     <string name="participant_registration_details_label_National_Identification_Number">NIN</string>
+    <string name="participant_registration_details_birth_date_hint">Enter the child\'s date of birth</string>
+    <string name="participant_registration_details_action_set_birth_date">Set date</string>
 </resources>
