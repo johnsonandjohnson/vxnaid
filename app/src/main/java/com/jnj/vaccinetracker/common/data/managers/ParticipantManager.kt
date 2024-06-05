@@ -78,6 +78,7 @@ class ParticipantManager @Inject constructor(
         nin: String?,
         gender: Gender,
         birthDate: DateTime,
+        isBirthDateAnApproximation: Boolean,
         telephone: String?,
         siteUuid: String,
         language: String,
@@ -93,6 +94,7 @@ class ParticipantManager @Inject constructor(
             Constants.ATTRIBUTE_LANGUAGE to language,
             Constants.ATTRIBUTE_VACCINE to vaccine,
             Constants.ATTRIBUTE_OPERATOR to operatorUUid,
+            Constants.ATTRIBUTE_IS_BIRTH_DATE_AN_APPROXIMATION to isBirthDateAnApproximation.toString(),
         )
         if (telephone != null) {
             personAttributes[Constants.ATTRIBUTE_TELEPHONE] = telephone

@@ -54,6 +54,9 @@ class RegisterParticipantParticipantDetailsFragment : BaseFragment(),
     private val viewModel: RegisterParticipantParticipantDetailsViewModel by viewModels { viewModelFactory }
     private lateinit var binding: FragmentRegisterParticipantParticipantDetailsBinding
 
+    private var birthDatePicked: DateTime? = null
+    private var isBirthDateApproxChecked: Boolean = false
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -192,7 +195,9 @@ class RegisterParticipantParticipantDetailsFragment : BaseFragment(),
             HomeLocationPickerDialog().show(childFragmentManager, TAG_HOME_LOCATION_PICKER)
         }
         binding.btnPickDate.setOnClickListener {
-            BirthDatePickerFragment().show(childFragmentManager, TAG_DATE_PICKER);
+            BirthDatePickerFragment(
+                    birthDatePicked, isBirthDateApproxChecked
+            ).show(childFragmentManager, TAG_DATE_PICKER);
         }
         binding.btnSubmit.setOnClickListener {
             submitRegistration()
@@ -294,8 +299,10 @@ class RegisterParticipantParticipantDetailsFragment : BaseFragment(),
         submitRegistration()
     }
 
-    override fun onBirthDatePicked(birthDate: DateTime) {
-        viewModel.setBirthDate(birthDate)
+    override fun onBirthDatePicked(birthDate: DateTime, isChecked: Boolean) {
+        birthDatePicked = birthDate
+        isBirthDateApproxChecked = isChecked
+        viewModel.setBirthDate(birthDate, isChecked)
     }
 
 }
