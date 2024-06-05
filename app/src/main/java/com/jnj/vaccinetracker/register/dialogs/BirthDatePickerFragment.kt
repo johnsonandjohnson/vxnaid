@@ -10,12 +10,11 @@ import com.jnj.vaccinetracker.R
 import com.jnj.vaccinetracker.common.helpers.findParent
 import com.soywiz.klock.DateTime
 import java.util.Calendar
-import androidx.appcompat.app.AlertDialog
 
 
-class BirthDatePickerFragment(
+class BirthDatePickerDialog(
         private var selectedDate: DateTime? = null,
-        private var isApproximationChecked: Boolean = false)
+        private var isBirthDateEstimatedChecked: Boolean = false)
     : DialogFragment() {
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
@@ -23,12 +22,12 @@ class BirthDatePickerFragment(
         dialog.setContentView(R.layout.dialog_birth_date_picker)
 
         val datePicker = dialog.findViewById<DatePicker>(R.id.datePicker)
-        val checkBox = dialog.findViewById<CheckBox>(R.id.checkbox_is_birth_date_an_approximation)
+        val checkBox = dialog.findViewById<CheckBox>(R.id.checkbox_is_birth_date_estimated)
 
         selectedDate?.let {
             datePicker.updateDate(it.yearInt, it.month1, it.dayOfMonth)
         }
-        checkBox.isChecked = isApproximationChecked
+        checkBox.isChecked = isBirthDateEstimatedChecked
 
         if (selectedDate == null) {
             val c = Calendar.getInstance()
@@ -40,9 +39,8 @@ class BirthDatePickerFragment(
 
         dialog.findViewById<Button>(R.id.btn_ok).setOnClickListener {
             selectedDate = DateTime(datePicker.year, datePicker.month, datePicker.dayOfMonth)
-            isApproximationChecked = checkBox.isChecked
-
-            findParent<BirthDatePickerListener>()?.onBirthDatePicked(selectedDate!!, isApproximationChecked)
+            isBirthDateEstimatedChecked = checkBox.isChecked
+            findParent<BirthDatePickerListener>()?.onBirthDatePicked(selectedDate!!, isBirthDateEstimatedChecked)
             dialog.dismiss()
         }
 

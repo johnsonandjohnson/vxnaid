@@ -11,6 +11,7 @@ import com.jnj.vaccinetracker.common.data.database.daos.base.count
 import com.jnj.vaccinetracker.common.data.database.daos.draft.*
 import com.jnj.vaccinetracker.common.data.database.entities.*
 import com.jnj.vaccinetracker.common.data.database.entities.draft.*
+import com.jnj.vaccinetracker.common.data.database.migrations.ParticipantAutoMigrationSpec12to13
 import com.jnj.vaccinetracker.common.data.database.openhelpers.SwappableOpenHelperFactory
 import com.jnj.vaccinetracker.common.data.database.openhelpers.helpers.onAutoCloseCallbackReflection
 import com.jnj.vaccinetracker.common.data.repositories.EncryptionKeyRepository
@@ -32,7 +33,7 @@ import javax.inject.Inject
 import kotlin.coroutines.CoroutineContext
 
 object ParticipantRoomDatabaseConfig {
-    const val CURRENT_VERSION = 12
+    const val CURRENT_VERSION = 13
     const val FILE_NAME = "participants.db"
 }
 
@@ -79,6 +80,7 @@ object ParticipantRoomDatabaseConfig {
         AutoMigration(from = 9, to = 10),
         AutoMigration(from = 10, to = 11),
         AutoMigration(from = 11, to = 12),
+        AutoMigration(from = 12, to = 13, spec = ParticipantAutoMigrationSpec12to13::class),
     ]
 )
 @TypeConverters(
