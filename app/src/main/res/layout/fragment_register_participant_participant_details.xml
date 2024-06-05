@@ -394,7 +394,7 @@
                     android:layout_weight="1"
                     android:maxHeight="70sp"
                     android:hint="@string/participant_registration_details_birth_date_hint"
-                    android:text='@{viewModel.isBirthDateAnApproximation ? "~ " + viewModel.birthDateText : viewModel.birthDateText}'
+                    android:text='@{viewModel.isBirthDateEstimated ? "~ " + viewModel.birthDateText : viewModel.birthDateText}'
                     android:textSize="18sp"
                     app:error="@{viewModel.birthDateValidationMessage}" />
 

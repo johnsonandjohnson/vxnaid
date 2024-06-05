@@ -6,7 +6,7 @@
     "entities": [
       {
         "tableName": "participant",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`participantUuid` TEXT NOT NULL, `participantId` TEXT NOT NULL COLLATE NOCASE, `nin` TEXT, `phone` TEXT, `gender` TEXT NOT NULL, `birthDate` INTEGER NOT NULL, `isBirthDateAnApproximation` INTEGER, `dateModified` INTEGER NOT NULL, `locationUuid` TEXT, PRIMARY KEY(`participantUuid`))",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`participantUuid` TEXT NOT NULL, `participantId` TEXT NOT NULL COLLATE NOCASE, `nin` TEXT, `phone` TEXT, `gender` TEXT NOT NULL, `birthDate` INTEGER NOT NULL, `isBirthDateEstimated` INTEGER, `dateModified` INTEGER NOT NULL, `locationUuid` TEXT, PRIMARY KEY(`participantUuid`))",
         "fields": [
           {
             "fieldPath": "participantUuid",
@@ -45,8 +45,8 @@
             "notNull": true
           },
           {
-            "fieldPath": "isBirthDateAnApproximation",
-            "columnName": "isBirthDateAnApproximation",
+            "fieldPath": "isBirthDateEstimated",
+            "columnName": "isBirthDateEstimated",
             "affinity": "INTEGER",
             "notNull": false
           },
@@ -92,10 +92,10 @@
             "name": "index_participant_isBirthDateAnApproximation",
             "unique": false,
             "columnNames": [
-              "isBirthDateAnApproximation"
+              "isBirthDateEstimated"
             ],
             "orders": [],
-            "createSql": "CREATE INDEX IF NOT EXISTS `index_participant_isBirthDateAnApproximation` ON `${TABLE_NAME}` (`isBirthDateAnApproximation`)"
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_participant_isBirthDateAnApproximation` ON `${TABLE_NAME}` (`isBirthDateEstimated`)"
           },
           {
             "name": "index_participant_dateModified",
@@ -858,7 +858,7 @@
       },
       {
         "tableName": "draft_participant",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`participantUuid` TEXT NOT NULL, `phone` TEXT, `participantId` TEXT NOT NULL COLLATE NOCASE, `nin` TEXT, `gender` TEXT NOT NULL, `birthDate` INTEGER NOT NULL, `isBirthDateAnApproximation` INTEGER, `registrationDate` INTEGER NOT NULL, `draftState` TEXT NOT NULL, `locationUuid` TEXT, PRIMARY KEY(`participantUuid`))",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`participantUuid` TEXT NOT NULL, `phone` TEXT, `participantId` TEXT NOT NULL COLLATE NOCASE, `nin` TEXT, `gender` TEXT NOT NULL, `birthDate` INTEGER NOT NULL, `isBirthDateEstimated` INTEGER, `registrationDate` INTEGER NOT NULL, `draftState` TEXT NOT NULL, `locationUuid` TEXT, PRIMARY KEY(`participantUuid`))",
         "fields": [
           {
             "fieldPath": "participantUuid",
@@ -897,8 +897,8 @@
             "notNull": true
           },
           {
-            "fieldPath": "isBirthDateAnApproximation",
-            "columnName": "isBirthDateAnApproximation",
+            "fieldPath": "isBirthDateEstimated",
+            "columnName": "isBirthDateEstimated",
             "affinity": "INTEGER",
             "notNull": false
           },
@@ -950,10 +950,10 @@
             "name": "index_draft_participant_isBirthDateAnApproximation",
             "unique": false,
             "columnNames": [
-              "isBirthDateAnApproximation"
+              "isBirthDateEstimated"
             ],
             "orders": [],
-            "createSql": "CREATE INDEX IF NOT EXISTS `index_draft_participant_isBirthDateAnApproximation` ON `${TABLE_NAME}` (`isBirthDateAnApproximation`)"
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_draft_participant_isBirthDateAnApproximation` ON `${TABLE_NAME}` (`isBirthDateEstimated`)"
           },
           {
             "name": "index_draft_participant_draftState",

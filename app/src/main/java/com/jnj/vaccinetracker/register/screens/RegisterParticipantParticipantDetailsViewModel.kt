@@ -105,7 +105,7 @@ class RegisterParticipantParticipantDetailsViewModel @Inject constructor(
     val birthDateText = mutableLiveData<String>()
     val birthDateValidationMessage = mutableLiveData<String>()
 
-    val isBirthDateAnApproximation = mutableLiveData<Boolean>()
+    val isBirthDateEstimated = mutableLiveData<Boolean>()
 
     val leftIrisScanned = mutableLiveBoolean()
     val rightIrisScanned = mutableLiveBoolean()
@@ -222,7 +222,7 @@ class RegisterParticipantParticipantDetailsViewModel @Inject constructor(
         val nin = nin.get()
         val gender = gender.get()
         val birthDate = birthDate.get()
-        val isBirthDateAnApproximation = isBirthDateAnApproximation.get()
+        val isBirthDateEstimated = isBirthDateEstimated.get()
         val fullPhoneNumber = createFullPhone()
 
         val isValidInput = validateInput(participantId, gender, homeLocation, vaccine?.value)
@@ -261,7 +261,7 @@ class RegisterParticipantParticipantDetailsViewModel @Inject constructor(
                 nin = nin,
                 gender = gender!!,
                 birthDate = birthDate!!,
-                isBirthDateAnApproximation = isBirthDateAnApproximation!!,
+                isBirthDateEstimated = isBirthDateEstimated!!,
                 telephone = phoneNumberToSubmit,
                 siteUuid = siteUuid,
                 language = "English",
@@ -425,7 +425,7 @@ class RegisterParticipantParticipantDetailsViewModel @Inject constructor(
         this.birthDate.set(birthDate)
         this.birthDateText.set(birthDate.format(DateFormat.FORMAT_DATE))
         birthDateValidationMessage.set(null)
-        isBirthDateAnApproximation.set(isChecked)
+        isBirthDateEstimated.set(isChecked)
     }
 
     private fun createFullPhone(): String {
