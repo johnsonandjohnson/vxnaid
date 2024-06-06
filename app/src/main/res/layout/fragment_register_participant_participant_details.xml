@@ -279,7 +279,8 @@
                     android:id="@+id/country_code_picker_phone"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    app:ccp_countryPreference="ug" />
+                    app:ccp_countryPreference="UG"
+                    app:ccp_defaultNameCode="UG" />
 
                 <EditText
                     android:id="@+id/edit_telephone"
