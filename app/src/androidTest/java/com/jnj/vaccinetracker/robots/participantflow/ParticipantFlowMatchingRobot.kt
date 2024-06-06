@@ -16,7 +16,7 @@ class ParticipantFlowMatchingRobot : BaseRobot() {
     }
 
     fun newParticipant() {
-        waitForView(buttonContaining("new participant")).perform(click)
+        waitForView(buttonContaining("new Child")).perform(click)
     }
 }
 
