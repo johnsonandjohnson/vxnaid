@@ -112,14 +112,14 @@
     <string name="scan_barcode_permission_message">To be able to scan barcodes, you will need to give access to your camera.</string>
     <string name="scan_barcode_grant_permission">Grant permission</string>
     <string name="participant_matching_msg_no_iris_license">No iris license could be obtained, cannot perform matching.</string>
-    <string name="participant_matching_description">Please select matching participant or register a new Child:</string>
+    <string name="participant_matching_description">Please select matching Child or register a new Child:</string>
     <string name="participant_matching_btn_new_participant">New Child</string>
     <string name="participant_matching_btn_match_selected">Match selected Child</string>
     <string name="participant_matching_label_no_results_this_site">No match found within your site.</string>
     <string name="participant_matching_label_other_results">The following matches were found outside your site:</string>
     <string name="participant_matching_label_amount_of_results">Total matches: %d</string>
-    <string name="participant_registration_picture_title">New participant photo</string>
-    <string name="participant_registration_details_title">New participant details</string>
+    <string name="participant_registration_picture_title">New Child photo</string>
+    <string name="participant_registration_details_title">New Child details</string>
     <string name="participant_registration_label_take_picture">Please take a clear and well-lit photo of the Child</string>
     <string name="participant_registration_label_confirm_photo_or_try_again">Would you like to submit this photo or try again?</string>
     <string name="participant_registration_details_action_register_participant">Register a Child</string>
@@ -191,14 +191,14 @@
     <string name="visit_dosing_label_select_manufacturer">Select vaccine manufacturer</string>
     <string name="visit_dosing_label_or">- OR -</string>
     <string name="visit_dosing_hint_vial_barcode">#1234567890</string>
-    <string name="visit_dosing_label_no_dosing_visit">There is no dosing visit available in the schedule for this participant.</string>
+    <string name="visit_dosing_label_no_dosing_visit">There is no dosing visit available in the schedule for this Child.</string>
     <string name="visit_dosing_label_loading">Loading available visits…</string>
     <string name="visit_dosing_tab_dosing_visit">Dosing visit</string>
     <string name="visit_dosing_tab_other_visit">Other visit</string>
     <string name="visit_dosing_error_no_vial_barcode">Please enter or scan a vial barcode</string>
     <string name="visit_dosing_error_no_manufacturer">Please select a manufacturer</string>
     <string name="visit_dosing_label_success">Visit successfully registered!</string>
-    <string name="visit_dosing_warning_out_of_time_window_description">Please confirm that this participant is receiving a dosage outside of the indicated time window.</string>
+    <string name="visit_dosing_warning_out_of_time_window_description">Please confirm that this Child is receiving a dosage outside of the indicated time window.</string>
     <string name="visit_dosing_warning_out_of_time_window_title">Dosing outside of window</string>
     <string name="visit_dosing_error_different_manufacturer_description">The manufacturer selected is different from the one indicated in the regimen and should not be administered.</string>
     <string name="visit_dosing_warning_different_manufacturer_description">The manufacturer selected is different from the one indicated in the regimen. Please confirm you will administer a different vaccine.</string>
@@ -206,7 +206,7 @@
     <string name="upcoming_visit_title">Next visit</string>
     <string name="upcoming_visit_type_follow_up">In Person Follow Up</string>
     <string name="upcoming_visit_type_dosing">Dosing</string>
-    <string name="visit_other_title">No additional steps required, please click submit to finish the participant workflow</string>
+    <string name="visit_other_title">No additional steps required, please click submit to finish the Child workflow</string>
     <string name="sync_service_name" translatable="false">Vaccine Monitoring Sync</string>
     <string name="sync_service_notification_title">Vaccine Monitoring Sync</string>
     <string name="sync_status_idle">Idle</string>
@@ -254,7 +254,7 @@
     <string name="setup_permission_doze_title">Bypass Battery Optimizations</string>
     <string name="setup_permission_doze_description">(Optional) Disable battery optimizations for this app, so synchronization can continue while the device is not in use for longer periods of time (e.g. overnight).</string>
     <string name="setup_permission_camera_title">Camera</string>
-    <string name="setup_permission_camera_description">Allow use of camera for taking participant photos.</string>
+    <string name="setup_permission_camera_description">Allow use of camera for taking Child photos.</string>
     <string name="setup_permission_install_title">Install applications</string>
     <string name="setup_permission_install_description">Allows the app to install updated versions.</string>
     <string name="setup_btn_enable">Enable</string>
@@ -267,7 +267,7 @@
     <string name="biometric_template" translatable="false">biometric template</string>
     <string name="image" translatable="false">image</string>
     <string name="visit" translatable="false">visit</string>
-    <string name="participant" translatable="false">participant</string>
+    <string name="participant" translatable="false">Child</string>
     <string name="iris_license_matching" translatable="false">Iris matching license</string>
     <string name="iris_license_client" translatable="false">Iris client license</string>
     <string name="configuration" translatable="false">configuration</string>
@@ -297,7 +297,7 @@
     <string name="get_device_name_by_site_uuid_call_error" translatable="false">Get device name call failed.</string>
     <string name="get_sync_records_by_uuids_call_error" translatable="false">Get sync records by uuids call failed.</string>
     <string name="upload_biometrics_template_error" translatable="false">Failed to upload biometrics template with participantUuid %s.</string>
-    <string name="upload_biometrics_templates_error" translatable="false">Failed to upload biometrics template of %d participant(s).</string>
+    <string name="upload_biometrics_templates_error" translatable="false">Failed to upload biometrics template of %d Child(s).</string>
     <string name="p2p_client_progress_completed_success">Transfer completed successfully</string>
     <string name="p2p_client_progress_logging_in">Logging in</string>
     <string name="p2p_client_progress_importing_secrets">Importing Secrets</string>
