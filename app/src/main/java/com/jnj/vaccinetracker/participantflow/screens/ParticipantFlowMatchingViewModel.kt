@@ -212,6 +212,7 @@ class ParticipantFlowMatchingViewModel @Inject constructor(
                         participantId = participant.participantId,
                         irisMatchingScore = participant.matchingScore,
                         birthDateText = participant.birthDate.toDateTime().format(DateFormat.FORMAT_DATE),
+                        isBirthDateEstimated=participant.isBirthDateEstimated,
                         gender = participant.gender,
                         telephone = participant.telephoneNumber,
                         homeLocation = participant.address?.toDomain()?.toStringList(addressMasterDataOrder)?.translate(),
@@ -273,6 +274,7 @@ class ParticipantFlowMatchingViewModel @Inject constructor(
                 participantId = it.participantId ?: return null,
                 gender = it.gender ?: return null,
                 birthDateText = it.birthDateText ?: return null,
+                isBirthDateEstimated = it.isBirthDateEstimated ?: return null,
                 vaccine = it.vaccine ?: return null,
                 participantPicture = selectedParticipantImage.get()
             )

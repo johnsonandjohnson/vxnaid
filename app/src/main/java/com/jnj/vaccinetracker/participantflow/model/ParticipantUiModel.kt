@@ -8,6 +8,7 @@ data class ParticipantUiModel(
     val participantId: String?,
     val irisMatchingScore: Int?,
     val birthDateText: String?,
+    val isBirthDateEstimated: Boolean?,
     val gender: Gender?,
     val telephone: String?,
     val homeLocation: String?,
@@ -19,6 +20,6 @@ data class ParticipantUiModel(
         participantId: String?,
         matchingScore: Int?,
         siteUUID: String?,
-    ) : this(null, participantId, matchingScore, null, null, null, null, null, siteUUID)
+    ) : this(null, participantId, matchingScore, null, null, null, null, null, null, siteUUID)
 
 }
