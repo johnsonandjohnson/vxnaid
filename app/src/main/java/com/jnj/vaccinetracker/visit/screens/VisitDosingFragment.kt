@@ -47,6 +47,8 @@ class VisitDosingFragment : BaseFragment(),
         private const val TAG_DIALOG_DIFFERENT_MANUFACTURER_EXPECTED = "differentManufacturerDialog"
         private const val MIN_WEIGHT = 1
         private const val MAX_WEIGHT = 300
+        private const val MIN_HEIGHT = 1
+        private const val MAX_HEIGHT = 300
     }
 
     private val viewModel: VisitViewModel by activityViewModels { viewModelFactory }
@@ -67,6 +69,7 @@ class VisitDosingFragment : BaseFragment(),
 
     private fun setupFilters() {
         binding.editTextWeightInput.filters = arrayOf(InputFilterMinMax(MIN_WEIGHT, MAX_WEIGHT))
+        binding.editTextHeightInput.filters = arrayOf(InputFilterMinMax(MIN_HEIGHT, MAX_HEIGHT))
     }
 
     private fun setupClickListeners() {
@@ -96,6 +99,11 @@ class VisitDosingFragment : BaseFragment(),
         binding.editTextWeightInput.doOnTextChanged { s, _, _, _ ->
             s.toString().toIntOrNull().let { newVal ->
                 viewModel.setWeight(newVal)
+            }
+        }
+        binding.editTextHeightInput.doOnTextChanged { s, _, _, _ ->
+            s.toString().toIntOrNull().let { newVal ->
+                viewModel.setHeight(newVal)
             }
         }
     }
