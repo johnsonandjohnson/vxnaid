@@ -7,6 +7,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
+import android.widget.EditText
+import androidx.core.widget.doAfterTextChanged
 import androidx.core.widget.doOnTextChanged
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.activityViewModels
@@ -24,6 +26,7 @@ import com.jnj.vaccinetracker.visit.VisitViewModel
 import com.jnj.vaccinetracker.visit.dialog.DifferentManufacturerExpectedDialog
 import com.jnj.vaccinetracker.visit.dialog.DosingOutOfWindowDialog
 import com.jnj.vaccinetracker.visit.dialog.VisitRegisteredSuccessDialog
+import com.jnj.vaccinetracker.visit.zscore.InputFilterMinMax
 import kotlinx.coroutines.flow.onEach
 
 
@@ -33,15 +36,17 @@ import kotlinx.coroutines.flow.onEach
  * @version 2
  */
 class VisitDosingFragment : BaseFragment(),
-    VisitRegisteredSuccessDialog.VisitRegisteredSuccessDialogListener,
-    DosingOutOfWindowDialog.DosingOutOfWindowDialogListener,
-    DifferentManufacturerExpectedDialog.DifferentManufacturerExpectedListener {
+        VisitRegisteredSuccessDialog.VisitRegisteredSuccessDialogListener,
+        DosingOutOfWindowDialog.DosingOutOfWindowDialogListener,
+        DifferentManufacturerExpectedDialog.DifferentManufacturerExpectedListener {
 
     private companion object {
         private const val REQ_SCAN_BARCODE = 45
         private const val TAG_DIALOG_SUCCESS = "successDialog"
         private const val TAG_DIALOG_DOSING_OUT_OF_WINDOW = "dosingOutOfWindowDialog"
         private const val TAG_DIALOG_DIFFERENT_MANUFACTURER_EXPECTED = "differentManufacturerDialog"
+        private const val MIN_WEIGHT = 1
+        private const val MAX_WEIGHT = 300
     }
 
     private val viewModel: VisitViewModel by activityViewModels { viewModelFactory }
@@ -52,31 +57,47 @@ class VisitDosingFragment : BaseFragment(),
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_visit_dosing, container, false)
         binding.viewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
-        binding.root.setOnClickListener { activity?.currentFocus?.hideKeyboard() }
 
+        setupFilters()
+        setupClickListeners()
+        setupInputListeners()
+
+        return binding.root
+    }
+
+    private fun setupFilters() {
+        binding.editTextWeightInput.filters = arrayOf(InputFilterMinMax(MIN_WEIGHT, MAX_WEIGHT))
+    }
+
+    private fun setupClickListeners() {
+        binding.root.setOnClickListener { activity?.currentFocus?.hideKeyboard() }
         binding.imageButtonBarcodeScanner.setOnClickListener {
-            startActivityForResult(ScanBarcodeActivity.create(requireContext(),ScanBarcodeActivity.MANUFACTURER), REQ_SCAN_BARCODE)
+            startActivityForResult(ScanBarcodeActivity.create(requireContext(), ScanBarcodeActivity.MANUFACTURER), REQ_SCAN_BARCODE)
         }
         binding.btnSubmit.setOnClickListener {
             submitDosingVisit()
         }
         binding.dropdownManufacturer.setOnItemClickListener { _, _, position, _ ->
-            val manufacturerName = viewModel.manufacturerList.get()?.distinct()?.get(position) ?: return@setOnItemClickListener
+            val manufacturerName = viewModel.manufacturerList.get()?.distinct()?.get(position)
+                    ?: return@setOnItemClickListener
             viewModel.setSelectedManufacturer(manufacturerName)
         }
+    }
+
+    private fun setupInputListeners() {
         binding.editVialBarcode.doOnTextChanged { s, _, _, _ ->
             if (!s.isNullOrEmpty()) {
                 viewModel.matchBarcodeManufacturer(s, resourcesWrapper)
-            }
-             else{
+            } else {
                 viewModel.setSelectedManufacturer("")
                 binding.dropdownManufacturer.clearListSelection()
-                }
+            }
         }
-
-
-
-        return binding.root
+        binding.editTextWeightInput.doOnTextChanged { s, _, _, _ ->
+            s.toString().toIntOrNull().let { newVal ->
+                viewModel.setWeight(newVal)
+            }
+        }
     }
 
     override fun observeViewModel(lifecycleOwner: LifecycleOwner) {
@@ -84,18 +105,18 @@ class VisitDosingFragment : BaseFragment(),
             val adapter = ArrayAdapter(requireContext(), R.layout.item_dropdown, manufacturers?.distinct().orEmpty())
             binding.dropdownManufacturer.setAdapter(adapter)
 
-            SharedPreference(context!!).saveManufracterList(viewModel.getManufactuerList())
-            SharedPreference(context!!).saveManufracterList(scanviewModel.getManufactuerList())
+            SharedPreference(requireContext()).saveManufracterList(viewModel.getManufactuerList())
+            SharedPreference(requireContext()).saveManufracterList(scanviewModel.getManufactuerList())
         }
 
         viewModel.visitEvents
-            .asFlow()
-            .onEach { success ->
-                if (success)
-                    onDosingVisitRegistrationSuccessful()
-                else
-                    onDosingVisitRegistrationFailed()
-            }.launchIn(lifecycleOwner)
+                .asFlow()
+                .onEach { success ->
+                    if (success)
+                        onDosingVisitRegistrationSuccessful()
+                    else
+                        onDosingVisitRegistrationFailed()
+                }.launchIn(lifecycleOwner)
 
         viewModel.previousDosingVisits.observe(lifecycleOwner) { visits ->
             binding.linearLayoutVisitHistory.removeAllViews()
@@ -114,11 +135,11 @@ class VisitDosingFragment : BaseFragment(),
 
     private fun submitDosingVisit(overrideOutsideWindowCheck: Boolean = false, overrideManufacturerCheck: Boolean = false) {
         viewModel.submitDosingVisit(
-            vialBarcode = binding.editVialBarcode.text.toString(),
-            outsideTimeWindowConfirmationListener = ::showOutsideTimeWindowConfirmationDialog,
-            incorrectManufacturerListener = ::showDifferentManufacturerDialog,
-            overrideOutsideTimeWindowCheck = overrideOutsideWindowCheck,
-            overrideManufacturerCheck = overrideManufacturerCheck
+                vialBarcode = binding.editVialBarcode.text.toString(),
+                outsideTimeWindowConfirmationListener = ::showOutsideTimeWindowConfirmationDialog,
+                incorrectManufacturerListener = ::showDifferentManufacturerDialog,
+                overrideOutsideTimeWindowCheck = overrideOutsideWindowCheck,
+                overrideManufacturerCheck = overrideManufacturerCheck
         )
     }
 
