@@ -89,6 +89,8 @@ class DraftParticipantScript {
         val telephone: String? = null
         val birthDate = DateTime(1999, 6, 6)
         val isBirthDateEstimated = false
+        val weight = 6
+        val height = 77
         val lang = "en"
         val gender = Gender.MALE
         val template: BiometricsTemplateBytes? = readAssetsTemplate()
@@ -126,7 +128,9 @@ class DraftParticipantScript {
                 visitUuid = firstScheduledDosingVisit.uuid,
                 manufacturer = manufacturer,
                 vialCode = vialCode,
-                dosingNumber = firstScheduledDosingVisit.dosingNumber!!
+                dosingNumber = firstScheduledDosingVisit.dosingNumber!!,
+                weight = weight,
+                height = height
             )
         }
     }
