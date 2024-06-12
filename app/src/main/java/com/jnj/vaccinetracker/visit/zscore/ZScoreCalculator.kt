@@ -12,7 +12,7 @@ abstract class ZScoreCalculator (
         private val gender: Gender,
         private val birtDayText: String
 ){
-
+    protected val zScore: Double? by lazy { calculateZScore() }
     abstract fun calculateZScoreAndRating(): ZScoreAndRating?
     abstract fun calculateZScore(): Double?
 }
