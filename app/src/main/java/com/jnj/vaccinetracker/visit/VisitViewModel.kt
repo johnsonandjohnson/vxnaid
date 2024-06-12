@@ -17,6 +17,7 @@ import com.jnj.vaccinetracker.participantflow.model.ParticipantImageUiModel
 import com.jnj.vaccinetracker.participantflow.model.ParticipantImageUiModel.Companion.toUiModel
 import com.jnj.vaccinetracker.participantflow.model.ParticipantSummaryUiModel
 import com.jnj.vaccinetracker.sync.domain.entities.UpcomingVisit
+import com.jnj.vaccinetracker.visit.zscore.HeightZScoreCalculator
 import com.jnj.vaccinetracker.visit.zscore.WeightZScoreCalculator
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
@@ -61,9 +62,14 @@ class VisitViewModel @Inject constructor(
     val differentManufacturerAllowed = mutableLiveBoolean()
     private val manufacturerRegexes = mutableLiveData<List<Manufacturer>>()
     val upcomingVisit = mutableLiveData<UpcomingVisit?>()
+
     private val weight = MutableLiveData<Int?>()
     val weightValidationMessage = mutableLiveData<String>()
-    val zScoreText = MutableLiveData<String>()
+    val zScoreWeightText = MutableLiveData<String>()
+
+    private val height = MutableLiveData<Int?>()
+    val heightValidationMessage = mutableLiveData<String>()
+    val zScoreHeightText = MutableLiveData<String>()
 
     private var manufacturersList: MutableList<Manufacturer> = mutableListOf<Manufacturer>()
     init {
@@ -288,9 +294,10 @@ class VisitViewModel @Inject constructor(
         overrideOutsideTimeWindowCheck: Boolean = false,
         overrideManufacturerCheck: Boolean = false,
     ) {
-
+        var isZScoreValid = true
         val manufacturer = selectedManufacturer.get()
         val weight = weight.value
+        val height = height.value
         val participant = participant.get()
         val dosingVisit = dosingVisit.get()
 
@@ -298,11 +305,6 @@ class VisitViewModel @Inject constructor(
 
         if (manufacturer.isNullOrEmpty()) {
             manufacturerValidationMessage.set(resourcesWrapper.getString(R.string.visit_dosing_error_no_manufacturer))
-            return
-        }
-
-        if (weight == null) {
-            weightValidationMessage.set(resourcesWrapper.getString(R.string.visit_dosing_error_no_weight))
             return
         }
 
@@ -322,6 +324,18 @@ class VisitViewModel @Inject constructor(
             return
         }
 
+        if (weight == null) {
+            weightValidationMessage.set(resourcesWrapper.getString(R.string.visit_dosing_error_no_weight))
+            isZScoreValid = false
+        }
+
+        if (height == null) {
+            heightValidationMessage.set(resourcesWrapper.getString(R.string.visit_dosing_error_no_height))
+            isZScoreValid = false
+        }
+
+        if (!isZScoreValid) return
+
         loading.set(true)
 
         scope.launch {
@@ -332,7 +346,9 @@ class VisitViewModel @Inject constructor(
                     vialCode = vialBarcode,
                     manufacturer = manufacturer,
                     participantUuid = participant.participantUuid,
-                    dosingNumber = requireNotNull(dosingVisit.dosingNumber) { "dosing visit must have a dosing number" }
+                    dosingNumber = requireNotNull(dosingVisit.dosingNumber) { "dosing visit must have a dosing number" },
+                    weight = weight!!,
+                    height = height!!,
                 )
                 onVisitLogged()
                 loading.set(false)
@@ -415,8 +431,26 @@ class VisitViewModel @Inject constructor(
             ).calculateZScoreAndRating()
         }
 
-        zScoreText.value = zScore?.toString() ?: ""
+        zScoreWeightText.value = zScore?.toString() ?: ""
         weightValidationMessage.set(null)
+    }
+
+    fun setHeight(value: Int?) {
+        val validatedValue = if (value != null && value < 0) 0 else value
+
+        if (validatedValue == height.value) return
+
+        height.value = validatedValue
+        val zScore = participant.value?.let {
+            HeightZScoreCalculator(
+                    validatedValue,
+                    it.gender,
+                    it.birthDateText
+            ).calculateZScoreAndRating()
+        }
+
+        zScoreHeightText.value = zScore?.toString() ?: ""
+        heightValidationMessage.set(null)
     }
 }
 

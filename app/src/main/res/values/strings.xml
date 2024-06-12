@@ -333,4 +333,8 @@
     <string name="visit_z_score_weight_label">Weight:</string>
     <string name="visit_z_score_label">Z Score:</string>
     <string name="visit_dosing_error_no_weight">Please enter weight</string>
+    <string name="visit_z_score_height_label">Height:</string>
+    <string name="visit_dosing_hint_kg">kg</string>
+    <string name="visit_dosing_hint_cm">cm</string>
+    <string name="visit_dosing_error_no_height">Please enter height</string>
 </resources>
