@@ -337,4 +337,13 @@
     <string name="visit_dosing_hint_kg">kg</string>
     <string name="visit_dosing_hint_cm">cm</string>
     <string name="visit_dosing_error_no_height">Please enter height</string>
+    <string-array name="birth_order_options">
+        <item>First</item>
+        <item>Second</item>
+        <item>Third</item>
+        <item>Fourth</item>
+        <item>Fifth</item>
+        <item>Sixth</item>
+        <!-- Add more options as needed -->
+    </string-array>
 </resources>

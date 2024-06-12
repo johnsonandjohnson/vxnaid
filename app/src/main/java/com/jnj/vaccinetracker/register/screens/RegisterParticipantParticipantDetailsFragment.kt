@@ -91,9 +91,17 @@ class RegisterParticipantParticipantDetailsFragment : BaseFragment(),
         }
         flowViewModel.countryCode.observe(lifecycleOwner) { countryCode ->
             if (countryCode != null) {
-                binding.countryCodePickerPhone.setCountryForPhoneCode(countryCode.toInt())
+                binding.countryCodePickerPhone.setCountryForPhoneCode(countryCode.toInt());
             }
         }
+
+        viewModel.birthOrderValidationMessage.observe(lifecycleOwner) { birthValidationMessage ->
+            logDebug("validate birth weight" + birthValidationMessage)
+            binding.birthError.requestFocus()
+            //binding.birthError.error = birthValidationMessage
+        }
+
+
         viewModel.vaccineNames.observe(lifecycleOwner) { vaccineNames ->
             val adapter = ArrayAdapter(
                 requireContext(),
@@ -231,7 +239,7 @@ class RegisterParticipantParticipantDetailsFragment : BaseFragment(),
     }
 
     private fun setupDropdowns() {
-        binding.dropdownVaccine.setOnItemClickListener { _, _, position, _ ->
+        binding.dropdownVaccine.setOnItemClickListener { _, _,_, position, _ ->
             val vaccineName =
                 viewModel.vaccineNames.value?.get(position) ?: return@setOnItemClickListener
             viewModel.setSelectedVaccine(vaccineName)
