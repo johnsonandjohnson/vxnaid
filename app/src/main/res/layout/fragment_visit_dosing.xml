@@ -73,8 +73,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
                     android:text="@{viewModel.dosingVisit.timeWindow}"
-                    android:textColor="@{viewModel.dosingVisitIsInsideTimeWindow ? @color/time_window_inside : @color/time_window_outside}"
                     android:textAppearance="@style/DescriptionText"
+                    android:textColor="@{viewModel.dosingVisitIsInsideTimeWindow ? @color/time_window_inside : @color/time_window_outside}"
                     android:visibility="@{viewModel.dosingVisit == null || (viewModel.dosingVisit != null &amp;&amp; viewModel.dosingVisit.dosingNumber == 1) ? View.INVISIBLE : View.VISIBLE}"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/textView_timeWindowTitle"
@@ -101,7 +101,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="32dp"
-                    android:layout_marginTop="32dp"
+                    android:layout_marginTop="5dp"
                     android:layout_marginEnd="32dp"
                     android:text="@string/visit_dosing_label_scan_or_manual_entry"
                     android:textAppearance="@style/LabelText"
@@ -109,7 +109,7 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.003"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/linearLayout_visitHistory" />
+                    app:layout_constraintTop_toBottomOf="@+id/linearLayout_z_score" />
 
                 <LinearLayout
                     android:id="@+id/linearLayout_visitHistory"
@@ -119,9 +119,99 @@
                     android:layout_marginTop="32dp"
                     android:layout_marginEnd="32dp"
                     android:orientation="vertical"
-                    app:layout_constraintBottom_toTopOf="@+id/textView_scanTitle"
+                    app:layout_constraintBottom_toTopOf="@+id/linearLayout_z_score"
                     app:layout_constraintTop_toBottomOf="@+id/textView_timeWindowTitle"
                     tools:layout_editor_absoluteX="297dp" />
+
+                <LinearLayout
+                    android:id="@+id/linearLayout_z_score"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="32dp"
+                    android:layout_marginTop="32dp"
+                    android:layout_marginEnd="32dp"
+                    android:orientation="vertical"
+                    app:layout_constraintBottom_toTopOf="@+id/textView_scanTitle"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/linearLayout_visitHistory">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/textView_weightLabel"
+                            android:layout_width="65dp"
+                            android:layout_height="wrap_content"
+                            android:text="@string/visit_z_score_weight_label"
+                            android:textAppearance="@style/LabelText"
+                            android:visibility="@{viewModel.dosingVisit == null ? View.INVISIBLE : View.VISIBLE}" />
+
+                        <EditText
+                            android:id="@+id/editText_weight_input"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:importantForAutofill="no"
+                            android:inputType="number"
+                            android:hint="@string/visit_dosing_hint_kg"
+                            android:visibility="@{viewModel.dosingVisit == null ? View.INVISIBLE : View.VISIBLE}"
+                            app:error="@{viewModel.weightValidationMessage}" />
+
+
+                        <TextView
+                            android:id="@+id/textView_z_score_value"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="2"
+                            android:gravity="center"
+                            android:text="@{viewModel.zScoreWeightText}"
+                            android:textAppearance="@style/LabelText"
+                            android:visibility="@{viewModel.dosingVisit == null ? View.INVISIBLE : View.VISIBLE}" />
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/textView_heightLabel"
+                            android:layout_width="65dp"
+                            android:layout_height="wrap_content"
+                            android:text="@string/visit_z_score_height_label"
+                            android:textAppearance="@style/LabelText"
+                            android:visibility="@{viewModel.dosingVisit == null ? View.INVISIBLE : View.VISIBLE}" />
+
+                        <EditText
+                            android:id="@+id/editText_height_input"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:importantForAutofill="no"
+                            android:hint="@string/visit_dosing_hint_cm"
+                            android:inputType="number"
+                            android:visibility="@{viewModel.dosingVisit == null ? View.INVISIBLE : View.VISIBLE}"
+                            app:error="@{viewModel.heightValidationMessage}" />
+
+
+                        <TextView
+                            android:id="@+id/textView_z_score_height_value"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="2"
+                            android:gravity="center"
+                            android:text="@{viewModel.zScoreHeightText}"
+                            android:textAppearance="@style/LabelText"
+                            android:visibility="@{viewModel.dosingVisit == null ? View.INVISIBLE : View.VISIBLE}" />
+                    </LinearLayout>
+                </LinearLayout>
+
 
                 <TextView
                     android:id="@+id/textView_scanSubtitle"
@@ -160,14 +250,14 @@
                     android:ems="10"
                     android:hint="@string/visit_dosing_hint_vial_barcode"
                     android:imeOptions="actionDone"
+                    android:importantForAutofill="no"
                     android:inputType="textVisiblePassword"
                     android:visibility="@{viewModel.dosingVisit == null ? View.INVISIBLE : View.VISIBLE}"
                     app:error="@{viewModel.vialValidationMessage}"
                     app:layout_constraintBottom_toTopOf="@+id/input_group_manufacturer"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textView_or"
-                    android:importantForAutofill="no" />
+                    app:layout_constraintTop_toBottomOf="@+id/textView_or" />
 
                 <LinearLayout
                     android:id="@+id/input_group_manufacturer"
@@ -220,9 +310,9 @@
                     android:layout_marginEnd="32dp"
                     android:layout_marginBottom="16dp"
                     android:backgroundTint="@color/colorPrimary"
-                    android:textAppearance="@style/ButtonTextStyling"
                     android:enabled="@{viewModel.loading ? false : true}"
                     android:text="@string/general_label_submit"
+                    android:textAppearance="@style/ButtonTextStyling"
                     android:visibility="@{viewModel.dosingVisit == null ? View.GONE : View.VISIBLE}"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -236,8 +326,8 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="32dp"
                 android:text="@string/visit_dosing_label_no_dosing_visit"
-                android:textColor="@color/errorDark"
                 android:textAppearance="@style/LabelText"
+                android:textColor="@color/errorDark"
                 android:visibility="@{!viewModel.loading &amp;&amp; viewModel.dosingVisit == null ? View.VISIBLE : View.GONE}" />
 
             <TextView
