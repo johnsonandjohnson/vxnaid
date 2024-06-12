@@ -2,6 +2,7 @@ package com.jnj.vaccinetracker.visit.zscore
 
 import android.text.InputFilter
 import android.text.Spanned
+import android.util.Log
 
 class InputFilterMinMax(private val min: Int, private val max: Int) : InputFilter {
 
@@ -19,7 +20,7 @@ class InputFilterMinMax(private val min: Int, private val max: Int) : InputFilte
                 return null
             }
         } catch (nfe: NumberFormatException) {
-            // Handle the exception
+            Log.e("InputFilterMinMax", "Number format exception: ${nfe.message}")
         }
         return ""
     }
