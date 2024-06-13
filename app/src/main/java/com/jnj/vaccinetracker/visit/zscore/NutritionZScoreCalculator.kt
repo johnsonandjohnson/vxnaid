@@ -3,7 +3,6 @@ package com.jnj.vaccinetracker.visit.zscore
 import android.graphics.Color
 import com.jnj.vaccinetracker.R
 import com.jnj.vaccinetracker.common.domain.entities.Gender
-import okhttp3.internal.toHexString
 import kotlin.random.Random
 
 class NutritionZScoreCalculator(
@@ -50,7 +49,7 @@ class NutritionZScoreCalculator(
       val zScore = this.zScore ?: return defaultColor
       val color = when {
          zScore <= -3 -> Color.RED
-         zScore < -2.0 -> Color.YELLOW
+         zScore < -2.0 -> Color.parseColor("#FFAA00") //dark yellow
          else -> Color.GREEN
       }
       return color
