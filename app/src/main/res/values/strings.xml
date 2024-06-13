@@ -123,7 +123,7 @@
     <string name="participant_registration_label_take_picture">Please take a clear and well-lit photo of the Child</string>
     <string name="participant_registration_label_confirm_photo_or_try_again">Would you like to submit this photo or try again?</string>
     <string name="participant_registration_details_action_register_participant">Register a Child</string>
-    <string name="participant_registration_details_description">Please provide the new Child\'s details below:</string>
+    <string name="participant_registration_details_description">Please provide new Child\'s details below:</string>
     <string name="participant_registration_details_label_participant_id">Child Number</string>
     <string name="participant_registration_details_label_confirm_participant_id">Confirm Child Number</string>
     <string name="participant_registration_details_label_iris_id">Iris ID</string>
@@ -136,6 +136,8 @@
     <string name="participant_registration_details_year_of_birth_hint" translatable="false">xxxx</string>
     <string name="participant_registration_details_label_telephone">Mobile phone</string>
     <string name="participant_registration_details_telephone_hint">Enter Child mobile phone</string>
+    <string name="participant_registration_details_label_birth_order" translatable="false"> Birth Order</string>
+    <string name ="participant_registration_details_birth_weight" translatable="false">Birth Weight (kg) </string>
     <string name="participant_registration_details_label_home_location">Address</string>
     <string name="participant_registration_details_home_location_hint">Enter the Child\'s address</string>
     <string name="participant_registration_details_action_set_home_location">Set address</string>

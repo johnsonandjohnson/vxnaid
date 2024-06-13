@@ -260,117 +260,6 @@
                     app:error="@{viewModel.fathersNameValidationMessage}" />
             </LinearLayout>
 
-            <LinearLayout
-                android:id="@+id/input_group_phone"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                android:gravity="center_vertical"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:id="@+id/label_phone"
-                    android:layout_width="155dp"
-                    android:layout_height="wrap_content"
-                    android:text="@string/participant_registration_details_label_telephone"
-                    android:textAppearance="@style/LabelText" />
-
-                <com.hbb20.CountryCodePicker
-                    android:id="@+id/country_code_picker_phone"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    app:ccp_countryPreference="UG"
-                    app:ccp_defaultNameCode="UG" />
-
-                <EditText
-                    android:id="@+id/edit_telephone"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:hint="@string/participant_registration_details_telephone_hint"
-                    android:inputType="phone"
-                    android:longClickable="false"
-                    android:text="@{viewModel.phone}"
-                    android:textIsSelectable="false"
-                    android:textSize="18sp"
-                    app:error="@{viewModel.phoneValidationMessage}" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/input_group_home_location"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                android:gravity="center_vertical"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:id="@+id/label_home_location"
-                    android:layout_width="155dp"
-                    android:layout_height="wrap_content"
-                    android:text="@string/participant_registration_details_label_home_location"
-                    android:textAppearance="@style/LabelText" />
-
-                <TextView
-                    android:id="@+id/textView_participantHomeLocation"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="16dp"
-                    android:layout_weight="1"
-                    android:hint="@string/participant_registration_details_home_location_hint"
-                    android:maxHeight="70sp"
-                    android:text="@{viewModel.homeLocationLabel == null ? `` : viewModel.homeLocationLabel}"
-                    android:textColor="@{viewModel.homeLocationValidationMessage == null ?  @color/colorPrimary : @color/errorLight}"
-                    android:textColorHint="@{viewModel.homeLocationValidationMessage == null ?  @color/colorPrimary : @color/errorLight}"
-                    android:textSize="18sp"
-                    app:error="@{viewModel.homeLocationValidationMessage}" />
-
-                <Button
-                    android:id="@+id/btn_set_home_location"
-                    style="@style/Widget.AppCompat.Button.Small"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:backgroundTint="@color/colorPrimary"
-                    android:text="@string/participant_registration_details_action_set_home_location"
-                    android:textAppearance="@style/ButtonTextStyling" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/input_group_child_category"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                android:gravity="center_vertical"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:id="@+id/participant_registration_details_label_child_category"
-                    android:layout_width="155dp"
-                    android:layout_height="wrap_content"
-                    android:maxLines="2"
-                    android:text="@string/participant_registration_details_label_child_category"
-                    android:textAppearance="@style/LabelText" />
-
-                <com.google.android.material.textfield.TextInputLayout
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    app:error="@{viewModel.childCategoryValidationMessage}">
-
-                    <AutoCompleteTextView
-                        android:id="@+id/dropdown_child_category"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="@string/participant_registration_details_label_select_child_category"
-                        android:inputType="none"
-                        android:text="@{viewModel.childCategory.display}" />
-
-                </com.google.android.material.textfield.TextInputLayout>
-            </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/input_group_year_of_birth"
@@ -471,7 +360,7 @@
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/input_group_vaccine"
+                android:id="@+id/input_group_phone"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
@@ -479,10 +368,137 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    android:id="@+id/label_vaccine"
+                    android:id="@+id/label_phone"
                     android:layout_width="155dp"
                     android:layout_height="wrap_content"
-                    android:text="@string/participant_registration_details_label_vaccine"
+                    android:text="@string/participant_registration_details_label_telephone"
+                    android:textAppearance="@style/LabelText" />
+
+                <com.hbb20.CountryCodePicker
+                    android:id="@+id/country_code_picker_phone"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:ccp_countryPreference="UG"
+                    app:ccp_defaultNameCode="UG" />
+
+                <EditText
+                    android:id="@+id/edit_telephone"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:hint="@string/participant_registration_details_telephone_hint"
+                    android:inputType="phone"
+                    android:longClickable="false"
+                    android:text="@{viewModel.phone}"
+                    android:textIsSelectable="false"
+                    android:textSize="18sp"
+                    app:error="@{viewModel.phoneValidationMessage}" />
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:id="@+id/input_group_birth_weight"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/participant_registration_details_label_birth_weight"
+                    android:layout_width="155dp"
+                    android:layout_height="wrap_content"
+                    android:maxLines="2"
+                    android:text="@string/participant_registration_details_birth_weight"
+                    android:textAppearance="@style/LabelText" />
+
+                <EditText
+                    android:id="@+id/edit_birth_weight"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="4dp"
+                    android:layout_weight="1"
+                    android:hint="@string/participant_registration_details_birth_weight"
+                    android:inputType="numberDecimal"
+                    android:textSize="18sp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/input_group_birth_order"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/participant_registration_details_label_birth_order"
+                    android:layout_width="155dp"
+                    android:layout_height="wrap_content"
+                    android:maxLines="2"
+                    android:text="@string/participant_registration_details_label_birth_order"
+                    android:textAppearance="@style/LabelText" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/input_group_home_location"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/label_home_location"
+                    android:layout_width="155dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/participant_registration_details_label_home_location"
+                    android:textAppearance="@style/LabelText" />
+
+                <TextView
+                    android:id="@+id/textView_participantHomeLocation"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="16dp"
+                    android:layout_weight="1"
+                    android:hint="@string/participant_registration_details_home_location_hint"
+                    android:maxHeight="70sp"
+                    android:text="@{viewModel.homeLocationLabel == null ? `` : viewModel.homeLocationLabel}"
+                    android:textColor="@{viewModel.homeLocationValidationMessage == null ?  @color/colorPrimary : @color/errorLight}"
+                    android:textColorHint="@{viewModel.homeLocationValidationMessage == null ?  @color/colorPrimary : @color/errorLight}"
+                    android:textSize="18sp"
+                    app:error="@{viewModel.homeLocationValidationMessage}" />
+
+                <Button
+                    android:id="@+id/btn_set_home_location"
+                    style="@style/Widget.AppCompat.Button.Small"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:backgroundTint="@color/colorPrimary"
+                    android:text="@string/participant_registration_details_action_set_home_location"
+                    android:textAppearance="@style/ButtonTextStyling" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/input_group_child_category"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/participant_registration_details_label_child_category"
+                    android:layout_width="155dp"
+                    android:layout_height="wrap_content"
+                    android:maxLines="2"
+                    android:text="@string/participant_registration_details_label_child_category"
                     android:textAppearance="@style/LabelText" />
 
                 <com.google.android.material.textfield.TextInputLayout
@@ -490,19 +506,19 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    app:error="@{viewModel.vaccineValidationMessage}">
+                    app:error="@{viewModel.childCategoryValidationMessage}">
 
                     <AutoCompleteTextView
-                        android:id="@+id/dropdown_vaccine"
+                        android:id="@+id/dropdown_child_category"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="@string/participant_registration_details_label_select_vaccine"
+                        android:hint="@string/participant_registration_details_label_select_child_category"
                         android:inputType="none"
-                        android:text="@{viewModel.vaccine.display}" />
+                        android:text="@{viewModel.childCategory.display}" />
 
                 </com.google.android.material.textfield.TextInputLayout>
-
             </LinearLayout>
+
 
             <Button
                 android:id="@+id/btn_submit"

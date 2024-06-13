@@ -1,6 +1,5 @@
 package com.jnj.vaccinetracker.register.screens
 
-import android.content.Context
 import androidx.collection.ArrayMap
 import com.jnj.vaccinetracker.R
 import com.jnj.vaccinetracker.common.data.database.typealiases.yearNow
@@ -93,6 +92,9 @@ class RegisterParticipantParticipantDetailsViewModel @Inject constructor(
 
     val mothersName = mutableLiveData<String>()
     val mothersNameValidationMessage = mutableLiveData<String>()
+
+    val birthWeight = mutableLiveData<String>()
+    val birthWeightValidationMessage = mutableLiveData<String>()
 
     val fathersName = mutableLiveData<String>()
     val fathersNameValidationMessage = mutableLiveData<String>()
@@ -220,6 +222,7 @@ class RegisterParticipantParticipantDetailsViewModel @Inject constructor(
         val vaccine: DisplayValue? = vaccine.get()
         val participantId = participantId.get()
         val nin = nin.get()
+        val birthWeight = birthWeight.get()
         val gender = gender.get()
         val birthDate = birthDate.get()
         val isBirthDateEstimated = isBirthDateEstimated.get()
@@ -259,6 +262,7 @@ class RegisterParticipantParticipantDetailsViewModel @Inject constructor(
             val result = participantManager.registerParticipant(
                 participantId = participantId!!,
                 nin = nin,
+                birthWeight = birthWeight,
                 gender = gender!!,
                 birthDate = birthDate!!,
                 isBirthDateEstimated = isBirthDateEstimated!!,
@@ -344,6 +348,7 @@ class RegisterParticipantParticipantDetailsViewModel @Inject constructor(
         confirmParticipantIdValidationMessage.set(null)
         ninValidationMessage.set(null)
         genderValidationMessage.set(null)
+        birthWeightValidationMessage.set(null)
         birthDateValidationMessage.set(null)
         phoneValidationMessage.set(null)
         homeLocationValidationMessage.set(null)
@@ -398,6 +403,11 @@ class RegisterParticipantParticipantDetailsViewModel @Inject constructor(
         if (this.nin.get() == nin) return
         this.nin.set(nin)
         // TODO: Validate NIN
+    }
+
+    fun setBirthWeight(birthWeight: String) {
+        if(this.birthWeight.get() == birthWeight) return
+        this.birthWeight.set(birthWeight)
     }
 
     private fun validateParticipantId() {

@@ -110,7 +110,8 @@ class DraftParticipantScript {
                 vaccine = vaccine,
                 address = address,
                 picture = image,
-                biometricsTemplateBytes = template
+                biometricsTemplateBytes = template,
+                birthWeight = birthWeight
             )
             println("logging first visit for participant $participantId")
             val participantUuid = draftParticipant.participantUuid
