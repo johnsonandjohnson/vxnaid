@@ -238,11 +238,51 @@
                             android:visibility="@{viewModel.dosingVisit == null || !viewModel.displayOedema ? View.GONE : View.VISIBLE}" />
 
                         <TextView
+                            android:id="@+id/checkBox_label_oedema"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/with_oedema"
                             android:textAppearance="@style/LabelText"
                             android:visibility="@{viewModel.dosingVisit == null || !viewModel.displayOedema ? View.GONE : View.VISIBLE}" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:visibility="@{!viewModel.shouldValidateMuac  ? View.GONE : View.VISIBLE}">
+
+                        <TextView
+                            android:id="@+id/textView_muacLabel"
+                            android:layout_width="65dp"
+                            android:layout_height="wrap_content"
+                            android:text="@string/visit_z_score_muac_label"
+                            android:textAppearance="@style/LabelText"
+                            android:visibility="@{viewModel.dosingVisit == null || !viewModel.shouldValidateMuac ? View.INVISIBLE : View.VISIBLE}" />
+
+                        <EditText
+                            android:id="@+id/editText_muac_input"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:hint="@string/visit_dosing_hint_cm"
+                            android:importantForAutofill="no"
+                            android:inputType="number"
+                            android:visibility="@{viewModel.dosingVisit == null || !viewModel.shouldValidateMuac ? View.INVISIBLE : View.VISIBLE}"
+                            app:error="@{viewModel.muacValidationMessage}" />
+
+
+                        <TextView
+                            android:id="@+id/textView_z_score_muac_value"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="2"
+                            android:gravity="center"
+                            android:text="@{viewModel.zScoreMuacText}"
+                            android:textAppearance="@style/LabelText"
+                            android:visibility="@{viewModel.dosingVisit == null || !viewModel.shouldValidateMuac  ? View.INVISIBLE : View.VISIBLE}" />
                     </LinearLayout>
 
                 </LinearLayout>

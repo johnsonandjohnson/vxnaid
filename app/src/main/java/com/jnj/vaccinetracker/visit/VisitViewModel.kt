@@ -18,6 +18,7 @@ import com.jnj.vaccinetracker.participantflow.model.ParticipantImageUiModel.Comp
 import com.jnj.vaccinetracker.participantflow.model.ParticipantSummaryUiModel
 import com.jnj.vaccinetracker.sync.domain.entities.UpcomingVisit
 import com.jnj.vaccinetracker.visit.zscore.HeightZScoreCalculator
+import com.jnj.vaccinetracker.visit.zscore.MuacZScoreCalculator
 import com.jnj.vaccinetracker.visit.zscore.NutritionZScoreCalculator
 import com.jnj.vaccinetracker.visit.zscore.WeightZScoreCalculator
 import kotlinx.coroutines.flow.*
@@ -78,6 +79,12 @@ class VisitViewModel @Inject constructor(
     val isOedema = MutableLiveData(false)
     val displayOedema = MutableLiveData(false)
 
+    private val muac = MutableLiveData<Int?>()
+    val muacValidationMessage = mutableLiveData<String>()
+    val zScoreMuacText = MutableLiveData<String>()
+    val shouldValidateMuac = MutableLiveData<Boolean>()
+    val zScoreMuacTextColor = MutableLiveData<Int>()
+
     private var manufacturersList: MutableList<Manufacturer> = mutableListOf<Manufacturer>()
     init {
         initState()
@@ -107,6 +114,7 @@ class VisitViewModel @Inject constructor(
             val visits = visitManager.getVisitsForParticipant(participantSummary.participantUuid)
             val manufacturers = configurationManager.getVaccineManufacturers(participantSummary.vaccine.value)
             val config = configurationManager.getConfiguration()
+            shouldValidateMuac.value = MuacZScoreCalculator.shouldCalculateMuacZScore(participantSummary.birthDateText)
             onVisitsLoaded(visits)
         //    onManufacturersLoaded(manufacturers)
             onManufacturerLoaded(config.manufacturers)
@@ -305,6 +313,8 @@ class VisitViewModel @Inject constructor(
         val manufacturer = selectedManufacturer.get()
         val weight = weight.value
         val height = height.value
+        val muac = muac.value
+        val shouldValidateMuac = shouldValidateMuac.value
         val isOedema = if (!displayOedema.value!!) false else isOedema.value
         val participant = participant.get()
         val dosingVisit = dosingVisit.get()
@@ -342,6 +352,11 @@ class VisitViewModel @Inject constructor(
             isZScoreValid = false
         }
 
+        if (shouldValidateMuac == true && muac == null) {
+            muacValidationMessage.set(resourcesWrapper.getString(R.string.visit_dosing_error_no_muac))
+            isZScoreValid = false
+        }
+
         if (!isZScoreValid) return
 
         loading.set(true)
@@ -358,6 +373,7 @@ class VisitViewModel @Inject constructor(
                     weight = weight!!,
                     height = height!!,
                     isOedema = isOedema!!,
+                    muac=muac
                 )
                 onVisitLogged()
                 loading.set(false)
@@ -467,6 +483,26 @@ class VisitViewModel @Inject constructor(
         if (value == isOedema.value) return
         isOedema.value = value
         setNutritionZScore()
+    }
+
+    fun setMuac(value: Int?) {
+        val validatedValue = if (value != null && value < 0) 0 else value
+
+        if (validatedValue == height.value) return
+
+        muac.value = validatedValue
+        val muacZScoreCalculator = participant.value?.let {
+            MuacZScoreCalculator(
+                    validatedValue,
+                    it.gender,
+                    it.birthDateText
+            )
+        } ?: return
+
+        val zScore = muacZScoreCalculator.calculateZScoreAndRating()
+        zScoreMuacText.value = zScore?.toString() ?: ""
+        zScoreMuacTextColor.value = muacZScoreCalculator.getTextColorBasedOnZsCoreValue()
+        muacValidationMessage.set(null)
     }
 
     private fun setNutritionZScore() {
