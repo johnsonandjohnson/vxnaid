@@ -85,6 +85,9 @@ class VisitDosingFragment : BaseFragment(),
                     ?: return@setOnItemClickListener
             viewModel.setSelectedManufacturer(manufacturerName)
         }
+        binding.checkBoxIsOedema.setOnCheckedChangeListener { _, isChecked ->
+            viewModel.setIsOedema(isChecked)
+        }
     }
 
     private fun setupInputListeners() {
@@ -138,6 +141,9 @@ class VisitDosingFragment : BaseFragment(),
                     view.visit = visit
                 }
             }
+        }
+        viewModel.zScoreNutritionTextColor.observe(lifecycleOwner) {
+            binding.textViewZScoreNutrition.setTextColor(it)
         }
     }
 

@@ -27,6 +27,7 @@ object Constants {
     const val ATTRIBUTE_VISIT_DOSE_NUMBER = "Dose number"
     const val ATTRIBUTE_VISIT_WEIGHT = "Weight"
     const val ATTRIBUTE_VISIT_HEIGHT = "Height"
+    const val ATTRIBUTE_VISIT_OEDEMA = "Oedema"
     const val VISIT_TYPE_DOSING = "Dosing"
     const val VISIT_TYPE_OTHER = "Other"
     const val VISIT_STATUS_OCCURRED = "OCCURRED"

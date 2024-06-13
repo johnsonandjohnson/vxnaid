@@ -101,7 +101,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="32dp"
-                    android:layout_marginTop="5dp"
+                    android:layout_marginTop="10dp"
                     android:layout_marginEnd="32dp"
                     android:text="@string/visit_dosing_label_scan_or_manual_entry"
                     android:textAppearance="@style/LabelText"
@@ -156,9 +156,9 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:gravity="center"
+                            android:hint="@string/visit_dosing_hint_kg"
                             android:importantForAutofill="no"
                             android:inputType="number"
-                            android:hint="@string/visit_dosing_hint_kg"
                             android:visibility="@{viewModel.dosingVisit == null ? View.INVISIBLE : View.VISIBLE}"
                             app:error="@{viewModel.weightValidationMessage}" />
 
@@ -173,6 +173,7 @@
                             android:textAppearance="@style/LabelText"
                             android:visibility="@{viewModel.dosingVisit == null ? View.INVISIBLE : View.VISIBLE}" />
                     </LinearLayout>
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
@@ -193,8 +194,8 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:gravity="center"
-                            android:importantForAutofill="no"
                             android:hint="@string/visit_dosing_hint_cm"
+                            android:importantForAutofill="no"
                             android:inputType="number"
                             android:visibility="@{viewModel.dosingVisit == null ? View.INVISIBLE : View.VISIBLE}"
                             app:error="@{viewModel.heightValidationMessage}" />
@@ -210,6 +211,40 @@
                             android:textAppearance="@style/LabelText"
                             android:visibility="@{viewModel.dosingVisit == null ? View.INVISIBLE : View.VISIBLE}" />
                     </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:layout_marginTop="5dp">
+
+                        <TextView
+                            android:id="@+id/textView_z_score_nutrition"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:alpha="@{viewModel.zScoreNutritionText == null ? 0.7f : 1.0f}"
+                            android:gravity="center"
+                            android:text="@{viewModel.zScoreNutritionText == null ? viewModel.zScoreNutritionPlaceholder : viewModel.zScoreNutritionText}"
+                            android:textAppearance="@style/LabelText"
+                            android:visibility="@{viewModel.dosingVisit == null ? View.INVISIBLE : View.VISIBLE}" />
+
+                        <CheckBox
+                            android:id="@+id/checkBox_is_oedema"
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:checked="@{viewModel.isOedema}"
+                            android:visibility="@{viewModel.dosingVisit == null || !viewModel.displayOedema ? View.GONE : View.VISIBLE}" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/with_oedema"
+                            android:textAppearance="@style/LabelText"
+                            android:visibility="@{viewModel.dosingVisit == null || !viewModel.displayOedema ? View.GONE : View.VISIBLE}" />
+                    </LinearLayout>
+
                 </LinearLayout>
 
 
