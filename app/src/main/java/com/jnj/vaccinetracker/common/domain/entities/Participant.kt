@@ -34,7 +34,12 @@ data class Participant(
     override val birthDate: BirthDate,
     override val attributes: Map<String, String>,
     override val address: Address?,
-) : ParticipantBase(), SyncBase
+) : ParticipantBase(), SyncBase {
+    val birthWeight: String?
+        get() {
+            TODO()
+        }
+}
 
 data class DraftParticipant(
     override val participantUuid: String,
@@ -48,6 +53,7 @@ data class DraftParticipant(
     override val attributes: Map<String, String>,
     override val address: Address?,
     override val draftState: DraftState,
+    val birthWeight: String?,
 ) : ParticipantBase(), SyncBase, UploadableDraft {
     override val dateModified: DateEntity get() = registrationDate
 }

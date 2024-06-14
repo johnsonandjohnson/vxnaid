@@ -2,11 +2,11 @@
   "formatVersion": 1,
   "database": {
     "version": 13,
-    "identityHash": "19a005981438cb17549b032f6801bf89",
+    "identityHash": "ec43502b98aabc6b0664ffcc44faaf40",
     "entities": [
       {
         "tableName": "participant",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`participantUuid` TEXT NOT NULL, `participantId` TEXT NOT NULL COLLATE NOCASE, `nin` TEXT, `phone` TEXT, `gender` TEXT NOT NULL, `birthDate` INTEGER NOT NULL, `isBirthDateEstimated` INTEGER, `dateModified` INTEGER NOT NULL, `locationUuid` TEXT, PRIMARY KEY(`participantUuid`))",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`participantUuid` TEXT NOT NULL, `participantId` TEXT NOT NULL COLLATE NOCASE, `nin` TEXT, `phone` TEXT, `birthWeight` TEXT, `gender` TEXT NOT NULL, `birthDate` INTEGER NOT NULL, `isBirthDateEstimated` INTEGER, `dateModified` INTEGER NOT NULL, `locationUuid` TEXT, PRIMARY KEY(`participantUuid`))",
         "fields": [
           {
             "fieldPath": "participantUuid",
@@ -29,6 +29,12 @@
           {
             "fieldPath": "phone",
             "columnName": "phone",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "birthWeight",
+            "columnName": "birthWeight",
             "affinity": "TEXT",
             "notNull": false
           },
@@ -858,7 +864,7 @@
       },
       {
         "tableName": "draft_participant",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`participantUuid` TEXT NOT NULL, `phone` TEXT, `participantId` TEXT NOT NULL COLLATE NOCASE, `nin` TEXT, `gender` TEXT NOT NULL, `birthDate` INTEGER NOT NULL, `isBirthDateEstimated` INTEGER, `registrationDate` INTEGER NOT NULL, `draftState` TEXT NOT NULL, `locationUuid` TEXT, PRIMARY KEY(`participantUuid`))",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`participantUuid` TEXT NOT NULL, `phone` TEXT, `participantId` TEXT NOT NULL COLLATE NOCASE, `nin` TEXT, `gender` TEXT NOT NULL, `birthDate` INTEGER NOT NULL, `isBirthDateEstimated` INTEGER, `registrationDate` INTEGER NOT NULL, `draftState` TEXT NOT NULL, `locationUuid` TEXT, `birthWeight` TEXT, PRIMARY KEY(`participantUuid`))",
         "fields": [
           {
             "fieldPath": "participantUuid",
@@ -917,6 +923,12 @@
           {
             "fieldPath": "locationUuid",
             "columnName": "locationUuid",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "birthWeight",
+            "columnName": "birthWeight",
             "affinity": "TEXT",
             "notNull": false
           }
@@ -1609,7 +1621,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '19a005981438cb17549b032f6801bf89')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'ec43502b98aabc6b0664ffcc44faaf40')"
     ]
   }
 }

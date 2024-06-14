@@ -76,6 +76,7 @@ class ParticipantManager @Inject constructor(
     suspend fun registerParticipant(
         participantId: String,
         nin: String?,
+        birthWeight: String?,
         gender: Gender,
         birthDate: DateTime,
         isBirthDateEstimated: Boolean,
@@ -86,7 +87,6 @@ class ParticipantManager @Inject constructor(
         address: Address,
         picture: ImageBytes?,
         biometricsTemplateBytes: BiometricsTemplateBytes?,
-        birthWeight: String?,
     ): DraftParticipant {
         val operatorUUid = userRepository.getUser()?.uuid ?: throw OperatorUuidNotAvailableException("trying to register participant without stored operator uuid")
 

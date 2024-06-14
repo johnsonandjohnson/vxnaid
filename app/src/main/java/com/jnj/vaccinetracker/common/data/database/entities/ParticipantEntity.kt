@@ -14,6 +14,7 @@ data class ParticipantEntity(
     override val nin: String?,
     @ColumnInfo(index = true)
     override val phone: String?,
+    override val birthWeight: String?, 
     override val gender: GenderEntity,
     override val birthDate: BirthDateEntity,
     @ColumnInfo(index = true)

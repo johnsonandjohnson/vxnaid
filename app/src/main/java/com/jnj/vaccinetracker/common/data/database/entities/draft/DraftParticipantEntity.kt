@@ -26,6 +26,7 @@ data class DraftParticipantEntity(
     override val draftState: DraftState = DraftState.initialState(),
     @ColumnInfo(index = true)
     override val locationUuid: String?,
+    override val birthWeight: String?
 ) : DraftParticipantEntityBase {
     companion object {
         const val ID = ParticipantUuidContainer.COL_PARTICIPANT_UUID

@@ -168,6 +168,7 @@ class RegisterParticipantParticipantDetailsFragment : BaseFragment(),
             val text = binding.editParticipantNin.text.toString()
             viewModel.setNin(text)
         }
+        
 
         binding.editParticipantId.doAfterTextChanged {
             val text = binding.editParticipantId.text.toString()
@@ -180,6 +181,10 @@ class RegisterParticipantParticipantDetailsFragment : BaseFragment(),
 
         binding.editTelephone.doAfterTextChanged {
             viewModel.setPhone(it?.toString().orEmpty())
+        }
+        
+        binding.editBirthWeight.doAfterTextChanged {
+            viewModel.setBirthWeight(it?.toString().orEmpty())
         }
 
 //        binding.editYearOfBirth.doAfterTextChanged {

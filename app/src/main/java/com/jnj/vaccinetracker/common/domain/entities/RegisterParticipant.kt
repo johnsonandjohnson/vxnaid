@@ -12,7 +12,9 @@ data class RegisterParticipant(
     val image: ImageBytes?,
     val biometricsTemplate: BiometricsTemplateBytes?,
     val scheduleFirstVisit: ScheduleFirstVisit,
-)
+) {
+    val birthWeight: String? = null
+}
 
 data class ScheduleFirstVisit(
     val visitType: String,

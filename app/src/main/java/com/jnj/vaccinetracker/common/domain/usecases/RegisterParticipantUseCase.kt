@@ -42,16 +42,17 @@ class RegisterParticipantUseCase @Inject constructor(
         participantImageFile: DraftParticipantImageFile?,
     ) = DraftParticipant(
         participantUuid = participantUuid,
-        nin = nin,
         registrationDate = registrationDate,
         image = participantImageFile,
         biometricsTemplate = participantBiometricsTemplateFile,
         participantId = participantId,
+        nin = nin,
         gender = gender,
         birthDate = birthDate,
         attributes = attributes,
         address = address,
-        draftState = DraftState.initialState()
+        draftState = DraftState.initialState(),
+        birthWeight = birthWeight
     )
 
     private suspend fun writeImageToDisk(file: DraftParticipantImageFile, imageBytes: ImageBytes) {
