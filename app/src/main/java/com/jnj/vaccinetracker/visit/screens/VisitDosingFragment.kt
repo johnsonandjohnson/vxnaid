@@ -49,6 +49,8 @@ class VisitDosingFragment : BaseFragment(),
         private const val MAX_WEIGHT = 300
         private const val MIN_HEIGHT = 1
         private const val MAX_HEIGHT = 300
+        private const val MIN_MUAC = 1
+        private const val MAX_MUAC = 300
     }
 
     private val viewModel: VisitViewModel by activityViewModels { viewModelFactory }
@@ -70,6 +72,7 @@ class VisitDosingFragment : BaseFragment(),
     private fun setupFilters() {
         binding.editTextWeightInput.filters = arrayOf(InputFilterMinMax(MIN_WEIGHT, MAX_WEIGHT))
         binding.editTextHeightInput.filters = arrayOf(InputFilterMinMax(MIN_HEIGHT, MAX_HEIGHT))
+        binding.editTextMuacInput.filters = arrayOf(InputFilterMinMax(MIN_MUAC, MAX_MUAC))
     }
 
     private fun setupClickListeners() {
@@ -109,6 +112,11 @@ class VisitDosingFragment : BaseFragment(),
                 viewModel.setHeight(newVal)
             }
         }
+        binding.editTextMuacInput.doOnTextChanged { s, _, _, _ ->
+            s.toString().toIntOrNull().let { newVal ->
+                viewModel.setMuac(newVal)
+            }
+        }
     }
 
     override fun observeViewModel(lifecycleOwner: LifecycleOwner) {
@@ -144,6 +152,9 @@ class VisitDosingFragment : BaseFragment(),
         }
         viewModel.zScoreNutritionTextColor.observe(lifecycleOwner) {
             binding.textViewZScoreNutrition.setTextColor(it)
+        }
+        viewModel.zScoreMuacTextColor.observe(lifecycleOwner) {
+            binding.textViewZScoreMuacValue.setTextColor(it)
         }
     }
 

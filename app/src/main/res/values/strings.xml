@@ -338,4 +338,6 @@
     <string name="visit_dosing_hint_cm">cm</string>
     <string name="visit_dosing_error_no_height">Please enter height</string>
     <string name="with_oedema">Oedema?</string>
+    <string name="visit_z_score_muac_label">MUAC:</string>
+    <string name="visit_dosing_error_no_muac">Please enter muac</string>
 </resources>
