@@ -47,6 +47,7 @@ class ParticipantRepository @Inject constructor(
             .withPhone(phone)
             .withLocationUuid(locationUuid)
             .withIsBirthDateEstimated(isBirthDateEstimated),
+            // todo add the map here
         biometricsTemplate = templateFile,
         image = imageFile
     )
@@ -59,6 +60,7 @@ class ParticipantRepository @Inject constructor(
         gender = gender,
         birthWeight = birthWeight,
         birthDate = birthDate,
+        // todo might be here
         dateModified = dateModified,
         locationUuid = locationUuid,
         isBirthDateEstimated = isBirthDateEstimated,

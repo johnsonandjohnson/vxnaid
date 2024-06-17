@@ -17,6 +17,7 @@ data class ParticipantEntity(
     override val birthWeight: String?, 
     override val gender: GenderEntity,
     override val birthDate: BirthDateEntity,
+    // todo add birth weigth
     @ColumnInfo(index = true)
     override val isBirthDateEstimated: Boolean?,
     @ColumnInfo(index = true)

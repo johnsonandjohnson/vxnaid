@@ -96,6 +96,7 @@ class ParticipantManager @Inject constructor(
             Constants.ATTRIBUTE_VACCINE to vaccine,
             Constants.ATTRIBUTE_OPERATOR to operatorUUid,
             Constants.ATTRIBUTE_IS_BIRTH_DATE_ESTIMATED to isBirthDateEstimated.toString(),
+            // add birth weight to the list off attributes
         )
         if (telephone != null) {
             personAttributes[Constants.ATTRIBUTE_TELEPHONE] = telephone

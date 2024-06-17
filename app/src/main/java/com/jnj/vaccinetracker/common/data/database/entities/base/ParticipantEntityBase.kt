@@ -9,6 +9,7 @@ interface ParticipantEntityBase : ParticipantUuidContainer {
     val nin: String?
     val gender: GenderEntity
     val birthDate: BirthDateEntity
+    // todo birth weight
     val isBirthDateEstimated: Boolean?
     val locationUuid: String?
     val birthWeight: String?

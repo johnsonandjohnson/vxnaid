@@ -21,6 +21,8 @@ sealed class ParticipantBase {
     val originalParticipantId: String? get() = attributes[Constants.ATTRIBUTE_ORIGINAL_PARTICIPANT_ID]
     val regimen: String? get() = attributes[Constants.ATTRIBUTE_VACCINE]
     val isBirthDateEstimated: Boolean? get() = attributes[Constants.ATTRIBUTE_IS_BIRTH_DATE_ESTIMATED]?.toBoolean()
+
+    // TODO create a getter
 }
 
 data class Participant(
@@ -34,6 +36,7 @@ data class Participant(
     override val birthDate: BirthDate,
     override val attributes: Map<String, String>,
     override val address: Address?,
+    // todo birth weight override val
 ) : ParticipantBase(), SyncBase {
     val birthWeight: String?
         get() {
@@ -81,6 +84,8 @@ fun Map<String, String>.withIsBirthDateEstimated(isBirthDateEstimated: Boolean?)
         filterKeys { it != birthdayEstimatedKey }
     }
 }
+
+// TODO Map<String, String> birthWeight
 
 
 fun DraftParticipant.toParticipantWithoutAssets(): Participant = Participant(

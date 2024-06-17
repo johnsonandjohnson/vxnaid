@@ -18,6 +18,7 @@ object Constants {
     const val ATTRIBUTE_VACCINE = "Vaccination program"
     const val ATTRIBUTE_ORIGINAL_PARTICIPANT_ID = "originalParticipantId"
     const val ATTRIBUTE_IS_BIRTH_DATE_ESTIMATED = "Is Birth Date Estimated"
+    // TODO add birth weight attribiute
 
     // Visit
     const val ATTRIBUTE_VISIT_STATUS = "Visit Status"

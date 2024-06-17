@@ -21,6 +21,7 @@ data class RoomParticipantModel(
     override val gender: GenderEntity,
     override val birthDate: BirthDateEntity,
     override val isBirthDateEstimated: Boolean?,
+    // todo add birth weight
     @Relation(parentColumn = ParticipantEntity.ID, entityColumn = ParticipantEntity.ID)
     val attributes: List<ParticipantAttributeEntity>,
     @Embedded
