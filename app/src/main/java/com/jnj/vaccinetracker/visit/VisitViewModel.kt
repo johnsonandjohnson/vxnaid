@@ -1,5 +1,6 @@
 package com.jnj.vaccinetracker.visit
 
+import androidx.lifecycle.MutableLiveData
 import com.jnj.vaccinetracker.R
 import com.jnj.vaccinetracker.common.data.managers.ConfigurationManager
 import com.jnj.vaccinetracker.common.data.managers.ParticipantManager
@@ -16,6 +17,10 @@ import com.jnj.vaccinetracker.participantflow.model.ParticipantImageUiModel
 import com.jnj.vaccinetracker.participantflow.model.ParticipantImageUiModel.Companion.toUiModel
 import com.jnj.vaccinetracker.participantflow.model.ParticipantSummaryUiModel
 import com.jnj.vaccinetracker.sync.domain.entities.UpcomingVisit
+import com.jnj.vaccinetracker.visit.zscore.HeightZScoreCalculator
+import com.jnj.vaccinetracker.visit.zscore.MuacZScoreCalculator
+import com.jnj.vaccinetracker.visit.zscore.NutritionZScoreCalculator
+import com.jnj.vaccinetracker.visit.zscore.WeightZScoreCalculator
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.yield
@@ -60,6 +65,26 @@ class VisitViewModel @Inject constructor(
     private val manufacturerRegexes = mutableLiveData<List<Manufacturer>>()
     val upcomingVisit = mutableLiveData<UpcomingVisit?>()
 
+    private val weight = MutableLiveData<Int?>()
+    val weightValidationMessage = mutableLiveData<String>()
+    val zScoreWeightText = MutableLiveData<String>()
+
+    private val height = MutableLiveData<Int?>()
+    val heightValidationMessage = mutableLiveData<String>()
+    val zScoreHeightText = MutableLiveData<String>()
+
+    val zScoreNutritionText = MutableLiveData<String>()
+    val zScoreNutritionTextColor = MutableLiveData<Int>()
+    val zScoreNutritionPlaceholder = "-/-"
+    val isOedema = MutableLiveData(false)
+    val displayOedema = MutableLiveData(false)
+
+    private val muac = MutableLiveData<Int?>()
+    val muacValidationMessage = mutableLiveData<String>()
+    val zScoreMuacText = MutableLiveData<String>()
+    val shouldValidateMuac = MutableLiveData<Boolean>()
+    val zScoreMuacTextColor = MutableLiveData<Int>()
+
     private var manufacturersList: MutableList<Manufacturer> = mutableListOf<Manufacturer>()
     init {
         initState()
@@ -89,6 +114,7 @@ class VisitViewModel @Inject constructor(
             val visits = visitManager.getVisitsForParticipant(participantSummary.participantUuid)
             val manufacturers = configurationManager.getVaccineManufacturers(participantSummary.vaccine.value)
             val config = configurationManager.getConfiguration()
+            shouldValidateMuac.value = MuacZScoreCalculator.shouldCalculateMuacZScore(participantSummary.birthDateText)
             onVisitsLoaded(visits)
         //    onManufacturersLoaded(manufacturers)
             onManufacturerLoaded(config.manufacturers)
@@ -283,8 +309,13 @@ class VisitViewModel @Inject constructor(
         overrideOutsideTimeWindowCheck: Boolean = false,
         overrideManufacturerCheck: Boolean = false,
     ) {
-
+        var isZScoreValid = true
         val manufacturer = selectedManufacturer.get()
+        val weight = weight.value
+        val height = height.value
+        val muac = muac.value
+        val shouldValidateMuac = shouldValidateMuac.value
+        val isOedema = if (!displayOedema.value!!) false else isOedema.value
         val participant = participant.get()
         val dosingVisit = dosingVisit.get()
 
@@ -311,6 +342,23 @@ class VisitViewModel @Inject constructor(
             return
         }
 
+        if (weight == null) {
+            weightValidationMessage.set(resourcesWrapper.getString(R.string.visit_dosing_error_no_weight))
+            isZScoreValid = false
+        }
+
+        if (height == null) {
+            heightValidationMessage.set(resourcesWrapper.getString(R.string.visit_dosing_error_no_height))
+            isZScoreValid = false
+        }
+
+        if (shouldValidateMuac == true && muac == null) {
+            muacValidationMessage.set(resourcesWrapper.getString(R.string.visit_dosing_error_no_muac))
+            isZScoreValid = false
+        }
+
+        if (!isZScoreValid) return
+
         loading.set(true)
 
         scope.launch {
@@ -321,7 +369,11 @@ class VisitViewModel @Inject constructor(
                     vialCode = vialBarcode,
                     manufacturer = manufacturer,
                     participantUuid = participant.participantUuid,
-                    dosingNumber = requireNotNull(dosingVisit.dosingNumber) { "dosing visit must have a dosing number" }
+                    dosingNumber = requireNotNull(dosingVisit.dosingNumber) { "dosing visit must have a dosing number" },
+                    weight = weight!!,
+                    height = height!!,
+                    isOedema = isOedema!!,
+                    muac=muac
                 )
                 onVisitLogged()
                 loading.set(false)
@@ -388,6 +440,86 @@ class VisitViewModel @Inject constructor(
             logWarn("error participantUuid not available to get upcoming visit")
             null
         }
+    }
+
+    fun setWeight(value: Int?) {
+        val validatedValue = if (value != null && value < 0) 0 else value
+
+        if (validatedValue == weight.value) return
+
+        weight.value = validatedValue
+        val zScore = participant.value?.let {
+            WeightZScoreCalculator(
+                    validatedValue,
+                    it.gender,
+                    it.birthDateText
+            ).calculateZScoreAndRating()
+        }
+
+        zScoreWeightText.value = zScore?.toString() ?: ""
+        weightValidationMessage.set(null)
+        setNutritionZScore()
+    }
+
+    fun setHeight(value: Int?) {
+        val validatedValue = if (value != null && value < 0) 0 else value
+
+        if (validatedValue == height.value) return
+
+        height.value = validatedValue
+        val zScore = participant.value?.let {
+            HeightZScoreCalculator(
+                    validatedValue,
+                    it.gender,
+                    it.birthDateText
+            ).calculateZScoreAndRating()
+        }
+
+        zScoreHeightText.value = zScore?.toString() ?: ""
+        heightValidationMessage.set(null)
+        setNutritionZScore()
+    }
+    fun setIsOedema(value: Boolean) {
+        if (value == isOedema.value) return
+        isOedema.value = value
+        setNutritionZScore()
+    }
+
+    fun setMuac(value: Int?) {
+        val validatedValue = if (value != null && value < 0) 0 else value
+
+        if (validatedValue == height.value) return
+
+        muac.value = validatedValue
+        val muacZScoreCalculator = participant.value?.let {
+            MuacZScoreCalculator(
+                    validatedValue,
+                    it.gender,
+                    it.birthDateText
+            )
+        } ?: return
+
+        val zScore = muacZScoreCalculator.calculateZScoreAndRating()
+        zScoreMuacText.value = zScore?.toString() ?: ""
+        zScoreMuacTextColor.value = muacZScoreCalculator.getTextColorBasedOnZsCoreValue()
+        muacValidationMessage.set(null)
+    }
+
+    private fun setNutritionZScore() {
+        val nutritionZScoreCalculator = participant.value?.let {
+            NutritionZScoreCalculator(
+                    weight.value,
+                    height.value,
+                    isOedema.value,
+                    it.gender,
+                    it.birthDateText
+            )
+        } ?: return
+
+        val zScore = nutritionZScoreCalculator.calculateZScoreAndRating()
+        displayOedema.value = nutritionZScoreCalculator.isOedemaValue()
+        zScoreNutritionText.value = zScore?.toString()
+        zScoreNutritionTextColor.value = nutritionZScoreCalculator.getTextColorBasedOnZsCoreValue()
     }
 }
 
