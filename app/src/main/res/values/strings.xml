@@ -330,6 +330,8 @@
     <string name="participant_registration_details_birth_date_hint">Enter the child\'s date of birth</string>
     <string name="participant_registration_details_action_set_birth_date">Set date</string>
     <string name="participant_registration_details_label_is_birth_date_estimated">Is Birth Date Estimated?</string>
+    <string name="participant_registration_details_error_no_birthday">Please select a birthdate</string>
+    <string name="participant_registration_details_error_birthdate_bigger_than_today">Invalid future date</string>
     <string name="visit_z_score_weight_label">Weight:</string>
     <string name="visit_z_score_label">Z Score:</string>
     <string name="visit_dosing_error_no_weight">Please enter weight</string>

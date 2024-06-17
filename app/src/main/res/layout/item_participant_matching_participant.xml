@@ -92,7 +92,7 @@
             android:id="@+id/textView_yearOfBirth"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@{String.valueOf(item.participant.birthDateText)}"
+            android:text='@{item.participant.isBirthDateEstimated ? "~ " + item.participant.birthDateText : item.participant.birthDateText}'
             android:textSize="16sp"
             app:layout_constraintBottom_toTopOf="@+id/textView_homeLocation"
             app:layout_constraintStart_toStartOf="@+id/textView_gender"
