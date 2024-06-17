@@ -40,7 +40,6 @@ class DraftParticipantRepository @Inject constructor(
         biometricsTemplate = templateFile,
         participantId = participantId,
         nin = nin,
-        birthWeight = birthWeight,
         gender = gender,
         birthDate = birthDate,
         address = address?.toDomain(),
@@ -48,6 +47,7 @@ class DraftParticipantRepository @Inject constructor(
         attributes = attributes.toMap()
             .withPhone(phone)
             .withLocationUuid(locationUuid)
+            .withBirthWeight(birthWeight)
             .withIsBirthDateEstimated(isBirthDateEstimated),
         draftState = draftState
     )
@@ -58,8 +58,8 @@ class DraftParticipantRepository @Inject constructor(
         participantId = participantId,
         nin = nin,
         gender = gender,
-        birthWeight = birthWeight,
         birthDate = birthDate,
+        birthWeight = birthWeight,
         isBirthDateEstimated = isBirthDateEstimated,
         draftState = DraftState.initialState(),
         registrationDate = dateModified,

@@ -9,6 +9,7 @@ import com.jnj.vaccinetracker.sync.data.models.VisitType
  */
 object Constants {
 
+
     const val IRIS_TEMPLATE_NAME = "irisTemplate.dat"
 
     // Participant
@@ -18,6 +19,7 @@ object Constants {
     const val ATTRIBUTE_VACCINE = "Vaccination program"
     const val ATTRIBUTE_ORIGINAL_PARTICIPANT_ID = "originalParticipantId"
     const val ATTRIBUTE_IS_BIRTH_DATE_ESTIMATED = "Is Birth Date Estimated"
+    const val ATTRIBUTE_BIRTH_WEIGHT= "Birth Weight"
 
     // Visit
     const val ATTRIBUTE_VISIT_STATUS = "Visit Status"

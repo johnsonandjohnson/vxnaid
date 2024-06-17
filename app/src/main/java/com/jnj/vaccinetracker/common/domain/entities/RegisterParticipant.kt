@@ -8,7 +8,7 @@ data class RegisterParticipant(
     val gender: Gender,
     val birthDate: BirthDate,
     val address: Address,
-    val attributes: Map<String, String>,
+    val attributes: MutableMap<String, String?>,
     val image: ImageBytes?,
     val biometricsTemplate: BiometricsTemplateBytes?,
     val scheduleFirstVisit: ScheduleFirstVisit,

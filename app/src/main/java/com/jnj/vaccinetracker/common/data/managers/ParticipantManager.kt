@@ -9,7 +9,6 @@ import com.jnj.vaccinetracker.common.domain.usecases.MatchParticipantsUseCase
 import com.jnj.vaccinetracker.common.domain.usecases.RegisterParticipantUseCase
 import com.jnj.vaccinetracker.common.exceptions.NoSiteUuidAvailableException
 import com.jnj.vaccinetracker.common.exceptions.OperatorUuidNotAvailableException
-import com.jnj.vaccinetracker.common.helpers.NetworkConnectivity
 import com.jnj.vaccinetracker.sync.data.repositories.SyncSettingsRepository
 import com.soywiz.klock.DateTime
 import javax.inject.Inject
@@ -96,6 +95,7 @@ class ParticipantManager @Inject constructor(
             Constants.ATTRIBUTE_VACCINE to vaccine,
             Constants.ATTRIBUTE_OPERATOR to operatorUUid,
             Constants.ATTRIBUTE_IS_BIRTH_DATE_ESTIMATED to isBirthDateEstimated.toString(),
+            Constants.ATTRIBUTE_BIRTH_WEIGHT to birthWeight,
         )
         if (telephone != null) {
             personAttributes[Constants.ATTRIBUTE_TELEPHONE] = telephone

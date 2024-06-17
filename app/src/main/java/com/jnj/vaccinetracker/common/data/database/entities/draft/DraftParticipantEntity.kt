@@ -19,6 +19,7 @@ data class DraftParticipantEntity(
     override val nin: String?,
     override val gender: GenderEntity,
     override val birthDate: BirthDateEntity,
+    override val birthWeight: String?,
     @ColumnInfo(index = true)
     override val isBirthDateEstimated: Boolean?,
     override val registrationDate: DateEntity,
@@ -26,7 +27,7 @@ data class DraftParticipantEntity(
     override val draftState: DraftState = DraftState.initialState(),
     @ColumnInfo(index = true)
     override val locationUuid: String?,
-    override val birthWeight: String?
+
 ) : DraftParticipantEntityBase {
     companion object {
         const val ID = ParticipantUuidContainer.COL_PARTICIPANT_UUID

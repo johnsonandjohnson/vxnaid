@@ -21,6 +21,7 @@ sealed class ParticipantBase {
     val originalParticipantId: String? get() = attributes[Constants.ATTRIBUTE_ORIGINAL_PARTICIPANT_ID]
     val regimen: String? get() = attributes[Constants.ATTRIBUTE_VACCINE]
     val isBirthDateEstimated: Boolean? get() = attributes[Constants.ATTRIBUTE_IS_BIRTH_DATE_ESTIMATED]?.toBoolean()
+    val birthWeight: String? get() = attributes[Constants.ATTRIBUTE_BIRTH_WEIGHT]
 }
 
 data class Participant(
@@ -35,10 +36,7 @@ data class Participant(
     override val attributes: Map<String, String>,
     override val address: Address?,
 ) : ParticipantBase(), SyncBase {
-    val birthWeight: String?
-        get() {
-            TODO()
-        }
+
 }
 
 data class DraftParticipant(
@@ -53,7 +51,6 @@ data class DraftParticipant(
     override val attributes: Map<String, String>,
     override val address: Address?,
     override val draftState: DraftState,
-    val birthWeight: String?,
 ) : ParticipantBase(), SyncBase, UploadableDraft {
     override val dateModified: DateEntity get() = registrationDate
 }
@@ -80,8 +77,13 @@ fun Map<String, String>.withIsBirthDateEstimated(isBirthDateEstimated: Boolean?)
     } else {
         filterKeys { it != birthdayEstimatedKey }
     }
-}
 
+  fun Map<String, String>.withBirthWeight(birthWeight: String?): Map<String,String> {
+      val birthWeightKey = Constants.ATTRIBUTE_BIRTH_WEIGHT
+      return birthWeight?.let { this + mapOf(birthWeightKey to it) } ?: filterKeys { it != birthWeightKey}
+  }
+
+}
 
 fun DraftParticipant.toParticipantWithoutAssets(): Participant = Participant(
     participantUuid = participantUuid,
