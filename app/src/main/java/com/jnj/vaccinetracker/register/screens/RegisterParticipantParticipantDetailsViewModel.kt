@@ -222,7 +222,9 @@ class RegisterParticipantParticipantDetailsViewModel @Inject constructor(
         val vaccine: DisplayValue? = vaccine.get()
         val participantId = participantId.get()
         val nin = nin.get()
+        logInfo("setting up birthweight")
         val birthWeight = birthWeight.get()
+        logInfo("setting up birthweight")
         val gender = gender.get()
         val birthDate = birthDate.get()
         val isBirthDateEstimated = isBirthDateEstimated.get()
@@ -328,6 +330,11 @@ class RegisterParticipantParticipantDetailsViewModel @Inject constructor(
         if (gender == null) {
             isValid = false
             genderValidationMessage.set(resourcesWrapper.getString(R.string.participant_registration_details_error_no_gender))
+        }
+
+        if (birthWeight == null ){
+            isValid = false
+            birthWeightValidationMessage.set("Please enter birth weight as integer")
         }
 
         if (homeLocation?.isEmpty() != false) {
