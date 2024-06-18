@@ -49,6 +49,7 @@ class DraftParticipantRepository @Inject constructor(
             .withLocationUuid(locationUuid)
             .withBirthWeight(birthWeight)
             .withIsBirthDateEstimated(isBirthDateEstimated),
+            // TODO add the map of birthweight here
         draftState = draftState
     )
 

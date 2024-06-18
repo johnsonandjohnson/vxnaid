@@ -9,7 +9,6 @@ import com.jnj.vaccinetracker.sync.data.models.VisitType
  */
 object Constants {
 
-
     const val IRIS_TEMPLATE_NAME = "irisTemplate.dat"
 
     // Participant
