@@ -25,6 +25,9 @@ data class ParticipantMatch(
     val telephoneNumber: String?
         get() = attributes[Constants.ATTRIBUTE_TELEPHONE]
 
+    val isBirthDateEstimated: Boolean
+        get() = attributes[Constants.ATTRIBUTE_IS_BIRTH_DATE_ESTIMATED].toBoolean()
+
     val yearOfBirth: Int = birthDate.year
 
     fun isBiometricsMatch(biometricsTemplateBytes: BiometricsTemplateBytes?) = biometricsTemplateBytes != null && (matchingScore ?: 0) > 0

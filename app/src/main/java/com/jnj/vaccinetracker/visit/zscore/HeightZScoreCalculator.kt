@@ -11,7 +11,7 @@ class HeightZScoreCalculator(
     }
 
     override fun calculateZScoreAndRating(): ZScoreAndRating? {
-        val zScore = calculateZScore() ?: return null
+        val zScore = this.zScore ?: return null
         val rating = when {
             zScore < -2 -> STUNTING
             else -> NORMAL

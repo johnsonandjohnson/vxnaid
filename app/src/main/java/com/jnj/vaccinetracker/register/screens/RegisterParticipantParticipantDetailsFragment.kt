@@ -94,6 +94,7 @@ class RegisterParticipantParticipantDetailsFragment : BaseFragment(),
                 binding.countryCodePickerPhone.setCountryForPhoneCode(countryCode.toInt())
             }
         }
+
 //        viewModel.vaccineNames.observe(lifecycleOwner) { vaccineNames ->
 //            val adapter = ArrayAdapter(
 //                requireContext(),
@@ -242,11 +243,13 @@ class RegisterParticipantParticipantDetailsFragment : BaseFragment(),
     }
 
     private fun setupDropdowns() {
+
 //        binding.dropdownVaccine.setOnItemClickListener { _, _, position, _ ->
 //            val vaccineName =
 //                viewModel.vaccineNames.value?.get(position) ?: return@setOnItemClickListener
 //            viewModel.setSelectedVaccine(vaccineName)
 //        }
+
         binding.dropdownChildCategory.setOnItemClickListener { _, _, position, _ ->
             val childCategoryName =
                 viewModel.childCategoryNames.value?.get(position) ?: return@setOnItemClickListener

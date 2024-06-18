@@ -82,7 +82,6 @@ class ParticipantManager @Inject constructor(
         telephone: String?,
         siteUuid: String,
         language: String,
-        vaccine: String,
         address: Address,
         picture: ImageBytes?,
         biometricsTemplateBytes: BiometricsTemplateBytes?,
@@ -92,7 +91,6 @@ class ParticipantManager @Inject constructor(
         val personAttributes = mutableMapOf(
             Constants.ATTRIBUTE_LOCATION to siteUuid,
             Constants.ATTRIBUTE_LANGUAGE to language,
-            Constants.ATTRIBUTE_VACCINE to vaccine,
             Constants.ATTRIBUTE_OPERATOR to operatorUUid,
             Constants.ATTRIBUTE_IS_BIRTH_DATE_ESTIMATED to isBirthDateEstimated.toString(),
             Constants.ATTRIBUTE_BIRTH_WEIGHT to birthWeight,

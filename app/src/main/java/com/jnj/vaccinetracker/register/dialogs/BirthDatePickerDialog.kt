@@ -11,7 +11,6 @@ import com.jnj.vaccinetracker.common.helpers.findParent
 import com.soywiz.klock.DateTime
 import java.util.Calendar
 
-
 class BirthDatePickerDialog(
         private var selectedDate: DateTime? = null,
         private var isBirthDateEstimatedChecked: Boolean = false)
@@ -29,16 +28,17 @@ class BirthDatePickerDialog(
         }
         checkBox.isChecked = isBirthDateEstimatedChecked
 
+        val c = Calendar.getInstance()
+        datePicker.maxDate = c.timeInMillis
         if (selectedDate == null) {
-            val c = Calendar.getInstance()
             val year = c.get(Calendar.YEAR)
-            val month = c.get(Calendar.MONTH)
+            val month = c.get(Calendar.MONTH + 1)
             val day = c.get(Calendar.DAY_OF_MONTH)
             datePicker.init(year, month, day, null)
         }
 
         dialog.findViewById<Button>(R.id.btn_ok).setOnClickListener {
-            selectedDate = DateTime(datePicker.year, datePicker.month, datePicker.dayOfMonth)
+            selectedDate = DateTime(datePicker.year, datePicker.month + 1, datePicker.dayOfMonth)
             isBirthDateEstimatedChecked = checkBox.isChecked
             findParent<BirthDatePickerListener>()?.onBirthDatePicked(selectedDate!!, isBirthDateEstimatedChecked)
             dialog.dismiss()
@@ -55,4 +55,3 @@ class BirthDatePickerDialog(
         fun onBirthDatePicked(birthDate: DateTime, isChecked: Boolean)
     }
 }
-
