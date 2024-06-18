@@ -262,7 +262,6 @@ class RegisterParticipantParticipantDetailsViewModel @Inject constructor(
             val compressedImage = picture?.toDomain()?.compress()
             val biometricsTemplateBytes = getTempBiometricsTemplatesBytesUseCase.getBiometricsTemplate(irisScans)
             val result = participantManager.registerParticipant(
-
                 participantId = participantId!!,
                 nin = nin,
                 birthWeight = birthWeight,
@@ -272,23 +271,9 @@ class RegisterParticipantParticipantDetailsViewModel @Inject constructor(
                 telephone = phoneNumberToSubmit,
                 siteUuid = siteUuid,
                 language = "English",
-                vaccine = vaccine?.value!!,
                 address = homeLocation!!,
                 picture = compressedImage,
                 biometricsTemplateBytes = biometricsTemplateBytes,
-
-                    participantId = participantId!!,
-                    nin = nin,
-                    gender = gender!!,
-                    birthDate = birthDate!!,
-                    isBirthDateEstimated = isBirthDateEstimated!!,
-                    telephone = phoneNumberToSubmit,
-                    siteUuid = siteUuid,
-                    language = "English",
-                    address = homeLocation!!,
-                    picture = compressedImage,
-                    biometricsTemplateBytes = biometricsTemplateBytes,
-
             )
             loading.set(false)
             registerSuccessEvents.tryEmit(

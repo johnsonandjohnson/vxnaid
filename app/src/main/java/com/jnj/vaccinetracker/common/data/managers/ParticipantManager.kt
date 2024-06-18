@@ -93,10 +93,12 @@ class ParticipantManager @Inject constructor(
             Constants.ATTRIBUTE_LANGUAGE to language,
             Constants.ATTRIBUTE_OPERATOR to operatorUUid,
             Constants.ATTRIBUTE_IS_BIRTH_DATE_ESTIMATED to isBirthDateEstimated.toString(),
-            Constants.ATTRIBUTE_BIRTH_WEIGHT to birthWeight,
         )
         if (telephone != null) {
             personAttributes[Constants.ATTRIBUTE_TELEPHONE] = telephone
+        }
+        if (birthWeight != null) {
+            personAttributes[Constants.ATTRIBUTE_BIRTH_WEIGHT] = birthWeight
         }
         val request = RegisterParticipant(
             participantId = participantId,

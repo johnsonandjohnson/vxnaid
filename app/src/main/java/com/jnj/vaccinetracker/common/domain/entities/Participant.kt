@@ -77,12 +77,11 @@ fun Map<String, String>.withIsBirthDateEstimated(isBirthDateEstimated: Boolean?)
     } else {
         filterKeys { it != birthdayEstimatedKey }
     }
+}
 
-  fun Map<String, String>.withBirthWeight(birthWeight: String?): Map<String,String> {
-      val birthWeightKey = Constants.ATTRIBUTE_BIRTH_WEIGHT
-      return birthWeight?.let { this + mapOf(birthWeightKey to it) } ?: filterKeys { it != birthWeightKey}
-  }
-
+fun Map<String, String>.withBirthWeight(birthWeight: String?): Map<String,String> {
+    val birthWeightKey = Constants.ATTRIBUTE_BIRTH_WEIGHT
+    return birthWeight?.let { this + mapOf(birthWeightKey to it) } ?: filterKeys { it != birthWeightKey}
 }
 
 fun DraftParticipant.toParticipantWithoutAssets(): Participant = Participant(
