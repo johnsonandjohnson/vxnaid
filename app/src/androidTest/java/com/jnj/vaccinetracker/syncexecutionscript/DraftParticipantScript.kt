@@ -89,6 +89,7 @@ class DraftParticipantScript {
         val telephone: String? = null
         val birthDate = DateTime(1999, 6, 6)
         val isBirthDateEstimated = false
+        val birthWeight = 2
         val weight = 6
         val height = 77
         val lang = "en"
@@ -107,9 +108,12 @@ class DraftParticipantScript {
                 telephone = telephone,
                 siteUuid = siteUuid,
                 language = lang,
+                vaccine = vaccine,
+                birthWeight = birthWeight,
                 address = address,
                 picture = image,
-                biometricsTemplateBytes = template
+                biometricsTemplateBytes = template,
+                birthWeight = birthWeight
             )
             println("logging first visit for participant $participantId")
             val participantUuid = draftParticipant.participantUuid

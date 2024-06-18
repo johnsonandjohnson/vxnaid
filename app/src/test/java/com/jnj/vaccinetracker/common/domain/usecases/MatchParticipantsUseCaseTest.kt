@@ -17,7 +17,6 @@ import com.jnj.vaccinetracker.sync.data.network.VaccineTrackerSyncApiDataSource
 import io.kotest.core.spec.style.FunSpec
 import io.kotest.matchers.shouldBe
 import io.mockk.coEvery
-import io.mockk.every
 import io.mockk.mockk
 
 class MatchParticipantsUseCaseTest : FunSpec({
@@ -66,10 +65,12 @@ class MatchParticipantsUseCaseTest : FunSpec({
 
     fun participant(uuid: String = uuid(), participantId: String = "", nin: String = "", phone: String? = null, gender: Gender = Gender.MALE, withTemplate: Boolean = true) =
         Participant(uuid, DateEntity(), null, if (withTemplate) ParticipantBiometricsTemplateFile.newFile(uuid) else null, participantId, nin, gender, BirthDate.yearOfBirth(2000),
+            mapOf<String,String>() .withBirthWeight(birthWeight) null)
             mapOf<String, String>().withPhone(phone), null)
 
     fun draftParticipant(uuid: String = uuid(), participantId: String = "", nin: String = "", phone: String? = null, gender: Gender = Gender.FEMALE, withTemplate: Boolean = true) =
-        DraftParticipant(uuid,
+        DraftParticipant(
+            uuid,
             DateEntity(),
             null,
             if (withTemplate) DraftParticipantBiometricsTemplateFile.newFile(uuid) else null,
@@ -78,8 +79,11 @@ class MatchParticipantsUseCaseTest : FunSpec({
             gender,
             BirthDate.yearOfBirth(2000),
             mapOf<String, String>().withPhone(phone),
+            mapOf<String, String>().withBirthWeight(birthWeight)
             null,
-            DraftState.initialState())
+            DraftState.initialState(),
+            birthWeight
+        )
     test("when remote api successfully returns result then return that") {
         // Arrange
         val participantId = "1"

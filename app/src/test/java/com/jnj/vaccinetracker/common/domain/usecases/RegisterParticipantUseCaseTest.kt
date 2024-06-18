@@ -12,8 +12,6 @@ import com.jnj.vaccinetracker.common.exceptions.NoNetworkException
 import com.jnj.vaccinetracker.common.exceptions.ParticipantAlreadyExistsException
 import com.jnj.vaccinetracker.sync.domain.helpers.SyncLogger
 import com.jnj.vaccinetracker.sync.domain.usecases.upload.UploadDraftParticipantUseCase
-import io.kotest.assertions.fail
-import io.kotest.assertions.shouldFail
 import io.kotest.core.spec.style.FunSpec
 import io.kotest.matchers.nulls.shouldNotBeNull
 import io.kotest.matchers.shouldBe
@@ -92,7 +90,8 @@ class RegisterParticipantUseCaseTest : FunSpec({
         birthDate = registerParticipant.birthdate,
         attributes = registerParticipant.attributes,
         address = registerParticipant.address,
-        draftState = DraftState.UPLOADED
+        draftState = DraftState.UPLOADED,
+        birthWeight = birthWeight
     )
 
     val uploadedDraftParticipantTemplatesUploaded = DraftParticipant(
@@ -106,7 +105,8 @@ class RegisterParticipantUseCaseTest : FunSpec({
         birthDate = registerParticipant.birthdate,
         attributes = registerParticipant.attributes,
         address = registerParticipant.address,
-        draftState = DraftState.UPLOADED
+        draftState = DraftState.UPLOADED,
+        birthWeight = birthWeight
     )
 
     val draftVisit = DraftVisit(

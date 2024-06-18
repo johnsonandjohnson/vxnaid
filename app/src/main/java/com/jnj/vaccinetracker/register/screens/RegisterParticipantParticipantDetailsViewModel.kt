@@ -93,6 +93,9 @@ class RegisterParticipantParticipantDetailsViewModel @Inject constructor(
     val mothersName = mutableLiveData<String>()
     val mothersNameValidationMessage = mutableLiveData<String>()
 
+    val birthWeight = mutableLiveData<String>()
+    val birthWeightValidationMessage = mutableLiveData<String>()
+
     val fathersName = mutableLiveData<String>()
     val fathersNameValidationMessage = mutableLiveData<String>()
 
@@ -219,6 +222,9 @@ class RegisterParticipantParticipantDetailsViewModel @Inject constructor(
         val homeLocation = homeLocation.get()
         val participantId = participantId.get()
         val nin = nin.get()
+        logInfo("setting up birthweight")
+        val birthWeight = birthWeight.get()
+        logInfo("setting up birthweight")
         val gender = gender.get()
         val birthDate = birthDate.get()
         val isBirthDateEstimated = isBirthDateEstimated.get()
@@ -256,17 +262,18 @@ class RegisterParticipantParticipantDetailsViewModel @Inject constructor(
             val compressedImage = picture?.toDomain()?.compress()
             val biometricsTemplateBytes = getTempBiometricsTemplatesBytesUseCase.getBiometricsTemplate(irisScans)
             val result = participantManager.registerParticipant(
-                    participantId = participantId!!,
-                    nin = nin,
-                    gender = gender!!,
-                    birthDate = birthDate!!,
-                    isBirthDateEstimated = isBirthDateEstimated!!,
-                    telephone = phoneNumberToSubmit,
-                    siteUuid = siteUuid,
-                    language = "English",
-                    address = homeLocation!!,
-                    picture = compressedImage,
-                    biometricsTemplateBytes = biometricsTemplateBytes,
+                participantId = participantId!!,
+                nin = nin,
+                birthWeight = birthWeight,
+                gender = gender!!,
+                birthDate = birthDate!!,
+                isBirthDateEstimated = isBirthDateEstimated!!,
+                telephone = phoneNumberToSubmit,
+                siteUuid = siteUuid,
+                language = "English",
+                address = homeLocation!!,
+                picture = compressedImage,
+                biometricsTemplateBytes = biometricsTemplateBytes,
             )
             loading.set(false)
             registerSuccessEvents.tryEmit(
@@ -327,6 +334,11 @@ class RegisterParticipantParticipantDetailsViewModel @Inject constructor(
             genderValidationMessage.set(resourcesWrapper.getString(R.string.participant_registration_details_error_no_gender))
         }
 
+        if (birthWeight == null ){
+            isValid = false
+            birthWeightValidationMessage.set("Please enter birth weight as integer")
+        }
+
         if (homeLocation?.isEmpty() != false) {
             isValid = false
             homeLocationValidationMessage.set(resourcesWrapper.getString(R.string.participant_registration_details_error_no_home_location))
@@ -345,6 +357,7 @@ class RegisterParticipantParticipantDetailsViewModel @Inject constructor(
         confirmParticipantIdValidationMessage.set(null)
         ninValidationMessage.set(null)
         genderValidationMessage.set(null)
+        birthWeightValidationMessage.set(null)
         birthDateValidationMessage.set(null)
         phoneValidationMessage.set(null)
         homeLocationValidationMessage.set(null)
@@ -398,6 +411,11 @@ class RegisterParticipantParticipantDetailsViewModel @Inject constructor(
         if (this.nin.get() == nin) return
         this.nin.set(nin)
         // TODO: Validate NIN
+    }
+
+    fun setBirthWeight(birthWeight: String) {
+        if(this.birthWeight.get() == birthWeight) return
+        this.birthWeight.set(birthWeight)
     }
 
     private fun validateParticipantId() {

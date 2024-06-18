@@ -9,7 +9,6 @@ import com.jnj.vaccinetracker.common.domain.usecases.MatchParticipantsUseCase
 import com.jnj.vaccinetracker.common.domain.usecases.RegisterParticipantUseCase
 import com.jnj.vaccinetracker.common.exceptions.NoSiteUuidAvailableException
 import com.jnj.vaccinetracker.common.exceptions.OperatorUuidNotAvailableException
-import com.jnj.vaccinetracker.common.helpers.NetworkConnectivity
 import com.jnj.vaccinetracker.sync.data.repositories.SyncSettingsRepository
 import com.soywiz.klock.DateTime
 import javax.inject.Inject
@@ -76,6 +75,7 @@ class ParticipantManager @Inject constructor(
     suspend fun registerParticipant(
         participantId: String,
         nin: String?,
+        birthWeight: String?,
         gender: Gender,
         birthDate: DateTime,
         isBirthDateEstimated: Boolean,
@@ -93,9 +93,13 @@ class ParticipantManager @Inject constructor(
             Constants.ATTRIBUTE_LANGUAGE to language,
             Constants.ATTRIBUTE_OPERATOR to operatorUUid,
             Constants.ATTRIBUTE_IS_BIRTH_DATE_ESTIMATED to isBirthDateEstimated.toString(),
+            // add birth weight to the list off attributes
         )
         if (telephone != null) {
             personAttributes[Constants.ATTRIBUTE_TELEPHONE] = telephone
+        }
+        if (birthWeight != null) {
+            personAttributes[Constants.ATTRIBUTE_BIRTH_WEIGHT] = birthWeight
         }
         val request = RegisterParticipant(
             participantId = participantId,

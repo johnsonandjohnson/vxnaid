@@ -94,6 +94,20 @@ class RegisterParticipantParticipantDetailsFragment : BaseFragment(),
                 binding.countryCodePickerPhone.setCountryForPhoneCode(countryCode.toInt())
             }
         }
+
+//        viewModel.vaccineNames.observe(lifecycleOwner) { vaccineNames ->
+//            val adapter = ArrayAdapter(
+//                requireContext(),
+//                R.layout.item_dropdown,
+//                vaccineNames.orEmpty().map { it.display })
+//            binding.dropdownVaccine.setAdapter(adapter)
+//        }
+
+        viewModel.birthWeightValidationMessage.observe(lifecycleOwner) { birthWeightValidationMessage ->
+            logDebug("validate birth weight" + birthWeightValidationMessage)
+           // binding.birthWeightError.requestFocus()
+        }
+
         viewModel.childCategoryNames.observe(lifecycleOwner) { childCategoryNames ->
             val adapter = ArrayAdapter(
                 requireContext(),
@@ -155,6 +169,7 @@ class RegisterParticipantParticipantDetailsFragment : BaseFragment(),
             val text = binding.editParticipantNin.text.toString()
             viewModel.setNin(text)
         }
+        
 
         binding.editParticipantId.doAfterTextChanged {
             val text = binding.editParticipantId.text.toString()
@@ -167,6 +182,10 @@ class RegisterParticipantParticipantDetailsFragment : BaseFragment(),
 
         binding.editTelephone.doAfterTextChanged {
             viewModel.setPhone(it?.toString().orEmpty())
+        }
+        
+        binding.editBirthWeight.doAfterTextChanged {
+            viewModel.setBirthWeight(it?.toString().orEmpty())
         }
 
 //        binding.editYearOfBirth.doAfterTextChanged {
@@ -224,6 +243,13 @@ class RegisterParticipantParticipantDetailsFragment : BaseFragment(),
     }
 
     private fun setupDropdowns() {
+
+//        binding.dropdownVaccine.setOnItemClickListener { _, _, position, _ ->
+//            val vaccineName =
+//                viewModel.vaccineNames.value?.get(position) ?: return@setOnItemClickListener
+//            viewModel.setSelectedVaccine(vaccineName)
+//        }
+
         binding.dropdownChildCategory.setOnItemClickListener { _, _, position, _ ->
             val childCategoryName =
                 viewModel.childCategoryNames.value?.get(position) ?: return@setOnItemClickListener
