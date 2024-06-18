@@ -260,171 +260,39 @@
                     app:error="@{viewModel.fathersNameValidationMessage}" />
             </LinearLayout>
 
-
             <LinearLayout
-                android:id="@+id/input_group_year_of_birth"
+                android:id="@+id/input_group_child_category"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
+
                 android:gravity="center_vertical"
                 android:orientation="horizontal">
 
                 <TextView
-                    android:id="@+id/label_date_of_birth"
-                    android:layout_width="155dp"
-                    android:layout_height="wrap_content"
-                    android:text="@string/participant_registration_details_label_date_of_birth"
-                    android:textAppearance="@style/LabelText" />
-
-                <TextView
-                    android:id="@+id/textView_participant_date_of_birth"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="16dp"
-                    android:layout_weight="1"
-                    android:maxHeight="70sp"
-                    android:hint="@string/participant_registration_details_birth_date_hint"
-                    android:textColorHint="@{viewModel.birthDateValidationMessage == null ?  @color/colorPrimary : @color/errorLight}"
-                    android:text='@{viewModel.isBirthDateEstimated ? "~ " + viewModel.birthDateText : viewModel.birthDateText}'
-                    android:textSize="18sp"
-                    app:error="@{viewModel.birthDateValidationMessage}" />
-
-                <Button
-                    android:id="@+id/btn_pick_date"
-                    style="@style/Widget.AppCompat.Button.Small"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:backgroundTint="@color/colorPrimary"
-                    android:textAppearance="@style/ButtonTextStyling"
-                    android:text="@string/participant_registration_details_action_set_birth_date" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/input_group_gender"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                android:gravity="center_vertical"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:id="@+id/label_gender"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:maxWidth="155dp"
-                    android:maxLines="1"
-                    android:minWidth="155dp"
-                    android:text="@string/participant_registration_details_label_gender"
-                    android:textAppearance="@style/LabelText" />
-
-
-                <RadioGroup
-                    android:id="@+id/radiogroup_gender"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:orientation='horizontal'>
-
-                    <RadioButton
-                        android:id="@+id/rb_gender_male"
-                        style="@android:style/Widget.Material.CompoundButton.RadioButton"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:checked="@{viewModel.gender == Gender.MALE}"
-                        android:text="@string/gender_male"
-                        android:textSize="18sp"
-                        tools:checked="true" />
-
-                    <RadioButton
-                        android:id="@+id/rb_gender_female"
-                        style="@android:style/Widget.Material.CompoundButton.RadioButton"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:checked="@{viewModel.gender == Gender.FEMALE}"
-                        android:text="@string/gender_female"
-                        android:textSize="18sp" />
-                </RadioGroup>
-
-                <TextView
-                    android:id="@+id/gender_error"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="0dp"
-                    android:focusable="true"
-                    android:focusableInTouchMode="true"
-                    android:paddingTop="0dp"
-                    app:error="@{viewModel.genderValidationMessage}" />
-
-            </LinearLayout>
-
-            <LinearLayout
-
-                android:id="@+id/input_group_phone"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                android:gravity="center_vertical"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:id="@+id/label_phone"
-                    android:layout_width="155dp"
-                    android:layout_height="wrap_content"
-                    android:text="@string/participant_registration_details_label_telephone"
-                    android:textAppearance="@style/LabelText" />
-
-                <com.hbb20.CountryCodePicker
-                    android:id="@+id/country_code_picker_phone"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    app:ccp_countryPreference="UG"
-                    app:ccp_defaultNameCode="UG" />
-
-                <EditText
-                    android:id="@+id/edit_telephone"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:hint="@string/participant_registration_details_telephone_hint"
-                    android:inputType="phone"
-                    android:longClickable="false"
-                    android:text="@{viewModel.phone}"
-                    android:textIsSelectable="false"
-                    android:textSize="18sp"
-                    app:error="@{viewModel.phoneValidationMessage}" />
-
-            </LinearLayout>
-
-
-            <LinearLayout
-                android:id="@+id/input_group_birth_weight"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                android:gravity="center_vertical"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:id="@+id/participant_registration_details_label_birth_weight"
+                    android:id="@+id/participant_registration_details_label_child_category"
                     android:layout_width="155dp"
                     android:layout_height="wrap_content"
                     android:maxLines="2"
-                    android:text="@string/participant_registration_details_birth_weight"
+                    android:text="@string/participant_registration_details_label_child_category"
                     android:textAppearance="@style/LabelText" />
 
-                <EditText
-                    android:id="@+id/edit_birth_weight"
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="4dp"
                     android:layout_weight="1"
-                    android:hint="@string/participant_registration_details_birth_weight"
-                    android:inputType="numberDecimal"
-                    android:textSize="18sp" />
+                    app:error="@{viewModel.childCategoryValidationMessage}">
 
+                    <AutoCompleteTextView
+                        android:id="@+id/dropdown_child_category"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/participant_registration_details_label_select_child_category"
+                        android:inputType="none"
+                        android:text="@{viewModel.childCategory.display}" />
+
+                </com.google.android.material.textfield.TextInputLayout>
             </LinearLayout>
 
             <LinearLayout
@@ -470,40 +338,7 @@
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/input_group_child_category"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"
 
-                android:gravity="center_vertical"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:id="@+id/participant_registration_details_label_child_category"
-                    android:layout_width="155dp"
-                    android:layout_height="wrap_content"
-                    android:maxLines="2"
-                    android:text="@string/participant_registration_details_label_child_category"
-                    android:textAppearance="@style/LabelText" />
-
-                <com.google.android.material.textfield.TextInputLayout
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    app:error="@{viewModel.childCategoryValidationMessage}">
-
-                    <AutoCompleteTextView
-                        android:id="@+id/dropdown_child_category"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="@string/participant_registration_details_label_select_child_category"
-                        android:inputType="none"
-                        android:text="@{viewModel.childCategory.display}" />
-
-                </com.google.android.material.textfield.TextInputLayout>
-            </LinearLayout>
-            <LinearLayout
                 android:id="@+id/input_group_phone"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
@@ -638,6 +473,35 @@
                     app:error="@{viewModel.genderValidationMessage}" />
 
             </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/input_group_birth_weight"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/participant_registration_details_label_birth_weight"
+                    android:layout_width="155dp"
+                    android:layout_height="wrap_content"
+                    android:maxLines="2"
+                    android:text="@string/participant_registration_details_birth_weight"
+                    android:textAppearance="@style/LabelText" />
+
+                <EditText
+                    android:id="@+id/edit_birth_weight"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="4dp"
+                    android:layout_weight="1"
+                    android:hint="@string/participant_registration_details_birth_weight"
+                    android:inputType="numberDecimal"
+                    android:textSize="18sp" />
+
+            </LinearLayout>
+
             <Button
                 android:id="@+id/btn_submit"
                 android:layout_width="wrap_content"
