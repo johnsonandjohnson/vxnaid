@@ -14,7 +14,7 @@ class WeightZScoreCalculator(
     }
 
     override fun calculateZScoreAndRating(): ZScoreAndRating? {
-        val zScore = calculateZScore() ?: return null
+        val zScore = this.zScore ?: return null
         val rating = when {
             zScore < -3 -> SEVERELY_UNDERWEIGHT
             zScore in -3.0..-2.0 -> UNDERWEIGHT

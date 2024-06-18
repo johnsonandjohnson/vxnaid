@@ -12,6 +12,7 @@ data class ParticipantSummaryUiModel(
     val participantId: String,
     val gender: Gender,
     val birthDateText: String,
+    val isBirthDateEstimated: Boolean,
     val vaccine: DisplayValue,
     val participantPicture: ParticipantImageUiModel?,
 ) : Parcelable

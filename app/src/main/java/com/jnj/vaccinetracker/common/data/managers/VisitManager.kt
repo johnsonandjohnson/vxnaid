@@ -43,6 +43,8 @@ class VisitManager @Inject constructor(
         dosingNumber: Int,
         weight: Int,
         height: Int,
+        isOedema: Boolean,
+        muac: Int?,
     ) {
         val locationUuid = syncSettingsRepository.getSiteUuid() ?: throw NoSiteUuidAvailableException("Trying to register dosing visit without a selected site")
         val operatorUUid = userRepository.getUser()?.uuid ?: throw OperatorUuidNotAvailableException("trying to register dosing visit without stored operator uuid")
@@ -52,7 +54,12 @@ class VisitManager @Inject constructor(
             Constants.ATTRIBUTE_VISIT_DOSE_NUMBER to dosingNumber.toString(),
             Constants.ATTRIBUTE_VISIT_WEIGHT to weight.toString(),
             Constants.ATTRIBUTE_VISIT_HEIGHT to height.toString(),
-        )
+            Constants.ATTRIBUTE_VISIT_OEDEMA to isOedema.toString(),
+        ).toMutableMap()
+
+        if (muac != null) {
+            attributes[Constants.ATTRIBUTE_VISIT_MUAC] = muac.toString()
+        }
 
         val obs = mapOf(
             Constants.OBSERVATION_TYPE_BARCODE to vialCode,
