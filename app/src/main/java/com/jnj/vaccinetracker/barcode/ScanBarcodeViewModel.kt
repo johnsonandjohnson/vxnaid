@@ -55,9 +55,12 @@ class ScanBarcodeViewModel @Inject constructor(
 
     private suspend fun load(participantSummary: ParticipantSummaryUiModel) {
         try {
-            val manufacturers = configurationManager.getVaccineManufacturers(participantSummary.vaccine.value)
+//            val manufacturers = participantSummary.vaccine?.let {
+//                configurationManager.getVaccineManufacturers(
+//                    it.value)
+//            }
             val config = configurationManager.getConfiguration()
-            onManufacturersLoaded(manufacturers)
+//            onManufacturersLoaded(manufacturers)
             onManufacturersDataLoaded(config.manufacturers)
             manufacturerRegexes.set(config.manufacturers)
             loading.set(false)

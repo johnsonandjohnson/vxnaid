@@ -107,7 +107,6 @@ class DraftParticipantScript {
                 telephone = telephone,
                 siteUuid = siteUuid,
                 language = lang,
-                vaccine = vaccine,
                 address = address,
                 picture = image,
                 biometricsTemplateBytes = template
