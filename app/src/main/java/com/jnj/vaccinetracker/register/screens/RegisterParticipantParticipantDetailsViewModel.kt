@@ -126,7 +126,6 @@ class RegisterParticipantParticipantDetailsViewModel @Inject constructor(
     val genderValidationMessage = mutableLiveData<String>()
     val phoneValidationMessage = mutableLiveData<String>()
     val homeLocationValidationMessage = mutableLiveData<String>()
-    val vaccineValidationMessage = mutableLiveData<String>()
     val languageValidationMessage = mutableLiveData<String>()
 
     val vaccineNames = mutableLiveData<List<DisplayValue>>()
@@ -221,7 +220,6 @@ class RegisterParticipantParticipantDetailsViewModel @Inject constructor(
         val siteUuid = syncSettingsRepository.getSiteUuid()
                 ?: return logWarn("Cannot submit registration: no site UUID known")
         val homeLocation = homeLocation.get()
-        val vaccine: DisplayValue? = vaccine.get()
         val participantId = participantId.get()
         val nin = nin.get()
         logInfo("setting up birthweight")
@@ -232,7 +230,7 @@ class RegisterParticipantParticipantDetailsViewModel @Inject constructor(
         val isBirthDateEstimated = isBirthDateEstimated.get()
         val fullPhoneNumber = createFullPhone()
 
-        val isValidInput = validateInput(participantId, gender, birthDate, homeLocation, vaccine?.value)
+        val isValidInput = validateInput(participantId, gender, birthDate, homeLocation)
 
         var phoneNumberToSubmit: String? = null
 
@@ -287,7 +285,6 @@ class RegisterParticipantParticipantDetailsViewModel @Inject constructor(
                     telephone = phoneNumberToSubmit,
                     siteUuid = siteUuid,
                     language = "English",
-                    vaccine = vaccine?.value!!,
                     address = homeLocation!!,
                     picture = compressedImage,
                     biometricsTemplateBytes = biometricsTemplateBytes,
@@ -301,7 +298,7 @@ class RegisterParticipantParticipantDetailsViewModel @Inject constructor(
                             gender,
                             birthDate.format(DateFormat.FORMAT_DATE),
                             isBirthDateEstimated,
-                            vaccine.value.let { DisplayValue(it, loc[it]) },
+                            null,
                             compressedImage?.let { ParticipantImageUiModel(it.bytes) }
                     )
             )
@@ -335,7 +332,6 @@ class RegisterParticipantParticipantDetailsViewModel @Inject constructor(
             gender: Gender?,
             birthDate: DateTime?,
             homeLocation: Address?,
-            vaccine: String?,
     ): Boolean {
         var isValid = true
         resetValidationMessages()
@@ -368,11 +364,6 @@ class RegisterParticipantParticipantDetailsViewModel @Inject constructor(
             birthDateValidationMessage.set(resourcesWrapper.getString(R.string.participant_registration_details_error_no_birthday))
         }
 
-        if (vaccine.isNullOrEmpty()) {
-            isValid = false
-            vaccineValidationMessage.set(resourcesWrapper.getString(R.string.participant_registration_details_error_no_vaccine))
-        }
-
         return isValid
     }
 
@@ -385,7 +376,6 @@ class RegisterParticipantParticipantDetailsViewModel @Inject constructor(
         birthDateValidationMessage.set(null)
         phoneValidationMessage.set(null)
         homeLocationValidationMessage.set(null)
-        vaccineValidationMessage.set(null)
         languageValidationMessage.set(null)
     }
 
@@ -507,12 +497,6 @@ class RegisterParticipantParticipantDetailsViewModel @Inject constructor(
         if (phoneCountryCode.get() == selectedCountryCode) return // Break feedback loop
         phoneCountryCode.set(selectedCountryCode)
         validatePhone()
-    }
-
-    fun setSelectedVaccine(vaccineName: DisplayValue) {
-        if (this.vaccine.get() == vaccineName) return
-        vaccine.set(vaccineName)
-        vaccineValidationMessage.set(null)
     }
 
     fun setSelectedChildCategory(childCategoryName: DisplayValue) {

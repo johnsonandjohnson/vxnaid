@@ -112,7 +112,10 @@ class VisitViewModel @Inject constructor(
     private suspend fun load(participantSummary: ParticipantSummaryUiModel) {
         try {
             val visits = visitManager.getVisitsForParticipant(participantSummary.participantUuid)
-            val manufacturers = configurationManager.getVaccineManufacturers(participantSummary.vaccine.value)
+//            val manufacturers = participantSummary.vaccine?.let {
+//                configurationManager.getVaccineManufacturers(
+//                    it.value)
+//            }
             val config = configurationManager.getConfiguration()
             shouldValidateMuac.value = MuacZScoreCalculator.shouldCalculateMuacZScore(participantSummary.birthDateText)
             onVisitsLoaded(visits)
