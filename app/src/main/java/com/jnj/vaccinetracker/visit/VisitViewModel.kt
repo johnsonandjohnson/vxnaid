@@ -85,6 +85,10 @@ class VisitViewModel @Inject constructor(
     val shouldValidateMuac = MutableLiveData<Boolean>()
     val zScoreMuacTextColor = MutableLiveData<Int>()
 
+    val selectedVisitTypeDropdown = mutableLiveData<String>()
+    var visitTypesDropdownList = mutableLiveData<List<String>>()
+    val visitTypeDropdownValidationMessage = mutableLiveData<String>()
+
     private var manufacturersList: MutableList<Manufacturer> = mutableListOf<Manufacturer>()
     init {
         initState()
@@ -122,6 +126,7 @@ class VisitViewModel @Inject constructor(
         //    onManufacturersLoaded(manufacturers)
             onManufacturerLoaded(config.manufacturers)
             onManufacturersDataLoaded(config.manufacturers)
+            onVisitTypesDropdownLoaded(Constants.VISIT_TYPES_DROPDOWN)
             differentManufacturerAllowed.set(config.canUseDifferentManufacturers)
             manufacturerRegexes.set(config.manufacturers)
             loading.set(false)
@@ -206,6 +211,15 @@ class VisitViewModel @Inject constructor(
         }
     }
 
+    private fun onVisitTypesDropdownLoaded(visitTypes: List<String>) {
+        this.visitTypesDropdownList.set(visitTypes)
+
+        // default value should be last visit + 1
+        if (visitTypes.size == 1) {
+            this.selectedVisitTypeDropdown.set(visitTypes[0])
+        }
+    }
+
     private fun onManufacturersDataLoaded(manufacturers: List<Manufacturer>) {
         this.manufacturersList.addAll(manufacturers)
 
@@ -228,6 +242,12 @@ class VisitViewModel @Inject constructor(
         if (this.selectedManufacturer.get() == manufacturerName) return
         selectedManufacturer.set(manufacturerName)
         manufacturerValidationMessage.set(null)
+    }
+
+    fun setSelectedVisitTypeDropdown(visitType: String) {
+        if (this.selectedVisitTypeDropdown.get() == visitType) return
+        selectedVisitTypeDropdown.set(visitType)
+        visitTypeDropdownValidationMessage.set(null)
     }
 
     /**
