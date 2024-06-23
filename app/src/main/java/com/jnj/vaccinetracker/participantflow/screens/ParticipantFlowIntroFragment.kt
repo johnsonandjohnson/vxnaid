@@ -10,13 +10,18 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.updateLayoutParams
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.LifecycleOwner
 import com.jnj.vaccinetracker.R
+import com.jnj.vaccinetracker.common.data.models.Constants
+import com.jnj.vaccinetracker.common.data.models.IrisPosition
 import com.jnj.vaccinetracker.common.helpers.logInfo
+import com.jnj.vaccinetracker.common.ui.BaseActivity
 import com.jnj.vaccinetracker.common.ui.BaseFragment
 import com.jnj.vaccinetracker.databinding.FragmentParticipantFlowIntroBinding
 import com.jnj.vaccinetracker.databinding.ItemParticipantFlowItemBinding
 import com.jnj.vaccinetracker.participantflow.ParticipantFlowViewModel
+import com.jnj.vaccinetracker.register.RegisterParticipantFlowActivity
 import com.jnj.vaccinetracker.update.UpdateDialog
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.debounce
@@ -33,9 +38,11 @@ class ParticipantFlowIntroFragment : BaseFragment() {
 
     private companion object {
         private const val TAG_UPDATE_DIALOG = "updateDialog"
+        private const val REQ_REGISTER_PARTICIPANT = Constants.REQ_REGISTER_PARTICIPANT
     }
 
     private val viewModel: ParticipantFlowViewModel by activityViewModels { viewModelFactory }
+    private val viewModelParticipantFlow: ParticipantFlowMatchingViewModel by viewModels { viewModelFactory }
 
     private lateinit var binding: FragmentParticipantFlowIntroBinding
 
@@ -45,6 +52,9 @@ class ParticipantFlowIntroFragment : BaseFragment() {
         binding.lifecycleOwner = viewLifecycleOwner
         binding.btnContinue.setOnClickListener {
             viewModel.confirmIntro()
+        }
+        binding.btnNewParticipant.setOnClickListener {
+            viewModelParticipantFlow.onNewParticipantButtonClick()
         }
 
         // Add dynamic content
@@ -65,6 +75,20 @@ class ParticipantFlowIntroFragment : BaseFragment() {
             .onEach {
                 onNewVersionAvailable()
             }.launchIn(lifecycleOwner)
+        viewModelParticipantFlow.launchRegistrationFlowEvents.asFlow().onEach {
+            startActivityForResult(
+                RegisterParticipantFlowActivity.create(
+                    context = requireContext(),
+                    participantId = null,
+                    isManualEnteredParticipantId = false,
+                    irisScannedLeft = false,
+                    irisScannedRight = false,
+                    countryCode = null,
+                    phoneNumber = null
+                ), REQ_REGISTER_PARTICIPANT
+            )
+            (requireActivity() as BaseActivity).setForwardAnimation()
+        }.launchIn(lifecycleOwner)
     }
 
     private fun onNewVersionAvailable() {

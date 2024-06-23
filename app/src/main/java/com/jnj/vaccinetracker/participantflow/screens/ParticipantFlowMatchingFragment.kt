@@ -12,6 +12,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.LifecycleOwner
 import com.google.android.material.snackbar.Snackbar
 import com.jnj.vaccinetracker.R
+import com.jnj.vaccinetracker.common.data.models.Constants
 import com.jnj.vaccinetracker.common.data.models.IrisPosition
 import com.jnj.vaccinetracker.common.helpers.logInfo
 import com.jnj.vaccinetracker.common.ui.BaseActivity
@@ -32,7 +33,7 @@ import kotlinx.coroutines.flow.onEach
 class ParticipantFlowMatchingFragment : BaseFragment() {
 
     private companion object {
-        private const val REQ_REGISTER_PARTICIPANT = 453
+        private const val REQ_REGISTER_PARTICIPANT = Constants.REQ_REGISTER_PARTICIPANT
         private const val TAG_MISSING_IDENTIFIERS = "missingIdentifiersDialog"
         private const val REQ_VISIT = 12
     }
