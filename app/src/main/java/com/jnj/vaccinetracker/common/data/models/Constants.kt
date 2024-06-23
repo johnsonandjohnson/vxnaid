@@ -52,4 +52,15 @@ object Constants {
 
     // PROGRESS
     const val MAX_PERCENT = 100
+
+    val VISIT_TYPES_DROPDOWN = listOf(
+       "At birth",
+        "6 weeks",
+        "10 weeks",
+        "14 weeks",
+        "6 months",
+        "9 months",
+        "12 months",
+        "18 months"
+    )
 }
