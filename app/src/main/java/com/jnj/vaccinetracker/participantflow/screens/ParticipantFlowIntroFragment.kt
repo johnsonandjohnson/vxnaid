@@ -38,7 +38,6 @@ class ParticipantFlowIntroFragment : BaseFragment() {
 
     private companion object {
         private const val TAG_UPDATE_DIALOG = "updateDialog"
-        private const val REQ_REGISTER_PARTICIPANT = Constants.REQ_REGISTER_PARTICIPANT
     }
 
     private val viewModel: ParticipantFlowViewModel by activityViewModels { viewModelFactory }
@@ -85,7 +84,7 @@ class ParticipantFlowIntroFragment : BaseFragment() {
                     irisScannedRight = false,
                     countryCode = null,
                     phoneNumber = null
-                ), REQ_REGISTER_PARTICIPANT
+                ), Constants.REQ_REGISTER_PARTICIPANT
             )
             (requireActivity() as BaseActivity).setForwardAnimation()
         }.launchIn(lifecycleOwner)

@@ -33,7 +33,6 @@ import kotlinx.coroutines.flow.onEach
 class ParticipantFlowMatchingFragment : BaseFragment() {
 
     private companion object {
-        private const val REQ_REGISTER_PARTICIPANT = Constants.REQ_REGISTER_PARTICIPANT
         private const val TAG_MISSING_IDENTIFIERS = "missingIdentifiersDialog"
         private const val REQ_VISIT = 12
     }
@@ -98,7 +97,7 @@ class ParticipantFlowMatchingFragment : BaseFragment() {
                     irisScannedRight = flowViewModel.irisScans[IrisPosition.RIGHT] ?: false,
                     countryCode = flowViewModel.phoneCountryCode.value,
                     phoneNumber = flowViewModel.participantPhone.value
-                ), REQ_REGISTER_PARTICIPANT
+                ), Constants.REQ_REGISTER_PARTICIPANT
             )
             (requireActivity() as BaseActivity).setForwardAnimation()
         }.launchIn(lifecycleOwner)
@@ -128,7 +127,7 @@ class ParticipantFlowMatchingFragment : BaseFragment() {
         super.onActivityResult(requestCode, resultCode, data)
         if (resultCode != RESULT_OK) return
         when (requestCode) {
-            REQ_REGISTER_PARTICIPANT -> {
+            Constants.REQ_REGISTER_PARTICIPANT -> {
                 val participant = data?.getParcelableExtra<ParticipantSummaryUiModel>(RegisterParticipantFlowActivity.EXTRA_PARTICIPANT)
                 if (participant == null) {
                     // If no participant passed, we will return to the start of the identification flow
