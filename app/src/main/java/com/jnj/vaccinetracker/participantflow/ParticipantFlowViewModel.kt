@@ -164,7 +164,8 @@ class ParticipantFlowViewModel @Inject constructor(
      * 3. Matching of participants based upon the entered data
      */
     private fun createScreens(identificationSteps: List<IdentificationStep>): List<Screen> {
-        val result = mutableListOf(Screen.INTRO)
+        val result = mutableListOf(Screen.ADD_OR_SEARCH_PARTICIPANT)
+        result += Screen.INTRO
 
         identificationSteps.forEach { step ->
             when (step.type) {
@@ -210,6 +211,14 @@ class ParticipantFlowViewModel @Inject constructor(
         workflowItems.add(WorkflowItem.VISIT)
 
         return workflowItems
+    }
+
+
+    /**
+     *Goes to searching participant workflow -> INTRO
+     */
+    fun onSearchParticipant() {
+        navigateForward()
     }
 
     /**
@@ -347,7 +356,7 @@ class ParticipantFlowViewModel @Inject constructor(
 
     fun reset() {
         navigationDirection = NavigationDirection.BACKWARD
-        currentScreen.set(Screen.INTRO)
+        currentScreen.set(Screen.ADD_OR_SEARCH_PARTICIPANT)
         participantId.set(null)
         isManualSetParticipantId.set(null)
         barcodeParticipantId.set(null)
@@ -368,6 +377,7 @@ class ParticipantFlowViewModel @Inject constructor(
     }
 
     enum class Screen(@StringRes val title: Int) : Parcelable {
+        ADD_OR_SEARCH_PARTICIPANT(R.string.match_or_register_patient_intro_title),
         INTRO(R.string.match_or_register_patient_intro_title),
         PARTICIPANT_ID(R.string.participant_flow_participant_id_title),
         PHONE(R.string.participant_flow_phone_title),

@@ -73,19 +73,7 @@
             android:textColor="@color/colorTextOnSecondary"
             android:textSize="14sp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
-
-        <Button
-            android:id="@+id/btn_new_participant"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="32dp"
-            android:layout_marginBottom="16dp"
-            android:textAppearance="@style/ButtonTextStyling"
-            android:backgroundTint="@color/colorTextOnLight"
-            android:text="@string/participant_matching_btn_new_participant"
-            android:textColor="@color/colorTextOnSecondary"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
