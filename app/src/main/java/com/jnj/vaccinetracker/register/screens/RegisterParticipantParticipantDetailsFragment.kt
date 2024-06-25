@@ -56,6 +56,9 @@ class RegisterParticipantParticipantDetailsFragment : BaseFragment(),
 
     private var birthDatePicked: DateTime? = null
     private var isBirthDateEstimatedChecked: Boolean = false
+    private var yearsEstimated: Int? = null
+    private var monthsEstimated: Int? = null
+    private var daysEstimated: Int? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -208,7 +211,7 @@ class RegisterParticipantParticipantDetailsFragment : BaseFragment(),
         }
         binding.btnPickDate.setOnClickListener {
             BirthDatePickerDialog(
-                    birthDatePicked, isBirthDateEstimatedChecked
+                    birthDatePicked, isBirthDateEstimatedChecked, yearsEstimated, monthsEstimated, daysEstimated
             ).show(childFragmentManager, TAG_DATE_PICKER);
         }
         binding.btnSubmit.setOnClickListener {
@@ -309,9 +312,18 @@ class RegisterParticipantParticipantDetailsFragment : BaseFragment(),
         submitRegistration()
     }
 
-    override fun onBirthDatePicked(birthDate: DateTime, isChecked: Boolean) {
+    override fun onBirthDatePicked(
+        birthDate: DateTime?,
+        isChecked: Boolean,
+        yearsEstimated: Int?,
+        monthsEstimated: Int?,
+        daysEstimated: Int?
+    ) {
         birthDatePicked = birthDate
         isBirthDateEstimatedChecked = isChecked
+        this.yearsEstimated=yearsEstimated
+        this.monthsEstimated=monthsEstimated
+        this.daysEstimated=daysEstimated
         viewModel.setBirthDate(birthDate, isChecked)
     }
 
