@@ -123,6 +123,7 @@ class NetworkConnectivityDefault @Inject constructor(
     }
 
     override suspend fun requireFastInternet() {
+        // TODO change it
         if (false)
             throw NoNetworkException()
     }

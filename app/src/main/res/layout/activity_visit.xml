@@ -64,19 +64,8 @@
             android:maxLines="1"
             android:text="@string/visit_label_year_of_birth"
             android:textAppearance="@style/LabelText"
-            app:layout_constraintBottom_toTopOf="@+id/textView_pre_vaccine"
             app:layout_constraintStart_toStartOf="@id/textView_pre_participantID"
             app:layout_constraintTop_toBottomOf="@+id/textView_pre_gender" />
-
-        <TextView
-            android:id="@+id/textView_pre_vaccine"
-            android:layout_width="wrap_content"
-            android:layout_height="50dp"
-            android:maxLines="1"
-            android:text="@string/visit_label_vaccine"
-            android:textAppearance="@style/LabelText"
-            app:layout_constraintStart_toStartOf="@id/textView_pre_participantID"
-            app:layout_constraintTop_toBottomOf="@+id/textView_pre_yearOfBirth" />
 
         <TextView
             android:id="@+id/textView_participantID"
@@ -115,7 +104,7 @@
             android:layout_height="wrap_content"
             android:text="@{viewModel.participant.vaccine.display}"
             android:textAppearance="@style/GeneralText"
-            app:layout_constraintBaseline_toBaselineOf="@+id/textView_pre_vaccine"
+            app:layout_constraintBaseline_toBaselineOf="@+id/textView_pre_yearOfBirth"
             app:layout_constraintEnd_toEndOf="@+id/textView_gender"
             app:layout_constraintStart_toStartOf="@+id/textView_participantID" />
 
@@ -126,7 +115,7 @@
             android:layout_marginEnd="32dp"
             android:scaleType="fitStart"
             app:imageUiModel="@{viewModel.participantImage}"
-            app:layout_constraintBottom_toBottomOf="@id/textView_pre_vaccine"
+            app:layout_constraintBottom_toBottomOf="@id/textView_pre_yearOfBirth"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@id/textView_pre_participantID"
             app:srcCompat="@drawable/ic_avatar_operator" />
@@ -141,11 +130,12 @@
             android:background="@color/colorAccent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/textView_pre_vaccine" />
+            app:layout_constraintTop_toBottomOf="@id/textView_pre_yearOfBirth" />
 
         <TextView
             android:id="@+id/label_visit_type"
             android:layout_width="0dp"
+            android:textAlignment="center"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="64dp"
             android:layout_marginTop="48dp"
@@ -155,33 +145,27 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/separator" />
 
-        <com.google.android.material.tabs.TabLayout
-            android:id="@+id/tabLayout"
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/visitTypeDropdown"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:background="@drawable/white_with_stroke"
+            android:elevation="4dp"
             app:layout_constraintEnd_toEndOf="@id/label_visit_type"
             app:layout_constraintStart_toStartOf="@id/label_visit_type"
             app:layout_constraintTop_toBottomOf="@id/label_visit_type"
-            app:tabGravity="fill"
-            app:tabIndicatorColor="@color/colorAccent"
-            app:tabIndicatorHeight="3dp"
-            app:tabMaxWidth="0dp"
-            app:tabMode="fixed">
+            app:error="@{viewModel.visitTypeDropdownValidationMessage}">
 
-            <com.google.android.material.tabs.TabItem
-                android:layout_width="wrap_content"
+            <AutoCompleteTextView
+                android:id="@+id/dropdown_visit"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:backgroundTint="@color/colorPrimaryLight"
-                tools:text="Placeholder tab" />
+                android:hint="@string/visit_dosing_label_select_visit_dropdown_time"
+                android:imeOptions="actionDone"
+                android:inputType="none"
+                android:text="@{viewModel.selectedVisitTypeDropdown}" />
 
-            <com.google.android.material.tabs.TabItem
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                tools:text="Placeholder tab" />
-
-        </com.google.android.material.tabs.TabLayout>
+        </com.google.android.material.textfield.TextInputLayout>
 
         <androidx.viewpager.widget.ViewPager
             android:id="@+id/viewPager_visit"
@@ -190,9 +174,9 @@
             android:layout_marginBottom="16dp"
             android:background="@drawable/white_with_stroke"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@+id/tabLayout"
-            app:layout_constraintStart_toStartOf="@+id/tabLayout"
-            app:layout_constraintTop_toBottomOf="@+id/tabLayout" />
+            app:layout_constraintEnd_toEndOf="@+id/visitTypeDropdown"
+            app:layout_constraintStart_toStartOf="@+id/visitTypeDropdown"
+            app:layout_constraintTop_toBottomOf="@+id/visitTypeDropdown" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

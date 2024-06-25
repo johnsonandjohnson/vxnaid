@@ -3,16 +3,23 @@ package com.jnj.vaccinetracker.visit
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.widget.ArrayAdapter
 import androidx.activity.viewModels
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.LifecycleOwner
 import com.google.android.material.snackbar.Snackbar
 import com.jnj.vaccinetracker.R
 import com.jnj.vaccinetracker.barcode.ScanBarcodeViewModel
+import com.jnj.vaccinetracker.common.data.encryption.SharedPreference
 import com.jnj.vaccinetracker.common.ui.BaseActivity
+import com.jnj.vaccinetracker.common.ui.MvvmView
 import com.jnj.vaccinetracker.common.ui.SyncBanner
 import com.jnj.vaccinetracker.databinding.ActivityVisitBinding
+import com.jnj.vaccinetracker.databinding.ItemVisitHistoryTitleBinding
+import com.jnj.vaccinetracker.databinding.ItemVisitPreviousDoseBinding
 import com.jnj.vaccinetracker.participantflow.model.ParticipantSummaryUiModel
 import com.jnj.vaccinetracker.splash.SplashActivity
+import kotlinx.coroutines.flow.onEach
 
 /**
  * @author maartenvangiel
@@ -47,10 +54,15 @@ class VisitActivity : BaseActivity() {
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
         binding.viewPagerVisit.adapter = VisitPagerAdapter(this, supportFragmentManager)
-        binding.tabLayout.setupWithViewPager(binding.viewPagerVisit)
+        binding.dropdownVisit.setOnItemClickListener { _, _, position, _ ->
+            val visitName = viewModel.visitTypesDropdownList.get()?.distinct()?.get(position)
+                ?: return@setOnItemClickListener
+            viewModel.setSelectedVisitTypeDropdown(visitName)
+        }
 
         setTitle(R.string.visit_label_title)
         supportActionBar?.setDisplayHomeAsUpEnabled(!newRegisteredParticipant)
+        observeViewModel(this)
 
     }
 
@@ -71,6 +83,13 @@ class VisitActivity : BaseActivity() {
                 }.also {
                     it.show()
                 }
+        }
+    }
+
+    private fun observeViewModel(lifecycleOwner: LifecycleOwner) {
+        viewModel.visitTypesDropdownList.observe(lifecycleOwner) { visitTypes ->
+            val adapter = ArrayAdapter(this, R.layout.item_dropdown, visitTypes?.distinct().orEmpty())
+            binding.dropdownVisit.setAdapter(adapter)
         }
     }
 

@@ -88,11 +88,6 @@ class VisitDosingFragment : BaseFragment(),
                     ?: return@setOnItemClickListener
             viewModel.setSelectedManufacturer(manufacturerName)
         }
-        binding.dropdownVisit.setOnItemClickListener { _, _, position, _ ->
-            val visitName = viewModel.visitTypesDropdownList.get()?.distinct()?.get(position)
-                ?: return@setOnItemClickListener
-            viewModel.setSelectedVisitTypeDropdown(visitName)
-        }
         binding.checkBoxIsOedema.setOnCheckedChangeListener { _, isChecked ->
             viewModel.setIsOedema(isChecked)
         }
@@ -131,11 +126,6 @@ class VisitDosingFragment : BaseFragment(),
 
             SharedPreference(requireContext()).saveManufracterList(viewModel.getManufactuerList())
             SharedPreference(requireContext()).saveManufracterList(scanviewModel.getManufactuerList())
-        }
-
-        viewModel.visitTypesDropdownList.observe(lifecycleOwner) { visitTypes ->
-            val adapter = ArrayAdapter(requireContext(), R.layout.item_dropdown, visitTypes?.distinct().orEmpty())
-            binding.dropdownVisit.setAdapter(adapter)
         }
 
         viewModel.visitEvents

@@ -344,5 +344,6 @@
     <string name="with_oedema">Oedema?</string>
     <string name="visit_z_score_muac_label">MUAC:</string>
     <string name="visit_dosing_error_no_muac">Please enter muac</string>
-    <string name="visit_dosing_label_select_visit_dropdown_time">Select visit type</string>
+    <string name="visit_dosing_label_select_visit_dropdown_time">Select a visit type</string>
+    <string name="visit_dosing_label_visit_type">Visit type:</string>
 </resources>

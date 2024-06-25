@@ -136,23 +136,6 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/linearLayout_visitHistory">
 
-                    <com.google.android.material.textfield.TextInputLayout
-                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        app:error="@{viewModel.visitTypeDropdownValidationMessage}">
-
-                        <AutoCompleteTextView
-                            android:id="@+id/dropdown_visit"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:hint="@string/visit_dosing_label_select_visit_dropdown_time"
-                            android:imeOptions="actionDone"
-                            android:inputType="none"
-                            android:text="@{viewModel.selectedVisitTypeDropdown}" />
-
-                    </com.google.android.material.textfield.TextInputLayout>
-
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
