@@ -77,7 +77,7 @@
     <string name="match_or_register_patient_step_index">Step %s</string>
     <string name="match_or_register_patient_btn_continue">Start Child workflow</string>
     <string name="match_or_register_patient_intro">You will be guided step-by-step to identify or register the Child</string>
-    <string name="match_or_register_patient_intro_title">Homescreen</string>
+    <string name="match_or_register_patient_intro_title">Match or register</string>
     <string name="iris_scan_left_title">Iris scan - Left eye</string>
     <string name="iris_scan_right_title">Iris scan - Right eye</string>
     <string name="participant_matching_title">Child matching</string>

@@ -164,8 +164,7 @@ class ParticipantFlowViewModel @Inject constructor(
      * 3. Matching of participants based upon the entered data
      */
     private fun createScreens(identificationSteps: List<IdentificationStep>): List<Screen> {
-        val result = mutableListOf(Screen.ADD_OR_SEARCH_PARTICIPANT)
-        result += Screen.INTRO
+        val result = mutableListOf(Screen.ADD_OR_SEARCH_PARTICIPANT, Screen.INTRO)
 
         identificationSteps.forEach { step ->
             when (step.type) {

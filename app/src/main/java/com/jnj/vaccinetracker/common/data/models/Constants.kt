@@ -54,4 +54,5 @@ object Constants {
     const val MAX_PERCENT = 100
 
     const val REQ_REGISTER_PARTICIPANT = 453
+    const val REQ_VISIT = 12
 }
