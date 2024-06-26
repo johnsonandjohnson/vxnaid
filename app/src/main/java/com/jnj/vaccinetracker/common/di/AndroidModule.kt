@@ -85,6 +85,9 @@ interface AndroidModule {
     fun bindParticipantFlowIntroFragment(): ParticipantFlowIntroFragment
 
     @ContributesAndroidInjector
+    fun bindParticipantFlowAddOrSearchFragment(): ParticipantFlowAddOrSearchFragment
+
+    @ContributesAndroidInjector
     fun bindLoginActivity(): LoginActivity
 
     @ContributesAndroidInjector

@@ -52,4 +52,6 @@ object Constants {
 
     // PROGRESS
     const val MAX_PERCENT = 100
+
+    const val REQ_REGISTER_PARTICIPANT = 453
 }
