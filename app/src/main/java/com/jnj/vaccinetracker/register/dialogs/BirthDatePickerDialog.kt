@@ -77,7 +77,6 @@ class BirthDatePickerDialog(
         switchIsBirthDateEstimated = dialog.findViewById(R.id.switch_is_birth_date_estimated)
         btnOk = dialog.findViewById(R.id.btn_ok)
         btnCancel = dialog.findViewById(R.id.btn_cancel)
-        datePicker = dialog.findViewById(R.id.datePicker)
         numberPickerYears = dialog.findViewById(R.id.numberPicker_years)
         numberPickerMonths = dialog.findViewById(R.id.numberPicker_months)
         numberPickerDays = dialog.findViewById(R.id.numberPicker_days)
@@ -85,7 +84,7 @@ class BirthDatePickerDialog(
 
     private fun setupDatePicker() {
         selectedDate?.let {
-            datePicker.updateDate(it.yearInt, it.month1, it.dayOfMonth)
+            datePicker.updateDate(it.yearInt, it.month1 - 1, it.dayOfMonth)
         }
 
         val c = Calendar.getInstance()
