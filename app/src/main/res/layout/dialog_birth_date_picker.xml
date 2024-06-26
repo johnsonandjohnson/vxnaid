@@ -14,6 +14,34 @@
         android:calendarViewShown="false" />
 
     <LinearLayout
+        android:id="@+id/layout_estimated_birthday"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center">
+
+        <!-- Year Picker -->
+        <NumberPicker
+            android:id="@+id/numberPicker_years"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="10dp"/>
+
+        <!-- Month Picker -->
+        <NumberPicker
+            android:id="@+id/numberPicker_months"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="10dp"/>
+
+        <!-- Day Picker -->
+        <NumberPicker
+            android:id="@+id/numberPicker_days"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
+
+    <LinearLayout
         android:id="@+id/input_group_is_birth_date_estimated"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -27,9 +55,9 @@
             android:text="@string/participant_registration_details_label_is_birth_date_estimated"
             android:textAppearance="@style/LabelText" />
 
-        <CheckBox
-            android:id="@+id/checkbox_is_birth_date_estimated"
-            android:layout_width="30dp"
+        <androidx.appcompat.widget.SwitchCompat
+            android:id="@+id/switch_is_birth_date_estimated"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
     </LinearLayout>
 
