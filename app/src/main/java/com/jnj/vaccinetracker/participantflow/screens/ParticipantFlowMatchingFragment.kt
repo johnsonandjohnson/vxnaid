@@ -34,7 +34,6 @@ class ParticipantFlowMatchingFragment : BaseFragment() {
 
     private companion object {
         private const val TAG_MISSING_IDENTIFIERS = "missingIdentifiersDialog"
-        private const val REQ_VISIT = 12
     }
 
     private val viewModel: ParticipantFlowMatchingViewModel by viewModels { viewModelFactory }
@@ -138,7 +137,7 @@ class ParticipantFlowMatchingFragment : BaseFragment() {
                 }
                 requireActivity().finish()
             }
-            REQ_VISIT -> {
+            Constants.REQ_VISIT -> {
                 flowViewModel.reset()
             }
         }

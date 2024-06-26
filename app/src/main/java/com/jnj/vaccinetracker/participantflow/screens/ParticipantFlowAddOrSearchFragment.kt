@@ -1,5 +1,7 @@
 package com.jnj.vaccinetracker.participantflow.screens
 
+import android.app.Activity
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.Menu
@@ -16,9 +18,12 @@ import com.jnj.vaccinetracker.common.helpers.logInfo
 import com.jnj.vaccinetracker.common.ui.BaseActivity
 import com.jnj.vaccinetracker.common.ui.BaseFragment
 import com.jnj.vaccinetracker.databinding.FragmentParticipantAddOrSearchBinding
+import com.jnj.vaccinetracker.participantflow.ParticipantFlowActivity
 import com.jnj.vaccinetracker.participantflow.ParticipantFlowViewModel
+import com.jnj.vaccinetracker.participantflow.model.ParticipantSummaryUiModel
 import com.jnj.vaccinetracker.register.RegisterParticipantFlowActivity
 import com.jnj.vaccinetracker.update.UpdateDialog
+import com.jnj.vaccinetracker.visit.VisitActivity
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.debounce
 import kotlinx.coroutines.flow.onEach
@@ -88,6 +93,32 @@ class ParticipantFlowAddOrSearchFragment: BaseFragment() {
       super.onPrepareOptionsMenu(menu)
       menu.findItem(R.id.action_logout).isVisible = true
       menu.findItem(R.id.action_cancel).isVisible = false
+   }
+
+   override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+      super.onActivityResult(requestCode, resultCode, data)
+      if (resultCode != Activity.RESULT_OK) return
+      when (requestCode) {
+         Constants.REQ_REGISTER_PARTICIPANT -> {
+            val participant = data?.getParcelableExtra<ParticipantSummaryUiModel>(RegisterParticipantFlowActivity.EXTRA_PARTICIPANT)
+            if (participant == null) {
+               // If no participant passed, we will return to the start of the identification flow
+               startActivity(ParticipantFlowActivity.create(requireContext()))
+            } else {
+               // If participant passed, we continue
+               startParticipantVisit(participant)
+            }
+            requireActivity().finish()
+         }
+         Constants.REQ_VISIT -> {
+            viewModel.reset()
+         }
+      }
+   }
+
+   private fun startParticipantVisit(participant: ParticipantSummaryUiModel) {
+      startActivity(VisitActivity.create(requireContext(), participant, true))
+      (requireActivity() as BaseActivity).setForwardAnimation()
    }
 
 }
