@@ -10,17 +10,11 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.updateLayoutParams
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.LifecycleOwner
 import com.jnj.vaccinetracker.R
-import com.jnj.vaccinetracker.common.helpers.logInfo
 import com.jnj.vaccinetracker.common.ui.BaseFragment
 import com.jnj.vaccinetracker.databinding.FragmentParticipantFlowIntroBinding
 import com.jnj.vaccinetracker.databinding.ItemParticipantFlowItemBinding
 import com.jnj.vaccinetracker.participantflow.ParticipantFlowViewModel
-import com.jnj.vaccinetracker.update.UpdateDialog
-import kotlinx.coroutines.FlowPreview
-import kotlinx.coroutines.flow.debounce
-import kotlinx.coroutines.flow.onEach
 
 
 /**
@@ -30,10 +24,6 @@ import kotlinx.coroutines.flow.onEach
  * @version 2
  */
 class ParticipantFlowIntroFragment : BaseFragment() {
-
-    private companion object {
-        private const val TAG_UPDATE_DIALOG = "updateDialog"
-    }
 
     private val viewModel: ParticipantFlowViewModel by activityViewModels { viewModelFactory }
 
@@ -51,26 +41,9 @@ class ParticipantFlowIntroFragment : BaseFragment() {
         populateWorkflowSteps(inflater)
 
         setHasOptionsMenu(true)
-        (activity as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(false)
+        (activity as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         return binding.root
-    }
-
-    @OptIn(FlowPreview::class)
-    override fun observeViewModel(lifecycleOwner: LifecycleOwner) {
-        logInfo("observeViewModel")
-        viewModel.updateAvailableEvents
-            .asFlow()
-            .debounce(100)
-            .onEach {
-                onNewVersionAvailable()
-            }.launchIn(lifecycleOwner)
-    }
-
-    private fun onNewVersionAvailable() {
-        // Launch new dialog if none visible before
-        if (requireActivity().supportFragmentManager.findFragmentByTag(TAG_UPDATE_DIALOG) == null)
-            UpdateDialog().show(requireActivity().supportFragmentManager, TAG_UPDATE_DIALOG)
     }
 
     /**
@@ -135,13 +108,8 @@ class ParticipantFlowIntroFragment : BaseFragment() {
 
     private fun Int.toPx() = this * resources.displayMetrics.densityDpi / DisplayMetrics.DENSITY_DEFAULT
 
-    /**
-     * We don't want to show the cancel workflow button on the home page.
-     */
     override fun onPrepareOptionsMenu(menu: Menu) {
         super.onPrepareOptionsMenu(menu)
-        menu.findItem(R.id.action_logout).isVisible = true
         menu.findItem(R.id.action_cancel).isVisible = false
     }
-
 }

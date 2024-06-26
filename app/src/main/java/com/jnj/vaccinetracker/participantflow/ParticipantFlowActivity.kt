@@ -70,6 +70,7 @@ class ParticipantFlowActivity : BaseActivity() {
 
     private fun navigateToScreen(screen: ParticipantFlowViewModel.Screen?, navigationDirection: NavigationDirection) {
         val fragment = when (screen) {
+            ParticipantFlowViewModel.Screen.ADD_OR_SEARCH_PARTICIPANT -> ParticipantFlowAddOrSearchFragment()
             ParticipantFlowViewModel.Screen.INTRO -> ParticipantFlowIntroFragment()
             ParticipantFlowViewModel.Screen.PARTICIPANT_ID -> ParticipantFlowParticipantIdFragment()
             ParticipantFlowViewModel.Screen.PHONE -> ParticipantFlowPhoneNumberFragment()

@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.jnj.vaccinetracker.participantflow.ParticipantFlowViewModel" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/label_welcome"
+            style="@style/CustomAutoSizeText"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="32dp"
+            android:text="@{@string/match_or_register_patient_welcome(viewModel.operator, viewModel.site.displayName)}"
+            android:textAppearance="@style/ScreenTitle"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="@string/match_or_register_patient_welcome" />
+
+
+        <LinearLayout
+            android:id="@+id/decision_buttons_container"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginTop="32dp"
+            android:layout_marginBottom="32dp"
+            android:gravity="center_vertical"
+            android:orientation="vertical"
+            android:padding="40dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/label_welcome"
+            app:layout_constraintStart_toStartOf="@id/label_welcome"
+            app:layout_constraintTop_toBottomOf="@id/label_welcome">
+
+            <Button
+                android:id="@+id/btn_new_participant"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="50dp"
+                android:layout_marginBottom="50dp"
+                android:layout_weight="1"
+                android:backgroundTint="@color/colorPrimary"
+                android:text="@string/participant_matching_btn_new_participant"
+                android:textAppearance="@style/ButtonTextStyling"
+                android:textColor="@color/colorTextOnSecondary"
+                android:textSize="23sp" />
+
+            <Button
+                android:id="@+id/btn_continue"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="50dp"
+                android:layout_marginBottom="50dp"
+                android:layout_weight="1"
+                android:backgroundTint="@color/colorTextOnLight"
+                android:text="@string/match_or_register_patient_btn_continue"
+                android:textAppearance="@style/ButtonTextStyling"
+                android:textColor="@color/colorTextOnSecondary"
+                android:textSize="23sp" />
+
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>
