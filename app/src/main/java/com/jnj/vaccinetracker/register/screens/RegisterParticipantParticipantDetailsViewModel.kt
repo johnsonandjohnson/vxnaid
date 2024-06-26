@@ -439,14 +439,14 @@ class RegisterParticipantParticipantDetailsViewModel @Inject constructor(
         }
     }
 
-    fun setBirthDate(birthDate: DateTime, isChecked: Boolean) {
+    fun setBirthDate(birthDate: DateTime?, isChecked: Boolean) {
         val currentBirthDate = this.birthDate.get()
         val currentIsChecked = this.isBirthDateEstimated.get()
 
         if (currentBirthDate == birthDate && currentIsChecked == isChecked) return
 
         this.birthDate.set(birthDate)
-        val formattedDate = birthDate.format(DateFormat.FORMAT_DATE)
+        val formattedDate = birthDate?.format(DateFormat.FORMAT_DATE)
         this.birthDateText.set(formattedDate)
         birthDateValidationMessage.set(null)
         isBirthDateEstimated.set(isChecked)
