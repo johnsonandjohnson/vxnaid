@@ -42,16 +42,16 @@ class BirthDatePickerDialog(
         setupSwitchListener()
 
         btnOk.setOnClickListener {
-            selectedDate = if (switchIsBirthDateEstimated.isChecked) {
+            isBirthDateEstimatedChecked = switchIsBirthDateEstimated.isChecked
+            selectedDate = if (isBirthDateEstimatedChecked) {
                 calculateEstimatedDate()
             } else {
                 DateTime(datePicker.year, datePicker.month + 1, datePicker.dayOfMonth)
             }
-            isBirthDateEstimatedChecked = switchIsBirthDateEstimated.isChecked
 
-            val years = if (switchIsBirthDateEstimated.isChecked) numberPickerYears.value else null
-            val months = if (switchIsBirthDateEstimated.isChecked) numberPickerMonths.value else null
-            val days = if (switchIsBirthDateEstimated.isChecked) numberPickerDays.value else null
+            val years = if (isBirthDateEstimatedChecked) numberPickerYears.value else null
+            val months = if (isBirthDateEstimatedChecked) numberPickerMonths.value else null
+            val days = if (isBirthDateEstimatedChecked) numberPickerDays.value else null
 
             (parentFragment as? BirthDatePickerListener)?.onBirthDatePicked(
                 selectedDate!!,
