@@ -9,8 +9,10 @@ import com.jnj.vaccinetracker.common.domain.usecases.masterdata.GetAddressHierar
 import com.jnj.vaccinetracker.common.domain.usecases.masterdata.GetConfigurationUseCase
 import com.jnj.vaccinetracker.common.domain.usecases.masterdata.GetLocalizationMapUseCase
 import com.jnj.vaccinetracker.common.domain.usecases.masterdata.GetSitesUseCase
+import com.jnj.vaccinetracker.common.domain.usecases.masterdata.GetSubstancesConfigUseCase
 import com.jnj.vaccinetracker.common.exceptions.SiteNotFoundException
 import com.jnj.vaccinetracker.common.ui.model.SiteUiModel
+import com.jnj.vaccinetracker.sync.domain.usecases.masterdata.SyncSubstancesConfigUseCase
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -25,6 +27,7 @@ class ConfigurationManager @Inject constructor(
     private val getLocalizationMapUseCase: GetLocalizationMapUseCase,
     private val getAddressHierarchyUseCase: GetAddressHierarchyUseCase,
     private val systemLanguageProvider: SystemLanguageProvider,
+    private val getSubstancesConfigUseCase: GetSubstancesConfigUseCase,
 ) {
 
     suspend fun getConfiguration() = getConfigurationUseCase.getMasterData()
@@ -57,4 +60,5 @@ class ConfigurationManager @Inject constructor(
 
     suspend fun getCountryAddressHierarchy(country: String): List<List<AddressValue>> = getAddressHierarchy().countryAddressMap[country] ?: emptyList()
 
+    suspend fun getSubstancesConfig() = getSubstancesConfigUseCase.getMasterData()
 }
