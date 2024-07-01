@@ -13,8 +13,10 @@ data class VisitDetail(
 ) {
 
     val dosingNumber: Int? get() = attributes[Constants.ATTRIBUTE_VISIT_DOSE_NUMBER]?.toIntOrNull()
-    val weight: Int? get() = attributes[Constants.ATTRIBUTE_VISIT_WEIGHT]?.toIntOrNull()
-    val height: Int? get() = attributes[Constants.ATTRIBUTE_VISIT_HEIGHT]?.toIntOrNull()
+    val weight: Int? get() = observations[Constants.OBSERVATION_TYPE_VISIT_WEIGHT]?.value?.toIntOrNull()
+    val height: Int? get() = observations[Constants.OBSERVATION_TYPE_VISIT_HEIGHT]?.value?.toIntOrNull()
+    val muac: Int? get() = observations[Constants.OBSERVATION_TYPE_VISIT_MUAC]?.value?.toIntOrNull()
+    val isOedema: Boolean get() = observations[Constants.OBSERVATION_TYPE_VISIT_OEDEMA]?.value?.toBoolean() ?: false
     val manufacturer: String? get() = observations[Constants.OBSERVATION_TYPE_MANUFACTURER]?.value
 
     val encounterDate: Date? get() = observations[Constants.OBSERVATION_TYPE_MANUFACTURER]?.dateTime

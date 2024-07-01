@@ -56,18 +56,19 @@ class VisitManager @Inject constructor(
             Constants.ATTRIBUTE_VISIT_STATUS to Constants.VISIT_STATUS_OCCURRED,
             Constants.ATTRIBUTE_OPERATOR to operatorUUid,
             Constants.ATTRIBUTE_VISIT_DOSE_NUMBER to dosingNumber.toString(),
-            Constants.ATTRIBUTE_VISIT_WEIGHT to weight.toString(),
-            Constants.ATTRIBUTE_VISIT_HEIGHT to height.toString(),
-            Constants.ATTRIBUTE_VISIT_OEDEMA to isOedema.toString(),
-        ).toMutableMap()
-
-        if (muac != null) {
-            attributes[Constants.ATTRIBUTE_VISIT_MUAC] = muac.toString()
-        }
+        )
 
         val obs = mapOf(
             Constants.OBSERVATION_TYPE_BARCODE to vialCode,
-            Constants.OBSERVATION_TYPE_MANUFACTURER to manufacturer)
+            Constants.OBSERVATION_TYPE_MANUFACTURER to manufacturer,
+            Constants.OBSERVATION_TYPE_VISIT_WEIGHT to weight.toString(),
+            Constants.OBSERVATION_TYPE_VISIT_HEIGHT to height.toString(),
+            Constants.OBSERVATION_TYPE_VISIT_OEDEMA to isOedema.toString(),
+        ).toMutableMap()
+
+        if (muac != null) {
+            obs[Constants.OBSERVATION_TYPE_VISIT_MUAC] = muac.toString()
+        }
 
         val request = UpdateVisit(
             visitUuid = visitUuid,
@@ -97,5 +98,4 @@ class VisitManager @Inject constructor(
     }
 
     suspend fun getUpcomingVisit(participantUuid: String): UpcomingVisit? = getUpcomingVisitUseCase.getUpcomingVisit(participantUuid, date = dateNow())
-
 }
