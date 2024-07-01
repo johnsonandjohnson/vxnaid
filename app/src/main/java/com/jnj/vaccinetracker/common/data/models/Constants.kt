@@ -35,7 +35,7 @@ object Constants {
     const val OBSERVATION_TYPE_MANUFACTURER = "Vaccine Manufacturer"
     const val OBSERVATION_TYPE_VISIT_WEIGHT = "Weight (kg)"
     const val OBSERVATION_TYPE_VISIT_HEIGHT = "Height (cm)"
-    const val OBSERVATION_TYPE_VISIT_MUAC = "Muac"
+    const val OBSERVATION_TYPE_VISIT_MUAC = "MUAC"
     const val OBSERVATION_TYPE_VISIT_OEDEMA = "Oedema"
 
     // common attributes
