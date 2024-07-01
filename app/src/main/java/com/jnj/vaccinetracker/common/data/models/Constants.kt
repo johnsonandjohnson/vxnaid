@@ -33,8 +33,8 @@ object Constants {
     const val VISIT_STATUS_SCHEDULED = "SCHEDULED"
     const val OBSERVATION_TYPE_BARCODE = "Barcode"
     const val OBSERVATION_TYPE_MANUFACTURER = "Vaccine Manufacturer"
-    const val OBSERVATION_TYPE_VISIT_WEIGHT = "Weight"
-    const val OBSERVATION_TYPE_VISIT_HEIGHT = "Height"
+    const val OBSERVATION_TYPE_VISIT_WEIGHT = "Weight (kg)"
+    const val OBSERVATION_TYPE_VISIT_HEIGHT = "Height (cm)"
     const val OBSERVATION_TYPE_VISIT_MUAC = "Muac"
     const val OBSERVATION_TYPE_VISIT_OEDEMA = "Oedema"
 
