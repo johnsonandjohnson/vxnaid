@@ -59,7 +59,7 @@ class VisitManager @Inject constructor(
             Constants.OBSERVATION_TYPE_MANUFACTURER to manufacturer,
             Constants.OBSERVATION_TYPE_VISIT_WEIGHT to weight.toString(),
             Constants.OBSERVATION_TYPE_VISIT_HEIGHT to height.toString(),
-            //Constants.OBSERVATION_TYPE_VISIT_OEDEMA to isOedema.toObsBoolean(),
+            Constants.OBSERVATION_TYPE_VISIT_OEDEMA to isOedema.toString(),
         ).toMutableMap()
 
         if (muac != null) {
@@ -94,12 +94,4 @@ class VisitManager @Inject constructor(
     }
 
     suspend fun getUpcomingVisit(participantUuid: String): UpcomingVisit? = getUpcomingVisitUseCase.getUpcomingVisit(participantUuid, date = dateNow())
-
-    private fun Boolean?.toObsBoolean(): String {
-        return when (this) {
-            true -> "Yes"
-            false -> "No"
-            null -> "Unknown"
-        }
-    }
 }
