@@ -33,6 +33,7 @@ data class SyncErrorOverview(val metadata: SyncErrorMetadata, val dateCreated: D
         MasterDataFile.LOCALIZATION -> R.string.localization
         MasterDataFile.ADDRESS_HIERARCHY -> R.string.address_hierarchy
         MasterDataFile.VACCINE_SCHEDULE -> R.string.vaccine_schedule
+        MasterDataFile.SUBSTANCES_CONFIG -> R.string.substances_config
     }.let { context.getString(it) }
 
     private fun LicenseType.display(context: ResourcesWrapper) = when (this) {

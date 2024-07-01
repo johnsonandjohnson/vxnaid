@@ -92,6 +92,10 @@ class HomeLocationPickerViewModel @Inject constructor(
             val addressFields = buildAddressFields(configuration, country)
             loading.set(true)
             val addressHierarchy = configurationManager.getCountryAddressHierarchy(country)
+
+            val substancesConfig = configurationManager.getSubstancesConfig()
+
+
             onSelectedCountryDataLoaded(country, addressFields, addressHierarchy)
             apiErrorMessage.set(null)
             loading.set(false)

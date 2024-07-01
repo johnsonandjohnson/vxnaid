@@ -4,6 +4,8 @@ package com.jnj.vaccinetracker.sync.data.network
 import com.jnj.vaccinetracker.common.data.models.ParticipantMatchDto
 import com.jnj.vaccinetracker.common.data.models.api.request.*
 import com.jnj.vaccinetracker.common.data.models.api.response.*
+import com.jnj.vaccinetracker.common.domain.entities.Substance
+import com.jnj.vaccinetracker.common.domain.entities.SubstancesConfig
 import com.jnj.vaccinetracker.sync.data.models.*
 import okhttp3.MultipartBody
 import okhttp3.ResponseBody
@@ -41,6 +43,9 @@ interface VaccineTrackerSyncApiService {
 
     @GET("$BIOMETRIC/config/vaccine-schedule")
     suspend fun getVaccineSchedule(): VaccineSchedule
+
+    @GET("$BIOMETRIC/config/substances")
+    suspend fun getSubstancesConfig(): SubstancesConfig
 
     @GET("$BIOMETRIC/location")
     suspend fun getSites(): SitesDto

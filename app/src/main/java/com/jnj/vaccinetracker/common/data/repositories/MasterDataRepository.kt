@@ -8,6 +8,8 @@ import com.jnj.vaccinetracker.common.data.models.api.response.LocalizationMapDto
 import com.jnj.vaccinetracker.common.domain.entities.Configuration
 import com.jnj.vaccinetracker.common.domain.entities.MasterDataFile
 import com.jnj.vaccinetracker.common.domain.entities.Sites
+import com.jnj.vaccinetracker.common.domain.entities.SubstancesConfig
+import com.jnj.vaccinetracker.common.domain.entities.substancesConfigAdapter
 import com.jnj.vaccinetracker.common.helpers.AppCoroutineDispatchers
 import com.jnj.vaccinetracker.common.helpers.logInfo
 import com.jnj.vaccinetracker.common.helpers.logWarn
@@ -42,6 +44,7 @@ class MasterDataRepository @Inject constructor(
     private val addressHierarchyAdapter get() = moshi.adapter<List<String>>(Types.newParameterizedType(List::class.java, String::class.java))
     private val localizationAdapter get() = moshi.adapter(LocalizationMapDto::class.java)
     private val vaccineScheduleAdapter = moshi.vaccineScheduleAdapter()
+    private val substancesConfigAdapter = moshi.substancesConfigAdapter()
 
     private val masterDataDir get() = File(filesDir, masterDataFolderName)
     private fun masterDataFile(fileName: String): File {
@@ -101,6 +104,10 @@ class MasterDataRepository @Inject constructor(
         writeFile(MasterDataFile.VACCINE_SCHEDULE, vaccineScheduleAdapter.toJson(vaccineSchedule))
     }
 
+    suspend fun writeSubstancesConfig(substancesConfig: SubstancesConfig) = withContext(dispatchers.io) {
+        writeFile(MasterDataFile.SUBSTANCES_CONFIG, substancesConfigAdapter.toJson(substancesConfig))
+    }
+
     suspend fun writeAddressHierarchy(addressHierarchy: AddressHierarchyDto) = withContext(dispatchers.io) {
         writeFile(MasterDataFile.ADDRESS_HIERARCHY, addressHierarchyAdapter.toJson(addressHierarchy))
     }
@@ -148,6 +155,8 @@ class MasterDataRepository @Inject constructor(
     suspend fun readAddressHierarchy(): AddressHierarchyDto? = readFile(MasterDataFile.ADDRESS_HIERARCHY, addressHierarchyAdapter)
 
     suspend fun readVaccineSchedule(): VaccineSchedule? = readFile(MasterDataFile.VACCINE_SCHEDULE, vaccineScheduleAdapter)
+
+    suspend fun readSubstanceConfig(): SubstancesConfig? = readFile(MasterDataFile.SUBSTANCES_CONFIG, substancesConfigAdapter)
 
     suspend fun md5Hash(masterDataFile: MasterDataFile): String? {
         return masterDataFile.readContentDecrypted()?.let { md5HashGenerator.md5(it) }
