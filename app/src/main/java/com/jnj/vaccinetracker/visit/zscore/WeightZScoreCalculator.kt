@@ -30,6 +30,6 @@ class WeightZScoreCalculator(
         // Perform calculations based on weight, gender, and age to calculate Z-score
         // Replace the placeholder calculation with actual logic using reference data or models
         if (weight == null) return null
-        return (Math.random() * 6) - 3 // Example Z-score between -3 and +3
+        return (Math.random() * 8) - 4 // Example Z-score between -4 and +4
     }
 }

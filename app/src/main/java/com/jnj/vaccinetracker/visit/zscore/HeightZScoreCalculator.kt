@@ -24,6 +24,6 @@ class HeightZScoreCalculator(
         // Perform calculations based on height, gender, and age to calculate Z-score
         // Replace the placeholder calculation with actual logic using reference data or models
         if (height == null) return null
-        return (Math.random() * 6) - 3 // Example Z-score between -3 and +3
+        return (Math.random() * 8) - 4 // Example Z-score between -4 and +4
     }
 }
