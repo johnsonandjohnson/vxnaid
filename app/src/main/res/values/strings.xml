@@ -277,6 +277,7 @@
     <string name="address_hierarchy" translatable="false">address hierarchy</string>
     <string name="vaccine_schedule" translatable="false">vaccine schedule</string>
     <string name="substances_config" translatable="false">substances config</string>
+    <string name="substances_group_config" translatable="false">substances group config</string>
     <string name="store_participant_sync_record_error" translatable="false">Failed to download %s with participantUuid %s.</string>
     <string name="store_visit_sync_record_error" translatable="false">Failed to download %s with participantUuid %s and visitUuid %s.</string>
     <string name="upload_participant_pending_call_error" translatable="false">Failed to upload %s with participantUuid %s.</string>

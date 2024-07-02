@@ -1,7 +1,8 @@
 package com.jnj.vaccinetracker.common.domain.entities
 
 enum class MasterDataFile {
-    CONFIGURATION, SITES, LOCALIZATION, ADDRESS_HIERARCHY, VACCINE_SCHEDULE, SUBSTANCES_CONFIG;
+    CONFIGURATION, SITES, LOCALIZATION, ADDRESS_HIERARCHY, VACCINE_SCHEDULE, SUBSTANCES_CONFIG,
+    SUBSTANCES_GROUP_CONFIG;
 
     val fileName
         get() = when (this) {
@@ -11,6 +12,7 @@ enum class MasterDataFile {
             ADDRESS_HIERARCHY -> "address_hierarchy.json"
             VACCINE_SCHEDULE -> "vaccine_schedule.json"
             SUBSTANCES_CONFIG -> "substances_config.json"
+            SUBSTANCES_GROUP_CONFIG -> "substances_group_config.json"
         }
 
     val isEncrypted: Boolean
@@ -21,6 +23,7 @@ enum class MasterDataFile {
             ADDRESS_HIERARCHY -> true
             VACCINE_SCHEDULE -> true
             SUBSTANCES_CONFIG -> true
+            SUBSTANCES_GROUP_CONFIG -> true
         }
 
     val syncName
@@ -31,5 +34,6 @@ enum class MasterDataFile {
             ADDRESS_HIERARCHY -> "addressHierarchy"
             VACCINE_SCHEDULE -> "vaccineSchedule"
             SUBSTANCES_CONFIG -> "substancesConfig"
+            SUBSTANCES_GROUP_CONFIG -> "substancesGroupConfig"
         }
 }

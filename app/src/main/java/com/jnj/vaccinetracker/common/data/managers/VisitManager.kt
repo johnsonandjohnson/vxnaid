@@ -2,7 +2,6 @@ package com.jnj.vaccinetracker.common.data.managers
 
 import com.jnj.vaccinetracker.common.data.database.typealiases.dateNow
 import com.jnj.vaccinetracker.common.data.models.Constants
-import com.jnj.vaccinetracker.common.data.repositories.MasterDataRepository
 import com.jnj.vaccinetracker.common.data.repositories.UserRepository
 import com.jnj.vaccinetracker.common.domain.entities.CreateVisit
 import com.jnj.vaccinetracker.common.domain.entities.UpdateVisit
@@ -13,7 +12,6 @@ import com.jnj.vaccinetracker.common.domain.usecases.GetUpcomingVisitUseCase
 import com.jnj.vaccinetracker.common.domain.usecases.UpdateVisitUseCase
 import com.jnj.vaccinetracker.common.exceptions.NoSiteUuidAvailableException
 import com.jnj.vaccinetracker.common.exceptions.OperatorUuidNotAvailableException
-import com.jnj.vaccinetracker.sync.data.network.VaccineTrackerSyncApiDataSource
 import com.jnj.vaccinetracker.sync.data.repositories.SyncSettingsRepository
 import com.jnj.vaccinetracker.sync.domain.entities.UpcomingVisit
 import java.util.*
@@ -32,8 +30,6 @@ class VisitManager @Inject constructor(
     private val updateVisitUseCase: UpdateVisitUseCase,
     private val createVisitUseCase: CreateVisitUseCase,
     private val getUpcomingVisitUseCase: GetUpcomingVisitUseCase,
-    private val vaccineTrackerApiDataSource: VaccineTrackerSyncApiDataSource,
-    private val masterDataRepository: MasterDataRepository,
 ) {
 
     suspend fun getVisitsForParticipant(participantUuid: String): List<VisitDetail> = getParticipantVisitDetailsUseCase.getParticipantVisitDetails(participantUuid)

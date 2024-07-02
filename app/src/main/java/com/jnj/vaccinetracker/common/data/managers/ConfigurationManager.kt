@@ -10,6 +10,7 @@ import com.jnj.vaccinetracker.common.domain.usecases.masterdata.GetConfiguration
 import com.jnj.vaccinetracker.common.domain.usecases.masterdata.GetLocalizationMapUseCase
 import com.jnj.vaccinetracker.common.domain.usecases.masterdata.GetSitesUseCase
 import com.jnj.vaccinetracker.common.domain.usecases.masterdata.GetSubstancesConfigUseCase
+import com.jnj.vaccinetracker.common.domain.usecases.masterdata.GetSubstancesGroupConfigUseCase
 import com.jnj.vaccinetracker.common.exceptions.SiteNotFoundException
 import com.jnj.vaccinetracker.common.ui.model.SiteUiModel
 import com.jnj.vaccinetracker.sync.domain.usecases.masterdata.SyncSubstancesConfigUseCase
@@ -28,6 +29,7 @@ class ConfigurationManager @Inject constructor(
     private val getAddressHierarchyUseCase: GetAddressHierarchyUseCase,
     private val systemLanguageProvider: SystemLanguageProvider,
     private val getSubstancesConfigUseCase: GetSubstancesConfigUseCase,
+    private val getSubstancesGroupConfigUseCase: GetSubstancesGroupConfigUseCase
 ) {
 
     suspend fun getConfiguration() = getConfigurationUseCase.getMasterData()
@@ -61,4 +63,6 @@ class ConfigurationManager @Inject constructor(
     suspend fun getCountryAddressHierarchy(country: String): List<List<AddressValue>> = getAddressHierarchy().countryAddressMap[country] ?: emptyList()
 
     suspend fun getSubstancesConfig() = getSubstancesConfigUseCase.getMasterData()
+
+    suspend fun getSubstancesGroupConfig() = getSubstancesGroupConfigUseCase.getMasterData()
 }

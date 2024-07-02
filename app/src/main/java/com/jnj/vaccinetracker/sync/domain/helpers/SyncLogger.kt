@@ -98,6 +98,7 @@ class SyncLogger @Inject constructor(
             MasterDataFile.ADDRESS_HIERARCHY -> masterDataMemoryDataSource.observeAddressHierarchy().map { }
             MasterDataFile.VACCINE_SCHEDULE -> masterDataMemoryDataSource.observeVaccineSchedule().map { }
             MasterDataFile.SUBSTANCES_CONFIG -> masterDataMemoryDataSource.observeSubstanceConfig().map { }
+            MasterDataFile.SUBSTANCES_GROUP_CONFIG -> masterDataMemoryDataSource.observeSubstanceConfig().map { }
         }
     }
 

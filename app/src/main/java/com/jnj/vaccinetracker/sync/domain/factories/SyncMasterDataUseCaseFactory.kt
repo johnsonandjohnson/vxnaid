@@ -11,7 +11,8 @@ class SyncMasterDataUseCaseFactory @Inject constructor(
     private val syncLocalizationUseCase: SyncLocalizationUseCase,
     private val syncAddressHierarchyUseCase: SyncAddressHierarchyUseCase,
     private val syncVaccineScheduleUseCase: SyncVaccineScheduleUseCase,
-    private val syncSubstancesConfigUseCase: SyncSubstancesConfigUseCase
+    private val syncSubstancesConfigUseCase: SyncSubstancesConfigUseCase,
+    private val syncSubstancesGroupConfigUseCase: SyncSubstancesGroupConfigUseCase
 ) {
 
     fun create(masterDataFile: MasterDataFile): SyncMasterDataUseCase {
@@ -22,6 +23,7 @@ class SyncMasterDataUseCaseFactory @Inject constructor(
             MasterDataFile.ADDRESS_HIERARCHY -> syncAddressHierarchyUseCase
             MasterDataFile.VACCINE_SCHEDULE -> syncVaccineScheduleUseCase
             MasterDataFile.SUBSTANCES_CONFIG -> syncSubstancesConfigUseCase
+            MasterDataFile.SUBSTANCES_GROUP_CONFIG -> syncSubstancesGroupConfigUseCase
         }
     }
 }
