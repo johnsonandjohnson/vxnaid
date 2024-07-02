@@ -1,5 +1,7 @@
 package com.jnj.vaccinetracker.visit
 
+import android.os.Build
+import androidx.annotation.RequiresApi
 import androidx.lifecycle.MutableLiveData
 import com.jnj.vaccinetracker.R
 import com.jnj.vaccinetracker.common.data.managers.ConfigurationManager
@@ -8,15 +10,18 @@ import com.jnj.vaccinetracker.common.data.managers.VisitManager
 import com.jnj.vaccinetracker.common.data.models.Constants
 import com.jnj.vaccinetracker.common.di.ResourcesWrapper
 import com.jnj.vaccinetracker.common.domain.entities.Manufacturer
+import com.jnj.vaccinetracker.common.domain.entities.ObservationValue
 import com.jnj.vaccinetracker.common.domain.entities.VisitDetail
 import com.jnj.vaccinetracker.common.exceptions.OperatorUuidNotAvailableException
 import com.jnj.vaccinetracker.common.helpers.*
 import com.jnj.vaccinetracker.common.ui.dateDayStart
+import com.jnj.vaccinetracker.common.util.SubstancesDataUtil
 import com.jnj.vaccinetracker.common.viewmodel.ViewModelBase
 import com.jnj.vaccinetracker.participantflow.model.ParticipantImageUiModel
 import com.jnj.vaccinetracker.participantflow.model.ParticipantImageUiModel.Companion.toUiModel
 import com.jnj.vaccinetracker.participantflow.model.ParticipantSummaryUiModel
 import com.jnj.vaccinetracker.sync.domain.entities.UpcomingVisit
+import com.jnj.vaccinetracker.visit.model.SubstanceDataModel
 import com.jnj.vaccinetracker.visit.zscore.HeightZScoreCalculator
 import com.jnj.vaccinetracker.visit.zscore.MuacZScoreCalculator
 import com.jnj.vaccinetracker.visit.zscore.NutritionZScoreCalculator
@@ -24,8 +29,14 @@ import com.jnj.vaccinetracker.visit.zscore.WeightZScoreCalculator
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.yield
+import java.time.Instant
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
+import java.time.temporal.ChronoUnit
 import java.util.*
 import javax.inject.Inject
+import kotlin.collections.ArrayList
+import kotlin.math.ceil
 
 /**
  * ViewModel for visit screen.
@@ -109,17 +120,20 @@ class VisitViewModel @Inject constructor(
         }
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     private suspend fun load(participantSummary: ParticipantSummaryUiModel) {
         try {
             val visits = visitManager.getVisitsForParticipant(participantSummary.participantUuid)
-//            val manufacturers = participantSummary.vaccine?.let {
-//                configurationManager.getVaccineManufacturers(
-//                    it.value)
-//            }
             val config = configurationManager.getConfiguration()
+            val substancesData = SubstancesDataUtil.getSubstancesDataForCurrentVisit(
+                participantSummary.birthDateText,
+                visits,
+                configurationManager
+            )
+
             shouldValidateMuac.value = MuacZScoreCalculator.shouldCalculateMuacZScore(participantSummary.birthDateText)
             onVisitsLoaded(visits)
-        //    onManufacturersLoaded(manufacturers)
+            //    onManufacturersLoaded(manufacturers)
             onManufacturerLoaded(config.manufacturers)
             onManufacturersDataLoaded(config.manufacturers)
             differentManufacturerAllowed.set(config.canUseDifferentManufacturers)
@@ -372,7 +386,7 @@ class VisitViewModel @Inject constructor(
                     vialCode = vialBarcode,
                     manufacturer = manufacturer,
                     participantUuid = participant.participantUuid,
-                    dosingNumber = requireNotNull(dosingVisit.dosingNumber) { "dosing visit must have a dosing number" },
+                    dosingNumber = 1,
                     weight = weight!!,
                     height = height!!,
                     isOedema = isOedema!!,
@@ -453,9 +467,9 @@ class VisitViewModel @Inject constructor(
         weight.value = validatedValue
         val zScore = participant.value?.let {
             WeightZScoreCalculator(
-                    validatedValue,
-                    it.gender,
-                    it.birthDateText
+                validatedValue,
+                it.gender,
+                it.birthDateText
             ).calculateZScoreAndRating()
         }
 
@@ -472,9 +486,9 @@ class VisitViewModel @Inject constructor(
         height.value = validatedValue
         val zScore = participant.value?.let {
             HeightZScoreCalculator(
-                    validatedValue,
-                    it.gender,
-                    it.birthDateText
+                validatedValue,
+                it.gender,
+                it.birthDateText
             ).calculateZScoreAndRating()
         }
 
@@ -496,9 +510,9 @@ class VisitViewModel @Inject constructor(
         muac.value = validatedValue
         val muacZScoreCalculator = participant.value?.let {
             MuacZScoreCalculator(
-                    validatedValue,
-                    it.gender,
-                    it.birthDateText
+                validatedValue,
+                it.gender,
+                it.birthDateText
             )
         } ?: return
 
@@ -511,11 +525,11 @@ class VisitViewModel @Inject constructor(
     private fun setNutritionZScore() {
         val nutritionZScoreCalculator = participant.value?.let {
             NutritionZScoreCalculator(
-                    weight.value,
-                    height.value,
-                    isOedema.value,
-                    it.gender,
-                    it.birthDateText
+                weight.value,
+                height.value,
+                isOedema.value,
+                it.gender,
+                it.birthDateText
             )
         } ?: return
 

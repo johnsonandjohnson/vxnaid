@@ -9,7 +9,9 @@ import com.jnj.vaccinetracker.common.domain.entities.Configuration
 import com.jnj.vaccinetracker.common.domain.entities.MasterDataFile
 import com.jnj.vaccinetracker.common.domain.entities.Sites
 import com.jnj.vaccinetracker.common.domain.entities.SubstancesConfig
+import com.jnj.vaccinetracker.common.domain.entities.SubstancesGroupConfig
 import com.jnj.vaccinetracker.common.domain.entities.substancesConfigAdapter
+import com.jnj.vaccinetracker.common.domain.entities.substancesGroupConfigAdapter
 import com.jnj.vaccinetracker.common.helpers.AppCoroutineDispatchers
 import com.jnj.vaccinetracker.common.helpers.logInfo
 import com.jnj.vaccinetracker.common.helpers.logWarn
@@ -45,6 +47,7 @@ class MasterDataRepository @Inject constructor(
     private val localizationAdapter get() = moshi.adapter(LocalizationMapDto::class.java)
     private val vaccineScheduleAdapter = moshi.vaccineScheduleAdapter()
     private val substancesConfigAdapter = moshi.substancesConfigAdapter()
+    private val substancesGroupConfigAdapter = moshi.substancesGroupConfigAdapter()
 
     private val masterDataDir get() = File(filesDir, masterDataFolderName)
     private fun masterDataFile(fileName: String): File {
@@ -108,6 +111,10 @@ class MasterDataRepository @Inject constructor(
         writeFile(MasterDataFile.SUBSTANCES_CONFIG, substancesConfigAdapter.toJson(substancesConfig))
     }
 
+    suspend fun writeSubstancesGroupConfig(substancesGroupConfig: SubstancesGroupConfig) = withContext(dispatchers.io) {
+        writeFile(MasterDataFile.SUBSTANCES_GROUP_CONFIG, substancesGroupConfigAdapter.toJson(substancesGroupConfig))
+    }
+
     suspend fun writeAddressHierarchy(addressHierarchy: AddressHierarchyDto) = withContext(dispatchers.io) {
         writeFile(MasterDataFile.ADDRESS_HIERARCHY, addressHierarchyAdapter.toJson(addressHierarchy))
     }
@@ -157,6 +164,8 @@ class MasterDataRepository @Inject constructor(
     suspend fun readVaccineSchedule(): VaccineSchedule? = readFile(MasterDataFile.VACCINE_SCHEDULE, vaccineScheduleAdapter)
 
     suspend fun readSubstanceConfig(): SubstancesConfig? = readFile(MasterDataFile.SUBSTANCES_CONFIG, substancesConfigAdapter)
+
+    suspend fun readSubstancesGroupConfig(): SubstancesGroupConfig? = readFile(MasterDataFile.SUBSTANCES_GROUP_CONFIG, substancesGroupConfigAdapter)
 
     suspend fun md5Hash(masterDataFile: MasterDataFile): String? {
         return masterDataFile.readContentDecrypted()?.let { md5HashGenerator.md5(it) }

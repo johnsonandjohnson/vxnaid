@@ -9,6 +9,7 @@ import com.jnj.vaccinetracker.common.data.repositories.CookieRepository
 import com.jnj.vaccinetracker.common.di.qualifiers.SyncApi
 import com.jnj.vaccinetracker.common.domain.entities.BiometricsTemplateBytes
 import com.jnj.vaccinetracker.common.domain.entities.SubstancesConfig
+import com.jnj.vaccinetracker.common.domain.entities.SubstancesGroupConfig
 import com.jnj.vaccinetracker.common.helpers.logInfo
 import com.jnj.vaccinetracker.common.helpers.logWarn
 import com.jnj.vaccinetracker.sync.data.models.*
@@ -77,6 +78,8 @@ interface VaccineTrackerSyncApiDataSource : VaccineTrackerApiDataSourceBase {
     suspend fun getVaccineSchedule(): VaccineSchedule
 
     suspend fun getSubstancesConfig(): SubstancesConfig
+
+    suspend fun getSubstancesGroupConfig(): SubstancesGroupConfig
 
     suspend fun getDeviceName(deviceNameRequest: DeviceNameRequest): DeviceNameResponse
 
@@ -232,6 +235,10 @@ class VaccineTrackerSyncApiDataSourceDefault @Inject constructor(
 
     override suspend fun getSubstancesConfig(): SubstancesConfig = webCallSync(callName = "getSubstancesConfig") {
         apiService.getSubstancesConfig()
+    }
+
+    override suspend fun getSubstancesGroupConfig(): SubstancesGroupConfig = webCallSync(callName = "getSubstancesGroupConfig"){
+        apiService.getSubstancesGroupConfig()
     }
 
     override suspend fun getPersonImage(personUuid: String): ResponseBody? = webCallSync(callName = "getPersonImage") {

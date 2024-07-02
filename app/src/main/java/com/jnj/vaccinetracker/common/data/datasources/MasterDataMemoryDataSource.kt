@@ -5,6 +5,7 @@ import com.jnj.vaccinetracker.common.domain.entities.Configuration
 import com.jnj.vaccinetracker.common.domain.entities.LocalizationMap
 import com.jnj.vaccinetracker.common.domain.entities.Sites
 import com.jnj.vaccinetracker.common.domain.entities.SubstancesConfig
+import com.jnj.vaccinetracker.common.domain.entities.SubstancesGroupConfig
 import com.jnj.vaccinetracker.sync.data.models.VaccineSchedule
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -25,6 +26,7 @@ class MasterDataMemoryDataSource @Inject constructor() {
     private val addressHierarchyFlow = MutableStateFlow<Container<AddressHierarchy?>>(Container(null))
     private val vaccineScheduleFlow = MutableStateFlow<Container<VaccineSchedule?>>(Container(null))
     private val substancesConfigFlow = MutableStateFlow<Container<SubstancesConfig?>>(Container(null))
+    private val substancesGroupConfigFlow = MutableStateFlow<Container<SubstancesGroupConfig?>>(Container(null))
 
     fun setSites(sites: Sites?) {
         sitesFlow.value = Container(sites)
@@ -79,7 +81,15 @@ class MasterDataMemoryDataSource @Inject constructor() {
         substancesConfigFlow.value = Container(substanceConfig)
     }
 
-    fun getSubstanceConfig() : SubstancesConfig? = substancesConfigFlow.value.obj
+    fun getSubstanceConfig(): SubstancesConfig? = substancesConfigFlow.value.obj
 
     fun observeSubstanceConfig(): Flow<SubstancesConfig?> = substancesConfigFlow.map { it.obj }
+
+    fun setSubstancesGroupConfig(substancesGroupConfig: SubstancesGroupConfig?) {
+        substancesGroupConfigFlow.value = Container(substancesGroupConfig)
+    }
+
+    fun getSubstancesGroupConfig(): SubstancesGroupConfig? = substancesGroupConfigFlow.value.obj
+
+    fun observeSubstancesGroupConfig(): Flow<SubstancesGroupConfig?> = substancesGroupConfigFlow.map { it.obj }
 }
