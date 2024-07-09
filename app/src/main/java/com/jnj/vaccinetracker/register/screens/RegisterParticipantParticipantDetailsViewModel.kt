@@ -23,6 +23,7 @@ import com.jnj.vaccinetracker.common.viewmodel.ViewModelBase
 import com.jnj.vaccinetracker.participantflow.model.ParticipantImageUiModel
 import com.jnj.vaccinetracker.participantflow.model.ParticipantImageUiModel.Companion.toDomain
 import com.jnj.vaccinetracker.participantflow.model.ParticipantSummaryUiModel
+import com.jnj.vaccinetracker.register.dialogs.HomeLocationPickerViewModel
 import com.jnj.vaccinetracker.sync.data.repositories.SyncSettingsRepository
 import com.soywiz.klock.DateFormat
 import com.soywiz.klock.DateTime
@@ -118,6 +119,7 @@ class RegisterParticipantParticipantDetailsViewModel @Inject constructor(
     val phone = mutableLiveData<String>()
     val homeLocationLabel = mutableLiveData<String>()
     private val homeLocation = mutableLiveData<Address>()
+    val selectedAddressType = mutableLiveData<HomeLocationPickerViewModel.SelectedAddressModel>()
     val vaccine = mutableLiveData<DisplayValue>()
     val language = mutableLiveData<DisplayValue>()
 
@@ -516,9 +518,10 @@ class RegisterParticipantParticipantDetailsViewModel @Inject constructor(
         childCategoryValidationMessage.set(null)
     }
 
-    fun setHomeLocation(homeLocation: Address, stringRepresentation: String) {
+    fun setHomeLocation(homeLocation: Address, stringRepresentation: String, selectedAddressType: HomeLocationPickerViewModel.SelectedAddressModel) {
         this.homeLocation.set(homeLocation)
         this.homeLocationLabel.set(stringRepresentation)
+        this.selectedAddressType.set(selectedAddressType)
         homeLocationValidationMessage.set(null)
     }
 }

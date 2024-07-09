@@ -207,10 +207,13 @@ class RegisterParticipantParticipantDetailsFragment : BaseFragment(),
 
     private fun setupClickListeners() {
         binding.btnSetHomeLocation.setOnClickListener {
-            HomeLocationPickerDialog().show(childFragmentManager, TAG_HOME_LOCATION_PICKER)
+            HomeLocationPickerDialog(
+                viewModel.selectedAddressType.value
+            ).show(childFragmentManager, TAG_HOME_LOCATION_PICKER)
         }
         binding.btnPickDate.setOnClickListener {
             BirthDatePickerDialog(
+                    // todo refactor to use viewModel, do not save them here
                     birthDatePicked, isBirthDateEstimatedChecked, yearsEstimated, monthsEstimated, daysEstimated
             ).show(childFragmentManager, TAG_DATE_PICKER);
         }
@@ -286,8 +289,8 @@ class RegisterParticipantParticipantDetailsFragment : BaseFragment(),
         viewModel.setGender(gender)
     }
 
-    override fun onHomeLocationPicked(address: HomeLocationPickerViewModel.AddressUiModel) {
-        viewModel.setHomeLocation(address.addressMap, address.stringRepresentation)
+    override fun onHomeLocationPicked(address: HomeLocationPickerViewModel.AddressUiModel, selectedAddressType: HomeLocationPickerViewModel.SelectedAddressModel) {
+        viewModel.setHomeLocation(address.addressMap, address.stringRepresentation, selectedAddressType)
     }
 
     override fun continueWithParticipantVisit(participant: ParticipantSummaryUiModel) {

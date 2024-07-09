@@ -25,7 +25,9 @@ import com.jnj.vaccinetracker.register.dialogs.HomeLocationPickerViewModel.*
  * @version 1
  * A dialog that allows the user to pick an address. Fields dynamically appear/disappear depending on the chosen dropdown items.
  */
-class HomeLocationPickerDialog : BaseDialogFragment() {
+class HomeLocationPickerDialog(
+    private val selectedHomeLocation: SelectedAddressModel?
+) : BaseDialogFragment() {
 
     private val viewModel: HomeLocationPickerViewModel by viewModels { viewModelFactory }
     private lateinit var binding: DialogHomeLocationPickerBinding
@@ -38,11 +40,12 @@ class HomeLocationPickerDialog : BaseDialogFragment() {
             dismissAllowingStateLoss()
         }
         binding.buttonConfirm.setOnClickListener {
-            viewModel.confirmAddress(confirmationListener = { address ->
-                findParent<HomeLocationPickerListener>()?.onHomeLocationPicked(address)
+            viewModel.confirmAddress(confirmationListener = { address, selectedAddressType ->
+                findParent<HomeLocationPickerListener>()?.onHomeLocationPicked(address, selectedAddressType)
                 dismiss()
             })
         }
+        viewModel.selectedAddress = selectedHomeLocation
         return binding.root
     }
 
@@ -157,7 +160,7 @@ class HomeLocationPickerDialog : BaseDialogFragment() {
     }
 
     interface HomeLocationPickerListener {
-        fun onHomeLocationPicked(address: AddressUiModel)
+        fun onHomeLocationPicked(address: AddressUiModel, selectedAddressType: SelectedAddressModel)
     }
 
 }

@@ -42,6 +42,7 @@ class HomeLocationPickerViewModel @Inject constructor(
 
     private val userInput = mutableMapOf<AddressValueType, UserInput?>()
     private var addressFields: List<AddressField>? = null
+    var selectedAddress: SelectedAddressModel? = null
 
     init {
         initState()
@@ -54,7 +55,7 @@ class HomeLocationPickerViewModel @Inject constructor(
             val config = configurationManager.getConfiguration()
             val loc = configurationManager.getLocalization()
             countries.set(config.addressFields.keys.sortedBy { it }.map { DisplayValue(it, loc[it]) })
-            setCountry(site.country)
+            setCountry(selectedAddress?.country ?: site.country)
             config
         } catch (ex: Throwable) {
             yield()
@@ -69,11 +70,23 @@ class HomeLocationPickerViewModel @Inject constructor(
                     country.value = it
                 }.mapLatest { country ->
                     loadCountryData(config, country)
+                    if (selectedAddress != null) {
+                        fillDialogWithSelectedAddress()
+                    }
                     loading.set(false)
                 }.launchIn(this)
         } else {
             loading.set(false)
         }
+    }
+
+    private fun fillDialogWithSelectedAddress() {
+        selectedAddress?.addressInputFieldList?.forEach { field ->
+            val isDropdown = field.type == AddressInputFieldType.DROPDOWN
+            val selectedItem = field.userInput?.value ?: ""
+            onAddressFieldSelected(field, selectedItem, isDropdown)
+        }
+        selectedAddress = null
     }
 
     private fun buildAddressFields(config: Configuration, country: String): List<AddressField> {
@@ -310,7 +323,7 @@ class HomeLocationPickerViewModel @Inject constructor(
         return addressMapper.toDomain(this)
     }
 
-    fun confirmAddress(confirmationListener: (AddressUiModel) -> Unit) = scope.launch {
+    fun confirmAddress(confirmationListener: (AddressUiModel, SelectedAddressModel) -> Unit) = scope.launch {
         if (!isInputValid()) {
             logWarn("Address validation failed!")
             return@launch
@@ -330,7 +343,7 @@ class HomeLocationPickerViewModel @Inject constructor(
         val address = resultAddressMap.toAddress()
         val stringRepresentation = address.toStringList(masterDataFields).joinToString(" | ") { loc[it] }
 
-        confirmationListener(AddressUiModel(address, stringRepresentation))
+        confirmationListener(AddressUiModel(address, stringRepresentation), SelectedAddressModel(country, addressInputFields.value))
     }
 
     private fun isInputValid(): Boolean {
@@ -370,6 +383,7 @@ class HomeLocationPickerViewModel @Inject constructor(
     }
 
     data class AddressUiModel(val addressMap: Address, val stringRepresentation: String)
+    data class SelectedAddressModel(val country: String, val addressInputFieldList: List<AddressInputField>?)
 
     data class AddressInputField(
         val displayName: String,
