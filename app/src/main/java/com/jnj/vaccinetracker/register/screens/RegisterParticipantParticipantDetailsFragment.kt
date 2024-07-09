@@ -3,6 +3,7 @@ package com.jnj.vaccinetracker.register.screens
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
+import android.text.method.ScrollingMovementMethod
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -75,6 +76,7 @@ class RegisterParticipantParticipantDetailsFragment : BaseFragment(),
         binding.lifecycleOwner = viewLifecycleOwner
         binding.flowViewModel = flowViewModel
         binding.root.setOnClickListener { activity?.currentFocus?.hideKeyboard() }
+        binding.textViewParticipantHomeLocation.movementMethod = ScrollingMovementMethod()
 
         setupPhoneInput()
         setupDropdowns()

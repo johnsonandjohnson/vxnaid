@@ -323,6 +323,7 @@
                     android:textColor="@{viewModel.homeLocationValidationMessage == null ?  @color/colorPrimary : @color/errorLight}"
                     android:textColorHint="@{viewModel.homeLocationValidationMessage == null ?  @color/colorPrimary : @color/errorLight}"
                     android:textSize="18sp"
+                    android:scrollbars="vertical"
                     app:error="@{viewModel.homeLocationValidationMessage}" />
 
                 <Button
