@@ -12,6 +12,7 @@ fun Moshi.otherSubstancesConfigAdapter(): JsonAdapter<OtherSubstancesConfig> = a
 @JsonClass(generateAdapter = true)
 data class OtherSubstance(
     val conceptName: String,
+    val label: String,
     val weeksAfterBirth: Int,
     val weeksAfterBirthLowWindow: Int,
     val weeksAfterBirthUpWindow: Int,

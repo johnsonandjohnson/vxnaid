@@ -79,6 +79,7 @@ class SubstancesDataUtil {
                     otherSubstancesDataModelList.add(
                         OtherSubstanceDataModel(
                             otherSubstance.conceptName,
+                            otherSubstance.label,
                             otherSubstance.category,
                             otherSubstance.options
                         )
@@ -108,13 +109,14 @@ class SubstancesDataUtil {
 
             return SubstanceDataModel(
                 substanceToBeAdministered,
+                substance.label,
                 substance.category,
                 substance.routeOfAdministration
             )
         }
 
         @RequiresApi(Build.VERSION_CODES.O)
-        private fun getWeeksBetweenDateAndToday(dateString: String): Int {
+        fun getWeeksBetweenDateAndToday(dateString: String): Int {
             val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd")
             val startDate = LocalDate.parse(dateString, formatter)
             val endDate = LocalDate.now()

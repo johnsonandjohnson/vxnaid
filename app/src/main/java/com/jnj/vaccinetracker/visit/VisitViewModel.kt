@@ -8,9 +8,13 @@ import com.jnj.vaccinetracker.common.data.managers.ConfigurationManager
 import com.jnj.vaccinetracker.common.data.managers.ParticipantManager
 import com.jnj.vaccinetracker.common.data.managers.VisitManager
 import com.jnj.vaccinetracker.common.data.models.Constants
+import com.jnj.vaccinetracker.common.data.repositories.UserRepository
 import com.jnj.vaccinetracker.common.di.ResourcesWrapper
+import com.jnj.vaccinetracker.common.domain.entities.CreateVisit
 import com.jnj.vaccinetracker.common.domain.entities.Manufacturer
 import com.jnj.vaccinetracker.common.domain.entities.VisitDetail
+import com.jnj.vaccinetracker.common.domain.usecases.CreateVisitUseCase
+import com.jnj.vaccinetracker.common.exceptions.NoSiteUuidAvailableException
 import com.jnj.vaccinetracker.common.exceptions.OperatorUuidNotAvailableException
 import com.jnj.vaccinetracker.common.helpers.*
 import com.jnj.vaccinetracker.common.ui.dateDayStart
@@ -19,6 +23,7 @@ import com.jnj.vaccinetracker.common.viewmodel.ViewModelBase
 import com.jnj.vaccinetracker.participantflow.model.ParticipantImageUiModel
 import com.jnj.vaccinetracker.participantflow.model.ParticipantImageUiModel.Companion.toUiModel
 import com.jnj.vaccinetracker.participantflow.model.ParticipantSummaryUiModel
+import com.jnj.vaccinetracker.sync.data.repositories.SyncSettingsRepository
 import com.jnj.vaccinetracker.sync.domain.entities.UpcomingVisit
 import com.jnj.vaccinetracker.visit.zscore.HeightZScoreCalculator
 import com.jnj.vaccinetracker.visit.zscore.MuacZScoreCalculator
@@ -27,6 +32,9 @@ import com.jnj.vaccinetracker.visit.zscore.WeightZScoreCalculator
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.yield
+import java.time.LocalDate
+import java.time.ZoneId
+import java.time.format.DateTimeFormatter
 import java.util.*
 import javax.inject.Inject
 
@@ -44,7 +52,10 @@ class VisitViewModel @Inject constructor(
     override val dispatchers: AppCoroutineDispatchers,
     private val resourcesWrapper: ResourcesWrapper,
     private val sessionExpiryObserver: SessionExpiryObserver,
-) : ViewModelBase() {
+    private val createVisitUseCase: CreateVisitUseCase,
+    private val userRepository: UserRepository,
+    private val syncSettingsRepository: SyncSettingsRepository,
+    ) : ViewModelBase() {
 
     /**
      * emits when event submission finished
@@ -317,6 +328,7 @@ class VisitViewModel @Inject constructor(
      * @param overrideOutsideTimeWindowCheck        Indicate if the time window check should be skipped
      * @param overrideManufacturerCheck             Indicate if the manufacturer check should be skipped
      */
+    @RequiresApi(Build.VERSION_CODES.O)
     @SuppressWarnings("LongParameterList")
     fun submitDosingVisit(
         vialBarcode: String,
@@ -396,6 +408,10 @@ class VisitViewModel @Inject constructor(
                     muac = muac,
                     substanceObservations = null
                 )
+
+                // schedule next visit after submitting current one
+                createNextVisit(participant)
+
                 onVisitLogged()
                 loading.set(false)
                 visitEvents.tryEmit(true)
@@ -410,6 +426,75 @@ class VisitViewModel @Inject constructor(
                 visitEvents.tryEmit(false)
             }
         }
+    }
+
+    @RequiresApi(Build.VERSION_CODES.O)
+    suspend fun createNextVisit(participant: ParticipantSummaryUiModel) {
+        val weeksNumberAfterBirthForNextVisit =
+            findWeeksNumberAfterBirthForNextVisit(participant.birthDateText)
+        if (weeksNumberAfterBirthForNextVisit != null) {
+            createVisitUseCase.createVisit(
+                buildNextVisitObject(
+                    participant,
+                    weeksNumberAfterBirthForNextVisit
+                )
+            )
+        }
+    }
+
+    @RequiresApi(Build.VERSION_CODES.O)
+    suspend fun findWeeksNumberAfterBirthForNextVisit(participantBirthDate: String): Int? {
+        val substancesConfig = configurationManager.getSubstancesConfig()
+        val weeksAfterBirthSet =
+            substancesConfig.map { substance -> substance.weeksAfterBirth }.sorted().toSet()
+        val childAgeInWeeks = SubstancesDataUtil.getWeeksBetweenDateAndToday(participantBirthDate)
+        var weeksNumberAfterBirthForNextVisit: Int? = null
+        substancesConfig.forEach { substance ->
+            val minWeekNumber = substance.weeksAfterBirth - substance.weeksAfterBirthLowWindow
+            val maxWeekNumber = substance.weeksAfterBirth + substance.weeksAfterBirthUpWindow
+            if (childAgeInWeeks in minWeekNumber..maxWeekNumber) {
+                weeksNumberAfterBirthForNextVisit =
+                    weeksAfterBirthSet.filter { it > substance.weeksAfterBirth }.minOrNull()
+            }
+        }
+
+        return weeksNumberAfterBirthForNextVisit
+    }
+
+    @RequiresApi(Build.VERSION_CODES.O)
+    fun buildNextVisitObject(
+        participant: ParticipantSummaryUiModel,
+        weeksNumberAfterBirthForNextVisit: Int?
+    ): CreateVisit {
+        val operatorUuid = userRepository.getUser()?.uuid
+            ?: throw OperatorUuidNotAvailableException("Operator uuid not available")
+        val locationUuid = syncSettingsRepository.getSiteUuid()
+            ?: throw NoSiteUuidAvailableException("Location not available")
+        val nextVisitDate = getNextVisitDate(participant, weeksNumberAfterBirthForNextVisit)
+        return CreateVisit(
+            participantUuid = participant.participantUuid,
+            visitType = Constants.VISIT_TYPE_DOSING,
+            startDatetime = nextVisitDate,
+            locationUuid = locationUuid,
+            attributes = mapOf(
+                Constants.ATTRIBUTE_VISIT_STATUS to Constants.VISIT_STATUS_SCHEDULED,
+                Constants.ATTRIBUTE_OPERATOR to operatorUuid,
+            )
+        )
+    }
+
+    @RequiresApi(Build.VERSION_CODES.O)
+    fun getNextVisitDate(
+        participant: ParticipantSummaryUiModel,
+        weeksNumberAfterBirthForNextVisit: Int?
+    ): Date {
+        val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd")
+        val birthDate = LocalDate.parse(participant.birthDateText, formatter)
+        val nextVisitDateAsDate = birthDate.plusWeeks(weeksNumberAfterBirthForNextVisit!!.toLong())
+
+        return Date.from(
+            nextVisitDateAsDate.atStartOfDay(ZoneId.of(Constants.UTC_TIME_ZONE_NAME)).toInstant()
+        )
     }
 
     /**

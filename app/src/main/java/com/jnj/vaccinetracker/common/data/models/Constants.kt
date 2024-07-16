@@ -56,4 +56,6 @@ object Constants {
 
     const val REQ_REGISTER_PARTICIPANT = 453
     const val REQ_VISIT = 12
+
+    const val UTC_TIME_ZONE_NAME = "UTC"
 }
