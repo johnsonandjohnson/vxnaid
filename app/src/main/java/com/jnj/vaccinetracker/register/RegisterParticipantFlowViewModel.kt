@@ -6,6 +6,8 @@ import com.jnj.vaccinetracker.common.data.models.NavigationDirection
 import com.jnj.vaccinetracker.common.helpers.AppCoroutineDispatchers
 import com.jnj.vaccinetracker.common.viewmodel.ViewModelBase
 import com.jnj.vaccinetracker.participantflow.model.ParticipantImageUiModel
+import com.jnj.vaccinetracker.participantflow.model.ParticipantSummaryUiModel
+import com.jnj.vaccinetracker.participantflow.model.ParticipantUiModel
 import javax.inject.Inject
 
 /**
@@ -17,6 +19,7 @@ class RegisterParticipantFlowViewModel @Inject constructor(override val dispatch
     var navigationDirection = NavigationDirection.NONE
     val participantPicture = mutableLiveData<ParticipantImageUiModel>()
     val participantId = mutableLiveData<String>()
+    val participant = mutableLiveData<ParticipantSummaryUiModel>()
     val leftEyeScanned = mutableLiveBoolean()
     val rightEyeScanned = mutableLiveBoolean()
     val isManualEnteredId = mutableLiveBoolean()
@@ -95,11 +98,18 @@ class RegisterParticipantFlowViewModel @Inject constructor(override val dispatch
         currentScreen.set(Screen.PARTICIPANT_DETAILS)
     }
 
+    fun confirmRegistration(participant: ParticipantSummaryUiModel) {
+        this.participant.set(participant)
+        navigationDirection = NavigationDirection.FORWARD
+        currentScreen.set(Screen.PARTICIPANT_CAPTURE_VACCINES)
+    }
+
     enum class Screen(@StringRes val title: Int) {
         CAMERA_PERMISSION(R.string.participant_registration_picture_title),
         TAKE_PICTURE(R.string.participant_registration_picture_title),
         CONFIRM_PICTURE(R.string.participant_registration_picture_title),
-        PARTICIPANT_DETAILS(R.string.participant_registration_details_title)
+        PARTICIPANT_DETAILS(R.string.participant_registration_details_title),
+        PARTICIPANT_CAPTURE_VACCINES(R.string.participant_registration_administered_vaccines_title)
     }
 
 }

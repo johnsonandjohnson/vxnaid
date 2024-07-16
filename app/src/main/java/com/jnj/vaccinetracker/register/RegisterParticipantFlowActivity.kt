@@ -14,6 +14,8 @@ import com.jnj.vaccinetracker.common.ui.BaseActivity
 import com.jnj.vaccinetracker.common.ui.SyncBanner
 import com.jnj.vaccinetracker.common.ui.animateNavigationDirection
 import com.jnj.vaccinetracker.databinding.ActivityRegisterParticipantFlowBinding
+import com.jnj.vaccinetracker.register.screens.RegisterParticipantAdministeredVaccinesFragment
+import com.jnj.vaccinetracker.register.screens.RegisterParticipantAdministeredVaccinesViewModel
 import com.jnj.vaccinetracker.register.screens.RegisterParticipantCameraPermissionFragment
 import com.jnj.vaccinetracker.register.screens.RegisterParticipantParticipantDetailsFragment
 import com.jnj.vaccinetracker.register.screens.RegisterParticipantPicturePreviewFragment
@@ -98,6 +100,7 @@ class RegisterParticipantFlowActivity : BaseActivity() {
             RegisterParticipantFlowViewModel.Screen.TAKE_PICTURE -> RegisterParticipantTakePictureFragment()
             RegisterParticipantFlowViewModel.Screen.CONFIRM_PICTURE -> RegisterParticipantPicturePreviewFragment()
             RegisterParticipantFlowViewModel.Screen.PARTICIPANT_DETAILS -> RegisterParticipantParticipantDetailsFragment()
+            RegisterParticipantFlowViewModel.Screen.PARTICIPANT_CAPTURE_VACCINES -> RegisterParticipantAdministeredVaccinesFragment.create(viewModel.participant.value!!)
             else -> null
         }
         screen?.let { title = getString(it.title) }

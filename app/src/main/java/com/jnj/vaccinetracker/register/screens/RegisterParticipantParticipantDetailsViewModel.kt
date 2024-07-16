@@ -367,10 +367,11 @@ class RegisterParticipantParticipantDetailsViewModel @Inject constructor(
         if (ninValue.isNullOrEmpty()) {
             isValid = false
             ninValidationMessage.set(resourcesWrapper.getString(R.string.participant_registration_details_error_no_nin))
-        } else if (isNinAlreadyExist(ninValue)) {
-            isValid = false
-            ninValidationMessage.set(resourcesWrapper.getString(R.string.participant_registration_details_error_nin_already_exist))
         }
+//        else if (isNinAlreadyExist(ninValue)) {
+//            isValid = false
+//            ninValidationMessage.set(resourcesWrapper.getString(R.string.participant_registration_details_error_nin_already_exist))
+//        }
 
         return isValid
     }

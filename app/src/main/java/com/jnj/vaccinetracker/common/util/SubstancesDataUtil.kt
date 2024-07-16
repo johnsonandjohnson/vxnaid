@@ -43,6 +43,25 @@ class SubstancesDataUtil {
             return substanceDataModelList
         }
 
+
+        suspend fun getAllSubstances(
+            configurationManager: ConfigurationManager
+        ): List<SubstanceDataModel> {
+            val substancesConfig = configurationManager.getSubstancesConfig()
+            val substanceDataModelList = mutableListOf<SubstanceDataModel>()
+            substancesConfig.forEach { substance ->
+                    substanceDataModelList.add(
+                        SubstanceDataModel(
+                            substance.conceptName,
+                            substance.category,
+                            substance.routeOfAdministration
+                        )
+                    )
+                }
+
+            return substanceDataModelList
+        }
+
         @RequiresApi(Build.VERSION_CODES.O)
         suspend fun getOtherSubstancesDataForCurrentVisit(
             participantBirthDate: String,

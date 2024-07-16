@@ -13,6 +13,7 @@ import com.jnj.vaccinetracker.participantflow.screens.ParticipantFlowParticipant
 import com.jnj.vaccinetracker.participantflow.screens.ParticipantFlowPhoneNumberViewModel
 import com.jnj.vaccinetracker.register.RegisterParticipantFlowViewModel
 import com.jnj.vaccinetracker.register.dialogs.HomeLocationPickerViewModel
+import com.jnj.vaccinetracker.register.screens.RegisterParticipantAdministeredVaccinesViewModel
 import com.jnj.vaccinetracker.register.screens.RegisterParticipantParticipantDetailsViewModel
 import com.jnj.vaccinetracker.settings.SettingsViewModel
 import com.jnj.vaccinetracker.setup.SetupFlowViewModel
@@ -165,4 +166,9 @@ interface ViewModelModule {
     @IntoMap
     @ViewModelKey(SetupLicensesViewModel::class)
     fun bindSetupLicensesViewModel(model: SetupLicensesViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(RegisterParticipantAdministeredVaccinesViewModel::class)
+    fun bindRegisterParticipantAdministeredVaccinesViewModel(model: RegisterParticipantAdministeredVaccinesViewModel): ViewModel
 }

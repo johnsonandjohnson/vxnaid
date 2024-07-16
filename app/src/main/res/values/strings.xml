@@ -350,4 +350,11 @@
     <string name="with_oedema">Oedema?</string>
     <string name="visit_z_score_muac_label">MUAC:</string>
     <string name="visit_dosing_error_no_muac">Please enter muac</string>
+    <string name="participant_registration_administered_vaccines_description">Please provide already administered vaccines:</string>
+    <string name="participant_registration_administered_vaccines_add_vaccine">Add vaccine</string>
+    <string name="vaccine_dialog_select_vaccine_dropdown">Select vaccine</string>
+    <string name="vaccine_dialog_select_vaccine_label">Vaccine</string>
+    <string name="vaccine_dialog_dose_label">Dose</string>
+    <string name="participant_registration_administered_vaccines_title">Already administeres vaccines</string>
+    <string name="administered_vaccines_no_previous_vaccines">No previous vaccines</string>
 </resources>

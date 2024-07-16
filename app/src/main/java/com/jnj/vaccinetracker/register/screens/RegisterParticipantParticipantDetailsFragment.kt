@@ -39,7 +39,6 @@ import kotlinx.coroutines.flow.onEach
 class RegisterParticipantParticipantDetailsFragment : BaseFragment(),
     HomeLocationPickerDialog.HomeLocationPickerListener,
     BirthDatePickerDialog.BirthDatePickerListener,
-    RegisterParticipantSuccessfulDialog.RegisterParticipationCompletionListener,
     RegisterParticipantConfirmNoTelephoneDialog.RegisterParticipationNoTelephoneConfirmationListener {
 
     private companion object {
@@ -133,8 +132,7 @@ class RegisterParticipantParticipantDetailsFragment : BaseFragment(),
         registerSuccessEvents
             .asFlow()
             .onEach { participant ->
-                RegisterParticipantSuccessfulDialog.create(participant)
-                    .show(childFragmentManager, TAG_SUCCESS_DIALOG)
+                flowViewModel.confirmRegistration(participant)
             }.launchIn(lifecycleOwner)
         registerNoPhoneEvents
             .asFlow()
@@ -293,23 +291,6 @@ class RegisterParticipantParticipantDetailsFragment : BaseFragment(),
 
     override fun onHomeLocationPicked(address: HomeLocationPickerViewModel.AddressUiModel, selectedAddressType: HomeLocationPickerViewModel.SelectedAddressModel) {
         viewModel.setHomeLocation(address.addressMap, address.stringRepresentation, selectedAddressType)
-    }
-
-    override fun continueWithParticipantVisit(participant: ParticipantSummaryUiModel) {
-        (requireActivity() as BaseActivity).run {
-            setResult(
-                Activity.RESULT_OK,
-                Intent().putExtra(RegisterParticipantFlowActivity.EXTRA_PARTICIPANT, participant)
-            )
-            finish()
-        }
-    }
-
-    override fun finishParticipantFlow() {
-        (requireActivity() as BaseActivity).run {
-            setResult(Activity.RESULT_OK)
-            finish()
-        }
     }
 
     override fun confirmNoTelephone() {

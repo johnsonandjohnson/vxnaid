@@ -17,6 +17,8 @@ import com.jnj.vaccinetracker.register.dialogs.HomeLocationPickerDialog
 import com.jnj.vaccinetracker.register.dialogs.RegisterParticipantConfirmNoTelephoneDialog
 import com.jnj.vaccinetracker.register.dialogs.RegisterParticipantIdNotMatchingDialog
 import com.jnj.vaccinetracker.register.dialogs.RegisterParticipantSuccessfulDialog
+import com.jnj.vaccinetracker.register.dialogs.VaccineDialog
+import com.jnj.vaccinetracker.register.screens.RegisterParticipantAdministeredVaccinesFragment
 import com.jnj.vaccinetracker.register.screens.RegisterParticipantCameraPermissionFragment
 import com.jnj.vaccinetracker.register.screens.RegisterParticipantParticipantDetailsFragment
 import com.jnj.vaccinetracker.register.screens.RegisterParticipantPicturePreviewFragment
@@ -88,6 +90,9 @@ interface AndroidModule {
     fun bindParticipantFlowAddOrSearchFragment(): ParticipantFlowAddOrSearchFragment
 
     @ContributesAndroidInjector
+    fun bindRegisterParticipantAdministeredVaccinesFragment(): RegisterParticipantAdministeredVaccinesFragment
+
+    @ContributesAndroidInjector
     fun bindLoginActivity(): LoginActivity
 
     @ContributesAndroidInjector
@@ -143,6 +148,8 @@ interface AndroidModule {
 
     @ContributesAndroidInjector
     fun bindRegisterParticipantSuccessfulDialog(): RegisterParticipantSuccessfulDialog
+    @ContributesAndroidInjector
+    fun bindVaccineDialog(): VaccineDialog
 
     @ContributesAndroidInjector
     fun bindRegisterParticipantConfirmNoTelephoneDialog(): RegisterParticipantConfirmNoTelephoneDialog
