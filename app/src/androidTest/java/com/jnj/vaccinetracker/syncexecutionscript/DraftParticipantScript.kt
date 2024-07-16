@@ -133,7 +133,8 @@ class DraftParticipantScript {
                 weight = weight,
                 height = height,
                 isOedema = false,
-                muac = 5
+                muac = 5,
+                substanceObservations = null
             )
         }
     }

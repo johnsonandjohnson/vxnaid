@@ -137,7 +137,7 @@
                 android:background="@color/colorPrimary" />
 
             <LinearLayout
-                android:id="@+id/auth_steps_container"
+                android:id="@+id/vaccine_items_container"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_marginTop="15dp"
@@ -154,6 +154,7 @@
                     android:id="@+id/recyclerView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:scrollbars="vertical"
                     android:visibility="gone" />
 
                 <TextView

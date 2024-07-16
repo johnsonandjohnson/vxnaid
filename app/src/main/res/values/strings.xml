@@ -357,4 +357,6 @@
     <string name="vaccine_dialog_dose_label">Dose</string>
     <string name="participant_registration_administered_vaccines_title">Already administeres vaccines</string>
     <string name="administered_vaccines_no_previous_vaccines">No previous vaccines</string>
+    <string name="general_label_add">Add</string>
+    <string name="remove_vaccine">remove</string>
 </resources>

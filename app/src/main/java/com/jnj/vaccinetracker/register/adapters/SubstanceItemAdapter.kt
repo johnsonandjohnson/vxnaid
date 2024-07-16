@@ -3,13 +3,16 @@ package com.jnj.vaccinetracker.register.adapters
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageButton
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.jnj.vaccinetracker.R
 import com.jnj.vaccinetracker.register.screens.RegisterParticipantAdministeredVaccinesViewModel
+import com.jnj.vaccinetracker.visit.model.SubstanceDataModel
 
 class SubstanceItemAdapter(
-   private val items: MutableList<RegisterParticipantAdministeredVaccinesViewModel.SubstanceDoseDataModel>
+   private val items: MutableList<SubstanceDataModel>,
+   private val viewModel: RegisterParticipantAdministeredVaccinesViewModel,
 ) : RecyclerView.Adapter<SubstanceItemAdapter.SubstanceViewHolder>() {
 
    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SubstanceViewHolder {
@@ -19,12 +22,12 @@ class SubstanceItemAdapter(
    }
 
    override fun onBindViewHolder(holder: SubstanceViewHolder, position: Int) {
-      holder.bind(items[position])
+      holder.bind(items[position], viewModel)
    }
 
    override fun getItemCount(): Int = items.size
 
-   fun updateList(newSubstances: List<RegisterParticipantAdministeredVaccinesViewModel.SubstanceDoseDataModel>?) {
+   fun updateList(newSubstances: List<SubstanceDataModel>?) {
       items.clear()
       if (newSubstances != null) {
          items.addAll(newSubstances)
@@ -34,13 +37,16 @@ class SubstanceItemAdapter(
       notifyDataSetChanged()
    }
 
-   class SubstanceViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+   inner class SubstanceViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
       private val substanceName: TextView = itemView.findViewById(R.id.textView_participantId)
-      private val substanceDose: TextView = itemView.findViewById(R.id.textView_dose)
+      private val btnRemove: ImageButton = itemView.findViewById(R.id.btnRemove)
 
-      fun bind(substance: RegisterParticipantAdministeredVaccinesViewModel.SubstanceDoseDataModel) {
-         substanceName.text = substance.substance.conceptName
-         substanceDose.text = substance.dose.toString()
+      fun bind(substance: SubstanceDataModel, viewModel: RegisterParticipantAdministeredVaccinesViewModel) {
+         substanceName.text = substance.conceptName
+
+         btnRemove.setOnClickListener {
+            viewModel.removeFromSelectedSubstances(substance)
+         }
       }
    }
 }

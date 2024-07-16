@@ -6,32 +6,23 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ArrayAdapter
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.LifecycleOwner
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.google.android.material.snackbar.Snackbar
 import com.jnj.vaccinetracker.R
 import com.jnj.vaccinetracker.common.helpers.hideKeyboard
-import com.jnj.vaccinetracker.common.helpers.logDebug
 import com.jnj.vaccinetracker.common.ui.BaseActivity
 import com.jnj.vaccinetracker.common.ui.BaseFragment
 import com.jnj.vaccinetracker.databinding.FragmentRegisterParticipantAdministeredVaccinesBinding
-import com.jnj.vaccinetracker.participantflow.model.ParticipantImageUiModel
 import com.jnj.vaccinetracker.participantflow.model.ParticipantSummaryUiModel
 import com.jnj.vaccinetracker.register.RegisterParticipantFlowActivity
 import com.jnj.vaccinetracker.register.RegisterParticipantFlowViewModel
 import com.jnj.vaccinetracker.register.adapters.SubstanceItemAdapter
-import com.jnj.vaccinetracker.register.dialogs.RegisterParticipantConfirmNoTelephoneDialog
-import com.jnj.vaccinetracker.register.dialogs.RegisterParticipantIdNotMatchingDialog
 import com.jnj.vaccinetracker.register.dialogs.RegisterParticipantSuccessfulDialog
 import com.jnj.vaccinetracker.register.dialogs.VaccineDialog
-import com.jnj.vaccinetracker.visit.VisitActivity
-import com.jnj.vaccinetracker.visit.VisitPagerAdapter
 import com.jnj.vaccinetracker.visit.model.SubstanceDataModel
-import com.soywiz.klock.DateFormat
 import kotlinx.coroutines.flow.onEach
 
 class RegisterParticipantAdministeredVaccinesFragment : BaseFragment(),
@@ -88,13 +79,24 @@ class RegisterParticipantAdministeredVaccinesFragment : BaseFragment(),
    }
 
    private fun setupRecyclerView() {
-      adapter = SubstanceItemAdapter(mutableListOf())
+      adapter = SubstanceItemAdapter(mutableListOf(), viewModel)
       binding.recyclerView.layoutManager = LinearLayoutManager(requireContext())
       binding.recyclerView.adapter = adapter
    }
 
    override fun observeViewModel(lifecycleOwner: LifecycleOwner) {
       observeViewModelEvents(lifecycleOwner)
+
+      viewModel.selectedSubstances.observe(lifecycleOwner){substanceItems ->
+         adapter.updateList(substanceItems)
+         if (viewModel.selectedSubstances.value?.isEmpty() == true || viewModel.selectedSubstances.value == null) {
+            binding.recyclerView.visibility = View.GONE
+            binding.textViewNoVaccines.visibility = View.VISIBLE
+         } else {
+            binding.recyclerView.visibility = View.VISIBLE
+            binding.textViewNoVaccines.visibility = View.GONE
+         }
+      }
    }
 
    private fun observeViewModelEvents(lifecycleOwner: LifecycleOwner) = viewModel.apply {
@@ -107,21 +109,18 @@ class RegisterParticipantAdministeredVaccinesFragment : BaseFragment(),
                   TAG_SUCCESS_DIALOG
                )
          }.launchIn(lifecycleOwner)
-      viewModel.selectedSubstances.observe(lifecycleOwner){substanceItems ->
-         adapter.updateList(substanceItems)
-         if (selectedSubstances.value?.isEmpty() == true || selectedSubstances.value == null) {
-            binding.recyclerView.visibility = View.GONE
-            binding.textViewNoVaccines.visibility = View.VISIBLE
-         } else {
-            binding.recyclerView.visibility = View.VISIBLE
-            binding.textViewNoVaccines.visibility = View.GONE
-         }
-      }
    }
 
    private fun setupClickListeners() {
       binding.btnAddVaccine.setOnClickListener {
-         VaccineDialog().show(childFragmentManager, TAG_VACCINE_PICKER)
+         val allSubstances = viewModel.substancesData.value.orEmpty()
+         val selectedSubstances = viewModel.selectedSubstances.value.orEmpty()
+
+         val filteredSubstances = allSubstances.filter { substance ->
+            selectedSubstances.none { selected -> selected.conceptName == substance.conceptName }
+         }
+
+         VaccineDialog(filteredSubstances).show(childFragmentManager, TAG_VACCINE_PICKER)
       }
       binding.btnSubmit.setOnClickListener {
          submitVaccineRegistration()
@@ -148,7 +147,7 @@ class RegisterParticipantAdministeredVaccinesFragment : BaseFragment(),
       }
    }
 
-   override fun addVaccine(vaccine: SubstanceDataModel, dose: Int) {
-      viewModel.addSelectedSubstance(vaccine, dose)
+   override fun addVaccine(vaccine: SubstanceDataModel) {
+      viewModel.addSelectedSubstance(vaccine)
    }
 }

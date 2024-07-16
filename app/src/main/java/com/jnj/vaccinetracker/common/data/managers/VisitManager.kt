@@ -45,25 +45,29 @@ class VisitManager @Inject constructor(
         height: Int?,
         isOedema: Boolean?,
         muac: Int?,
+        substanceObservations: Map<String, String>?
     ) {
-        val locationUuid = syncSettingsRepository.getSiteUuid() ?: throw NoSiteUuidAvailableException("Trying to register dosing visit without a selected site")
-        val operatorUUid = userRepository.getUser()?.uuid ?: throw OperatorUuidNotAvailableException("trying to register dosing visit without stored operator uuid")
+        // TODO arguments could be refactored later on
+        val locationUuid = syncSettingsRepository.getSiteUuid()
+            ?: throw NoSiteUuidAvailableException("Trying to register dosing visit without a selected site")
+
+        val operatorUUid = userRepository.getUser()?.uuid
+            ?: throw OperatorUuidNotAvailableException("trying to register dosing visit without stored operator uuid")
+
         val attributes = mapOf(
             Constants.ATTRIBUTE_VISIT_STATUS to Constants.VISIT_STATUS_OCCURRED,
             Constants.ATTRIBUTE_OPERATOR to operatorUUid,
             Constants.ATTRIBUTE_VISIT_DOSE_NUMBER to dosingNumber.toString(),
         )
 
-        val obs = mapOf(
-            Constants.OBSERVATION_TYPE_BARCODE to vialCode,
-            Constants.OBSERVATION_TYPE_MANUFACTURER to manufacturer,
-        ).toMutableMap()
-
-        if (muac != null) {
-            obs[Constants.OBSERVATION_TYPE_VISIT_WEIGHT] = weight.toString()
-            obs[Constants.OBSERVATION_TYPE_VISIT_HEIGHT] = height.toString()
-            obs[Constants.OBSERVATION_TYPE_VISIT_OEDEMA] = isOedema.toString()
-            obs[Constants.OBSERVATION_TYPE_VISIT_MUAC] = muac.toString()
+        val obsBuilder = mutableMapOf<String, String>().apply {
+            put(Constants.OBSERVATION_TYPE_BARCODE, vialCode)
+            put(Constants.OBSERVATION_TYPE_MANUFACTURER, manufacturer)
+            muac?.let { put(Constants.OBSERVATION_TYPE_VISIT_MUAC, it.toString()) }
+            weight?.let { put(Constants.OBSERVATION_TYPE_VISIT_WEIGHT, it.toString()) }
+            height?.let { put(Constants.OBSERVATION_TYPE_VISIT_HEIGHT, it.toString()) }
+            isOedema?.let { put(Constants.OBSERVATION_TYPE_VISIT_OEDEMA, it.toString()) }
+            substanceObservations?.let { putAll(it) }
         }
 
         val request = UpdateVisit(
@@ -72,10 +76,12 @@ class VisitManager @Inject constructor(
             participantUuid = participantUuid,
             locationUuid = locationUuid,
             attributes = attributes,
-            observations = obs,
+            observations = obsBuilder.toMap(),
         )
+
         updateVisitUseCase.updateVisit(request)
     }
+
 
     suspend fun registerOtherVisit(participantUuid: String) {
         val locationUuid = syncSettingsRepository.getSiteUuid() ?: throw NoSiteUuidAvailableException("Trying to register other visit without a selected site")

@@ -6,7 +6,7 @@
 
         <variable
             name="item"
-            type="com.jnj.vaccinetracker.register.screens.RegisterParticipantAdministeredVaccinesViewModel.SubstanceDoseDataModel" />
+            type="com.jnj.vaccinetracker.visit.model.SubstanceDataModel" />
 
     </data>
 
@@ -14,28 +14,38 @@
         android:id="@+id/constraintLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
         android:background="@color/greyed_out"
         android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/textView_participantId"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="8dp"
-            android:text="@{item.substance.conceptName}"
-            android:textAppearance="@style/GeneralText"
-            tools:text="Vaccine"
-            android:textStyle="bold"/>
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:padding="8dp">
 
-        <TextView
-            android:id="@+id/textView_dose"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:text="@{item.dose}"
-            android:textAppearance="@style/GeneralText"
-            tools:text="Dose: 0" />
+            <TextView
+                android:id="@+id/textView_participantId"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:text="@{item.conceptName}"
+                android:textAppearance="@style/GeneralText"
+                tools:text="Vaccine"
+                android:textStyle="bold"/>
+
+            <ImageButton
+                android:id="@+id/btnRemove"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:contentDescription="@string/remove_vaccine"
+                android:src="@drawable/baseline_delete_outline_24"/>
+
+        </LinearLayout>
 
         <Button
             android:id="@+id/border"
@@ -45,5 +55,4 @@
             android:background="@color/colorPrimaryLight" />
 
     </LinearLayout>
-
 </layout>

@@ -19,7 +19,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:layout_marginBottom="30dp">
 
             <TextView
                 android:id="@+id/textView_vaccine"
@@ -48,31 +49,6 @@
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/input_group_dose"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:orientation="horizontal">
-
-            <TextView
-                android:id="@+id/textView_dose"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="30dp"
-                android:maxLines="2"
-                android:text="@string/vaccine_dialog_dose_label"
-                android:textAppearance="@style/LabelText"
-                android:textSize="21sp" />
-
-            <NumberPicker
-                android:id="@+id/numberPicker_dose"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:value="@={viewModel.selectedDose}" />
-        </LinearLayout>
-
-
-        <LinearLayout
             style="?android:attr/buttonBarStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -84,7 +60,7 @@
                 style="?android:attr/buttonBarButtonStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/general_label_ok" />
+                android:text="@string/general_label_add" />
 
             <Button
                 android:id="@+id/btn_cancel"

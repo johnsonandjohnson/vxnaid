@@ -1,11 +1,9 @@
 package com.jnj.vaccinetracker.register.screens
 
-import androidx.lifecycle.viewModelScope
 import com.jnj.vaccinetracker.R
 import com.jnj.vaccinetracker.common.data.managers.ConfigurationManager
 import com.jnj.vaccinetracker.common.data.managers.VisitManager
 import com.jnj.vaccinetracker.common.di.ResourcesWrapper
-import com.jnj.vaccinetracker.common.domain.entities.Manufacturer
 import com.jnj.vaccinetracker.common.domain.entities.VisitDetail
 import com.jnj.vaccinetracker.common.exceptions.OperatorUuidNotAvailableException
 import com.jnj.vaccinetracker.common.helpers.AppCoroutineDispatchers
@@ -16,7 +14,6 @@ import com.jnj.vaccinetracker.common.util.SubstancesDataUtil
 import com.jnj.vaccinetracker.common.viewmodel.ViewModelBase
 import com.jnj.vaccinetracker.participantflow.model.ParticipantSummaryUiModel
 import com.jnj.vaccinetracker.visit.model.SubstanceDataModel
-import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.flow.launchIn
@@ -36,19 +33,14 @@ class RegisterParticipantAdministeredVaccinesViewModel @Inject constructor(
 ) : ViewModelBase() {
 
    val registerVaccinesSuccessEvents = eventFlow<ParticipantSummaryUiModel>()
-   var substancesData = mutableLiveData<List<SubstanceDataModel>>()
-   var selectedSubstances = mutableLiveData<MutableList<SubstanceDoseDataModel>>()
+   var substancesData = mutableLiveData<List<SubstanceDataModel>>(emptyList())
+   var selectedSubstances = mutableLiveData<List<SubstanceDataModel>>()
    val loading = mutableLiveBoolean()
    val errorMessage = mutableLiveData<String>()
    private val participantArg = stateFlow<ParticipantSummaryUiModel?>(null)
    val participant = mutableLiveData<ParticipantSummaryUiModel>()
    private val retryClickEvents = eventFlow<Unit>()
-   val dosingVisit = mutableLiveData<VisitDetail>()
-
-   data class SubstanceDoseDataModel(
-      val substance: SubstanceDataModel,
-      val dose: Int
-   )
+   private val dosingVisit = mutableLiveData<VisitDetail>()
 
    init {
       initState()
@@ -73,9 +65,15 @@ class RegisterParticipantAdministeredVaccinesViewModel @Inject constructor(
       dosingVisit.set(foundDosingVisit)
    }
 
-   fun addSelectedSubstance(substance: SubstanceDataModel, dose: Int) {
-      val newSubstance = SubstanceDoseDataModel(substance, dose)
-      selectedSubstances.value?.add(newSubstance)
+   fun addSelectedSubstance(substance: SubstanceDataModel) {
+      val currentSubstances = selectedSubstances.value ?: emptyList()
+      selectedSubstances.value = currentSubstances + substance
+   }
+
+   fun removeFromSelectedSubstances(substanceToRemove: SubstanceDataModel) {
+      val currentSubstances = selectedSubstances.value ?: emptyList()
+      val updatedList = currentSubstances.filter { it.conceptName != substanceToRemove.conceptName }
+      selectedSubstances.value = updatedList
    }
 
    private suspend fun load(participantSummary: ParticipantSummaryUiModel) {
@@ -121,12 +119,15 @@ class RegisterParticipantAdministeredVaccinesViewModel @Inject constructor(
          return
       }
 
+      val substanceObservations = selectedSubstances.value?.associate { substance ->
+         substance.conceptName to substance.conceptName
+      }.orEmpty()
+
 
       loading.set(true)
 
       scope.launch {
          try {
-            // TODO change to multiple substances
             visitManager.registerDosingVisit(
                encounterDatetime = Date(),
                visitUuid = dosingVisit.uuid,
@@ -137,7 +138,8 @@ class RegisterParticipantAdministeredVaccinesViewModel @Inject constructor(
                weight = null,
                height = null,
                isOedema = null,
-               muac = null
+               muac = null,
+               substanceObservations = substanceObservations
             )
             loading.set(false)
             registerVaccinesSuccessEvents.tryEmit(participant)

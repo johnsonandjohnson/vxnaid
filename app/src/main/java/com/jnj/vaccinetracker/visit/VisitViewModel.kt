@@ -393,7 +393,8 @@ class VisitViewModel @Inject constructor(
                     weight = weight!!,
                     height = height!!,
                     isOedema = isOedema!!,
-                    muac = muac
+                    muac = muac,
+                    substanceObservations = null
                 )
                 onVisitLogged()
                 loading.set(false)
