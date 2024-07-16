@@ -54,6 +54,7 @@ class SubstancesDataUtil {
                         SubstanceDataModel(
                             substance.conceptName,
                             substance.category,
+                            substance.label,
                             substance.routeOfAdministration
                         )
                     )
