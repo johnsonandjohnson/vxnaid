@@ -1,10 +1,17 @@
 package com.jnj.vaccinetracker.register.screens
 
+import android.os.Build
+import androidx.annotation.RequiresApi
 import com.jnj.vaccinetracker.R
 import com.jnj.vaccinetracker.common.data.managers.ConfigurationManager
 import com.jnj.vaccinetracker.common.data.managers.VisitManager
+import com.jnj.vaccinetracker.common.data.models.Constants
+import com.jnj.vaccinetracker.common.data.repositories.UserRepository
 import com.jnj.vaccinetracker.common.di.ResourcesWrapper
+import com.jnj.vaccinetracker.common.domain.entities.CreateVisit
 import com.jnj.vaccinetracker.common.domain.entities.VisitDetail
+import com.jnj.vaccinetracker.common.domain.usecases.CreateVisitUseCase
+import com.jnj.vaccinetracker.common.exceptions.NoSiteUuidAvailableException
 import com.jnj.vaccinetracker.common.exceptions.OperatorUuidNotAvailableException
 import com.jnj.vaccinetracker.common.helpers.AppCoroutineDispatchers
 import com.jnj.vaccinetracker.common.helpers.SessionExpiryObserver
@@ -13,6 +20,7 @@ import com.jnj.vaccinetracker.common.helpers.rethrowIfFatal
 import com.jnj.vaccinetracker.common.util.SubstancesDataUtil
 import com.jnj.vaccinetracker.common.viewmodel.ViewModelBase
 import com.jnj.vaccinetracker.participantflow.model.ParticipantSummaryUiModel
+import com.jnj.vaccinetracker.sync.data.repositories.SyncSettingsRepository
 import com.jnj.vaccinetracker.visit.model.SubstanceDataModel
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.filterNotNull
@@ -21,6 +29,9 @@ import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import kotlinx.coroutines.yield
+import java.time.LocalDate
+import java.time.ZoneId
+import java.time.format.DateTimeFormatter
 import java.util.Date
 import javax.inject.Inject
 
@@ -30,6 +41,9 @@ class RegisterParticipantAdministeredVaccinesViewModel @Inject constructor(
    private val resourcesWrapper: ResourcesWrapper,
    private val visitManager: VisitManager,
    private val sessionExpiryObserver: SessionExpiryObserver,
+   private val createVisitUseCase: CreateVisitUseCase,
+   private val userRepository: UserRepository,
+   private val syncSettingsRepository: SyncSettingsRepository,
 ) : ViewModelBase() {
 
    val registerVaccinesSuccessEvents = eventFlow<ParticipantSummaryUiModel>()
@@ -96,6 +110,7 @@ class RegisterParticipantAdministeredVaccinesViewModel @Inject constructor(
       this.participantArg.value = participant
    }
 
+   @RequiresApi(Build.VERSION_CODES.O)
    fun submitVaccineRegistration(
    ) {
       scope.launch {
@@ -103,6 +118,43 @@ class RegisterParticipantAdministeredVaccinesViewModel @Inject constructor(
       }
    }
 
+   @RequiresApi(Build.VERSION_CODES.O)
+   suspend fun createNextVisit(participant: ParticipantSummaryUiModel) {
+         createVisitUseCase.createVisit(
+            buildNextVisitObject(
+               participant,
+            )
+         )
+   }
+
+   @RequiresApi(Build.VERSION_CODES.O)
+   fun buildNextVisitObject(
+      participant: ParticipantSummaryUiModel,
+   ): CreateVisit {
+      val operatorUuid = userRepository.getUser()?.uuid
+         ?: throw OperatorUuidNotAvailableException("Operator uuid not available")
+      val locationUuid = syncSettingsRepository.getSiteUuid()
+         ?: throw NoSiteUuidAvailableException("Location not available")
+      val nextVisitDate = LocalDate.now()
+      return CreateVisit(
+         participantUuid = participant.participantUuid,
+         visitType = Constants.VISIT_TYPE_DOSING,
+         startDatetime = convertLocalDateToDate(nextVisitDate),
+         locationUuid = locationUuid,
+         attributes = mapOf(
+            Constants.ATTRIBUTE_VISIT_STATUS to Constants.VISIT_STATUS_SCHEDULED,
+            Constants.ATTRIBUTE_OPERATOR to operatorUuid,
+         )
+      )
+   }
+   @RequiresApi(Build.VERSION_CODES.O)
+   fun convertLocalDateToDate(localDate: LocalDate): Date {
+      val localDateTime = localDate.atStartOfDay()
+      val instant = localDateTime.atZone(ZoneId.systemDefault()).toInstant()
+      return Date.from(instant)
+   }
+
+   @RequiresApi(Build.VERSION_CODES.O)
    @SuppressWarnings("LongParameterList")
    fun doRegisterVisit(
    ) {
@@ -141,6 +193,7 @@ class RegisterParticipantAdministeredVaccinesViewModel @Inject constructor(
                muac = null,
                substanceObservations = substanceObservations
             )
+            createNextVisit(participant)
             loading.set(false)
             registerVaccinesSuccessEvents.tryEmit(participant)
          } catch (ex: OperatorUuidNotAvailableException) {
