@@ -190,7 +190,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:backgroundTint="@color/colorPrimary"
-                    android:text="@string/participant_registration_details_action_register_participant"
+                    android:text="@string/participant_administered_vaccines_action_save"
                     android:textAppearance="@style/ButtonTextStyling" />
             </LinearLayout>
 

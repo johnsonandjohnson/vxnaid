@@ -150,7 +150,7 @@ class RegisterParticipantAdministeredVaccinesViewModel @Inject constructor(
    @RequiresApi(Build.VERSION_CODES.O)
    fun convertLocalDateToDate(localDate: LocalDate): Date {
       val localDateTime = localDate.atStartOfDay()
-      val instant = localDateTime.atZone(ZoneId.systemDefault()).toInstant()
+      val instant = localDateTime.atZone(ZoneId.of(Constants.UTC_TIME_ZONE_NAME)).toInstant()
       return Date.from(instant)
    }
 
