@@ -6,14 +6,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.os.bundleOf
 import androidx.databinding.DataBindingUtil
-import androidx.fragment.app.activityViewModels
 import com.jnj.vaccinetracker.R
 import com.jnj.vaccinetracker.common.helpers.findParent
 import com.jnj.vaccinetracker.common.ui.BaseDialogFragment
 import com.jnj.vaccinetracker.databinding.DialogRegisterParticipantSuccessfulBinding
-import com.jnj.vaccinetracker.databinding.FragmentRegisterParticipantParticipantDetailsBinding
 import com.jnj.vaccinetracker.participantflow.model.ParticipantSummaryUiModel
-import com.jnj.vaccinetracker.register.RegisterParticipantFlowViewModel
 
 /**
  * @author maartenvangiel
