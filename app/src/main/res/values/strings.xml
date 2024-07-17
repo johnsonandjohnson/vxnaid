@@ -358,6 +358,6 @@
     <string name="participant_registration_administered_vaccines_title">Already administeres vaccines</string>
     <string name="administered_vaccines_no_previous_vaccines">No previous vaccines</string>
     <string name="general_label_add">Add</string>
-    <string name="remove_vaccine">remove</string>
+    <string name="remove_vaccine">Remove</string>
     <string name="participant_administered_vaccines_action_save">Save</string>
 </resources>
