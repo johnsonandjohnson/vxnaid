@@ -2,8 +2,11 @@ package com.jnj.vaccinetracker.register.dialogs
 
 import android.app.Dialog
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.widget.Button
 import android.widget.DatePicker
+import android.widget.EditText
 import android.widget.LinearLayout
 import android.widget.NumberPicker
 import androidx.appcompat.widget.SwitchCompat
@@ -30,6 +33,7 @@ class BirthDatePickerDialog(
     private lateinit var numberPickerYears: NumberPicker
     private lateinit var numberPickerMonths: NumberPicker
     private lateinit var numberPickerDays: NumberPicker
+    private lateinit var editTextEstimatedAge: EditText
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val dialog = Dialog(requireContext())
@@ -63,7 +67,6 @@ class BirthDatePickerDialog(
             dialog.dismiss()
         }
 
-
         btnCancel.setOnClickListener {
             dialog.dismiss()
         }
@@ -80,6 +83,7 @@ class BirthDatePickerDialog(
         numberPickerYears = dialog.findViewById(R.id.numberPicker_years)
         numberPickerMonths = dialog.findViewById(R.id.numberPicker_months)
         numberPickerDays = dialog.findViewById(R.id.numberPicker_days)
+        editTextEstimatedAge = dialog.findViewById(R.id.editText_estimated_age)
     }
 
     private fun setupDatePicker() {
@@ -92,7 +96,7 @@ class BirthDatePickerDialog(
 
         if (selectedDate == null) {
             val year = c.get(Calendar.YEAR)
-            val month = c.get(Calendar.MONTH) + 1
+            val month = c.get(Calendar.MONTH)
             val day = c.get(Calendar.DAY_OF_MONTH)
             datePicker.init(year, month, day, null)
         }
@@ -129,8 +133,24 @@ class BirthDatePickerDialog(
     }
 
     private fun setupSwitchListener() {
-        switchIsBirthDateEstimated.setOnCheckedChangeListener { _, _ ->
+        switchIsBirthDateEstimated.setOnCheckedChangeListener { _, isChecked ->
             updateLayoutVisibility()
+            if (isChecked) {
+                editTextEstimatedAge.addTextChangedListener(object : TextWatcher {
+                    override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+                    override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
+                    override fun afterTextChanged(s: Editable?) {
+                        val estimatedAge = s?.toString()?.toIntOrNull()
+                        if (estimatedAge != null) {
+                            numberPickerYears.value = estimatedAge
+                            numberPickerMonths.value = 0
+                            numberPickerDays.value = 0
+                        }
+                    }
+                })
+            } else {
+                editTextEstimatedAge.removeTextChangedListener(null)
+            }
         }
     }
 
