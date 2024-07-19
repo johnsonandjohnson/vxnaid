@@ -25,6 +25,8 @@ import com.jnj.vaccinetracker.participantflow.model.ParticipantImageUiModel.Comp
 import com.jnj.vaccinetracker.participantflow.model.ParticipantSummaryUiModel
 import com.jnj.vaccinetracker.sync.data.repositories.SyncSettingsRepository
 import com.jnj.vaccinetracker.sync.domain.entities.UpcomingVisit
+import com.jnj.vaccinetracker.visit.model.OtherSubstanceDataModel
+import com.jnj.vaccinetracker.visit.model.SubstanceDataModel
 import com.jnj.vaccinetracker.visit.zscore.HeightZScoreCalculator
 import com.jnj.vaccinetracker.visit.zscore.MuacZScoreCalculator
 import com.jnj.vaccinetracker.visit.zscore.NutritionZScoreCalculator
@@ -101,6 +103,11 @@ class VisitViewModel @Inject constructor(
 
     private var manufacturersList: MutableList<Manufacturer> = mutableListOf<Manufacturer>()
 
+    var substancesData = MutableLiveData<List<SubstanceDataModel>>(listOf<SubstanceDataModel>())
+    var selectedSubstancesAndBarcodes = MutableLiveData<MutableMap<String, String>>(mutableMapOf())
+    private var otherSubstancesData =  MutableLiveData<List<OtherSubstanceDataModel>>(listOf())
+
+
     init {
         initState()
     }
@@ -129,12 +136,12 @@ class VisitViewModel @Inject constructor(
         try {
             val visits = visitManager.getVisitsForParticipant(participantSummary.participantUuid)
             val config = configurationManager.getConfiguration()
-            val substancesData = SubstancesDataUtil.getSubstancesDataForCurrentVisit(
+            substancesData.value = SubstancesDataUtil.getSubstancesDataForCurrentVisit(
                 participantSummary.birthDateText,
                 visits,
                 configurationManager
             )
-            val otherSubstancesData = SubstancesDataUtil.getOtherSubstancesDataForCurrentVisit(
+            otherSubstancesData.value = SubstancesDataUtil.getOtherSubstancesDataForCurrentVisit(
                 participantSummary.birthDateText,
                 configurationManager
             )
@@ -346,6 +353,7 @@ class VisitViewModel @Inject constructor(
         val isOedema = if (!displayOedema.value!!) false else isOedema.value
         val participant = participant.get()
         val dosingVisit = dosingVisit.get()
+        val substancesObservations = selectedSubstancesAndBarcodes.value ?: mapOf()
 
         vialValidationMessage.set(null)
 
@@ -406,7 +414,7 @@ class VisitViewModel @Inject constructor(
                     height = height!!,
                     isOedema = isOedema!!,
                     muac = muac,
-                    substanceObservations = null
+                    substanceObservations = substancesObservations.toMap()
                 )
 
                 // schedule next visit after submitting current one
@@ -627,6 +635,12 @@ class VisitViewModel @Inject constructor(
         displayOedema.value = nutritionZScoreCalculator.isOedemaValue()
         zScoreNutritionText.value = zScore?.toString()
         zScoreNutritionTextColor.value = nutritionZScoreCalculator.getTextColorBasedOnZsCoreValue()
+    }
+
+    fun setSelectedSubstances(substance: SubstanceDataModel, barcode: String) {
+        val currentMap = selectedSubstancesAndBarcodes.value ?: mutableMapOf()
+        currentMap[substance.conceptName] = barcode
+        selectedSubstancesAndBarcodes.postValue(currentMap)
     }
 }
 

@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.jnj.vaccinetracker.visit.VisitViewModel" />
+
+        <import type="android.view.View" />
+
+    </data>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/container_dosing_visit"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageButton
+                android:id="@+id/imageButton_barcodeScanner"
+                android:layout_width="159dp"
+                android:layout_height="110dp"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/button_rounded"
+                android:padding="8dp"
+                android:scaleType="fitCenter"
+                app:layout_constraintBottom_toTopOf="@+id/textView_or"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView_scanTitle"
+                app:srcCompat="@drawable/ic_barcodescan"
+                tools:ignore="ContentDescription" />
+
+            <TextView
+                android:id="@+id/textView_scanTitle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="32dp"
+                android:text="@string/visit_dosing_label_scan_or_manual_entry"
+                android:textAppearance="@style/LabelText"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.003"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+            <TextView
+                android:id="@+id/textView_scanSubtitle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="@string/visit_dosing_label_scan_barcode"
+                android:textAlignment="center"
+                android:textAppearance="@style/LabelText"
+                app:layout_constraintEnd_toEndOf="@+id/imageButton_barcodeScanner"
+                app:layout_constraintStart_toStartOf="@+id/imageButton_barcodeScanner"
+                app:layout_constraintTop_toBottomOf="@+id/imageButton_barcodeScanner" />
+
+            <TextView
+                android:id="@+id/textView_or"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="@string/visit_dosing_label_or"
+                android:textAppearance="@style/GeneralText"
+                app:layout_constraintBottom_toTopOf="@+id/edit_vial_barcode"
+                app:layout_constraintEnd_toEndOf="@+id/imageButton_barcodeScanner"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="@+id/imageButton_barcodeScanner"
+                app:layout_constraintTop_toBottomOf="@+id/textView_scanSubtitle" />
+
+            <EditText
+                android:id="@+id/edit_vial_barcode"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="128dp"
+                android:layout_marginTop="32dp"
+                android:layout_marginEnd="128dp"
+                android:ems="10"
+                android:hint="@string/visit_dosing_hint_vial_barcode"
+                android:imeOptions="actionDone"
+                android:importantForAutofill="no"
+                android:inputType="textVisiblePassword"
+                app:error="@{viewModel.vialValidationMessage}"
+                app:layout_constraintBottom_toTopOf="@+id/input_group_manufacturer"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView_or" />
+
+            <LinearLayout
+                android:id="@+id/input_group_manufacturer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="32dp"
+                android:layout_marginEnd="32dp"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                app:layout_constraintBottom_toTopOf="@+id/btn_confirmSubstance"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/edit_vial_barcode">
+
+                <TextView
+                    android:id="@+id/label_manufacturer"
+                    android:layout_width="155dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/visit_dosing_label_manufacturer"
+                    android:textAppearance="@style/LabelText" />
+
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    app:error="@{viewModel.manufacturerValidationMessage}">
+
+                    <AutoCompleteTextView
+                        android:id="@+id/dropdown_manufacturer"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/visit_dosing_label_select_manufacturer"
+                        android:imeOptions="actionDone"
+                        android:inputType="none"
+                        android:text="@{viewModel.selectedManufacturer}" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/btn_confirmSubstance"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginEnd="32dp"
+                android:layout_marginBottom="16dp"
+                android:backgroundTint="@color/colorPrimary"
+                android:text="@string/general_label_confirm"
+                android:textAppearance="@style/ButtonTextStyling"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/btn_Cancel"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <Button
+                android:id="@+id/btn_Cancel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginEnd="32dp"
+                android:layout_marginBottom="16dp"
+                android:text="@string/general_label_cancel"
+                android:textAppearance="@style/ButtonTextStyling"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/btn_confirmSubstance" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </FrameLayout>
+</layout>

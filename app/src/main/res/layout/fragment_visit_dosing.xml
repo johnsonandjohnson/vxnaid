@@ -80,37 +80,6 @@
                     app:layout_constraintStart_toEndOf="@+id/textView_timeWindowTitle"
                     app:layout_constraintTop_toTopOf="@+id/textView_timeWindowTitle" />
 
-                <ImageButton
-                    android:id="@+id/imageButton_barcodeScanner"
-                    android:layout_width="159dp"
-                    android:layout_height="110dp"
-                    android:layout_marginTop="16dp"
-                    android:background="@drawable/button_rounded"
-                    android:padding="8dp"
-                    android:scaleType="fitCenter"
-                    android:visibility="@{viewModel.dosingVisit == null ? View.INVISIBLE : View.VISIBLE}"
-                    app:layout_constraintBottom_toTopOf="@+id/textView_or"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textView_scanTitle"
-                    app:srcCompat="@drawable/ic_barcodescan"
-                    tools:ignore="ContentDescription" />
-
-                <TextView
-                    android:id="@+id/textView_scanTitle"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="32dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginEnd="32dp"
-                    android:text="@string/visit_dosing_label_scan_or_manual_entry"
-                    android:textAppearance="@style/LabelText"
-                    android:visibility="@{viewModel.dosingVisit == null ? View.INVISIBLE : View.VISIBLE}"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.003"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/linearLayout_z_score" />
-
                 <LinearLayout
                     android:id="@+id/linearLayout_visitHistory"
                     android:layout_width="match_parent"
@@ -131,7 +100,7 @@
                     android:layout_marginTop="32dp"
                     android:layout_marginEnd="32dp"
                     android:orientation="vertical"
-                    app:layout_constraintBottom_toTopOf="@+id/textView_scanTitle"
+                    app:layout_constraintBottom_toTopOf="@+id/linearLayout_vaccines"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/linearLayout_visitHistory">
@@ -215,9 +184,9 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
                         android:gravity="center_vertical"
-                        android:orientation="horizontal"
-                        android:layout_marginTop="5dp">
+                        android:orientation="horizontal">
 
                         <TextView
                             android:id="@+id/textView_z_score_nutrition"
@@ -287,95 +256,28 @@
 
                 </LinearLayout>
 
-
-                <TextView
-                    android:id="@+id/textView_scanSubtitle"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:text="@string/visit_dosing_label_scan_barcode"
-                    android:textAlignment="center"
-                    android:textAppearance="@style/LabelText"
-                    android:visibility="@{viewModel.dosingVisit == null ? View.INVISIBLE : View.VISIBLE}"
-                    app:layout_constraintEnd_toEndOf="@+id/imageButton_barcodeScanner"
-                    app:layout_constraintStart_toStartOf="@+id/imageButton_barcodeScanner"
-                    app:layout_constraintTop_toBottomOf="@+id/imageButton_barcodeScanner" />
-
-                <TextView
-                    android:id="@+id/textView_or"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:text="@string/visit_dosing_label_or"
-                    android:textAppearance="@style/GeneralText"
-                    android:visibility="@{viewModel.dosingVisit == null ? View.INVISIBLE : View.VISIBLE}"
-                    app:layout_constraintBottom_toTopOf="@+id/edit_vial_barcode"
-                    app:layout_constraintEnd_toEndOf="@+id/imageButton_barcodeScanner"
-                    app:layout_constraintHorizontal_bias="0.5"
-                    app:layout_constraintStart_toStartOf="@+id/imageButton_barcodeScanner"
-                    app:layout_constraintTop_toBottomOf="@+id/textView_scanSubtitle" />
-
-                <EditText
-                    android:id="@+id/edit_vial_barcode"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="128dp"
-                    android:layout_marginTop="32dp"
-                    android:layout_marginEnd="128dp"
-                    android:ems="10"
-                    android:hint="@string/visit_dosing_hint_vial_barcode"
-                    android:imeOptions="actionDone"
-                    android:importantForAutofill="no"
-                    android:inputType="textVisiblePassword"
-                    android:visibility="@{viewModel.dosingVisit == null ? View.INVISIBLE : View.VISIBLE}"
-                    app:error="@{viewModel.vialValidationMessage}"
-                    app:layout_constraintBottom_toTopOf="@+id/input_group_manufacturer"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textView_or" />
-
                 <LinearLayout
-                    android:id="@+id/input_group_manufacturer"
+                    android:id="@+id/linearLayout_vaccines"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="32dp"
+                    android:layout_marginStart="16dp"
                     android:layout_marginTop="32dp"
                     android:layout_marginEnd="32dp"
-                    android:layout_weight="1"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal"
+                    android:orientation="vertical"
                     android:visibility="@{viewModel.dosingVisit == null ? View.INVISIBLE : View.VISIBLE}"
                     app:layout_constraintBottom_toTopOf="@+id/btn_submit"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/edit_vial_barcode">
+                    app:layout_constraintTop_toBottomOf="@+id/linearLayout_z_score">
 
-                    <TextView
-                        android:id="@+id/label_manufacturer"
-                        android:layout_width="155dp"
-                        android:layout_height="wrap_content"
-                        android:text="@string/visit_dosing_label_manufacturer"
-                        android:textAppearance="@style/LabelText" />
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/recyclerView_vaccines"
+                        android:layout_width="match_parent"
+                        android:layout_height="350dp">
 
-                    <com.google.android.material.textfield.TextInputLayout
-                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        app:error="@{viewModel.manufacturerValidationMessage}">
+                    </androidx.recyclerview.widget.RecyclerView>
 
-                        <AutoCompleteTextView
-                            android:id="@+id/dropdown_manufacturer"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:hint="@string/visit_dosing_label_select_manufacturer"
-                            android:imeOptions="actionDone"
-                            android:inputType="none"
-                            android:text="@{viewModel.selectedManufacturer}" />
-
-                    </com.google.android.material.textfield.TextInputLayout>
 
                 </LinearLayout>
+
 
                 <Button
                     android:id="@+id/btn_submit"

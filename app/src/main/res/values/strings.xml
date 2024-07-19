@@ -360,4 +360,5 @@
     <string name="general_label_add">Add</string>
     <string name="remove_vaccine">Remove</string>
     <string name="participant_administered_vaccines_action_save">Save</string>
+    <string name="visit_dosing_label_instruction">Click the barcode to scan or for manual entry:</string>
 </resources>

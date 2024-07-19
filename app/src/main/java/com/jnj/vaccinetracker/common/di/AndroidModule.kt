@@ -40,6 +40,8 @@ import com.jnj.vaccinetracker.splash.SplashActivity
 import com.jnj.vaccinetracker.sync.presentation.SyncAndroidService
 import com.jnj.vaccinetracker.update.UpdateDialog
 import com.jnj.vaccinetracker.visit.VisitActivity
+import com.jnj.vaccinetracker.visit.adapters.VisitSubstanceItemAdapter
+import com.jnj.vaccinetracker.visit.dialog.DialogVaccineBarcode
 import com.jnj.vaccinetracker.visit.dialog.DifferentManufacturerExpectedDialog
 import com.jnj.vaccinetracker.visit.dialog.DosingOutOfWindowDialog
 import com.jnj.vaccinetracker.visit.dialog.VisitRegisteredSuccessDialog
@@ -150,6 +152,9 @@ interface AndroidModule {
     fun bindRegisterParticipantSuccessfulDialog(): RegisterParticipantSuccessfulDialog
     @ContributesAndroidInjector
     fun bindVaccineDialog(): VaccineDialog
+
+    @ContributesAndroidInjector
+    fun bindDialogVaccineBarcode(): DialogVaccineBarcode
 
     @ContributesAndroidInjector
     fun bindRegisterParticipantConfirmNoTelephoneDialog(): RegisterParticipantConfirmNoTelephoneDialog
