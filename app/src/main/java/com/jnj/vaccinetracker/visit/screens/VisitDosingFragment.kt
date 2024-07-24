@@ -1,13 +1,10 @@
 package com.jnj.vaccinetracker.visit.screens
 
-import android.app.Activity
-import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ArrayAdapter
 import androidx.annotation.RequiresApi
 import androidx.core.widget.doOnTextChanged
 import androidx.databinding.DataBindingUtil
@@ -16,16 +13,13 @@ import androidx.lifecycle.LifecycleOwner
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.snackbar.Snackbar
 import com.jnj.vaccinetracker.R
-import com.jnj.vaccinetracker.barcode.ScanBarcodeActivity
-import com.jnj.vaccinetracker.barcode.ScanBarcodeViewModel
-import com.jnj.vaccinetracker.common.data.encryption.SharedPreference
 import com.jnj.vaccinetracker.common.helpers.hideKeyboard
 import com.jnj.vaccinetracker.common.ui.BaseFragment
 import com.jnj.vaccinetracker.databinding.*
-import com.jnj.vaccinetracker.register.adapters.SubstanceItemAdapter
 import com.jnj.vaccinetracker.splash.SplashActivity
 import com.jnj.vaccinetracker.visit.VisitViewModel
 import com.jnj.vaccinetracker.visit.adapters.VisitSubstanceItemAdapter
+import com.jnj.vaccinetracker.visit.dialog.DialogScheduleMissingSubstances
 import com.jnj.vaccinetracker.visit.dialog.DialogVaccineBarcode
 import com.jnj.vaccinetracker.visit.dialog.DifferentManufacturerExpectedDialog
 import com.jnj.vaccinetracker.visit.dialog.DosingOutOfWindowDialog
@@ -33,6 +27,7 @@ import com.jnj.vaccinetracker.visit.dialog.VisitRegisteredSuccessDialog
 import com.jnj.vaccinetracker.visit.model.SubstanceDataModel
 import com.jnj.vaccinetracker.visit.zscore.InputFilterMinMax
 import kotlinx.coroutines.flow.onEach
+import java.util.Date
 
 
 /**
@@ -44,12 +39,14 @@ class VisitDosingFragment : BaseFragment(),
         VisitRegisteredSuccessDialog.VisitRegisteredSuccessDialogListener,
         DosingOutOfWindowDialog.DosingOutOfWindowDialogListener,
         DifferentManufacturerExpectedDialog.DifferentManufacturerExpectedListener,
-        DialogVaccineBarcode.ConfirmSubstanceListener
+        DialogVaccineBarcode.ConfirmSubstanceListener,
+        DialogScheduleMissingSubstances.DialogScheduleMissingSubstancesListener
 {
 
     private companion object {
         private const val TAG_DIALOG_SUCCESS = "successDialog"
         private const val TAG_DIALOG_DOSING_OUT_OF_WINDOW = "dosingOutOfWindowDialog"
+        private const val TAG_DIALOG_SCHEDULE_MISSING_SUBSTANCES = "scheduleMissingSubstances"
         private const val TAG_DIALOG_DIFFERENT_MANUFACTURER_EXPECTED = "differentManufacturerDialog"
         private const val MIN_WEIGHT = 1
         private const val MAX_WEIGHT = 300
@@ -158,13 +155,17 @@ class VisitDosingFragment : BaseFragment(),
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
-    private fun submitDosingVisit(overrideOutsideWindowCheck: Boolean = false, overrideManufacturerCheck: Boolean = false) {
+    private fun submitDosingVisit(overrideOutsideWindowCheck: Boolean = false,
+                                  overrideManufacturerCheck: Boolean = false,
+                                  newVisitDate: Date? = null) {
         viewModel.submitDosingVisit(
                 vialBarcode = "",
                 outsideTimeWindowConfirmationListener = ::showOutsideTimeWindowConfirmationDialog,
                 incorrectManufacturerListener = ::showDifferentManufacturerDialog,
+                missingSubstancesListener = ::showScheduleMissingSubstancesDialog,
                 overrideOutsideTimeWindowCheck = overrideOutsideWindowCheck,
-                overrideManufacturerCheck = overrideManufacturerCheck
+                overrideManufacturerCheck = overrideManufacturerCheck,
+                newVisitDate = newVisitDate
         )
     }
 
@@ -174,6 +175,10 @@ class VisitDosingFragment : BaseFragment(),
 
     private fun showOutsideTimeWindowConfirmationDialog() {
         DosingOutOfWindowDialog().show(childFragmentManager, TAG_DIALOG_DOSING_OUT_OF_WINDOW)
+    }
+
+    private fun showScheduleMissingSubstancesDialog(substances: List<String>) {
+        DialogScheduleMissingSubstances(substances).show(childFragmentManager, TAG_DIALOG_SCHEDULE_MISSING_SUBSTANCES)
     }
 
     private fun showDifferentManufacturerDialog() {
@@ -194,6 +199,12 @@ class VisitDosingFragment : BaseFragment(),
         submitDosingVisit(overrideManufacturerCheck = true, overrideOutsideWindowCheck = true)
     }
 
+
+    @RequiresApi(Build.VERSION_CODES.O)
+    override fun onDialogScheduleMissingSubstancesConfirmed(date: Date) {
+        submitDosingVisit(newVisitDate = date)
+    }
+
     override fun onVisitRegisteredSuccessDialogClosed() {
         requireActivity().apply {
             startActivity(SplashActivity.create(this)) // Restart the participant flow
@@ -204,5 +215,4 @@ class VisitDosingFragment : BaseFragment(),
     override fun addSubstance(substance: SubstanceDataModel, barcodeText: String) {
         viewModel.setSelectedSubstances(substance, barcodeText)
     }
-
 }

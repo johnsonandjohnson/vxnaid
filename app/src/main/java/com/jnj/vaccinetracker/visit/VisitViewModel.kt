@@ -39,6 +39,7 @@ import java.time.ZoneId
 import java.time.format.DateTimeFormatter
 import java.util.*
 import javax.inject.Inject
+import kotlin.reflect.KFunction1
 
 /**
  * ViewModel for visit screen.
@@ -341,8 +342,10 @@ class VisitViewModel @Inject constructor(
         vialBarcode: String,
         outsideTimeWindowConfirmationListener: () -> Unit,
         incorrectManufacturerListener: () -> Unit,
+        missingSubstancesListener: (List<String>) -> Unit,
         overrideOutsideTimeWindowCheck: Boolean = false,
         overrideManufacturerCheck: Boolean = false,
+        newVisitDate: Date? = null
     ) {
         var isZScoreValid = true
         val manufacturer = selectedManufacturer.get()
@@ -354,6 +357,7 @@ class VisitViewModel @Inject constructor(
         val participant = participant.get()
         val dosingVisit = dosingVisit.get()
         val substancesObservations = selectedSubstancesAndBarcodes.value ?: mapOf()
+        val missingSubstances = getMissingSubstanceLabels()
 
         vialValidationMessage.set(null)
 
@@ -365,20 +369,6 @@ class VisitViewModel @Inject constructor(
         if (participant == null || dosingVisit == null) {
             logError("No participant or dosing visit in memory!")
             visitEvents.tryEmit(false)
-            return
-        }
-
-        if (!overrideOutsideTimeWindowCheck && !dosingVisitIsInsideTimeWindow.get()) {
-            outsideTimeWindowConfirmationListener()
-            return
-        }
-
-        if (!overrideManufacturerCheck && !isExpectedManufacturer(
-                dosingVisit.dosingNumber,
-                manufacturer
-            )
-        ) {
-            incorrectManufacturerListener()
             return
         }
 
@@ -399,6 +389,26 @@ class VisitViewModel @Inject constructor(
 
         if (!isZScoreValid) return
 
+        if (!overrideOutsideTimeWindowCheck && !dosingVisitIsInsideTimeWindow.get()) {
+            outsideTimeWindowConfirmationListener()
+            return
+        }
+
+        if (!overrideManufacturerCheck && !isExpectedManufacturer(
+                dosingVisit.dosingNumber,
+                manufacturer
+            )
+        ) {
+            incorrectManufacturerListener()
+            return
+        }
+
+        if (newVisitDate == null && missingSubstances.isNotEmpty()
+        ) {
+            missingSubstancesListener(missingSubstances)
+            return
+        }
+
         loading.set(true)
 
         scope.launch {
@@ -418,7 +428,7 @@ class VisitViewModel @Inject constructor(
                 )
 
                 // schedule next visit after submitting current one
-                createNextVisit(participant)
+                createNextVisit(participant, newVisitDate)
 
                 onVisitLogged()
                 loading.set(false)
@@ -437,52 +447,44 @@ class VisitViewModel @Inject constructor(
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
-    suspend fun createNextVisit(participant: ParticipantSummaryUiModel) {
-        val weeksNumberAfterBirthForNextVisit =
-            findWeeksNumberAfterBirthForNextVisit(participant.birthDateText)
-        if (weeksNumberAfterBirthForNextVisit != null) {
-            createVisitUseCase.createVisit(
-                buildNextVisitObject(
-                    participant,
-                    weeksNumberAfterBirthForNextVisit
-                )
-            )
-        }
+    suspend fun createNextVisit(participant: ParticipantSummaryUiModel, newVisitDate: Date? = null) {
+        val visitDate = newVisitDate ?: getNextVisitDate(participant)
+        createVisitUseCase.createVisit(buildVisitObject(participant, visitDate!!))
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
-    suspend fun findWeeksNumberAfterBirthForNextVisit(participantBirthDate: String): Int? {
+    private suspend fun getNextVisitDate(participant: ParticipantSummaryUiModel): Date? {
+        val weeksNumberAfterBirthForNextVisit = findWeeksNumberAfterBirthForNextVisit(participant.birthDateText)
+        return weeksNumberAfterBirthForNextVisit?.let { calculateNextVisitDate(participant.birthDateText, it) }
+    }
+
+    @RequiresApi(Build.VERSION_CODES.O)
+    private suspend fun findWeeksNumberAfterBirthForNextVisit(participantBirthDate: String): Int? {
         val substancesConfig = configurationManager.getSubstancesConfig()
-        val weeksAfterBirthSet =
-            substancesConfig.map { substance -> substance.weeksAfterBirth }.sorted().toSet()
+        val weeksAfterBirthSet = substancesConfig.map { it.weeksAfterBirth }.sorted().toSet()
         val childAgeInWeeks = SubstancesDataUtil.getWeeksBetweenDateAndToday(participantBirthDate)
-        var weeksNumberAfterBirthForNextVisit: Int? = null
-        substancesConfig.forEach { substance ->
-            val minWeekNumber = substance.weeksAfterBirth - substance.weeksAfterBirthLowWindow
-            val maxWeekNumber = substance.weeksAfterBirth + substance.weeksAfterBirthUpWindow
-            if (childAgeInWeeks in minWeekNumber..maxWeekNumber) {
-                weeksNumberAfterBirthForNextVisit =
-                    weeksAfterBirthSet.filter { it > substance.weeksAfterBirth }.minOrNull()
-            }
-        }
 
-        return weeksNumberAfterBirthForNextVisit
+        return substancesConfig
+            .filter {
+                val minWeekNumber = it.weeksAfterBirth - it.weeksAfterBirthLowWindow
+                val maxWeekNumber = it.weeksAfterBirth + it.weeksAfterBirthUpWindow
+                childAgeInWeeks in minWeekNumber..maxWeekNumber
+            }
+            .mapNotNull { weeksAfterBirthSet.filter { week -> week > it.weeksAfterBirth }.minOrNull() }
+            .firstOrNull()
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
-    fun buildNextVisitObject(
-        participant: ParticipantSummaryUiModel,
-        weeksNumberAfterBirthForNextVisit: Int?
-    ): CreateVisit {
+    private fun buildVisitObject(participant: ParticipantSummaryUiModel, visitDate: Date): CreateVisit {
         val operatorUuid = userRepository.getUser()?.uuid
             ?: throw OperatorUuidNotAvailableException("Operator uuid not available")
         val locationUuid = syncSettingsRepository.getSiteUuid()
             ?: throw NoSiteUuidAvailableException("Location not available")
-        val nextVisitDate = getNextVisitDate(participant, weeksNumberAfterBirthForNextVisit)
+
         return CreateVisit(
             participantUuid = participant.participantUuid,
             visitType = Constants.VISIT_TYPE_DOSING,
-            startDatetime = nextVisitDate,
+            startDatetime = visitDate,
             locationUuid = locationUuid,
             attributes = mapOf(
                 Constants.ATTRIBUTE_VISIT_STATUS to Constants.VISIT_STATUS_SCHEDULED,
@@ -492,17 +494,11 @@ class VisitViewModel @Inject constructor(
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
-    fun getNextVisitDate(
-        participant: ParticipantSummaryUiModel,
-        weeksNumberAfterBirthForNextVisit: Int?
-    ): Date {
+    private fun calculateNextVisitDate(birthDateText: String, weeksNumberAfterBirth: Int): Date {
         val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd")
-        val birthDate = LocalDate.parse(participant.birthDateText, formatter)
-        val nextVisitDateAsDate = birthDate.plusWeeks(weeksNumberAfterBirthForNextVisit!!.toLong())
-
-        return Date.from(
-            nextVisitDateAsDate.atStartOfDay(ZoneId.of(Constants.UTC_TIME_ZONE_NAME)).toInstant()
-        )
+        val birthDate = LocalDate.parse(birthDateText, formatter)
+        val nextVisitDate = birthDate.plusWeeks(weeksNumberAfterBirth.toLong())
+        return Date.from(nextVisitDate.atStartOfDay(ZoneId.of(Constants.UTC_TIME_ZONE_NAME)).toInstant())
     }
 
     /**
@@ -642,5 +638,14 @@ class VisitViewModel @Inject constructor(
         currentMap[substance.conceptName] = barcode
         selectedSubstancesAndBarcodes.postValue(currentMap)
     }
+
+    private fun getMissingSubstanceLabels(): List<String> {
+        val selectedConceptNames = selectedSubstancesAndBarcodes.value?.keys?.toSet() ?: setOf()
+
+        return substancesData.value
+            ?.filter { it.conceptName !in selectedConceptNames }
+           ?.map { it.conceptName } ?: listOf()
+    }
+
 }
 

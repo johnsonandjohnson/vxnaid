@@ -3,6 +3,7 @@ package com.jnj.vaccinetracker.common.di
 import com.jnj.vaccinetracker.barcode.ScanBarcodeActivity
 import com.jnj.vaccinetracker.common.ui.dialog.SuccessDialog
 import com.jnj.vaccinetracker.common.ui.dialog.SyncErrorDialog
+import com.jnj.vaccinetracker.databinding.DialogScheduleMissingSubstancesBinding
 import com.jnj.vaccinetracker.irisscanner.ScannerConnectedActivity
 import com.jnj.vaccinetracker.login.LoginActivity
 import com.jnj.vaccinetracker.login.RefreshSessionDialog
@@ -41,6 +42,8 @@ import com.jnj.vaccinetracker.sync.presentation.SyncAndroidService
 import com.jnj.vaccinetracker.update.UpdateDialog
 import com.jnj.vaccinetracker.visit.VisitActivity
 import com.jnj.vaccinetracker.visit.adapters.VisitSubstanceItemAdapter
+import com.jnj.vaccinetracker.visit.dialog.DatePickerDialog
+import com.jnj.vaccinetracker.visit.dialog.DialogScheduleMissingSubstances
 import com.jnj.vaccinetracker.visit.dialog.DialogVaccineBarcode
 import com.jnj.vaccinetracker.visit.dialog.DifferentManufacturerExpectedDialog
 import com.jnj.vaccinetracker.visit.dialog.DosingOutOfWindowDialog
@@ -185,6 +188,12 @@ interface AndroidModule {
 
     @ContributesAndroidInjector
     fun bindDosingOutOfWindowDialog(): DosingOutOfWindowDialog
+
+    @ContributesAndroidInjector
+    fun bindDialogScheduleMissingSubstances(): DialogScheduleMissingSubstances
+
+    @ContributesAndroidInjector
+    fun bindDatePickerDialog(): DatePickerDialog
 
     @ContributesAndroidInjector
     fun bindVisitRegisteredSuccessDialog(): VisitRegisteredSuccessDialog
