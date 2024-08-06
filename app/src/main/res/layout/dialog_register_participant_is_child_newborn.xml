@@ -37,7 +37,7 @@
             android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
             android:gravity="center_horizontal"
-            android:text="New born"
+            android:text="@string/participant_registration_new_born_title"
             android:textAppearance="@style/PopupTitle"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

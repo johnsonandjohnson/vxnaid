@@ -146,6 +146,7 @@
     <string name="participant_registration_label_telephone_number_title">Le numéro de téléphone portable est manquant</string>
     <string name="participant_registration_label_telephone_number_desc">Veuillez confirmer que ce participant sera enregistré sans numéro de téléphone portable.</string>
     <string name="participant_registration_is_child_newborn">L’enfant est-il un nouveau-né?</string>
+    <string name="participant_registration_new_born_title">Nouveau née</string>
     <string name="home_location_picker_label_country">Pays</string>
     <string name="home_location_picker_title">Lieu du domicile</string>
     <string name="home_location_picker_error_enter_x">Veuillez entrer %s</string>
@@ -184,6 +185,8 @@
     <string name="visit_dosing_error_no_vial_barcode">Veuillez saisir ou scanner le code-barres du flacon</string>
     <string name="visit_dosing_error_no_manufacturer">Veuillez sélectionner un fabricant</string>
     <string name="visit_dosing_label_success">Visite enregistrée avec succès!</string>
+    <string name="visit_schedule_next_visit_title">Planifier la prochaine visite</string>
+    <string name="visit_schedule_next_visit_proposed_date_title">Date proposée:</string>
     <string name="visit_dosing_warning_out_of_time_window_description">Veuillez confirmer que ce participant reçoit un dosage en dehors de la plage horaire indiquée.</string>
     <string name="visit_dosing_warning_out_of_time_window_title">Dosage en dehors de la plage horaire</string>
     <string name="visit_dosing_error_different_manufacturer_description">Le fabricant sélectionné est différent de celui indiqué dans le schéma thérapeutique et la dose ne devrait pas être administré.</string>

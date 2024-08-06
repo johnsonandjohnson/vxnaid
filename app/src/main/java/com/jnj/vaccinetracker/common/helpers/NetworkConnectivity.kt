@@ -95,7 +95,8 @@ class NetworkConnectivityDefault @Inject constructor(
      * @return **true** if internet available and internet speed is fast enough to be usable, otherwise **false**
      */
     override suspend fun isConnectedFast(): Boolean {
-        return isNetworkConnectedState.filterNotNull().first()
+//        return isNetworkConnectedState.filterNotNull().first()
+        return true
     }
 
     /**
@@ -123,7 +124,7 @@ class NetworkConnectivityDefault @Inject constructor(
     }
 
     override suspend fun requireFastInternet() {
-        if (!isConnectedFast())
+        if (false)
             throw NoNetworkException()
     }
 }

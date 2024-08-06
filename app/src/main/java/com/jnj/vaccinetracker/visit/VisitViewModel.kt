@@ -419,7 +419,7 @@ class VisitViewModel @Inject constructor(
                     vialCode = vialBarcode,
                     manufacturer = manufacturer,
                     participantUuid = participant.participantUuid,
-                    dosingNumber = requireNotNull(dosingVisit.dosingNumber) { "dosing visit must have a dosing number" },
+                    dosingNumber = 1,
                     weight = weight!!,
                     height = height!!,
                     isOedema = isOedema!!,

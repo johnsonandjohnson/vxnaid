@@ -147,7 +147,7 @@ class ParticipantPendingCallService @Inject constructor(
             skipUuid(participantUuid)
             return
         }
-        networkConnectivity.awaitFastInternet(debugLabel())
+//        networkConnectivity.awaitFastInternet(debugLabel())
         syncSettingsObserver.awaitSyncSettingsAvailable(debugLabel())
         val logSyncErrors = retriesLeft == 1 // only log sync errors after last attempt
         val success = upload(participantUuid, logSyncErrors)

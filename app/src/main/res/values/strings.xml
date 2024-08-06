@@ -163,6 +163,7 @@
     <string name="participant_registration_label_id_not_matching_title">Re-enter Child ID</string>
     <string name="participant_registration_label_id_not_matching_desc">The entered Child ID\'s do not match. Please correct before submitting the Child.</string>
     <string name="participant_registration_is_child_newborn">Is Child a Newborn?</string>
+    <string name="participant_registration_new_born_title">New born</string>
     <string name="home_location_picker_label_country">Country</string>
     <string name="home_location_picker_title">Address</string>
     <string name="home_location_picker_error_enter_x">Enter %s</string>
@@ -202,6 +203,8 @@
     <string name="visit_dosing_error_no_vial_barcode">Please enter or scan a vial barcode</string>
     <string name="visit_dosing_error_no_manufacturer">Please select a manufacturer</string>
     <string name="visit_dosing_label_success">Visit successfully registered!</string>
+    <string name="visit_schedule_next_visit_title">Schedule next visit</string>
+    <string name="visit_schedule_next_visit_proposed_date_title">Proposed date:</string>
     <string name="visit_dosing_warning_out_of_time_window_description">Please confirm that this Child is receiving a dosage outside of the indicated time window.</string>
     <string name="visit_dosing_warning_out_of_time_window_title">Dosing outside of window</string>
     <string name="visit_dosing_error_different_manufacturer_description">The manufacturer selected is different from the one indicated in the regimen and should not be administered.</string>
