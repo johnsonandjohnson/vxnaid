@@ -213,7 +213,11 @@ class ParticipantFlowMatchingViewModel @Inject constructor(
                         participantUUID = participant.uuid,
                         participantId = participant.participantId,
                         irisMatchingScore = participant.matchingScore,
-                        birthDateText = RegisterParticipantParticipantDetailsViewModel.calculateAgeFromDate(participant.birthDate.toDateTime()),
+                        birthDateText = (if (participant.isBirthDateEstimated) {
+                           RegisterParticipantParticipantDetailsViewModel.calculateAgeFromDate(participant.birthDate.toDateTime())
+                        } else {
+                            participant.birthDate.toDateTime().format(DateFormat.FORMAT_DATE)
+                        }),
                         isBirthDateEstimated=participant.isBirthDateEstimated,
                         gender = participant.gender,
                         telephone = participant.telephoneNumber,

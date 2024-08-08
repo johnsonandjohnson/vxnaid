@@ -389,7 +389,7 @@ class VisitViewModel @Inject constructor(
 
         if (!isZScoreValid) return
 
-        if (!overrideOutsideTimeWindowCheck && !dosingVisitIsInsideTimeWindow.get()) {
+        if (!overrideOutsideTimeWindowCheck && !dosingVisitIsInsideTimeWindow.get() && newVisitDate == null) {
             outsideTimeWindowConfirmationListener()
             return
         }
@@ -419,7 +419,7 @@ class VisitViewModel @Inject constructor(
                     vialCode = vialBarcode,
                     manufacturer = manufacturer,
                     participantUuid = participant.participantUuid,
-                    dosingNumber = requireNotNull(dosingVisit.dosingNumber) { "dosing visit must have a dosing number" },
+                    dosingNumber = dosingVisit.dosingNumber ?: 0,
                     weight = weight!!,
                     height = height!!,
                     isOedema = isOedema!!,
