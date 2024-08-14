@@ -378,7 +378,7 @@
     <string name="label_new_visit_date">New visit date:</string>
     <string name="dialog_missing_substances_empty_date_validation_message">Enter date</string>
     <string name="general_label_next">Next</string>
-    <string name="contraindications_description">Are there any contraindications?</string>
+    <string name="contradictions_description">Are there any contradictions?</string>
     <string name="contraindication_hint">Consider any conditions, allergies, or medications that might interact negatively with a  vaccination procedure.</string>
     <string name="reschedule_visit_button_label">Reschedule visit</string>
     <string name="visit_reschedule_visit_title">Reschedule the visit</string>

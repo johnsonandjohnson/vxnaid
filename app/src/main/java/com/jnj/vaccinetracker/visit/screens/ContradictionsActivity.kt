@@ -11,21 +11,21 @@ import com.jnj.vaccinetracker.R
 import com.jnj.vaccinetracker.common.helpers.hideKeyboard
 import com.jnj.vaccinetracker.common.ui.BaseActivity
 import com.jnj.vaccinetracker.common.ui.SyncBanner
-import com.jnj.vaccinetracker.databinding.FragmentContraindicationsBinding
+import com.jnj.vaccinetracker.databinding.FragmentContradictionsBinding
 import com.jnj.vaccinetracker.participantflow.model.ParticipantSummaryUiModel
 import com.jnj.vaccinetracker.splash.SplashActivity
 import com.jnj.vaccinetracker.visit.VisitActivity
 import com.jnj.vaccinetracker.visit.dialog.RescheduleVisitDialog
 
-class ContraindicationsActivity : BaseActivity() {
+class ContradictionsActivity : BaseActivity() {
    private val participant: ParticipantSummaryUiModel by lazy {
       intent.getParcelableExtra(EXTRA_PARTICIPANT)!!
    }
    private val newRegisteredParticipant: Boolean by lazy {
       intent.getBooleanExtra(EXTRA_TYPE, false)
    }
-   private val viewModel: ContraindicationsViewModel by viewModels { viewModelFactory }
-   private lateinit var binding: FragmentContraindicationsBinding
+   private val viewModel: ContradictionsViewModel by viewModels { viewModelFactory }
+   private lateinit var binding: FragmentContradictionsBinding
    private var errorSnackbar: Snackbar? = null
 
    companion object {
@@ -34,7 +34,7 @@ class ContraindicationsActivity : BaseActivity() {
       private const val EXTRA_TYPE = "newParticipantRegistration"
 
       fun create(context: Context, participant: ParticipantSummaryUiModel, newRegisteredParticipant: Boolean): Intent {
-         return Intent(context, ContraindicationsActivity::class.java).apply {
+         return Intent(context, ContradictionsActivity::class.java).apply {
             putExtra(EXTRA_PARTICIPANT, participant)
             putExtra(EXTRA_TYPE, newRegisteredParticipant)
          }
@@ -43,7 +43,7 @@ class ContraindicationsActivity : BaseActivity() {
 
    override fun onCreate(savedInstanceState: Bundle?) {
       super.onCreate(savedInstanceState)
-      binding = DataBindingUtil.setContentView(this, R.layout.fragment_contraindications)
+      binding = DataBindingUtil.setContentView(this, R.layout.fragment_contradictions)
       binding.viewModel = viewModel
       binding.lifecycleOwner = this
 

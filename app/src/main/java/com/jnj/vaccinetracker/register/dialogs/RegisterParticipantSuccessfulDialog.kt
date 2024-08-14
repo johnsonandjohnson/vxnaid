@@ -12,7 +12,7 @@ import com.jnj.vaccinetracker.common.ui.BaseDialogFragment
 import com.jnj.vaccinetracker.databinding.DialogRegisterParticipantSuccessfulBinding
 import com.jnj.vaccinetracker.participantflow.model.ParticipantSummaryUiModel
 import com.jnj.vaccinetracker.visit.dialog.RescheduleVisitDialog
-import com.jnj.vaccinetracker.visit.screens.ContraindicationsActivity
+import com.jnj.vaccinetracker.visit.screens.ContradictionsActivity
 
 /**
  * @author maartenvangiel
@@ -47,7 +47,7 @@ class RegisterParticipantSuccessfulDialog : BaseDialogFragment() {
         }
         binding.btnFinish.setOnClickListener {
             RescheduleVisitDialog.create(participant = participant)
-                .show(parentFragmentManager, ContraindicationsActivity.TAG_DIALOG_RESCHEDULE_VISIT)
+                .show(parentFragmentManager, ContradictionsActivity.TAG_DIALOG_RESCHEDULE_VISIT)
         }
         return binding.root
     }

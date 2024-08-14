@@ -31,7 +31,7 @@ import com.jnj.vaccinetracker.databinding.DialogRescheduleVisitBinding
 import com.jnj.vaccinetracker.participantflow.model.ParticipantSummaryUiModel
 import com.jnj.vaccinetracker.register.dialogs.ScheduleVisitDatePickerDialog
 import com.jnj.vaccinetracker.sync.data.repositories.SyncSettingsRepository
-import com.jnj.vaccinetracker.visit.screens.ContraindicationsViewModel
+import com.jnj.vaccinetracker.visit.screens.ContradictionsViewModel
 import com.soywiz.klock.DateFormat
 import com.soywiz.klock.DateTime
 import kotlinx.coroutines.launch
@@ -40,7 +40,7 @@ import javax.inject.Inject
 
 class RescheduleVisitDialog @Inject constructor() : BaseDialogFragment(), ScheduleVisitDatePickerDialog.OnDateSelectedListener {
    private lateinit var binding: DialogRescheduleVisitBinding
-   private val viewModel: ContraindicationsViewModel by activityViewModels { viewModelFactory }
+   private val viewModel: ContradictionsViewModel by activityViewModels { viewModelFactory }
    private lateinit var rescheduleReasonEditText: EditText
    private lateinit var visitDateTextView: TextView
    private var visitDate: DateTime? = null
