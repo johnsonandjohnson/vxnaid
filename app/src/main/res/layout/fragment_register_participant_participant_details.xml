@@ -459,7 +459,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="4dp"
                     android:layout_weight="1"
-                    android:hint="@string/participant_registration_details_birth_weight"
+                    android:hint="@string/general_label_kg"
+                    android:importantForAutofill="no"
                     android:inputType="numberDecimal"
                     android:textSize="18sp" />
 

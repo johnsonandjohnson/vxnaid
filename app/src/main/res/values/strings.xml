@@ -385,4 +385,5 @@
     <string name="schedule_reason_label">Provide a reason for the reschedule</string>
     <string name="reschedule_visit_failed">Visit reschedule has failed.</string>
     <string name="reschedule_hint">Enter the reason here</string>
+    <string name="general_label_kg">kg</string>
 </resources>
