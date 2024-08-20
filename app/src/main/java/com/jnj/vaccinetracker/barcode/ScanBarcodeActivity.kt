@@ -52,7 +52,6 @@ class ScanBarcodeActivity : BaseActivity() {
     }
 
     private val viewModel: ScanBarcodeViewModel by viewModels { viewModelFactory }
-    private val visitviewModel: VisitViewModel by viewModels { viewModelFactory }
     private lateinit var binding: ActivityScanBarcodeBinding
     private var previewUseCase: Preview? = null
     private var barcodeScanUseCase: ImageAnalysis? = null
@@ -152,16 +151,7 @@ class ScanBarcodeActivity : BaseActivity() {
                             .map { it.rawValue }
                             .lastOrNull()
                         if (barcode != null) {
-
-                           /* if(flag.equals(ScanBarcodeActivity.MANUFACTURER)){
-                                visitviewModel.validateIdManufracturer(barcode)
-                               *//* var intent=Intent()
-                                intent.putExtra(EXTRA_BARCODE,barcode)
-                                setResult(Activity.RESULT_OK,intent)
-                                finish()*//*
-                            }else {*/
-                                viewModel.onBarcodeScanned(barcode, flag,SharedPreference(this).getManufracterList())
-                           // }
+                            viewModel.onBarcodeScanned(barcode, flag, SharedPreference(this).getManufracterList())
                         }
                     }
                     .addOnFailureListener {

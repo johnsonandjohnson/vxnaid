@@ -2,8 +2,10 @@ package com.jnj.vaccinetracker.visit
 
 import android.content.Context
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
 import androidx.activity.viewModels
+import androidx.annotation.RequiresApi
 import androidx.databinding.DataBindingUtil
 import com.google.android.material.snackbar.Snackbar
 import com.jnj.vaccinetracker.R
@@ -39,6 +41,7 @@ class VisitActivity : BaseActivity() {
 
     private var errorSnackbar: Snackbar? = null
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         scanModel.setArguments(participant)
@@ -54,6 +57,7 @@ class VisitActivity : BaseActivity() {
 
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onStart() {
         super.onStart()
         viewModel.errorMessage.observe(this) { errorMessage ->

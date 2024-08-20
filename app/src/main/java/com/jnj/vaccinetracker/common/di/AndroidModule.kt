@@ -44,7 +44,6 @@ import com.jnj.vaccinetracker.visit.VisitActivity
 import com.jnj.vaccinetracker.common.dialogs.DatePickerDialog
 import com.jnj.vaccinetracker.visit.dialog.DialogScheduleMissingSubstances
 import com.jnj.vaccinetracker.visit.dialog.DialogVaccineBarcode
-import com.jnj.vaccinetracker.visit.dialog.DifferentManufacturerExpectedDialog
 import com.jnj.vaccinetracker.visit.dialog.DosingOutOfWindowDialog
 import com.jnj.vaccinetracker.visit.dialog.RescheduleVisitDialog
 import com.jnj.vaccinetracker.visit.dialog.VisitRegisteredSuccessDialog
@@ -204,9 +203,6 @@ interface AndroidModule {
 
     @ContributesAndroidInjector
     fun bindRescheduleVisitDialog(): RescheduleVisitDialog
-
-    @ContributesAndroidInjector
-    fun bindDifferentManufacturerExpectedDialog(): DifferentManufacturerExpectedDialog
 
     @ContributesAndroidInjector
     fun bindVaccineTrackerSyncAndroidService(): SyncAndroidService

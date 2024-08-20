@@ -11,6 +11,7 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.RecyclerView
 import com.jnj.vaccinetracker.R
+import com.jnj.vaccinetracker.common.data.models.Constants
 import com.jnj.vaccinetracker.visit.dialog.DialogVaccineBarcode
 import com.jnj.vaccinetracker.visit.model.SubstanceDataModel
 
@@ -20,7 +21,7 @@ class VisitSubstanceItemAdapter(
    private val context: Context
 ) : RecyclerView.Adapter<VisitSubstanceItemAdapter.SubstanceViewHolder>() {
 
-   private var selectedSubstances: MutableMap<String, String> = mutableMapOf()
+   private var selectedSubstances: MutableMap<String, Map<String, String>> = mutableMapOf()
 
    companion object {
       private const val TAG_VISIT_VACCINE_DIALOG = "visit_vaccine_dialog"
@@ -48,13 +49,13 @@ class VisitSubstanceItemAdapter(
       notifyDataSetChanged()
    }
 
-   fun colorItems(selectedItems: MutableMap<String, String>) {
+   fun colorItems(selectedItems: MutableMap<String, Map<String, String>>) {
       selectedSubstances = selectedItems
       notifyDataSetChanged()
    }
 
    inner class SubstanceViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-      private val substanceName: TextView = itemView.findViewById(R.id.textView_participantId)
+      private val substanceName: TextView = itemView.findViewById(R.id.textView_substance_name)
       private val btnBarcode: ImageButton = itemView.findViewById(R.id.imageButton_barcodeScanner)
       private val layout: LinearLayout = itemView.findViewById(R.id.linearLayout_item)
 
@@ -65,10 +66,20 @@ class VisitSubstanceItemAdapter(
          return selectedSubstances.containsKey(substance.conceptName)
       }
 
+      private fun getBarcode(substance: SubstanceDataModel): String? {
+         return selectedSubstances[substance.conceptName]?.get(Constants.BARCODE_STR)
+      }
+
+      private fun getManufacturer(substance: SubstanceDataModel): String? {
+         return selectedSubstances[substance.conceptName]?.get(Constants.MANUFACTURER_NAME_STR)
+      }
+
       fun bind(substance: SubstanceDataModel) {
          substanceName.text = substance.label
+         val barcode = getBarcode(substance)
+         val manufacturerName = getManufacturer(substance)
          btnBarcode.setOnClickListener {
-            DialogVaccineBarcode(substance).show(supportFragmentManager, TAG_VISIT_VACCINE_DIALOG)
+            DialogVaccineBarcode(substance, barcode, manufacturerName).show(supportFragmentManager, TAG_VISIT_VACCINE_DIALOG)
          }
          layout.setBackgroundColor(if (isSelected(substance)) green else grey)
       }

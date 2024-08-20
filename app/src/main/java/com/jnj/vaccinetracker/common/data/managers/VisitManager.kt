@@ -45,7 +45,7 @@ class VisitManager @Inject constructor(
         height: Int?,
         isOedema: Boolean?,
         muac: Int?,
-        substanceObservations: Map<String, String>?
+        substanceObservations: Map<String, Map<String, String>>?
     ) {
         val locationUuid = syncSettingsRepository.getSiteUuid()
             ?: throw NoSiteUuidAvailableException("Trying to register dosing visit without a selected site")
@@ -66,7 +66,11 @@ class VisitManager @Inject constructor(
             weight?.let { put(Constants.OBSERVATION_TYPE_VISIT_WEIGHT, it.toString()) }
             height?.let { put(Constants.OBSERVATION_TYPE_VISIT_HEIGHT, it.toString()) }
             isOedema?.let { put(Constants.OBSERVATION_TYPE_VISIT_OEDEMA, it.toString()) }
-            substanceObservations?.let { putAll(it) }
+            substanceObservations?.forEach { (conceptName, obsMap) ->
+                obsMap.forEach { (obsKey, obsValue) ->
+                    put("$conceptName:$obsKey", obsValue)
+                }
+            }
         }
 
         val request = UpdateVisit(

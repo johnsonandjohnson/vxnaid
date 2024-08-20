@@ -171,7 +171,7 @@ class RegisterParticipantAdministeredVaccinesViewModel @Inject constructor(
       }
 
       val substanceObservations = selectedSubstances.value?.associate { substance ->
-         substance.conceptName to substance.conceptName
+         substance.conceptName to mapOf(Constants.BARCODE_STR to "", Constants.MANUFACTURER_NAME_STR to "")
       }.orEmpty()
 
 

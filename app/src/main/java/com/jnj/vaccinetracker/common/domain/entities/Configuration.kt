@@ -15,7 +15,6 @@ data class Configuration(
     val operatorCredentialsRetentionTime: Long, // Time to retain operator credentials for offline use, in milliseconds
     val operatorOfflineSessionTimeout: Long,
     @Json(name = "vaccine") val vaccines: List<Vaccine>,
-    val canUseDifferentManufacturers: Boolean,
     val manufacturers: List<Manufacturer>,
     val personLanguages: List<NamedValue>,
     val authSteps: List<IdentificationStep>,
