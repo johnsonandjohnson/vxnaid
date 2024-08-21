@@ -59,6 +59,6 @@ object Constants {
 
     const val UTC_TIME_ZONE_NAME = "UTC"
 
-    const val BARCODE_STR = "barcode"
-    const val MANUFACTURER_NAME_STR = "manufacturerName"
+    const val BARCODE_STR = "Barcode"
+    const val MANUFACTURER_NAME_STR = "Manufacturer"
 }
