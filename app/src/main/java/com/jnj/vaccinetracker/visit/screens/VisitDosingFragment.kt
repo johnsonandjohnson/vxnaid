@@ -214,6 +214,6 @@ class VisitDosingFragment : BaseFragment(),
     }
 
     override fun addOtherSubstance(substanceName: String, value: String) {
-        viewModel.addObsToObsMap(substanceName, value, "")
+        viewModel.addObsToOtherSubstancesObsMap(substanceName, value)
     }
 }

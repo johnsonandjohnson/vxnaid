@@ -188,7 +188,8 @@ class RegisterParticipantAdministeredVaccinesViewModel @Inject constructor(
                height = null,
                isOedema = null,
                muac = null,
-               substanceObservations = substanceObservations
+               substanceObservations = substanceObservations,
+               otherSubstanceObservations = null
             )
             createNextVisit(participant)
             loading.set(false)

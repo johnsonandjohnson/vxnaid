@@ -97,6 +97,7 @@ class VisitViewModel @Inject constructor(
 
     var substancesData = MutableLiveData(listOf<SubstanceDataModel>())
     var selectedSubstancesWithBarcodes = MutableLiveData<MutableMap<String, Map<String, String>>>(mutableMapOf())
+    var selectedOtherSubstances = MutableLiveData<MutableMap<String, String>>()
     var otherSubstancesData =  MutableLiveData<List<OtherSubstanceDataModel>>(listOf())
 
     init {
@@ -254,6 +255,7 @@ class VisitViewModel @Inject constructor(
         val participant = participant.get()
         val dosingVisit = dosingVisit.get()
         val substancesObservations = selectedSubstancesWithBarcodes.value ?: mapOf()
+        val otherSubstancesObservations = selectedOtherSubstances.value ?: mapOf()
         val missingSubstances = getMissingSubstanceLabels()
 
         if (participant == null || dosingVisit == null) {
@@ -303,7 +305,8 @@ class VisitViewModel @Inject constructor(
                     height = height!!,
                     isOedema = isOedema!!,
                     muac = muac,
-                    substanceObservations = substancesObservations.toMap()
+                    substanceObservations = substancesObservations.toMap(),
+                    otherSubstanceObservations = otherSubstancesObservations.toMap(),
                 )
 
                 // schedule next visit after submitting current one
@@ -516,6 +519,12 @@ class VisitViewModel @Inject constructor(
         val currentMap = selectedSubstancesWithBarcodes.value?.toMutableMap() ?: mutableMapOf()
         currentMap[conceptName] = mapOf(Constants.BARCODE_STR to barcode, Constants.MANUFACTURER_NAME_STR to manufacturerName)
         selectedSubstancesWithBarcodes.postValue(currentMap)
+    }
+
+    fun addObsToOtherSubstancesObsMap(conceptName: String, value: String) {
+        val currentMap = selectedOtherSubstances.value?.toMutableMap() ?: mutableMapOf()
+        currentMap[conceptName] = value
+        selectedOtherSubstances.postValue(currentMap)
     }
 
     fun removeObsFromMap(conceptName: String) {
