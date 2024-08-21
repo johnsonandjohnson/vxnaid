@@ -38,8 +38,6 @@ class VisitManager @Inject constructor(
         participantUuid: String,
         encounterDatetime: Date,
         visitUuid: String,
-        vialCode: String,
-        manufacturer: String,
         dosingNumber: Int,
         weight: Int?,
         height: Int?,
@@ -60,16 +58,15 @@ class VisitManager @Inject constructor(
         )
 
         val obsBuilder = mutableMapOf<String, String>().apply {
-            put(Constants.OBSERVATION_TYPE_BARCODE, vialCode)
-            put(Constants.OBSERVATION_TYPE_MANUFACTURER, manufacturer)
             muac?.let { put(Constants.OBSERVATION_TYPE_VISIT_MUAC, it.toString()) }
             weight?.let { put(Constants.OBSERVATION_TYPE_VISIT_WEIGHT, it.toString()) }
             height?.let { put(Constants.OBSERVATION_TYPE_VISIT_HEIGHT, it.toString()) }
             isOedema?.let { put(Constants.OBSERVATION_TYPE_VISIT_OEDEMA, it.toString()) }
             substanceObservations?.forEach { (conceptName, obsMap) ->
-                obsMap.forEach { (obsKey, obsValue) ->
-                    put("$conceptName:$obsKey", obsValue)
+                val obsString = obsMap.entries.joinToString(", ") { (obsKey, obsValue) ->
+                    "$obsKey: $obsValue"
                 }
+                put(conceptName, obsString)
             }
         }
 

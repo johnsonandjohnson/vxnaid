@@ -182,8 +182,6 @@ class RegisterParticipantAdministeredVaccinesViewModel @Inject constructor(
             visitManager.registerDosingVisit(
                encounterDatetime = Date(),
                visitUuid = dosingVisit.uuid,
-               vialCode = "",
-               manufacturer = "",
                participantUuid = participant.participantUuid,
                dosingNumber = dosingVisit.dosingNumber ?: 0,
                weight = null,

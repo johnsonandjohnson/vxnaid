@@ -165,7 +165,6 @@ class VisitDosingFragment : BaseFragment(),
     private fun submitDosingVisit(overrideOutsideWindowCheck: Boolean = false,
                                   newVisitDate: Date? = null) {
         viewModel.submitDosingVisit(
-                vialBarcode = "",
                 outsideTimeWindowConfirmationListener = ::showOutsideTimeWindowConfirmationDialog,
                 missingSubstancesListener = ::showScheduleMissingSubstancesDialog,
                 overrideOutsideTimeWindowCheck = overrideOutsideWindowCheck,

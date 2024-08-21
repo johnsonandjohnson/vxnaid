@@ -232,7 +232,6 @@ class VisitViewModel @Inject constructor(
     /**
      * Submit a dosing visit encounter
      *
-     * @param vialBarcode                           String representing the vial barcode
      * @param outsideTimeWindowConfirmationListener Callback function for when the current time is outside the dosing window
      * @param missingSubstancesListener             Callback function for when some of the selected vaccines were not administered
      * @param overrideOutsideTimeWindowCheck        Indicate if the time window check should be skipped
@@ -241,7 +240,6 @@ class VisitViewModel @Inject constructor(
     @RequiresApi(Build.VERSION_CODES.O)
     @SuppressWarnings("LongParameterList")
     fun submitDosingVisit(
-        vialBarcode: String,
         outsideTimeWindowConfirmationListener: () -> Unit,
         missingSubstancesListener: (List<String>) -> Unit,
         overrideOutsideTimeWindowCheck: Boolean = false,
@@ -299,8 +297,6 @@ class VisitViewModel @Inject constructor(
                 visitManager.registerDosingVisit(
                     encounterDatetime = Date(),
                     visitUuid = dosingVisit.uuid,
-                    vialCode = vialBarcode,
-                    manufacturer = "",
                     participantUuid = participant.participantUuid,
                     dosingNumber = dosingVisit.dosingNumber ?: 0,
                     weight = weight!!,
