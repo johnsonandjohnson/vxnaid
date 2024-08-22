@@ -186,11 +186,11 @@
     <string name="visit_label_participant_id">Child Number</string>
     <string name="visit_label_vaccine">Regimen</string>
     <string name="visit_label_visit_type">Please select the appropriate visit type</string>
-    <string name="visit_label_title">Select visit</string>
+    <string name="visit_label_title">Visit</string>
     <string name="visit_dosing_label_scan_or_manual_entry">Please scan the barcode vial or enter it manually below:</string>
-    <string name="visit_dosing_label_dosing_number">Dosing number:</string>
+    <string name="visit_dosing_label_visit_number">Visit number:</string>
     <string name="visit_dosing_label_time_window">Time window:</string>
-    <string name="visit_dosing_title_history">Dosing History:</string>
+    <string name="visit_vaccination_history">Vaccination History:</string>
     <string name="visit_dosing_label_scan_barcode">Scan barcode</string>
     <string name="visit_dosing_label_manufacturer">Manufacturer</string>
     <string name="visit_dosing_label_select_manufacturer">Select vaccine manufacturer</string>
@@ -198,8 +198,8 @@
     <string name="visit_dosing_hint_vial_barcode">#1234567890</string>
     <string name="visit_dosing_label_no_dosing_visit">There is no dosing visit available in the schedule for this Child.</string>
     <string name="visit_dosing_label_loading">Loading available visits…</string>
-    <string name="visit_dosing_tab_dosing_visit">Dosing visit</string>
-    <string name="visit_dosing_tab_other_visit">Other visit</string>
+    <string name="visit_vaccines_tab">Vaccines</string>
+    <string name="visit_capture_data_tab">Capture Data</string>
     <string name="visit_dosing_error_no_vial_barcode">Please enter or scan a vial barcode</string>
     <string name="visit_dosing_error_no_manufacturer">Please select a manufacturer</string>
     <string name="visit_dosing_label_success">Visit successfully registered!</string>
@@ -386,4 +386,6 @@
     <string name="reschedule_visit_failed">Visit reschedule has failed.</string>
     <string name="reschedule_hint">Enter the reason here</string>
     <string name="general_label_kg">kg</string>
+    <string name="general_label_enter_text">Enter text</string>
+    <string name="general_label_label">Label</string>
 </resources>

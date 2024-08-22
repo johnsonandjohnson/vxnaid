@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.jnj.vaccinetracker.visit.VisitViewModel" />
+
+        <import type="android.view.View" />
+
+    </data>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/container_dosing_visit"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/textView_dosingNumberTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="32dp"
+                    android:layout_marginTop="32dp"
+                    android:layout_marginEnd="32dp"
+                    android:text="@string/visit_dosing_label_visit_number"
+                    android:textAppearance="@style/LabelText"
+                    android:visibility="@{viewModel.dosingVisit == null ? View.INVISIBLE : View.VISIBLE}"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/textView_dosingNumber"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="32dp"
+                    android:text="@{String.valueOf(viewModel.visitsCounter)}"
+                    android:textAppearance="@style/DescriptionText"
+                    android:visibility="@{viewModel.dosingVisit == null ? View.INVISIBLE : View.VISIBLE}"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/textView_dosingNumberTitle"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/textView_timeWindowTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="32dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="32dp"
+                    android:text="@string/visit_dosing_label_time_window"
+                    android:textAppearance="@style/LabelText"
+                    android:visibility="@{viewModel.dosingVisit == null || (viewModel.dosingVisit != null &amp;&amp; viewModel.dosingVisit.dosingNumber == 1) ? View.INVISIBLE : View.VISIBLE}"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/textView_dosingNumberTitle" />
+
+                <TextView
+                    android:id="@+id/textView_timeWindow"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:text="@{viewModel.dosingVisit.timeWindow}"
+                    android:textAppearance="@style/DescriptionText"
+                    android:textColor="@{viewModel.dosingVisitIsInsideTimeWindow ? @color/time_window_inside : @color/time_window_outside}"
+                    android:visibility="@{viewModel.dosingVisit == null || (viewModel.dosingVisit != null &amp;&amp; viewModel.dosingVisit.dosingNumber == 1) ? View.INVISIBLE : View.VISIBLE}"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/textView_timeWindowTitle"
+                    app:layout_constraintTop_toTopOf="@+id/textView_timeWindowTitle" />
+
+                <LinearLayout
+                    android:id="@+id/linearLayout_visitHistory"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="32dp"
+                    android:layout_marginEnd="32dp"
+                    android:orientation="vertical"
+                    app:layout_constraintBottom_toTopOf="@+id/linearLayout_otherSubstances"
+                    app:layout_constraintTop_toBottomOf="@+id/textView_timeWindowTitle"
+                    tools:layout_editor_absoluteX="297dp" />
+
+                <LinearLayout
+                    android:id="@+id/linearLayout_otherSubstances"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="32dp"
+                    android:layout_marginEnd="32dp"
+                    android:orientation="vertical"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/linearLayout_visitHistory">
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/recyclerView_otherSubstances"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+                    </androidx.recyclerview.widget.RecyclerView>
+
+                </LinearLayout>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <TextView
+                android:id="@+id/empty_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="32dp"
+                android:text="@string/visit_dosing_label_no_dosing_visit"
+                android:textAppearance="@style/LabelText"
+                android:textColor="@color/errorDark"
+                android:visibility="@{!viewModel.loading &amp;&amp; viewModel.dosingVisit == null ? View.VISIBLE : View.GONE}" />
+
+            <TextView
+                android:id="@+id/loading_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="32dp"
+                android:text="@string/visit_dosing_label_loading"
+                android:textSize="18sp"
+                android:visibility="@{viewModel.loading ? View.VISIBLE : View.GONE}" />
+
+        </FrameLayout>
+    </androidx.core.widget.NestedScrollView>
+</layout>

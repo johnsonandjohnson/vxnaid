@@ -170,7 +170,7 @@
     <string name="visit_label_visit_type">Veuillez sélectionner le type de visite approprié</string>
     <string name="visit_label_title">Sélectionnez une visite</string>
     <string name="visit_dosing_label_scan_or_manual_entry">Veuillez scanner le code-barres du flacon ou le saisir manuellement ci-dessous:</string>
-    <string name="visit_dosing_label_dosing_number">Numéro du dosage:</string>
+    <string name="visit_dosing_label_visit_number">Numéro du dosage:</string>
     <string name="visit_dosing_label_time_window">Plage horaire:</string>
     <string name="visit_dosing_title_history">Historique de dosage(s):</string>
     <string name="visit_dosing_label_scan_barcode">Scanner le code-barres</string>
@@ -180,8 +180,8 @@
     <string name="visit_dosing_hint_vial_barcode">#1234567890</string>
     <string name="visit_dosing_label_no_dosing_visit">Il n\'y a pas de visite de dosage dans l\'horaire pour ce participant.</string>
     <string name="visit_dosing_label_loading">Chargement des visites disponibles…</string>
-    <string name="visit_dosing_tab_dosing_visit">Visite de dosage</string>
-    <string name="visit_dosing_tab_other_visit">Autre visite</string>
+    <string name="visit_vaccines_tab">Visite de dosage</string>
+    <string name="visit_capture_data_tab">Autre visite</string>
     <string name="visit_dosing_error_no_vial_barcode">Veuillez saisir ou scanner le code-barres du flacon</string>
     <string name="visit_dosing_error_no_manufacturer">Veuillez sélectionner un fabricant</string>
     <string name="visit_dosing_label_success">Visite enregistrée avec succès!</string>

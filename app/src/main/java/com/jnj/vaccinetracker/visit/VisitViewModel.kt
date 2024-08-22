@@ -63,7 +63,6 @@ class VisitViewModel @Inject constructor(
      * emits when event submission finished
      */
     val visitEvents = eventFlow<Boolean>()
-    val otherVisitEvents = eventFlow<Boolean>()
     private val retryClickEvents = eventFlow<Unit>()
     private val participantArg = stateFlow<ParticipantSummaryUiModel?>(null)
     val loading = mutableLiveBoolean()
@@ -99,6 +98,9 @@ class VisitViewModel @Inject constructor(
     var selectedSubstancesWithBarcodes = MutableLiveData<MutableMap<String, Map<String, String>>>(mutableMapOf())
     var selectedOtherSubstances = MutableLiveData<MutableMap<String, String>>()
     var otherSubstancesData =  MutableLiveData<List<OtherSubstanceDataModel>>(listOf())
+    var checkOtherSubstances =  MutableLiveData<Boolean>(false)
+    var isAnyOtherSubstancesEmpty =  MutableLiveData<Boolean>(false)
+    var visitsCounter = MutableLiveData<Int>(0)
 
     init {
         initState()
@@ -127,6 +129,7 @@ class VisitViewModel @Inject constructor(
     private suspend fun load(participantSummary: ParticipantSummaryUiModel) {
         try {
             val visits = visitManager.getVisitsForParticipant(participantSummary.participantUuid)
+            visitsCounter.value = visits.count()
             substancesData.value = SubstancesDataUtil.getSubstancesDataForCurrentVisit(
                 participantSummary.birthDateText,
                 visits,
@@ -254,6 +257,7 @@ class VisitViewModel @Inject constructor(
         val isOedema = if (!displayOedema.value!!) false else isOedema.value
         val participant = participant.get()
         val dosingVisit = dosingVisit.get()
+        val visitsCounter = visitsCounter.value
         val substancesObservations = selectedSubstancesWithBarcodes.value ?: mapOf()
         val otherSubstancesObservations = selectedOtherSubstances.value ?: mapOf()
         val missingSubstances = getMissingSubstanceLabels()
@@ -279,7 +283,7 @@ class VisitViewModel @Inject constructor(
             isZScoreValid = false
         }
 
-        if (!isZScoreValid) return
+        // if (!isZScoreValid) return for now
 
         if (!overrideOutsideTimeWindowCheck && !dosingVisitIsInsideTimeWindow.get() && newVisitDate == null) {
             outsideTimeWindowConfirmationListener()
@@ -300,11 +304,7 @@ class VisitViewModel @Inject constructor(
                     encounterDatetime = Date(),
                     visitUuid = dosingVisit.uuid,
                     participantUuid = participant.participantUuid,
-                    dosingNumber = dosingVisit.dosingNumber ?: 0,
-                    weight = weight!!,
-                    height = height!!,
-                    isOedema = isOedema!!,
-                    muac = muac,
+                    dosingNumber = visitsCounter ?: 0,
                     substanceObservations = substancesObservations.toMap(),
                     otherSubstanceObservations = otherSubstancesObservations.toMap(),
                 )
@@ -381,39 +381,6 @@ class VisitViewModel @Inject constructor(
         val birthDate = LocalDate.parse(birthDateText, formatter)
         val nextVisitDate = birthDate.plusWeeks(weeksNumberAfterBirth.toLong())
         return Date.from(nextVisitDate.atStartOfDay(ZoneId.of(Constants.UTC_TIME_ZONE_NAME)).toInstant())
-    }
-
-    /**
-     * Submit a visit of type 'other'
-     *
-     */
-    fun submitOtherVisit() {
-        val participant = participant.get()
-        if (participant == null) {
-            logError("No participant or dosing visit in memory!")
-            visitEvents.tryEmit(false)
-            return
-        }
-
-        loading.set(true)
-
-        scope.launch {
-            try {
-                visitManager.registerOtherVisit(participant.participantUuid)
-                onVisitLogged()
-                loading.set(false)
-                otherVisitEvents.tryEmit(true)
-            } catch (ex: OperatorUuidNotAvailableException) {
-                loading.set(false)
-                sessionExpiryObserver.notifySessionExpired()
-            } catch (throwable: Throwable) {
-                yield()
-                throwable.rethrowIfFatal()
-                loading.set(false)
-                logError("Failed to register other visit: ", throwable)
-                otherVisitEvents.tryEmit(false)
-            }
-        }
     }
 
     private suspend fun onVisitLogged() {
@@ -539,6 +506,10 @@ class VisitViewModel @Inject constructor(
         return substancesData.value
             ?.filter { it.conceptName !in selectedConceptNames }
            ?.map { it.label } ?: listOf()
+    }
+
+    fun checkIfAnyOtherSubstancesEmpty() {
+        checkOtherSubstances.value = true
     }
 }
 

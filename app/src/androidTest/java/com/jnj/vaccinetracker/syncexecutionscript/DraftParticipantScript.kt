@@ -127,13 +127,7 @@ class DraftParticipantScript {
                 participantUuid = draftParticipant.participantUuid,
                 encounterDatetime = dateNow(),
                 visitUuid = firstScheduledDosingVisit.uuid,
-                manufacturer = manufacturer,
-                vialCode = vialCode,
                 dosingNumber = firstScheduledDosingVisit.dosingNumber!!,
-                weight = weight,
-                height = height,
-                isOedema = false,
-                muac = 5,
                 substanceObservations = null
             )
         }

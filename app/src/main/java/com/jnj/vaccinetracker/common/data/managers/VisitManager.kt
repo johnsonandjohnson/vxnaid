@@ -28,7 +28,6 @@ class VisitManager @Inject constructor(
     private val syncSettingsRepository: SyncSettingsRepository,
     private val getParticipantVisitDetailsUseCase: GetParticipantVisitDetailsUseCase,
     private val updateVisitUseCase: UpdateVisitUseCase,
-    private val createVisitUseCase: CreateVisitUseCase,
     private val getUpcomingVisitUseCase: GetUpcomingVisitUseCase,
 ) {
 
@@ -39,10 +38,6 @@ class VisitManager @Inject constructor(
         encounterDatetime: Date,
         visitUuid: String,
         dosingNumber: Int,
-        weight: Int? = null,
-        height: Int? = null,
-        isOedema: Boolean? = null,
-        muac: Int? = null,
         substanceObservations: Map<String, Map<String, String>>? = null,
         otherSubstanceObservations: Map<String, String>? = null
     ) {
@@ -55,10 +50,6 @@ class VisitManager @Inject constructor(
         val attributes = buildVisitAttributes(operatorUuid, dosingNumber)
 
         val observations = buildObservations(
-            weight = weight,
-            height = height,
-            muac = muac,
-            isOedema = isOedema,
             substanceObservations = substanceObservations,
             otherSubstanceObservations = otherSubstanceObservations,
             encounterDatetime=encounterDatetime
@@ -85,20 +76,11 @@ class VisitManager @Inject constructor(
     }
 
     private fun buildObservations(
-        weight: Int?,
-        height: Int?,
-        muac: Int?,
-        isOedema: Boolean?,
         substanceObservations: Map<String, Map<String, String>>?,
         otherSubstanceObservations: Map<String, String>?,
         encounterDatetime: Date
     ): Map<String, String> {
         return mutableMapOf<String, String>().apply {
-            weight?.let { put(Constants.OBSERVATION_TYPE_VISIT_WEIGHT, it.toString()) }
-            height?.let { put(Constants.OBSERVATION_TYPE_VISIT_HEIGHT, it.toString()) }
-            muac?.let { put(Constants.OBSERVATION_TYPE_VISIT_MUAC, it.toString()) }
-            isOedema?.let { put(Constants.OBSERVATION_TYPE_VISIT_OEDEMA, it.toString()) }
-
             // convention for obs for a vaccine is its conceptName plus Date/Barcode/Manufacturer ex: Polio 0 Barcode
             substanceObservations?.forEach { (conceptName, obsMap) ->
                 // Date needs to be always added
@@ -113,24 +95,6 @@ class VisitManager @Inject constructor(
                 put(conceptName, conceptValue)
             }
         }
-    }
-
-
-
-    suspend fun registerOtherVisit(participantUuid: String) {
-        val locationUuid = syncSettingsRepository.getSiteUuid() ?: throw NoSiteUuidAvailableException("Trying to register other visit without a selected site")
-        val operatorUUid = userRepository.getUser()?.uuid ?: throw OperatorUuidNotAvailableException("trying to register other visit without stored operator uuid")
-        val request = CreateVisit(
-            participantUuid = participantUuid,
-            visitType = Constants.VISIT_TYPE_OTHER,
-            startDatetime = Date(),
-            locationUuid = locationUuid,
-            attributes = mapOf(
-                Constants.ATTRIBUTE_VISIT_STATUS to Constants.VISIT_STATUS_OCCURRED,
-                Constants.ATTRIBUTE_OPERATOR to operatorUUid,
-            )
-        )
-        createVisitUseCase.createVisit(request)
     }
 
     suspend fun getUpcomingVisit(participantUuid: String): UpcomingVisit? = getUpcomingVisitUseCase.getUpcomingVisit(participantUuid, date = dateNow())

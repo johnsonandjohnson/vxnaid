@@ -48,8 +48,8 @@ import com.jnj.vaccinetracker.visit.dialog.DosingOutOfWindowDialog
 import com.jnj.vaccinetracker.visit.dialog.RescheduleVisitDialog
 import com.jnj.vaccinetracker.visit.dialog.VisitRegisteredSuccessDialog
 import com.jnj.vaccinetracker.visit.screens.ContraindicationsActivity
-import com.jnj.vaccinetracker.visit.screens.VisitDosingFragment
-import com.jnj.vaccinetracker.visit.screens.VisitOtherFragment
+import com.jnj.vaccinetracker.visit.screens.VisitVaccinesFragment
+import com.jnj.vaccinetracker.visit.screens.VisitCaptureDataFragment
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 
@@ -178,13 +178,13 @@ interface AndroidModule {
     fun bindVisitActivity(): VisitActivity
 
     @ContributesAndroidInjector
-    fun bindVisitDosageFragment(): VisitDosingFragment
+    fun bindVisitVaccinesFragment(): VisitVaccinesFragment
 
     @ContributesAndroidInjector
     fun bindContraindicationsFragment(): ContraindicationsActivity
 
     @ContributesAndroidInjector
-    fun bindVisitOtherFragment(): VisitOtherFragment
+    fun bindVisitCaptureDataFragment(): VisitCaptureDataFragment
 
     @ContributesAndroidInjector
     fun bindSuccessDialog(): SuccessDialog

@@ -64,9 +64,37 @@ class OtherSubstanceItemAdapter(
         notifyDataSetChanged()
     }
 
+    fun checkIfAnyItemsEmpty(itemsValues: MutableMap<String, String>?, recyclerView: RecyclerView): Boolean {
+        var hasEmptyItems = false
+        items.forEachIndexed { index, item ->
+            val itemValue = itemsValues?.get(item.conceptName)
+            when (getItemViewType(index)) {
+                TYPE_TEXT -> {
+                    val holder = recyclerView.findViewHolderForAdapterPosition(index) as? TextViewHolder
+                    if (itemValue.isNullOrEmpty()) {
+                        holder?.inputEditText?.error = "Please fill before submitting"
+                        hasEmptyItems = true
+                    } else {
+                        holder?.inputEditText?.error = null
+                    }
+                }
+                TYPE_RADIO -> {
+                    val holder = recyclerView.findViewHolderForAdapterPosition(index) as? RadioViewHolder
+                    if (itemValue.isNullOrEmpty()) {
+                        holder?.labelTextView?.error = "Please select an option before submitting"
+                        hasEmptyItems = true
+                    } else {
+                        holder?.labelTextView?.error = null
+                    }
+                }
+            }
+        }
+        return hasEmptyItems
+    }
+
     inner class TextViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val labelTextView: TextView = itemView.findViewById(R.id.label_otherSubstance)
-        private val inputEditText: EditText = itemView.findViewById(R.id.editText_otherSubstance)
+        val inputEditText: EditText = itemView.findViewById(R.id.editText_otherSubstance)
 
         fun bind(item: OtherSubstanceDataModel) {
             labelTextView.text = item.label
@@ -78,7 +106,7 @@ class OtherSubstanceItemAdapter(
     }
 
     inner class RadioViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        private val labelTextView: TextView = itemView.findViewById(R.id.label_otherSubstance)
+        val labelTextView: TextView = itemView.findViewById(R.id.label_otherSubstance)
         private val radioGroup: RadioGroup = itemView.findViewById(R.id.radioGroup_otherSubstance)
 
         fun bind(item: OtherSubstanceDataModel) {
@@ -100,7 +128,6 @@ class OtherSubstanceItemAdapter(
                 listener.addOtherSubstance(item.conceptName, selectedValue)
             }
         }
-
     }
 
     interface AddSubstanceValueListener {

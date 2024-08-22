@@ -184,10 +184,6 @@ class RegisterParticipantAdministeredVaccinesViewModel @Inject constructor(
                visitUuid = dosingVisit.uuid,
                participantUuid = participant.participantUuid,
                dosingNumber = dosingVisit.dosingNumber ?: 0,
-               weight = null,
-               height = null,
-               isOedema = null,
-               muac = null,
                substanceObservations = substanceObservations,
                otherSubstanceObservations = null
             )
