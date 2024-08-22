@@ -61,4 +61,5 @@ object Constants {
 
     const val BARCODE_STR = "Barcode"
     const val MANUFACTURER_NAME_STR = "Manufacturer"
+    const val DATE_STR = "Date"
 }

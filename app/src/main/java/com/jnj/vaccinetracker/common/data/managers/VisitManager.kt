@@ -99,9 +99,10 @@ class VisitManager @Inject constructor(
             muac?.let { put(Constants.OBSERVATION_TYPE_VISIT_MUAC, it.toString()) }
             isOedema?.let { put(Constants.OBSERVATION_TYPE_VISIT_OEDEMA, it.toString()) }
 
-            // convention for manufacturer and barcode obs for a vaccine is its concept name plus Barcode/Manufacturer ex: Polio 0 Barcode
+            // convention for obs for a vaccine is its conceptName plus Date/Barcode/Manufacturer ex: Polio 0 Barcode
             substanceObservations?.forEach { (conceptName, obsMap) ->
-                put(conceptName, encounterDatetime.toString())
+                // Date needs to be always added
+                put("$conceptName ${Constants.DATE_STR}", encounterDatetime.toString())
                 obsMap.forEach { (key, value) ->
                     val fullKey = "$conceptName $key"
                     put(fullKey, value)
