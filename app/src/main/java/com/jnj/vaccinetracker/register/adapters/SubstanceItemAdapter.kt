@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.jnj.vaccinetracker.R
 import com.jnj.vaccinetracker.register.screens.RegisterParticipantAdministeredVaccinesViewModel
 import com.jnj.vaccinetracker.visit.model.SubstanceDataModel
+import com.soywiz.klock.DateFormat
 
 class SubstanceItemAdapter(
    private val items: MutableList<SubstanceDataModel>,
@@ -40,9 +41,11 @@ class SubstanceItemAdapter(
    inner class SubstanceViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
       private val substanceName: TextView = itemView.findViewById(R.id.textView_participantId)
       private val btnRemove: ImageButton = itemView.findViewById(R.id.btnRemove)
+      private val vaccineDate: TextView = itemView.findViewById(R.id.textView_vaccineDate)
 
       fun bind(substance: SubstanceDataModel, viewModel: RegisterParticipantAdministeredVaccinesViewModel) {
          substanceName.text = substance.label
+         vaccineDate.text = substance.obsDate?.format(DateFormat.FORMAT_DATE) ?: ""
 
          btnRemove.setOnClickListener {
             viewModel.removeFromSelectedSubstances(substance)

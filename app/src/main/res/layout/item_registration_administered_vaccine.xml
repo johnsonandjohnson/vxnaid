@@ -36,6 +36,19 @@
                 tools:text="Vaccine"
                 android:textStyle="bold"/>
 
+            <TextView
+                android:id="@+id/textView_vaccineDate"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:text=""
+                android:textAppearance="@style/GeneralText"
+                tools:text="Vaccine Date"
+                android:layout_gravity="center_vertical"
+                android:textStyle="bold"/>
+
             <ImageButton
                 android:id="@+id/btnRemove"
                 android:layout_width="wrap_content"

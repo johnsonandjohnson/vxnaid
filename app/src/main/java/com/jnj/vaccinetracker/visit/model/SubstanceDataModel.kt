@@ -4,5 +4,6 @@ data class SubstanceDataModel(
     val conceptName: String,
     val label: String,
     val category: String,
-    val routeOfAdministration: String
+    val routeOfAdministration: String,
+    var obsDate: String? = null
 )

@@ -23,6 +23,8 @@ import com.jnj.vaccinetracker.register.adapters.SubstanceItemAdapter
 import com.jnj.vaccinetracker.register.dialogs.RegisterParticipantSuccessfulDialog
 import com.jnj.vaccinetracker.register.dialogs.VaccineDialog
 import com.jnj.vaccinetracker.visit.model.SubstanceDataModel
+import com.soywiz.klock.DateFormat
+import com.soywiz.klock.DateTime
 import kotlinx.coroutines.flow.onEach
 
 class RegisterParticipantAdministeredVaccinesFragment : BaseFragment(),
@@ -150,5 +152,9 @@ class RegisterParticipantAdministeredVaccinesFragment : BaseFragment(),
 
    override fun addVaccine(vaccine: SubstanceDataModel) {
       viewModel.addSelectedSubstance(vaccine)
+   }
+
+   override fun addVaccineDate(conceptName: String, dateValue: DateTime) {
+      viewModel.addVaccineDate(conceptName, dateValue.format(DateFormat.FORMAT_DATE))
    }
 }

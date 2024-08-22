@@ -2,6 +2,7 @@ package com.jnj.vaccinetracker.register.screens
 
 import android.os.Build
 import androidx.annotation.RequiresApi
+import androidx.lifecycle.MutableLiveData
 import com.jnj.vaccinetracker.R
 import com.jnj.vaccinetracker.common.data.managers.ConfigurationManager
 import com.jnj.vaccinetracker.common.data.managers.VisitManager
@@ -48,6 +49,7 @@ class RegisterParticipantAdministeredVaccinesViewModel @Inject constructor(
    val registerVaccinesSuccessEvents = eventFlow<ParticipantSummaryUiModel>()
    var substancesData = mutableLiveData<List<SubstanceDataModel>>(emptyList())
    var selectedSubstances = mutableLiveData<List<SubstanceDataModel>>()
+   val selectedSubstancesDates = MutableLiveData<MutableMap<String, Map<String, String>>>(mutableMapOf())
    val loading = mutableLiveBoolean()
    val errorMessage = mutableLiveData<String>()
    private val participantArg = stateFlow<ParticipantSummaryUiModel?>(null)
@@ -87,6 +89,16 @@ class RegisterParticipantAdministeredVaccinesViewModel @Inject constructor(
       val currentSubstances = selectedSubstances.value ?: emptyList()
       val updatedList = currentSubstances.filter { it.conceptName != substanceToRemove.conceptName }
       selectedSubstances.value = updatedList
+
+      val currentDatesMap = selectedSubstancesDates.value ?: mutableMapOf()
+      currentDatesMap.remove(substanceToRemove.conceptName)
+      selectedSubstancesDates.value = currentDatesMap
+   }
+
+   fun addVaccineDate(conceptName: String, dateValue: String) {
+      val currentMap = selectedSubstancesDates.value ?: mutableMapOf()
+      currentMap[conceptName] = mapOf(Constants.DATE_STR to dateValue)
+      selectedSubstancesDates.postValue(currentMap)
    }
 
    private suspend fun load(participantSummary: ParticipantSummaryUiModel) {
@@ -172,8 +184,13 @@ class RegisterParticipantAdministeredVaccinesViewModel @Inject constructor(
 
       val substanceObservations = selectedSubstances.value?.associate { substance ->
          substance.conceptName to mapOf(Constants.BARCODE_STR to "", Constants.MANUFACTURER_NAME_STR to "")
-      }.orEmpty()
+      }.orEmpty().toMutableMap()
 
+      val substancesDatesMap = selectedSubstancesDates.value ?: mutableMapOf()
+      substancesDatesMap.forEach { (conceptName, valueMap) ->
+         val existingMap = substanceObservations[conceptName] ?: emptyMap()
+         substanceObservations[conceptName] = existingMap + valueMap
+      }
 
       loading.set(true)
 

@@ -11,5 +11,10 @@ class DateUtil {
             val format = SimpleDateFormat(targetFormat, Locale.getDefault())
             return format.format(date)
         }
+
+        fun convertStringToDate(date: String, sourceFormat: String): Date? {
+            val dateFormat = SimpleDateFormat(sourceFormat, Locale.getDefault())
+            return dateFormat.parse(date)
+        }
     }
 }

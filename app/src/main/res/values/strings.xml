@@ -366,6 +366,7 @@
     <string name="vaccine_dialog_select_vaccine_dropdown">Select vaccine</string>
     <string name="vaccine_dialog_select_vaccine_label">Vaccine</string>
     <string name="vaccine_dialog_dose_label">Dose</string>
+    <string name="vaccine_dialog_vaccine_date_label">Date</string>
     <string name="participant_registration_administered_vaccines_title">Already administered vaccines</string>
     <string name="administered_vaccines_no_previous_vaccines">No previous vaccines</string>
     <string name="general_label_add">Add</string>
