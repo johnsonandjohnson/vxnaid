@@ -390,4 +390,5 @@
     <string name="general_label_kg">kg</string>
     <string name="general_label_enter_text">Enter text</string>
     <string name="general_label_label">Label</string>
+    <string name="participant_registration_description_success">Does the child require vaccination?</string>
 </resources>
