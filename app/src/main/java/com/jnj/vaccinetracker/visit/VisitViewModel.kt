@@ -108,6 +108,9 @@ class VisitViewModel @Inject constructor(
     var selectedVisitType =  MutableLiveData<String>(Constants.VISIT_TYPES[0])
     var suggestedVisitType =  MutableLiveData<String>(Constants.VISIT_TYPES[0])
     var visitTypes =  MutableLiveData<List<String>>(Constants.VISIT_TYPES)
+    var visitLocation = MutableLiveData<String>()
+    var isVisitLocationSelected = MutableLiveData(false)
+    var checkVisitLocation = MutableLiveData(false)
 
     init {
         initState()
@@ -272,6 +275,7 @@ class VisitViewModel @Inject constructor(
         val substancesObservations = selectedSubstancesWithBarcodes.value ?: mapOf()
         val otherSubstancesObservations = selectedOtherSubstances.value ?: mapOf()
         val missingSubstances = getMissingSubstanceLabels()
+        val visitLocationValue = visitLocation.value
 
         if (participant == null || dosingVisit == null) {
             logError("No participant or dosing visit in memory!")
@@ -318,6 +322,7 @@ class VisitViewModel @Inject constructor(
                     dosingNumber = visitsCounter ?: 0,
                     substanceObservations = substancesObservations.toMap(),
                     otherSubstanceObservations = otherSubstancesObservations.toMap(),
+                    visitLocation = visitLocationValue
                 )
 
                 // schedule next visit after submitting current one
@@ -546,5 +551,16 @@ class VisitViewModel @Inject constructor(
         )
     }
 
+    fun setVisitLocationValue(locationValue: String) {
+        visitLocation.value = locationValue
+    }
+
+    fun isVisitLocationValid() : Boolean {
+        return isVisitLocationSelected.value == true
+    }
+
+    fun checkVisitLocationSelection() {
+        checkVisitLocation.value = true
+    }
 }
 

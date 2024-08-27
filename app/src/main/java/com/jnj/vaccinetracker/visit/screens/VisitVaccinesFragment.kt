@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.RadioGroup
 import androidx.annotation.RequiresApi
 import androidx.core.widget.doOnTextChanged
 import androidx.databinding.DataBindingUtil
@@ -20,9 +21,7 @@ import com.jnj.vaccinetracker.splash.SplashActivity
 import com.jnj.vaccinetracker.visit.VisitViewModel
 import com.jnj.vaccinetracker.visit.adapters.OtherSubstanceItemAdapter
 import com.jnj.vaccinetracker.visit.adapters.VisitSubstanceItemAdapter
-import com.jnj.vaccinetracker.visit.dialog.DialogScheduleMissingSubstances
 import com.jnj.vaccinetracker.visit.dialog.DialogVaccineBarcode
-import com.jnj.vaccinetracker.visit.dialog.DosingOutOfWindowDialog
 import com.jnj.vaccinetracker.visit.dialog.VisitRegisteredSuccessDialog
 import com.jnj.vaccinetracker.visit.model.SubstanceDataModel
 import kotlinx.coroutines.flow.onEach

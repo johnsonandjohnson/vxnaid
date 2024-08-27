@@ -41,7 +41,8 @@ class VisitManager @Inject constructor(
         visitUuid: String,
         dosingNumber: Int,
         substanceObservations: Map<String, Map<String, String>>? = null,
-        otherSubstanceObservations: Map<String, String>? = null
+        otherSubstanceObservations: Map<String, String>? = null,
+        visitLocation: String? = null
     ) {
         val locationUuid = syncSettingsRepository.getSiteUuid()
             ?: throw NoSiteUuidAvailableException("Trying to register dosing visit without a selected site")
@@ -49,7 +50,7 @@ class VisitManager @Inject constructor(
         val operatorUuid = userRepository.getUser()?.uuid
             ?: throw OperatorUuidNotAvailableException("Trying to register dosing visit without stored operator UUID")
 
-        val attributes = buildVisitAttributes(operatorUuid, dosingNumber)
+        val attributes = buildVisitAttributes(operatorUuid, dosingNumber, visitLocation)
 
         val observations = buildObservations(
             substanceObservations = substanceObservations,
@@ -69,11 +70,12 @@ class VisitManager @Inject constructor(
         updateVisitUseCase.updateVisit(request)
     }
 
-    private fun buildVisitAttributes(operatorUuid: String, dosingNumber: Int): Map<String, String> {
+    private fun buildVisitAttributes(operatorUuid: String, dosingNumber: Int, visitLocation: String?): Map<String, String> {
         return mapOf(
             Constants.ATTRIBUTE_VISIT_STATUS to Constants.VISIT_STATUS_OCCURRED,
             Constants.ATTRIBUTE_OPERATOR to operatorUuid,
-            Constants.ATTRIBUTE_VISIT_DOSE_NUMBER to dosingNumber.toString()
+            Constants.ATTRIBUTE_VISIT_DOSE_NUMBER to dosingNumber.toString(),
+            *listOfNotNull(visitLocation?.let { Constants.ATTRIBUTE_VISIT_LOCATION to visitLocation }).toTypedArray()
         )
     }
 

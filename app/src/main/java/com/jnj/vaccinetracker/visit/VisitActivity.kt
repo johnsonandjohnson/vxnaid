@@ -15,6 +15,7 @@ import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.tabs.TabLayout
 import com.jnj.vaccinetracker.R
 import com.jnj.vaccinetracker.barcode.ScanBarcodeViewModel
+import com.jnj.vaccinetracker.common.helpers.findParent
 import com.jnj.vaccinetracker.common.helpers.hideKeyboard
 import com.jnj.vaccinetracker.common.ui.BaseActivity
 import com.jnj.vaccinetracker.common.ui.SyncBanner
@@ -24,12 +25,13 @@ import com.jnj.vaccinetracker.register.dialogs.AlreadyAdministeredVaccineDatePic
 import com.jnj.vaccinetracker.register.dialogs.VaccineDialog
 import com.jnj.vaccinetracker.register.screens.RegisterParticipantAdministeredVaccinesFragment
 import com.jnj.vaccinetracker.splash.SplashActivity
+import com.jnj.vaccinetracker.visit.adapters.OtherSubstanceItemAdapter
 import com.jnj.vaccinetracker.visit.dialog.DialogScheduleMissingSubstances
 import com.jnj.vaccinetracker.visit.dialog.DosingOutOfWindowDialog
+import java.util.Date
 import com.jnj.vaccinetracker.visit.model.SubstanceDataModel
 import com.soywiz.klock.DateTime
 import kotlinx.coroutines.launch
-import java.util.Date
 
 /**
  * @author maartenvangiel
@@ -46,6 +48,7 @@ class VisitActivity :
     companion object {
         private const val EXTRA_PARTICIPANT = "participant"
         private const val EXTRA_TYPE = "newParticipantRegistration"
+        private const val TAG_DIALOG_SUCCESS = "successDialog"
         private const val TAG_DIALOG_DOSING_OUT_OF_WINDOW = "dosingOutOfWindowDialog"
         private const val TAG_DIALOG_SCHEDULE_MISSING_SUBSTANCES = "scheduleMissingSubstances"
         private const val TAG_VACCINE_PICKER = "vaccinePicker"
@@ -76,7 +79,6 @@ class VisitActivity :
         binding.viewPagerVisit.adapter = VisitPagerAdapter(this, supportFragmentManager)
         binding.tabLayout.setupWithViewPager(binding.viewPagerVisit)
         setupClickListeners()
-
 
         setTitle(R.string.visit_label_title)
         supportActionBar?.setDisplayHomeAsUpEnabled(!newRegisteredParticipant)

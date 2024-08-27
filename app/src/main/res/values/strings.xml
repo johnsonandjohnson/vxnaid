@@ -190,6 +190,7 @@
     <string name="visit_dosing_label_scan_or_manual_entry">Please scan the barcode vial or enter it manually below:</string>
     <string name="visit_dosing_label_visit_number">Visit number:</string>
     <string name="visit_dosing_label_time_window">Time window:</string>
+    <string name="visit_dosing_label_visit_location">Visit location:</string>
     <string name="visit_vaccination_history">Vaccination History:</string>
     <string name="visit_dosing_label_scan_barcode">Scan barcode</string>
     <string name="visit_dosing_label_manufacturer">Manufacturer</string>
@@ -391,4 +392,5 @@
     <string name="visit_dosing_label_suggest">Suggest</string>
     <string name="general_label_enter_text">Enter text</string>
     <string name="general_label_label">Label</string>
+    <string name="participant_registration_description_success">Does the child require vaccination?</string>
 </resources>

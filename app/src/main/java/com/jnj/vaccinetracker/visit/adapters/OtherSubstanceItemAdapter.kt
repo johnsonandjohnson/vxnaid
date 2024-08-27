@@ -42,7 +42,6 @@ class OtherSubstanceItemAdapter(
             }
             else -> throw IllegalArgumentException("Unknown view type")
         }
-
     }
 
     override fun getItemCount(): Int = items.size

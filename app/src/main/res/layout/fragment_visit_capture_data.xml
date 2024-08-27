@@ -81,6 +81,58 @@
                     app:layout_constraintTop_toTopOf="@+id/textView_timeWindowTitle" />
 
                 <LinearLayout
+                    android:id="@+id/linearLayout_visitLocation"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView_timeWindowTitle"
+                    app:layout_constraintVertical_bias="0.0">
+
+                    <TextView
+                        android:id="@+id/textView_visitLocationTitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="32dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginEnd="32dp"
+                        android:text="@string/visit_dosing_label_visit_location"
+                        android:textAppearance="@style/LabelText"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <RadioGroup
+                        android:id="@+id/radioLocations"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <RadioButton
+                            android:id="@+id/radioButtonStatic"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Static" />
+
+                        <RadioButton
+                            android:id="@+id/radioButtonOutreach"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="4dp"
+                            android:text="Outreach" />
+
+                        <RadioButton
+                            android:id="@+id/radioButtonSchool"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="4dp"
+                            android:text="School" />
+
+                    </RadioGroup>
+
+                </LinearLayout>
+
+                <LinearLayout
                     android:id="@+id/linearLayout_visitHistory"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -89,7 +141,7 @@
                     android:layout_marginEnd="32dp"
                     android:orientation="vertical"
                     app:layout_constraintBottom_toTopOf="@+id/linearLayout_otherSubstances"
-                    app:layout_constraintTop_toBottomOf="@+id/textView_timeWindowTitle"
+                    app:layout_constraintTop_toBottomOf="@+id/linearLayout_visitLocation"
                     tools:layout_editor_absoluteX="297dp" />
 
                 <LinearLayout

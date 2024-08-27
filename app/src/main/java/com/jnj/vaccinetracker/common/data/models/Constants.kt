@@ -27,6 +27,7 @@ object Constants {
     const val ATTRIBUTE_VISIT_DAYS_BEFORE = "Low Window"
     const val ATTRIBUTE_VISIT_VACCINE_MANUFACTURER = "Vaccine Manufacturer"
     const val ATTRIBUTE_VISIT_DOSE_NUMBER = "Dose number"
+    const val ATTRIBUTE_VISIT_LOCATION = "Visit Location"
     const val VISIT_TYPE_DOSING = "Dosing"
     const val VISIT_TYPE_OTHER = "Other"
     const val VISIT_STATUS_OCCURRED = "OCCURRED"
@@ -62,6 +63,10 @@ object Constants {
     const val BARCODE_STR = "Barcode"
     const val MANUFACTURER_NAME_STR = "Manufacturer"
     const val DATE_STR = "Date"
+
+    const val STATIC_LOCATION = "Static"
+    const val OUTREACH_LOCATION = "Outreach"
+    const val SCHOOL_LOCATION = "School"
 
     const val VISIT_TYPE_AT_BIRTH = "At Birth"
     const val VISIT_TYPE_SIX_WEEKS = "6 weeks"

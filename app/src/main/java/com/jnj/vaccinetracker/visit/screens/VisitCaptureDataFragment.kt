@@ -5,6 +5,10 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.util.Log
+import android.widget.RadioButton
+import android.widget.RadioGroup
+import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.core.widget.doOnTextChanged
 import androidx.databinding.DataBindingUtil
@@ -65,15 +69,33 @@ class VisitCaptureDataFragment :
                 viewModel.checkOtherSubstances.value = false
             }
         }
+
+        viewModel.checkVisitLocation.observe(lifecycleOwner) {
+            if (viewModel.checkVisitLocation.value == true) {
+                if (!viewModel.isVisitLocationValid()) {
+                    binding.textViewVisitLocationTitle.error = "Please fill before submitting"
+                } else {
+                    binding.textViewVisitLocationTitle.error = null
+                }
+
+            }
+        }
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_visit_capture_data, container, false)
         binding.lifecycleOwner = viewLifecycleOwner
         binding.viewModel = viewModel
+
+        binding.radioLocations.setOnCheckedChangeListener { group, checkedId ->
+            val selectedRadioButton = binding.root.findViewById<RadioButton>(checkedId)
+            val selectedValue = selectedRadioButton?.text.toString()
+            viewModel.setVisitLocationValue(selectedValue)
+            viewModel.isVisitLocationSelected.value = true
+        }
+
         setOtherSubstancesRecyclerView()
         return binding.root
-
     }
 
     private fun setOtherSubstancesRecyclerView() {
