@@ -61,7 +61,13 @@ class VisitVaccinesFragment : BaseFragment(),
     }
 
     private fun setupVaccinesRecyclerView() {
-        adapter = VisitSubstanceItemAdapter(mutableListOf(), requireActivity().supportFragmentManager, requireContext())
+        adapter = VisitSubstanceItemAdapter(
+            mutableListOf(),
+            requireActivity().supportFragmentManager,
+            requireContext(),
+            viewModel,
+            viewModel.suggestedSubstancesData.value,
+        )
         binding.recyclerViewVaccines.layoutManager = LinearLayoutManager(requireContext())
         binding.recyclerViewVaccines.adapter = adapter
     }
@@ -79,11 +85,17 @@ class VisitVaccinesFragment : BaseFragment(),
                     else
                         onDosingVisitRegistrationFailed()
                 }.launchIn(lifecycleOwner)
-        viewModel.substancesData.observe(lifecycleOwner) { substances ->
+        viewModel.selectedSubstancesData.observe(lifecycleOwner) { substances ->
             adapter.updateList(substances)
         }
         viewModel.selectedSubstancesWithBarcodes.observe(lifecycleOwner) { substances ->
             adapter.colorItems(substances)
+        }
+        viewModel.isSuggesting.observe(lifecycleOwner) {isSuggesting ->
+            adapter.setSuggestingMode(isSuggesting)
+        }
+        viewModel.suggestedSubstancesData.observe(lifecycleOwner) {suggestedSubstances ->
+            adapter.setSuggestedSubstances(suggestedSubstances)
         }
     }
 

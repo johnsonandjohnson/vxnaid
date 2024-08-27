@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
 import android.widget.Button
+import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.databinding.DataBindingUtil
 import com.jnj.vaccinetracker.R
@@ -18,7 +19,8 @@ import com.soywiz.klock.DateFormat
 import com.soywiz.klock.DateTime
 
 class VaccineDialog(
-   private val substanceData: List<SubstanceDataModel>
+   private val substanceData: List<SubstanceDataModel>,
+   private val withDate: Boolean = true
 ) : BaseDialogFragment(), ScheduleVisitDatePickerDialog.OnDateSelectedListener {
    private lateinit var btnAdd: Button
    private lateinit var btnCancel: Button
@@ -26,6 +28,7 @@ class VaccineDialog(
    private lateinit var binding: DialogSelectVaccineBinding
    private lateinit var vaccineDateButton: Button
    private lateinit var vaccineDateTextView: TextView
+   private lateinit var dateLayout: LinearLayout
    var selectedSubstance: SubstanceDataModel? = null
    private var vaccineDate: DateTime? = null
 
@@ -49,6 +52,11 @@ class VaccineDialog(
       dropdown = binding.dropdownVaccine
       vaccineDateButton = binding.vaccineDateDatePickerButton
       vaccineDateTextView = binding.vaccineDateValue
+      dateLayout = binding.vaccineDateLinearLayout
+
+      if (!withDate) {
+         dateLayout.visibility = View.INVISIBLE
+      }
    }
 
    private fun setOnClickListeners() {
@@ -56,7 +64,12 @@ class VaccineDialog(
          if (selectedSubstance != null) {
             selectedSubstance!!.obsDate = vaccineDate?.format(DateFormat.FORMAT_DATE)
             findParent<AddVaccineListener>()?.addVaccine(selectedSubstance!!)
-            findParent<AddVaccineListener>()?.addVaccineDate(selectedSubstance!!.conceptName, vaccineDate!!)
+            if (withDate) {
+               findParent<AddVaccineListener>()?.addVaccineDate(
+                  selectedSubstance!!.conceptName,
+                  vaccineDate!!
+               )
+            }
             dismissAllowingStateLoss()
          }
       }

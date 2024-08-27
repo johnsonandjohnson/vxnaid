@@ -78,6 +78,41 @@ class SubstancesDataUtil {
         }
 
         @RequiresApi(Build.VERSION_CODES.O)
+        fun getVisitTypeForCurrentVisit(
+            participantBirthDate: String,
+        ): String {
+            val childAgeInWeeks = getWeeksBetweenDateAndToday(participantBirthDate)
+            val visitType = getVisitTypeFromChildAgeInWeeks(childAgeInWeeks)
+            return visitType
+        }
+
+        @RequiresApi(Build.VERSION_CODES.O)
+        suspend fun getSubstancesDataForVisitType(
+            visitType: String,
+            configurationManager: ConfigurationManager
+        ): List<SubstanceDataModel> {
+            val substancesGroupConfig = configurationManager.getSubstancesGroupConfig()
+            val visitTypeInWeeks = getWeeksBetweenDateAndTodayFromVisitType(visitType)
+            val substancesConfig = configurationManager.getSubstancesConfig()
+            val substanceDataModelList = mutableListOf<SubstanceDataModel>()
+            substancesConfig.forEach { substance ->
+                val minWeekNumber = substance.weeksAfterBirth - substance.weeksAfterBirthLowWindow
+                val maxWeekNumber = substance.weeksAfterBirth + substance.weeksAfterBirthUpWindow
+                if (visitTypeInWeeks in minWeekNumber..maxWeekNumber) {
+                    substanceDataModelList.add(
+                        getSingleSubstanceData(
+                            substance,
+                            substancesGroupConfig,
+                            null,
+                            substancesConfig
+                        )
+                    )
+                }
+            }
+            return substanceDataModelList.filter { it.conceptName != "" }
+        }
+
+        @RequiresApi(Build.VERSION_CODES.O)
         fun isTimeIntervalMaintained(
             previousVaccineConceptName: String,
             participantVisits: List<VisitDetail>,
@@ -228,7 +263,7 @@ class SubstancesDataUtil {
         private fun getSingleSubstanceData(
             substance: Substance,
             substancesGroupConfig: SubstancesGroupConfig,
-            participantVisits: List<VisitDetail>,
+            participantVisits: List<VisitDetail>?,
             substancesConfig: SubstancesConfig
         ): SubstanceDataModel {
             val group =
@@ -241,7 +276,7 @@ class SubstancesDataUtil {
             }
             var substanceToBeAdministered = substance.conceptName
             for (item in earlierElements) {
-                if (isSubstanceAlreadyApplied(participantVisits, item)) {
+                if (participantVisits != null && isSubstanceAlreadyApplied(participantVisits, item)) {
                     substanceToBeAdministered = ""
                 } else {
                     substanceToBeAdministered = item
@@ -268,6 +303,32 @@ class SubstancesDataUtil {
             val daysBetween = ChronoUnit.DAYS.between(startDate, endDate).toDouble()
 
             return ceil(daysBetween / 7).toInt()
+        }
+
+        private fun getWeeksBetweenDateAndTodayFromVisitType(visitType: String): Int {
+            return when (visitType) {
+                Constants.VISIT_TYPE_AT_BIRTH -> 1
+                Constants.VISIT_TYPE_SIX_WEEKS -> 6
+                Constants.VISIT_TYPE_TEN_WEEKS -> 10
+                Constants.VISIT_TYPE_FOURTEEN_WEEKS -> 14
+                Constants.VISIT_TYPE_NINE_MONTHS -> 36
+                Constants.VISIT_TYPE_EIGHTEEN_MONTHS -> 72
+                Constants.VISIT_TYPE_TWO_YEARS -> 96
+                else -> 1
+            }
+        }
+
+        private fun getVisitTypeFromChildAgeInWeeks(ageInWeeks: Int): String {
+            return when {
+                ageInWeeks in 0..4 -> Constants.VISIT_TYPE_AT_BIRTH       // 0-4 weeks: Birth visit
+                ageInWeeks in 5..8 -> Constants.VISIT_TYPE_SIX_WEEKS      // 5-8 weeks: Six weeks visit
+                ageInWeeks in 9..12 -> Constants.VISIT_TYPE_TEN_WEEKS     // 9-12 weeks: Ten weeks visit
+                ageInWeeks in 13..34 -> Constants.VISIT_TYPE_FOURTEEN_WEEKS // 13-34 weeks: Fourteen weeks visit
+                ageInWeeks in 35..70 -> Constants.VISIT_TYPE_NINE_MONTHS  // 35-70 weeks: Nine months visit
+                ageInWeeks in 71..94 -> Constants.VISIT_TYPE_EIGHTEEN_MONTHS // 71-94 weeks: Eighteen months visit
+                ageInWeeks >= 95 -> Constants.VISIT_TYPE_TWO_YEARS        // 95+ weeks: Two years visit
+                else -> Constants.VISIT_TYPE_AT_BIRTH                    // Default to Birth visit
+            }
         }
 
         private fun isSubstanceAlreadyApplied(

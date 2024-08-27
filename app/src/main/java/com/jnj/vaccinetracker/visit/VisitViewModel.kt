@@ -94,13 +94,20 @@ class VisitViewModel @Inject constructor(
     val shouldValidateMuac = MutableLiveData<Boolean>()
     val zScoreMuacTextColor = MutableLiveData<Int>()
 
-    var substancesData = MutableLiveData(listOf<SubstanceDataModel>())
+    var suggestedSubstancesData = MutableLiveData(listOf<SubstanceDataModel>())
+    var selectedSubstancesData = MutableLiveData(listOf<SubstanceDataModel>())
+    var substancesDataAll = MutableLiveData(listOf<SubstanceDataModel>())
     var selectedSubstancesWithBarcodes = MutableLiveData<MutableMap<String, Map<String, String>>>(mutableMapOf())
     var selectedOtherSubstances = MutableLiveData<MutableMap<String, String>>()
     var otherSubstancesData =  MutableLiveData<List<OtherSubstanceDataModel>>(listOf())
     var checkOtherSubstances =  MutableLiveData<Boolean>(false)
     var isAnyOtherSubstancesEmpty =  MutableLiveData<Boolean>(false)
     var visitsCounter = MutableLiveData<Int>(0)
+
+    var isSuggesting =  MutableLiveData<Boolean>(true)
+    var selectedVisitType =  MutableLiveData<String>(Constants.VISIT_TYPES[0])
+    var suggestedVisitType =  MutableLiveData<String>(Constants.VISIT_TYPES[0])
+    var visitTypes =  MutableLiveData<List<String>>(Constants.VISIT_TYPES)
 
     init {
         initState()
@@ -130,11 +137,15 @@ class VisitViewModel @Inject constructor(
         try {
             val visits = visitManager.getVisitsForParticipant(participantSummary.participantUuid)
             visitsCounter.value = visits.count()
-            substancesData.value = SubstancesDataUtil.getSubstancesDataForCurrentVisit(
+            suggestedVisitType.value = SubstancesDataUtil.getVisitTypeForCurrentVisit(participantSummary.birthDateText)
+            selectedVisitType.value = suggestedVisitType.value
+            suggestedSubstancesData.value = SubstancesDataUtil.getSubstancesDataForCurrentVisit(
                 participantSummary.birthDateText,
                 visits,
                 configurationManager
             )
+            selectedSubstancesData.value = suggestedSubstancesData.value
+            substancesDataAll.value = SubstancesDataUtil.getAllSubstances(configurationManager)
             otherSubstancesData.value = SubstancesDataUtil.getOtherSubstancesDataForCurrentVisit(
                 participantSummary.birthDateText,
                 configurationManager
@@ -501,9 +512,10 @@ class VisitViewModel @Inject constructor(
     }
 
     private fun getMissingSubstanceLabels(): List<String> {
+        //todo rethik how to handle this for new approach
         val selectedConceptNames = selectedSubstancesWithBarcodes.value?.keys?.toSet() ?: setOf()
 
-        return substancesData.value
+        return suggestedSubstancesData.value
             ?.filter { it.conceptName !in selectedConceptNames }
            ?.map { it.label } ?: listOf()
     }
@@ -511,5 +523,28 @@ class VisitViewModel @Inject constructor(
     fun checkIfAnyOtherSubstancesEmpty() {
         checkOtherSubstances.value = true
     }
+
+    fun setIsSuggesting(checked: Boolean) {
+        if (checked == isSuggesting.value) return
+        isSuggesting.value = checked
+        selectedSubstancesData.value = suggestedSubstancesData.value
+        selectedVisitType.value = suggestedVisitType.value
+    }
+
+    fun addToSelectedSubstances(vaccine: SubstanceDataModel) {
+        selectedSubstancesData.value = selectedSubstancesData.value?.plus(vaccine)
+    }
+
+    fun removeFromSelectedSubstances(vaccine: SubstanceDataModel) {
+        selectedSubstancesData.value = selectedSubstancesData.value?.minus(vaccine)
+    }
+
+    suspend fun onVisitTypeDropdownChange() {
+        selectedSubstancesData.value = SubstancesDataUtil.getSubstancesDataForVisitType(
+            selectedVisitType.value ?: "",
+            configurationManager
+        )
+    }
+
 }
 

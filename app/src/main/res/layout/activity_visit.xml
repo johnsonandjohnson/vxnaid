@@ -123,27 +123,96 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/textView_pre_yearOfBirth" />
 
-        <TextView
-            android:id="@+id/label_visit_type"
-            android:layout_width="0dp"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/input_group_visit_type"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="64dp"
-            android:layout_marginTop="48dp"
-            android:text="@string/visit_label_visit_type"
-            android:textAppearance="@style/DescriptionText"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="10dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/separator" />
+            app:layout_constraintTop_toBottomOf="@id/separator">
+
+            <LinearLayout
+                android:id="@+id/layout_visit_type"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <TextView
+                    android:id="@+id/label_visit_type"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="@{viewModel.suggestedVisitType}"
+                    android:textAppearance="@style/LabelText"
+                    android:visibility="visible" />
+
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu"
+                    android:id="@+id/group_visit_typdropdown"
+                    android:layout_width="wrap_content"
+                    android:layout_height="50dp"
+                    android:visibility="gone">
+
+                    <AutoCompleteTextView
+                        android:id="@+id/dropdown_visit_types"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/visit_dosing_label_visit_type"
+                        android:imeOptions="actionDone"
+                        android:inputType="none"
+                        android:text="@{viewModel.selectedVisitType}" />
+                </com.google.android.material.textfield.TextInputLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/linearLayout_suggest_switch"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="end"
+                android:orientation="horizontal"
+                android:visibility="invisible"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/layout_visit_type"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <androidx.appcompat.widget.SwitchCompat
+                    android:id="@+id/switch_suggest"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:backgroundTint="@color/colorAccent"
+                    android:checked="@{viewModel.isSuggesting}" />
+
+                <TextView
+                    android:id="@+id/label_suggest"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="@string/visit_dosing_label_suggest"
+                    android:textAppearance="@style/GeneralText"
+                    android:textColor="@color/colorAccent"
+                    android:textSize="13sp" />
+            </LinearLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/tabLayout"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
+            android:layout_marginEnd="32dp"
             android:background="@drawable/white_with_stroke"
-            app:layout_constraintEnd_toEndOf="@id/label_visit_type"
-            app:layout_constraintStart_toStartOf="@id/label_visit_type"
-            app:layout_constraintTop_toBottomOf="@id/label_visit_type"
+            android:backgroundTint="@color/colorAccent"
+            app:layout_constraintEnd_toEndOf="@id/input_group_visit_type"
+            app:layout_constraintStart_toStartOf="@id/input_group_visit_type"
+            app:layout_constraintTop_toBottomOf="@id/input_group_visit_type"
             app:tabGravity="fill"
             app:tabIndicatorColor="@color/colorAccent"
             app:tabIndicatorHeight="3dp"
@@ -169,6 +238,7 @@
             android:layout_height="0dp"
             android:layout_marginBottom="16dp"
             android:background="@drawable/white_with_stroke"
+            android:backgroundTint="@color/colorAccent"
             app:layout_constraintBottom_toTopOf="@+id/btn_submit"
             app:layout_constraintEnd_toEndOf="@+id/tabLayout"
             app:layout_constraintStart_toStartOf="@+id/tabLayout"
@@ -189,7 +259,24 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/viewPager_visit"/>
+            app:layout_constraintTop_toBottomOf="@+id/viewPager_visit" />
+
+        <Button
+            android:id="@+id/btn_add_vaccine"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginEnd="32dp"
+            android:layout_marginBottom="16dp"
+            android:backgroundTint="@color/colorTextOnLight"
+            android:enabled="@{viewModel.loading ? false : true}"
+            android:text="@string/participant_registration_administered_vaccines_add_vaccine"
+            android:textAppearance="@style/ButtonTextStyling"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/btn_submit"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/btn_submit" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

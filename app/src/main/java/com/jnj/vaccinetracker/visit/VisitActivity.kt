@@ -5,22 +5,30 @@ import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.view.View
+import android.widget.ArrayAdapter
 import androidx.activity.viewModels
 import androidx.annotation.RequiresApi
+import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.lifecycleScope
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.tabs.TabLayout
 import com.jnj.vaccinetracker.R
 import com.jnj.vaccinetracker.barcode.ScanBarcodeViewModel
-import com.jnj.vaccinetracker.common.helpers.findParent
+import com.jnj.vaccinetracker.common.helpers.hideKeyboard
 import com.jnj.vaccinetracker.common.ui.BaseActivity
 import com.jnj.vaccinetracker.common.ui.SyncBanner
 import com.jnj.vaccinetracker.databinding.ActivityVisitBinding
 import com.jnj.vaccinetracker.participantflow.model.ParticipantSummaryUiModel
+import com.jnj.vaccinetracker.register.dialogs.AlreadyAdministeredVaccineDatePickerDialog
+import com.jnj.vaccinetracker.register.dialogs.VaccineDialog
+import com.jnj.vaccinetracker.register.screens.RegisterParticipantAdministeredVaccinesFragment
 import com.jnj.vaccinetracker.splash.SplashActivity
-import com.jnj.vaccinetracker.visit.adapters.OtherSubstanceItemAdapter
 import com.jnj.vaccinetracker.visit.dialog.DialogScheduleMissingSubstances
 import com.jnj.vaccinetracker.visit.dialog.DosingOutOfWindowDialog
+import com.jnj.vaccinetracker.visit.model.SubstanceDataModel
+import com.soywiz.klock.DateTime
+import kotlinx.coroutines.launch
 import java.util.Date
 
 /**
@@ -31,15 +39,16 @@ import java.util.Date
 class VisitActivity :
     BaseActivity(),
     DosingOutOfWindowDialog.DosingOutOfWindowDialogListener,
-    DialogScheduleMissingSubstances.DialogScheduleMissingSubstancesListener
+    DialogScheduleMissingSubstances.DialogScheduleMissingSubstancesListener,
+    VaccineDialog.AddVaccineListener
 {
 
     companion object {
         private const val EXTRA_PARTICIPANT = "participant"
         private const val EXTRA_TYPE = "newParticipantRegistration"
-        private const val TAG_DIALOG_SUCCESS = "successDialog"
         private const val TAG_DIALOG_DOSING_OUT_OF_WINDOW = "dosingOutOfWindowDialog"
         private const val TAG_DIALOG_SCHEDULE_MISSING_SUBSTANCES = "scheduleMissingSubstances"
+        private const val TAG_VACCINE_PICKER = "vaccinePicker"
 
         fun create(context: Context, participant: ParticipantSummaryUiModel, newRegisteredParticipant: Boolean): Intent {
             return Intent(context, VisitActivity::class.java)
@@ -68,11 +77,13 @@ class VisitActivity :
         binding.tabLayout.setupWithViewPager(binding.viewPagerVisit)
         setupClickListeners()
 
+
         setTitle(R.string.visit_label_title)
         supportActionBar?.setDisplayHomeAsUpEnabled(!newRegisteredParticipant)
     }
 
     private fun setupClickListeners() {
+        binding.root.setOnClickListener { this.currentFocus?.hideKeyboard() }
         binding.btnSubmit.setOnClickListener {
             onSubmit()
         }
@@ -80,8 +91,12 @@ class VisitActivity :
             override fun onTabSelected(tab: TabLayout.Tab) {
                 if (tab.position == 0) {
                     makeSubmitBtnInvisible()
+                    makeSuggestingSwitchInvisible()
+                    makeAddVaccineButtonInvisible()
                 } else if (tab.position == 1) {
                     makeSubmitBtnVisible()
+                    makeSuggestingSwitchVisible()
+                    makeAddVaccineButtonVisible()
                 }
             }
 
@@ -93,6 +108,22 @@ class VisitActivity :
                 // Optional: Handle tab reselected logic here
             }
         })
+        binding.switchSuggest.setOnCheckedChangeListener { _, isChecked ->
+            viewModel.setIsSuggesting(isChecked)
+            onVisitTypesChanged(viewModel.visitTypes.value)
+        }
+        binding.btnAddVaccine.setOnClickListener {
+            onBtnAddVaccine()
+        }
+        binding.dropdownVisitTypes.setOnItemClickListener { _, _, position, _ ->
+            val selectedVisitType = viewModel.visitTypes.value?.distinct()?.get(position)
+                ?: return@setOnItemClickListener
+
+            lifecycleScope.launch {
+                updateSelectedVisitType(selectedVisitType)
+                viewModel.onVisitTypeDropdownChange()
+            }
+        }
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
@@ -114,6 +145,18 @@ class VisitActivity :
                     it.show()
                 }
         }
+        viewModel.isSuggesting.observe(this) {isSuggesting ->
+            onSuggestingSwitch(isSuggesting)
+        }
+        viewModel.visitTypes.observe(this) { visitTypes ->
+            onVisitTypesChanged(visitTypes)
+        }
+    }
+
+    private fun onVisitTypesChanged(visitTypes: List<String>?) {
+        val adapter =
+            ArrayAdapter(this, R.layout.item_dropdown, visitTypes?.distinct().orEmpty())
+        binding.dropdownVisitTypes.setAdapter(adapter)
     }
 
     override fun onSupportNavigateUp(): Boolean {
@@ -168,6 +211,40 @@ class VisitActivity :
         binding.btnSubmit.visibility = View.INVISIBLE
     }
 
+    fun makeSuggestingSwitchVisible() {
+        binding.linearLayoutSuggestSwitch.visibility = View.VISIBLE
+    }
+
+    fun makeSuggestingSwitchInvisible() {
+        binding.linearLayoutSuggestSwitch.visibility = View.INVISIBLE
+    }
+
+    fun makeAddVaccineButtonVisible() {
+        if (viewModel.isSuggesting.value == false) {
+            binding.btnAddVaccine.visibility = View.VISIBLE
+        }
+    }
+
+    fun makeAddVaccineButtonInvisible() {
+        binding.btnAddVaccine.visibility = View.INVISIBLE
+    }
+
+    fun makeVisitTypeDropdownVisible() {
+        binding.groupVisitTypdropdown.visibility = View.VISIBLE
+    }
+
+    fun makeVisitTypeDropdownGone() {
+        binding.groupVisitTypdropdown.visibility = View.GONE
+    }
+
+    fun makeVisitTypeLabelVisible() {
+        binding.labelVisitType.visibility = View.VISIBLE
+    }
+
+    fun makeVisitTypeLabelGone() {
+        binding.labelVisitType.visibility = View.GONE
+    }
+
     private fun onSubmit() {
         viewModel.checkIfAnyOtherSubstancesEmpty()
         if (viewModel.isAnyOtherSubstancesEmpty.value == true) {
@@ -178,7 +255,52 @@ class VisitActivity :
         submitDosingVisit()
     }
 
+    private fun onSuggestingSwitch(suggestingValue: Boolean) {
+        if (!suggestingValue) {
+            val generalColor = ContextCompat.getColorStateList(this, R.color.colorTextOnLight)
+            binding.tabLayout.backgroundTintList = null
+            binding.viewPagerVisit.backgroundTintList = null
+            binding.labelSuggest.setTextColor(generalColor)
+            makeAddVaccineButtonVisible()
+            makeVisitTypeDropdownVisible()
+            makeVisitTypeLabelGone()
+        } else {
+            val colorAccent = ContextCompat.getColorStateList(this, R.color.colorAccent)
+            binding.tabLayout.backgroundTintList = colorAccent
+            binding.viewPagerVisit.backgroundTintList = colorAccent
+            binding.labelSuggest.setTextColor(colorAccent)
+            makeAddVaccineButtonInvisible()
+            makeVisitTypeDropdownGone()
+            makeVisitTypeLabelVisible()
+        }
+    }
+
+    private fun onBtnAddVaccine() {
+        val allSubstances = viewModel.substancesDataAll.value.orEmpty()
+        val selectedSubstances = viewModel.selectedSubstancesData.value?.map{ substance ->
+            substance.conceptName
+        }?.toSet() ?: setOf()
+        val filteredSubstances = allSubstances.filter { substance ->
+            substance.conceptName !in selectedSubstances
+        }
+        VaccineDialog(filteredSubstances, withDate=false).show(supportFragmentManager, TAG_VACCINE_PICKER)
+    }
+
+    private fun updateSelectedVisitType(name: String?) {
+        if (name == viewModel.selectedVisitType.value) return
+        val text = name ?: ""
+        viewModel.selectedVisitType.value = text
+    }
+
     override val syncBanner: SyncBanner
         get() = binding.syncBanner
+
+    override fun addVaccine(vaccine: SubstanceDataModel) {
+        viewModel.addToSelectedSubstances(vaccine)
+    }
+
+    override fun addVaccineDate(conceptName: String, dateValue: DateTime) {
+        // no need to implement
+    }
 
 }

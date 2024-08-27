@@ -62,4 +62,22 @@ object Constants {
     const val BARCODE_STR = "Barcode"
     const val MANUFACTURER_NAME_STR = "Manufacturer"
     const val DATE_STR = "Date"
+
+    const val VISIT_TYPE_AT_BIRTH = "At Birth"
+    const val VISIT_TYPE_SIX_WEEKS = "6 weeks"
+    const val VISIT_TYPE_TEN_WEEKS = "10 weeks"
+    const val VISIT_TYPE_FOURTEEN_WEEKS = "14 weeks"
+    const val VISIT_TYPE_NINE_MONTHS = "9 months"
+    const val VISIT_TYPE_EIGHTEEN_MONTHS = "18 months"
+    const val VISIT_TYPE_TWO_YEARS = "2 years"
+
+    val VISIT_TYPES = listOf(
+        VISIT_TYPE_AT_BIRTH,
+        VISIT_TYPE_SIX_WEEKS,
+        VISIT_TYPE_TEN_WEEKS,
+        VISIT_TYPE_FOURTEEN_WEEKS,
+        VISIT_TYPE_NINE_MONTHS,
+        VISIT_TYPE_EIGHTEEN_MONTHS,
+        VISIT_TYPE_TWO_YEARS
+    )
 }
