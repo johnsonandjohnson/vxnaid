@@ -74,26 +74,6 @@ class VisitViewModel @Inject constructor(
     val errorMessage = mutableLiveData<String>()
     val upcomingVisit = mutableLiveData<UpcomingVisit?>()
 
-    private val weight = MutableLiveData<Int?>()
-    val weightValidationMessage = mutableLiveData<String>()
-    val zScoreWeightText = MutableLiveData<String>()
-
-    private val height = MutableLiveData<Int?>()
-    val heightValidationMessage = mutableLiveData<String>()
-    val zScoreHeightText = MutableLiveData<String>()
-
-    val zScoreNutritionText = MutableLiveData<String>()
-    val zScoreNutritionTextColor = MutableLiveData<Int>()
-    val zScoreNutritionPlaceholder = "-/-"
-    val isOedema = MutableLiveData(false)
-    val displayOedema = MutableLiveData(false)
-
-    private val muac = MutableLiveData<Int?>()
-    val muacValidationMessage = mutableLiveData<String>()
-    val zScoreMuacText = MutableLiveData<String>()
-    val shouldValidateMuac = MutableLiveData<Boolean>()
-    val zScoreMuacTextColor = MutableLiveData<Int>()
-
     var suggestedSubstancesData = MutableLiveData(listOf<SubstanceDataModel>())
     var selectedSubstancesData = MutableLiveData(listOf<SubstanceDataModel>())
     var substancesDataAll = MutableLiveData(listOf<SubstanceDataModel>())
@@ -153,9 +133,6 @@ class VisitViewModel @Inject constructor(
                 participantSummary.birthDateText,
                 configurationManager
             )
-
-            shouldValidateMuac.value =
-                MuacZScoreCalculator.shouldCalculateMuacZScore(participantSummary.birthDateText)
             onVisitsLoaded(visits)
             loading.set(false)
         } catch (ex: Throwable) {
@@ -208,8 +185,9 @@ class VisitViewModel @Inject constructor(
 
         foundDosingVisit?.let { visit ->
             val now = Calendar.getInstance().timeInMillis
-            val insideTimeWindow =
-                now in visit.startDate.dateDayStart.time..(visit.endDate.dateDayStart.time + 1.days)
+            val startTime = visit.startDate.dateDayStart.time
+            val endTime = visit.endDate.dateDayStart.time + 1.days
+            val insideTimeWindow = now >= startTime && now <= endTime
             logInfo("insideTimeWindow: $insideTimeWindow")
             dosingVisitIsInsideTimeWindow.set(insideTimeWindow)
         }
@@ -263,12 +241,6 @@ class VisitViewModel @Inject constructor(
         overrideOutsideTimeWindowCheck: Boolean = false,
         newVisitDate: Date? = null
     ) {
-        var isZScoreValid = true
-        val weight = weight.value
-        val height = height.value
-        val muac = muac.value
-        val shouldValidateMuac = shouldValidateMuac.value
-        val isOedema = if (!displayOedema.value!!) false else isOedema.value
         val participant = participant.get()
         val dosingVisit = dosingVisit.get()
         val visitsCounter = visitsCounter.value
@@ -282,23 +254,6 @@ class VisitViewModel @Inject constructor(
             visitEvents.tryEmit(false)
             return
         }
-
-        if (weight == null) {
-            weightValidationMessage.set(resourcesWrapper.getString(R.string.visit_dosing_error_no_weight))
-            isZScoreValid = false
-        }
-
-        if (height == null) {
-            heightValidationMessage.set(resourcesWrapper.getString(R.string.visit_dosing_error_no_height))
-            isZScoreValid = false
-        }
-
-        if (shouldValidateMuac == true && muac == null) {
-            muacValidationMessage.set(resourcesWrapper.getString(R.string.visit_dosing_error_no_muac))
-            isZScoreValid = false
-        }
-
-        // if (!isZScoreValid) return for now
 
         if (!overrideOutsideTimeWindowCheck && !dosingVisitIsInsideTimeWindow.get() && newVisitDate == null) {
             outsideTimeWindowConfirmationListener()
@@ -417,87 +372,6 @@ class VisitViewModel @Inject constructor(
         }
     }
 
-    fun setWeight(value: Int?) {
-        val validatedValue = if (value != null && value < 0) 0 else value
-
-        if (validatedValue == weight.value) return
-
-        weight.value = validatedValue
-        val zScore = participant.value?.let {
-            WeightZScoreCalculator(
-                validatedValue,
-                it.gender,
-                it.birthDateText
-            ).calculateZScoreAndRating()
-        }
-
-        zScoreWeightText.value = zScore?.toString() ?: ""
-        weightValidationMessage.set(null)
-        setNutritionZScore()
-    }
-
-    fun setHeight(value: Int?) {
-        val validatedValue = if (value != null && value < 0) 0 else value
-
-        if (validatedValue == height.value) return
-
-        height.value = validatedValue
-        val zScore = participant.value?.let {
-            HeightZScoreCalculator(
-                validatedValue,
-                it.gender,
-                it.birthDateText
-            ).calculateZScoreAndRating()
-        }
-
-        zScoreHeightText.value = zScore?.toString() ?: ""
-        heightValidationMessage.set(null)
-        setNutritionZScore()
-    }
-
-    fun setIsOedema(value: Boolean) {
-        if (value == isOedema.value) return
-        isOedema.value = value
-        setNutritionZScore()
-    }
-
-    fun setMuac(value: Int?) {
-        val validatedValue = if (value != null && value < 0) 0 else value
-
-        if (validatedValue == height.value) return
-
-        muac.value = validatedValue
-        val muacZScoreCalculator = participant.value?.let {
-            MuacZScoreCalculator(
-                validatedValue,
-                it.gender,
-                it.birthDateText
-            )
-        } ?: return
-
-        val zScore = muacZScoreCalculator.calculateZScoreAndRating()
-        zScoreMuacText.value = zScore?.toString() ?: ""
-        zScoreMuacTextColor.value = muacZScoreCalculator.getTextColorBasedOnZsCoreValue()
-        muacValidationMessage.set(null)
-    }
-
-    private fun setNutritionZScore() {
-        val nutritionZScoreCalculator = participant.value?.let {
-            NutritionZScoreCalculator(
-                weight.value,
-                height.value,
-                isOedema.value,
-                it.gender,
-                it.birthDateText
-            )
-        } ?: return
-
-        val zScore = nutritionZScoreCalculator.calculateZScoreAndRating()
-        displayOedema.value = nutritionZScoreCalculator.isOedemaValue()
-        zScoreNutritionText.value = zScore?.toString()
-        zScoreNutritionTextColor.value = nutritionZScoreCalculator.getTextColorBasedOnZsCoreValue()
-    }
-
     fun addObsToObsMap(conceptName: String, barcode: String, manufacturerName: String) {
         val currentMap = selectedSubstancesWithBarcodes.value?.toMutableMap() ?: mutableMapOf()
         currentMap[conceptName] = mapOf(Constants.BARCODE_STR to barcode, Constants.MANUFACTURER_NAME_STR to manufacturerName)
@@ -517,7 +391,6 @@ class VisitViewModel @Inject constructor(
     }
 
     private fun getMissingSubstanceLabels(): List<String> {
-        //todo rethik how to handle this for new approach
         val selectedConceptNames = selectedSubstancesWithBarcodes.value?.keys?.toSet() ?: setOf()
 
         return suggestedSubstancesData.value
@@ -549,6 +422,20 @@ class VisitViewModel @Inject constructor(
             selectedVisitType.value ?: "",
             configurationManager
         )
+        otherSubstancesData.value = SubstancesDataUtil.getOtherSubstancesDataForVisitType(
+            selectedVisitType.value ?: "",
+            configurationManager
+        )
+        removeSelectedOtherSubstancesIfNotRelatedToVisitType()
+    }
+
+    private fun removeSelectedOtherSubstancesIfNotRelatedToVisitType() {
+        val conceptNames = otherSubstancesData.value?.map { it.conceptName } ?: emptyList()
+        val currentData = selectedOtherSubstances.value?.toMutableMap()
+        currentData?.entries?.removeIf { (key, _) ->
+            key !in conceptNames
+        }
+        selectedOtherSubstances.value = currentData ?: mutableMapOf()
     }
 
     fun setVisitLocationValue(locationValue: String) {

@@ -56,14 +56,14 @@ class VaccineDialog(
       dateLayout = binding.vaccineDateLinearLayout
 
       if (!withDate) {
-         dateLayout.visibility = View.INVISIBLE
+         dateLayout.visibility = View.GONE
       }
    }
 
    private fun setOnClickListeners() {
       btnAdd.setOnClickListener {
          validateDate()
-         if (selectedSubstance != null && vaccineDate != null) {
+         if (selectedSubstance != null || (vaccineDate != null && withDate)) {
             selectedSubstance!!.obsDate = vaccineDate?.format(DateFormat.FORMAT_DATE)
             findParent<AddVaccineListener>()?.addVaccine(selectedSubstance!!)
             if (withDate) {
@@ -97,7 +97,7 @@ class VaccineDialog(
    }
 
    private fun validateDate() {
-      if (vaccineDate == null) {
+      if (withDate && vaccineDate == null) {
          val dateValidationText = getString(R.string.dialog_missing_substances_empty_date_validation_message)
          vaccineDateTextView.error = dateValidationText
          val hintTextColor = ContextCompat.getColor(requireContext(), R.color.errorLight)

@@ -258,6 +258,35 @@ class SubstancesDataUtil {
             return otherSubstancesDataModelList
         }
 
+        @RequiresApi(Build.VERSION_CODES.O)
+        suspend fun getOtherSubstancesDataForVisitType(
+            visitType: String,
+            configurationManager: ConfigurationManager
+        ): List<OtherSubstanceDataModel> {
+            val otherSubstancesConfig = configurationManager.getOtherSubstancesConfig()
+            val visitTypeInWeeks = getWeeksBetweenDateAndTodayFromVisitType(visitType)
+            val otherSubstancesDataModelList = mutableListOf<OtherSubstanceDataModel>()
+            otherSubstancesConfig.forEach { otherSubstance ->
+                val minWeekNumber =
+                    otherSubstance.weeksAfterBirth - otherSubstance.weeksAfterBirthLowWindow
+                val maxWeekNumber =
+                    otherSubstance.weeksAfterBirth + otherSubstance.weeksAfterBirthUpWindow
+                if (visitTypeInWeeks in minWeekNumber..maxWeekNumber) {
+                    otherSubstancesDataModelList.add(
+                        OtherSubstanceDataModel(
+                            otherSubstance.conceptName,
+                            otherSubstance.label,
+                            otherSubstance.category,
+                            otherSubstance.inputType,
+                            otherSubstance.options
+                        )
+                    )
+                }
+            }
+
+            return otherSubstancesDataModelList
+        }
+
         private fun getSingleSubstanceData(
             substance: Substance,
             substancesGroupConfig: SubstancesGroupConfig,

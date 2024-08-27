@@ -65,6 +65,7 @@ class VisitActivity :
     private val viewModel: VisitViewModel by viewModels { viewModelFactory }
     private val scanModel:ScanBarcodeViewModel by viewModels{ viewModelFactory }
     private lateinit var binding: ActivityVisitBinding
+    private var isFirstTab = true
 
     private var errorSnackbar: Snackbar? = null
 
@@ -93,12 +94,12 @@ class VisitActivity :
             override fun onTabSelected(tab: TabLayout.Tab) {
                 if (tab.position == 0) {
                     makeSubmitBtnInvisible()
-                    makeSuggestingSwitchInvisible()
                     makeAddVaccineButtonInvisible()
+                    isFirstTab = true
                 } else if (tab.position == 1) {
                     makeSubmitBtnVisible()
-                    makeSuggestingSwitchVisible()
                     makeAddVaccineButtonVisible()
+                    isFirstTab = false
                 }
             }
 
@@ -213,16 +214,8 @@ class VisitActivity :
         binding.btnSubmit.visibility = View.INVISIBLE
     }
 
-    fun makeSuggestingSwitchVisible() {
-        binding.linearLayoutSuggestSwitch.visibility = View.VISIBLE
-    }
-
-    fun makeSuggestingSwitchInvisible() {
-        binding.linearLayoutSuggestSwitch.visibility = View.INVISIBLE
-    }
-
     fun makeAddVaccineButtonVisible() {
-        if (viewModel.isSuggesting.value == false) {
+        if (viewModel.isSuggesting.value == false && !isFirstTab) {
             binding.btnAddVaccine.visibility = View.VISIBLE
         }
     }
@@ -231,25 +224,26 @@ class VisitActivity :
         binding.btnAddVaccine.visibility = View.INVISIBLE
     }
 
-    fun makeVisitTypeDropdownVisible() {
+    private fun makeVisitTypeDropdownVisible() {
         binding.groupVisitTypdropdown.visibility = View.VISIBLE
     }
 
-    fun makeVisitTypeDropdownGone() {
+    private fun makeVisitTypeDropdownGone() {
         binding.groupVisitTypdropdown.visibility = View.GONE
     }
 
-    fun makeVisitTypeLabelVisible() {
+    private fun makeVisitTypeLabelVisible() {
         binding.labelVisitType.visibility = View.VISIBLE
     }
 
-    fun makeVisitTypeLabelGone() {
+    private fun makeVisitTypeLabelGone() {
         binding.labelVisitType.visibility = View.GONE
     }
 
     private fun onSubmit() {
         viewModel.checkIfAnyOtherSubstancesEmpty()
-        if (viewModel.isAnyOtherSubstancesEmpty.value == true) {
+        viewModel.checkVisitLocationSelection()
+        if (viewModel.isAnyOtherSubstancesEmpty.value == true || !viewModel.isVisitLocationValid()) {
             viewModel.isAnyOtherSubstancesEmpty.value = false
             binding.tabLayout.getTabAt(0)?.select()
             return
