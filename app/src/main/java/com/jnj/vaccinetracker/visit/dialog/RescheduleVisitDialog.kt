@@ -28,6 +28,7 @@ import com.jnj.vaccinetracker.common.exceptions.OperatorUuidNotAvailableExceptio
 import com.jnj.vaccinetracker.common.helpers.findParent
 import com.jnj.vaccinetracker.common.ui.BaseDialogFragment
 import com.jnj.vaccinetracker.databinding.DialogRescheduleVisitBinding
+import com.jnj.vaccinetracker.participantflow.ParticipantFlowActivity
 import com.jnj.vaccinetracker.participantflow.model.ParticipantSummaryUiModel
 import com.jnj.vaccinetracker.register.dialogs.ScheduleVisitDatePickerDialog
 import com.jnj.vaccinetracker.sync.data.repositories.SyncSettingsRepository
@@ -83,6 +84,11 @@ class RescheduleVisitDialog @Inject constructor() : BaseDialogFragment(), Schedu
                if (visitDate != null) {
                   createVisitUseCase.createVisit(buildNextVisitObject(participant, Date(visitDate!!.unixMillisLong)))
                   dismissAllowingStateLoss()
+
+                  if (requireActivity().isTaskRoot) {
+                     startActivity(ParticipantFlowActivity.create(requireContext()))
+                  }
+
                   requireActivity().finish()
                }
             } catch (ex: Exception) {
@@ -90,6 +96,7 @@ class RescheduleVisitDialog @Inject constructor() : BaseDialogFragment(), Schedu
             }
          }
       }
+
 
       binding.btnFinish.setOnClickListener {
          dismissAllowingStateLoss()
