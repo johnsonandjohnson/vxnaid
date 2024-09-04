@@ -13,7 +13,8 @@ import com.jnj.vaccinetracker.participantflow.screens.ParticipantFlowParticipant
 import com.jnj.vaccinetracker.participantflow.screens.ParticipantFlowPhoneNumberViewModel
 import com.jnj.vaccinetracker.register.RegisterParticipantFlowViewModel
 import com.jnj.vaccinetracker.register.dialogs.HomeLocationPickerViewModel
-import com.jnj.vaccinetracker.register.screens.RegisterParticipantAdministeredVaccinesViewModel
+import com.jnj.vaccinetracker.register.screens.HistoricalDataForVisitTypeViewModel
+import com.jnj.vaccinetracker.register.screens.RegisterParticipantHistoricalDataViewModel
 import com.jnj.vaccinetracker.register.screens.RegisterParticipantParticipantDetailsViewModel
 import com.jnj.vaccinetracker.settings.SettingsViewModel
 import com.jnj.vaccinetracker.setup.SetupFlowViewModel
@@ -124,6 +125,11 @@ interface ViewModelModule {
 
     @Binds
     @IntoMap
+    @ViewModelKey(RegisterParticipantHistoricalDataViewModel::class)
+    fun bindRegisterParticipantHistoricalDataViewModel(model: RegisterParticipantHistoricalDataViewModel): ViewModel
+
+    @Binds
+    @IntoMap
     @ViewModelKey(RegisterParticipantParticipantDetailsViewModel::class)
     fun bindRegisterParticipantParticipantDetailsViewModel(model: RegisterParticipantParticipantDetailsViewModel): ViewModel
 
@@ -170,8 +176,8 @@ interface ViewModelModule {
 
     @Binds
     @IntoMap
-    @ViewModelKey(RegisterParticipantAdministeredVaccinesViewModel::class)
-    fun bindRegisterParticipantAdministeredVaccinesViewModel(model: RegisterParticipantAdministeredVaccinesViewModel): ViewModel
+    @ViewModelKey(HistoricalDataForVisitTypeViewModel::class)
+    fun bindRegisterParticipantAdministeredVaccinesViewModel(model: HistoricalDataForVisitTypeViewModel): ViewModel
 
     @Binds
     @IntoMap

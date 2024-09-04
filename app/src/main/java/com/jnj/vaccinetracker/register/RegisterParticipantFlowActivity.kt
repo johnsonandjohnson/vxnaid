@@ -3,8 +3,10 @@ package com.jnj.vaccinetracker.register
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.os.Build
 import android.os.Bundle
 import androidx.activity.viewModels
+import androidx.annotation.RequiresApi
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import com.jnj.vaccinetracker.R
@@ -14,9 +16,9 @@ import com.jnj.vaccinetracker.common.ui.BaseActivity
 import com.jnj.vaccinetracker.common.ui.SyncBanner
 import com.jnj.vaccinetracker.common.ui.animateNavigationDirection
 import com.jnj.vaccinetracker.databinding.ActivityRegisterParticipantFlowBinding
-import com.jnj.vaccinetracker.register.screens.RegisterParticipantAdministeredVaccinesFragment
-import com.jnj.vaccinetracker.register.screens.RegisterParticipantAdministeredVaccinesViewModel
+import com.jnj.vaccinetracker.register.screens.HistoricalDataForVisitTypeFragment
 import com.jnj.vaccinetracker.register.screens.RegisterParticipantCameraPermissionFragment
+import com.jnj.vaccinetracker.register.screens.RegisterParticipantHistoricalDataFragment
 import com.jnj.vaccinetracker.register.screens.RegisterParticipantParticipantDetailsFragment
 import com.jnj.vaccinetracker.register.screens.RegisterParticipantPicturePreviewFragment
 import com.jnj.vaccinetracker.register.screens.RegisterParticipantTakePictureFragment
@@ -25,6 +27,7 @@ import com.jnj.vaccinetracker.register.screens.RegisterParticipantTakePictureFra
  * @author maartenvangiel
  * @version 1
  */
+@RequiresApi(Build.VERSION_CODES.O)
 class RegisterParticipantFlowActivity : BaseActivity() {
 
     companion object {
@@ -100,7 +103,8 @@ class RegisterParticipantFlowActivity : BaseActivity() {
             RegisterParticipantFlowViewModel.Screen.TAKE_PICTURE -> RegisterParticipantTakePictureFragment()
             RegisterParticipantFlowViewModel.Screen.CONFIRM_PICTURE -> RegisterParticipantPicturePreviewFragment()
             RegisterParticipantFlowViewModel.Screen.PARTICIPANT_DETAILS -> RegisterParticipantParticipantDetailsFragment()
-            RegisterParticipantFlowViewModel.Screen.PARTICIPANT_CAPTURE_VACCINES -> RegisterParticipantAdministeredVaccinesFragment.create(viewModel.participant.value!!)
+            RegisterParticipantFlowViewModel.Screen.PARTICIPANT_CAPTURE_HISTORICAL_DATA -> RegisterParticipantHistoricalDataFragment()
+            RegisterParticipantFlowViewModel.Screen.VISIT_TYPE_HISTORICAL_DATA -> HistoricalDataForVisitTypeFragment.create(viewModel.visitTypeName.value)
             else -> null
         }
         screen?.let { title = getString(it.title) }

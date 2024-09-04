@@ -34,7 +34,7 @@
                 android:contentDescription="@string/remove_vaccine"
                 android:gravity="center"
                 android:scaleType="fitCenter"
-                android:layout_marginTop="6dp"
+                android:layout_marginTop="8dp"
                 android:src="@drawable/baseline_delete_outline_24"
                 android:visibility="gone" />
 
@@ -69,7 +69,7 @@
                 android:id="@+id/imageButton_barcodeScanner"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="8dp"
                 android:background="@android:color/transparent"
                 android:padding="8dp"
                 android:scaleType="fitCenter"

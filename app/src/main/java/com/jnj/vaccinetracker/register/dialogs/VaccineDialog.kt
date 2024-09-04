@@ -20,18 +20,13 @@ import com.soywiz.klock.DateFormat
 import com.soywiz.klock.DateTime
 
 class VaccineDialog(
-   private val substanceData: List<SubstanceDataModel>,
-   private val withDate: Boolean = true
-) : BaseDialogFragment(), ScheduleVisitDatePickerDialog.OnDateSelectedListener {
+   private val substanceData: List<SubstanceDataModel>
+) : BaseDialogFragment() {
    private lateinit var btnAdd: Button
    private lateinit var btnCancel: Button
    private lateinit var dropdown: AutoCompleteTextView
    private lateinit var binding: DialogSelectVaccineBinding
-   private lateinit var vaccineDateButton: Button
-   private lateinit var vaccineDateTextView: TextView
-   private lateinit var dateLayout: LinearLayout
    var selectedSubstance: SubstanceDataModel? = null
-   private var vaccineDate: DateTime? = null
 
    override fun onCreateView(
       inflater: LayoutInflater,
@@ -51,33 +46,14 @@ class VaccineDialog(
       btnAdd = binding.btnAdd
       btnCancel = binding.btnCancel
       dropdown = binding.dropdownVaccine
-      vaccineDateButton = binding.vaccineDateDatePickerButton
-      vaccineDateTextView = binding.vaccineDateValue
-      dateLayout = binding.vaccineDateLinearLayout
-
-      if (!withDate) {
-         dateLayout.visibility = View.GONE
-      }
    }
 
    private fun setOnClickListeners() {
       btnAdd.setOnClickListener {
-         validateDate()
-         if (selectedSubstance != null || (vaccineDate != null && withDate)) {
-            selectedSubstance!!.obsDate = vaccineDate?.format(DateFormat.FORMAT_DATE)
+         if (selectedSubstance != null) {
             findParent<AddVaccineListener>()?.addVaccine(selectedSubstance!!)
-            if (withDate) {
-               findParent<AddVaccineListener>()?.addVaccineDate(
-                  selectedSubstance!!.conceptName,
-                  vaccineDate!!
-               )
-            }
             dismissAllowingStateLoss()
          }
-      }
-
-      vaccineDateButton.setOnClickListener {
-         AlreadyAdministeredVaccineDatePickerDialog(vaccineDate, this).show(childFragmentManager, "alreadyAdministeredVaccineDatePickerDialog")
       }
 
       btnCancel.setOnClickListener {
@@ -96,15 +72,6 @@ class VaccineDialog(
       }
    }
 
-   private fun validateDate() {
-      if (withDate && vaccineDate == null) {
-         val dateValidationText = getString(R.string.dialog_missing_substances_empty_date_validation_message)
-         vaccineDateTextView.error = dateValidationText
-         val hintTextColor = ContextCompat.getColor(requireContext(), R.color.errorLight)
-         vaccineDateTextView.setHintTextColor(hintTextColor)
-      }
-   }
-
    private fun setupDropdown() {
       val adapter = ArrayAdapter(
          requireContext(),
@@ -114,15 +81,7 @@ class VaccineDialog(
       dropdown.setAdapter(adapter)
    }
 
-   override fun onDateSelected(dateTime: DateTime) {
-      vaccineDate = dateTime
-      vaccineDateTextView.text = dateTime.format(DateFormat.FORMAT_DATE)
-      vaccineDateTextView.error = null
-   }
-
    interface AddVaccineListener {
       fun addVaccine(vaccine: SubstanceDataModel)
-
-      fun addVaccineDate(conceptName: String, dateValue: DateTime)
    }
 }

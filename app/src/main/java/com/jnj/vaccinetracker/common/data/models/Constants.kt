@@ -85,4 +85,7 @@ object Constants {
         VISIT_TYPE_EIGHTEEN_MONTHS,
         VISIT_TYPE_TWO_YEARS
     )
+
+    const val SUBSTANCES_AND_DATES_STR = "substancesAndDates"
+    const val OTHER_SUBSTANCES_AND_VALUES_STR = "otherSubstancesAndValues"
 }

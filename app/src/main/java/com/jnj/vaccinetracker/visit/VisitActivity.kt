@@ -15,17 +15,13 @@ import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.tabs.TabLayout
 import com.jnj.vaccinetracker.R
 import com.jnj.vaccinetracker.barcode.ScanBarcodeViewModel
-import com.jnj.vaccinetracker.common.helpers.findParent
 import com.jnj.vaccinetracker.common.helpers.hideKeyboard
 import com.jnj.vaccinetracker.common.ui.BaseActivity
 import com.jnj.vaccinetracker.common.ui.SyncBanner
 import com.jnj.vaccinetracker.databinding.ActivityVisitBinding
 import com.jnj.vaccinetracker.participantflow.model.ParticipantSummaryUiModel
-import com.jnj.vaccinetracker.register.dialogs.AlreadyAdministeredVaccineDatePickerDialog
 import com.jnj.vaccinetracker.register.dialogs.VaccineDialog
-import com.jnj.vaccinetracker.register.screens.RegisterParticipantAdministeredVaccinesFragment
 import com.jnj.vaccinetracker.splash.SplashActivity
-import com.jnj.vaccinetracker.visit.adapters.OtherSubstanceItemAdapter
 import com.jnj.vaccinetracker.visit.dialog.DialogScheduleMissingSubstances
 import com.jnj.vaccinetracker.visit.dialog.DosingOutOfWindowDialog
 import java.util.Date
@@ -114,6 +110,11 @@ class VisitActivity :
         binding.switchSuggest.setOnCheckedChangeListener { _, isChecked ->
             viewModel.setIsSuggesting(isChecked)
             onVisitTypesChanged(viewModel.visitTypes.value)
+            if (!isChecked) {
+                lifecycleScope.launch {
+                    viewModel.onVisitTypeDropdownChange()
+                }
+            }
         }
         binding.btnAddVaccine.setOnClickListener {
             onBtnAddVaccine()
@@ -279,7 +280,7 @@ class VisitActivity :
         val filteredSubstances = allSubstances.filter { substance ->
             substance.conceptName !in selectedSubstances
         }
-        VaccineDialog(filteredSubstances, withDate=false).show(supportFragmentManager, TAG_VACCINE_PICKER)
+        VaccineDialog(filteredSubstances).show(supportFragmentManager, TAG_VACCINE_PICKER)
     }
 
     private fun updateSelectedVisitType(name: String?) {
@@ -294,9 +295,4 @@ class VisitActivity :
     override fun addVaccine(vaccine: SubstanceDataModel) {
         viewModel.addToSelectedSubstances(vaccine)
     }
-
-    override fun addVaccineDate(conceptName: String, dateValue: DateTime) {
-        // no need to implement
-    }
-
 }

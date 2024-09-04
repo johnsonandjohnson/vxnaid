@@ -30,33 +30,47 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:layout_marginStart="16dp"
+                android:layout_gravity="center"
                 android:layout_marginTop="8dp"
                 android:text="@{item.label}"
                 android:textAppearance="@style/GeneralText"
                 tools:text="Vaccine"
                 android:textStyle="bold"/>
 
-            <TextView
-                android:id="@+id/textView_vaccineDate"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="8dp"
-                android:text=""
-                android:textAppearance="@style/GeneralText"
-                tools:text="Vaccine Date"
-                android:layout_gravity="center_vertical"
-                android:textStyle="bold"/>
 
-            <ImageButton
-                android:id="@+id/btnRemove"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="16dp"
-                android:background="?attr/selectableItemBackgroundBorderless"
-                android:contentDescription="@string/remove_vaccine"
-                android:src="@drawable/baseline_delete_outline_24"/>
+
+                <TextView
+                    android:id="@+id/label_vaccination_date"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="8dp"
+                    android:layout_weight="1"
+                    android:textAppearance="@style/LabelText" />
+
+                <TextView
+                    android:id="@+id/textView_vaccination_date"
+                    android:layout_width="0dp"
+                    android:layout_gravity="center"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_weight="1"
+                    android:maxHeight="70sp"
+                    android:hint="@string/vaccine_never_administered"
+                    android:textSize="18sp"/>
+
+
+                <Button
+                    android:id="@+id/btn_pick_date"
+                    style="@style/Widget.AppCompat.Button.Small"
+                    android:layout_width="0dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:backgroundTint="@color/colorPrimary"
+                    android:textAppearance="@style/ButtonTextStyling"
+                    android:text="@string/participant_registration_details_action_set_birth_date" />
 
         </LinearLayout>
 

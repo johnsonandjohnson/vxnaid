@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.jnj.vaccinetracker.register.screens.RegisterParticipantHistoricalDataViewModel" />
+
+        <variable
+            name="flowViewModel"
+            type="com.jnj.vaccinetracker.register.RegisterParticipantFlowViewModel" />
+
+        <import type="com.jnj.vaccinetracker.common.domain.entities.Gender" />
+
+        <import type="android.view.View" />
+
+        <import type="android.text.InputType" />
+
+    </data>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ProgressBar
+            android:id="@+id/loading_indicator"
+            style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal|top"
+            android:indeterminate="true"
+            android:visibility="@{viewModel.loading ? View.VISIBLE : View.GONE}" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="100dp"
+                android:text="@string/participant_registration_historic_visits_title"
+                android:textAppearance="@style/ScreenTitle" />
+
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:layout_gravity="center">
+
+                <GridLayout
+                    android:id="@+id/button_grid"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:columnCount="2"
+                    android:padding="16dp">
+
+                    <!-- Example Button -->
+<!--                    <Button-->
+<!--                        android:layout_width="200dp"-->
+<!--                        android:layout_height="200dp"-->
+<!--                        android:layout_margin="32dp"-->
+<!--                        android:backgroundTint="@color/colorTextOnLight"-->
+<!--                        android:text="Button 1"-->
+<!--                        android:textAppearance="@style/ButtonTextStyling"-->
+<!--                        app:cornerRadius="30dp" />-->
+
+                </GridLayout>
+
+            </ScrollView>
+
+            <Button
+                android:id="@+id/btn_submit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginBottom="32dp"
+                android:backgroundTint="@color/colorPrimary"
+                android:text="@string/participant_administered_vaccines_action_save"
+                android:textAppearance="@style/ButtonTextStyling" />
+        </LinearLayout>
+
+    </FrameLayout>
+</layout>

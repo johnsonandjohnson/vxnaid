@@ -368,7 +368,7 @@
     <string name="vaccine_dialog_select_vaccine_label">Vaccine</string>
     <string name="vaccine_dialog_dose_label">Dose</string>
     <string name="vaccine_dialog_vaccine_date_label">Date</string>
-    <string name="participant_registration_administered_vaccines_title">Already administered vaccines</string>
+    <string name="participant_registration_historical_data_title">Historical Data</string>
     <string name="administered_vaccines_no_previous_vaccines">No previous vaccines</string>
     <string name="general_label_add">Add</string>
     <string name="remove_vaccine">Remove</string>
@@ -393,4 +393,7 @@
     <string name="general_label_enter_text">Enter text</string>
     <string name="general_label_label">Label</string>
     <string name="participant_registration_description_success">Does the child require vaccination?</string>
+    <string name="participant_registration_historic_visits_title">Please complete the data for all past visits:</string>
+    <string name="vaccine_never_administered">Never administered</string>
+    <string name="participant_registration_historical_data_description">Please capture historical data:</string>
 </resources>

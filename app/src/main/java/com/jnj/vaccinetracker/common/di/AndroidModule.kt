@@ -15,12 +15,13 @@ import com.jnj.vaccinetracker.participantflow.screens.*
 import com.jnj.vaccinetracker.register.RegisterParticipantFlowActivity
 import com.jnj.vaccinetracker.register.dialogs.HomeLocationPickerDialog
 import com.jnj.vaccinetracker.register.dialogs.RegisterParticipantConfirmNoTelephoneDialog
-import com.jnj.vaccinetracker.register.dialogs.RegisterParticipantIdNotMatchingDialog
 import com.jnj.vaccinetracker.register.dialogs.RegisterParticipantHasChildEverVaccinatedDialog
+import com.jnj.vaccinetracker.register.dialogs.RegisterParticipantIdNotMatchingDialog
 import com.jnj.vaccinetracker.register.dialogs.RegisterParticipantSuccessfulDialog
 import com.jnj.vaccinetracker.register.dialogs.VaccineDialog
-import com.jnj.vaccinetracker.register.screens.RegisterParticipantAdministeredVaccinesFragment
+import com.jnj.vaccinetracker.register.screens.HistoricalDataForVisitTypeFragment
 import com.jnj.vaccinetracker.register.screens.RegisterParticipantCameraPermissionFragment
+import com.jnj.vaccinetracker.register.screens.RegisterParticipantHistoricalDataFragment
 import com.jnj.vaccinetracker.register.screens.RegisterParticipantParticipantDetailsFragment
 import com.jnj.vaccinetracker.register.screens.RegisterParticipantPicturePreviewFragment
 import com.jnj.vaccinetracker.register.screens.RegisterParticipantTakePictureFragment
@@ -41,15 +42,12 @@ import com.jnj.vaccinetracker.splash.SplashActivity
 import com.jnj.vaccinetracker.sync.presentation.SyncAndroidService
 import com.jnj.vaccinetracker.update.UpdateDialog
 import com.jnj.vaccinetracker.visit.VisitActivity
-import com.jnj.vaccinetracker.common.dialogs.DatePickerDialog
-import com.jnj.vaccinetracker.visit.dialog.DialogScheduleMissingSubstances
 import com.jnj.vaccinetracker.visit.dialog.DialogVaccineBarcode
 import com.jnj.vaccinetracker.visit.dialog.DosingOutOfWindowDialog
-import com.jnj.vaccinetracker.visit.dialog.RescheduleVisitDialog
 import com.jnj.vaccinetracker.visit.dialog.VisitRegisteredSuccessDialog
 import com.jnj.vaccinetracker.visit.screens.ContraindicationsActivity
-import com.jnj.vaccinetracker.visit.screens.VisitVaccinesFragment
 import com.jnj.vaccinetracker.visit.screens.VisitCaptureDataFragment
+import com.jnj.vaccinetracker.visit.screens.VisitVaccinesFragment
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 
@@ -95,7 +93,10 @@ interface AndroidModule {
     fun bindParticipantFlowAddOrSearchFragment(): ParticipantFlowAddOrSearchFragment
 
     @ContributesAndroidInjector
-    fun bindRegisterParticipantAdministeredVaccinesFragment(): RegisterParticipantAdministeredVaccinesFragment
+    fun bindRegisterParticipantAdministeredVaccinesFragment(): HistoricalDataForVisitTypeFragment
+
+    @ContributesAndroidInjector
+    fun bindRegisterParticipantHistoricalDataFragment(): RegisterParticipantHistoricalDataFragment
 
     @ContributesAndroidInjector
     fun bindLoginActivity(): LoginActivity
@@ -152,15 +153,18 @@ interface AndroidModule {
     fun bindHomeLocationPickerDialog(): HomeLocationPickerDialog
 
     @ContributesAndroidInjector
+    fun bindDialogVaccineBarcode(): DialogVaccineBarcode
+
+    @ContributesAndroidInjector
     fun bindRegisterParticipantSuccessfulDialog(): RegisterParticipantSuccessfulDialog
     @ContributesAndroidInjector
     fun bindVaccineDialog(): VaccineDialog
 
     @ContributesAndroidInjector
-    fun bindDialogVaccineBarcode(): DialogVaccineBarcode
+    fun bindRegisterParticipantConfirmNoTelephoneDialog(): RegisterParticipantConfirmNoTelephoneDialog
 
     @ContributesAndroidInjector
-    fun bindRegisterParticipantConfirmNoTelephoneDialog(): RegisterParticipantConfirmNoTelephoneDialog
+    fun bindRegisterParticipantHasChildEverVaccinatedDialog(): RegisterParticipantHasChildEverVaccinatedDialog
 
     @ContributesAndroidInjector
     fun bindRegisterParticipantIdNotMatchingDialog(): RegisterParticipantIdNotMatchingDialog
@@ -178,10 +182,10 @@ interface AndroidModule {
     fun bindVisitActivity(): VisitActivity
 
     @ContributesAndroidInjector
-    fun bindVisitVaccinesFragment(): VisitVaccinesFragment
+    fun bindContraindicationsActivity(): ContraindicationsActivity
 
     @ContributesAndroidInjector
-    fun bindContraindicationsFragment(): ContraindicationsActivity
+    fun bindVisitVaccinesFragment(): VisitVaccinesFragment
 
     @ContributesAndroidInjector
     fun bindVisitCaptureDataFragment(): VisitCaptureDataFragment
@@ -193,16 +197,7 @@ interface AndroidModule {
     fun bindDosingOutOfWindowDialog(): DosingOutOfWindowDialog
 
     @ContributesAndroidInjector
-    fun bindDialogScheduleMissingSubstances(): DialogScheduleMissingSubstances
-
-    @ContributesAndroidInjector
-    fun bindDatePickerDialog(): DatePickerDialog
-
-    @ContributesAndroidInjector
     fun bindVisitRegisteredSuccessDialog(): VisitRegisteredSuccessDialog
-
-    @ContributesAndroidInjector
-    fun bindRescheduleVisitDialog(): RescheduleVisitDialog
 
     @ContributesAndroidInjector
     fun bindVaccineTrackerSyncAndroidService(): SyncAndroidService
@@ -228,6 +223,4 @@ interface AndroidModule {
     @ContributesAndroidInjector
     fun bindConfirmBackPressDialog(): ConfirmStopServiceDialog
 
-    @ContributesAndroidInjector
-    fun bindRegisterParticipantIsChildNewbornDialog(): RegisterParticipantHasChildEverVaccinatedDialog
 }
