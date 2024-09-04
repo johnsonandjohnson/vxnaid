@@ -5,5 +5,8 @@ data class SubstanceDataModel(
     val label: String,
     val category: String,
     val routeOfAdministration: String,
+    val group: String,
+    val maximumAgeInWeeks: Int?,
+    val minimumWeeksNumberAfterPreviousDose: Int?,
     var obsDate: String? = null
 )

@@ -64,10 +64,6 @@ object Constants {
     const val MANUFACTURER_NAME_STR = "Manufacturer"
     const val DATE_STR = "Date"
 
-    const val STATIC_LOCATION = "Static"
-    const val OUTREACH_LOCATION = "Outreach"
-    const val SCHOOL_LOCATION = "School"
-
     const val VISIT_TYPE_AT_BIRTH = "At Birth"
     const val VISIT_TYPE_SIX_WEEKS = "6 weeks"
     const val VISIT_TYPE_TEN_WEEKS = "10 weeks"
@@ -85,6 +81,9 @@ object Constants {
         VISIT_TYPE_EIGHTEEN_MONTHS,
         VISIT_TYPE_TWO_YEARS
     )
+
+    const val REFERRAL_CLINIC_CONCEPT_NAME = "Referral Clinic Vxnaid";
+    const val REFERRAL_ADDITIONAL_INFO_CONCEPT_NAME = "Referral Additional Info Vxnaid";
 
     const val SUBSTANCES_AND_DATES_STR = "substancesAndDates"
     const val OTHER_SUBSTANCES_AND_VALUES_STR = "otherSubstancesAndValues"

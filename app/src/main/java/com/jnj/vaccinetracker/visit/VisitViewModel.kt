@@ -260,8 +260,7 @@ class VisitViewModel @Inject constructor(
             return
         }
 
-        if (newVisitDate == null && missingSubstances.isNotEmpty()
-        ) {
+        if (newVisitDate == null && missingSubstances.isNotEmpty()) {
             missingSubstancesListener(missingSubstances)
             return
         }

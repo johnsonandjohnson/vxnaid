@@ -5,9 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.RadioGroup
 import androidx.annotation.RequiresApi
-import androidx.core.widget.doOnTextChanged
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.LifecycleOwner
@@ -99,7 +97,8 @@ class VisitVaccinesFragment : BaseFragment(),
     }
 
     private fun onDosingVisitRegistrationSuccessful() {
-        VisitRegisteredSuccessDialog.create(viewModel.upcomingVisit.value, viewModel.participant.value).show(childFragmentManager, TAG_DIALOG_SUCCESS)
+        val dosingVisit = viewModel.dosingVisit.value
+        VisitRegisteredSuccessDialog.create(viewModel.upcomingVisit.value, viewModel.participant.value, dosingVisit!!.uuid).show(childFragmentManager, TAG_DIALOG_SUCCESS)
     }
 
     private fun onDosingVisitRegistrationFailed() {

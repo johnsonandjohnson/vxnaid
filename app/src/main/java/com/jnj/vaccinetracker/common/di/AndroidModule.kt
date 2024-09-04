@@ -42,12 +42,16 @@ import com.jnj.vaccinetracker.splash.SplashActivity
 import com.jnj.vaccinetracker.sync.presentation.SyncAndroidService
 import com.jnj.vaccinetracker.update.UpdateDialog
 import com.jnj.vaccinetracker.visit.VisitActivity
+import com.jnj.vaccinetracker.common.dialogs.DatePickerDialog
+import com.jnj.vaccinetracker.visit.dialog.DialogScheduleMissingSubstances
 import com.jnj.vaccinetracker.visit.dialog.DialogVaccineBarcode
 import com.jnj.vaccinetracker.visit.dialog.DosingOutOfWindowDialog
+import com.jnj.vaccinetracker.visit.dialog.RescheduleVisitDialog
 import com.jnj.vaccinetracker.visit.dialog.VisitRegisteredSuccessDialog
 import com.jnj.vaccinetracker.visit.screens.ContraindicationsActivity
-import com.jnj.vaccinetracker.visit.screens.VisitCaptureDataFragment
+import com.jnj.vaccinetracker.visit.screens.ReferralActivity
 import com.jnj.vaccinetracker.visit.screens.VisitVaccinesFragment
+import com.jnj.vaccinetracker.visit.screens.VisitCaptureDataFragment
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 
@@ -197,7 +201,16 @@ interface AndroidModule {
     fun bindDosingOutOfWindowDialog(): DosingOutOfWindowDialog
 
     @ContributesAndroidInjector
+    fun bindDialogScheduleMissingSubstances(): DialogScheduleMissingSubstances
+
+    @ContributesAndroidInjector
+    fun bindDatePickerDialog(): DatePickerDialog
+
+    @ContributesAndroidInjector
     fun bindVisitRegisteredSuccessDialog(): VisitRegisteredSuccessDialog
+
+    @ContributesAndroidInjector
+    fun bindRescheduleVisitDialog(): RescheduleVisitDialog
 
     @ContributesAndroidInjector
     fun bindVaccineTrackerSyncAndroidService(): SyncAndroidService
@@ -223,4 +236,9 @@ interface AndroidModule {
     @ContributesAndroidInjector
     fun bindConfirmBackPressDialog(): ConfirmStopServiceDialog
 
+    @ContributesAndroidInjector
+    fun bindRegisterParticipantIsChildNewbornDialog(): RegisterParticipantHasChildEverVaccinatedDialog
+
+    @ContributesAndroidInjector
+    fun bindReferralFlowActivity(): ReferralActivity
 }

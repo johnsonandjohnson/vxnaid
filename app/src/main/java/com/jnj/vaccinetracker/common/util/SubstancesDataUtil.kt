@@ -22,27 +22,6 @@ class SubstancesDataUtil {
 
     companion object {
 
-        private const val HEP_B_BD_VACCINE_CONCEPT_NAME = "Hep B BD Vxnaid"
-        private const val BCG_VACCINE_CONCEPT_NAME = "BCG Vxnaid"
-        private const val POLIO_0_VACCINE_CONCEPT_NAME = "Polio 0 Vxnaid"
-        private const val POLIO_1_VACCINE_CONCEPT_NAME = "Polio 1 Vxnaid"
-        private const val POLIO_2_VACCINE_CONCEPT_NAME = "Polio 2 Vxnaid"
-        private const val POLIO_3_VACCINE_CONCEPT_NAME = "Polio 3 Vxnaid"
-        private const val ROTA_1_VACCINE_CONCEPT_NAME = "Rota 1 Vxnaid"
-        private const val ROTA_2_VACCINE_CONCEPT_NAME = "Rota 2 Vxnaid"
-        private const val ROTA_3_VACCINE_CONCEPT_NAME = "Rota 3 Vxnaid"
-        private const val PCV_1_VACCINE_CONCEPT_NAME = "PCV 1 Vxnaid"
-        private const val PCV_2_VACCINE_CONCEPT_NAME = "PCV 2 Vxnaid"
-        private const val PCV_3_VACCINE_CONCEPT_NAME = "PCV 3 Vxnaid"
-        private const val DPT_HEB_1_VACCINE_CONCEPT_NAME = "DPT-HepB-Hib 1 Vxnaid"
-        private const val DPT_HEB_2_VACCINE_CONCEPT_NAME = "DPT-HepB-Hib 2 Vxnaid"
-        private const val DPT_HEB_3_VACCINE_CONCEPT_NAME = "DPT-HepB-Hib 3 Vxnaid"
-        private const val IPV_1_VACCINE_CONCEPT_NAME = "IPV 1 Vxnaid"
-        private const val IPV_2_VACCINE_CONCEPT_NAME = "IPV 2 Vxnaid"
-        private const val MR_1_VACCINE_CONCEPT_NAME = "Measles Rubella 1 (MR1) Vxnaid"
-        private const val MR_2_VACCINE_CONCEPT_NAME = "Measles Rubella 2 (MR2) Vxnaid"
-        private const val YELLOW_FEVER_VACCINE_CONCEPT_NAME = "Yellow Fever Vxnaid"
-
         @RequiresApi(Build.VERSION_CODES.O)
         suspend fun getSubstancesDataForCurrentVisit(
             participantBirthDate: String,
@@ -56,7 +35,9 @@ class SubstancesDataUtil {
             substancesConfig.forEach { substance ->
                 val minWeekNumber = substance.weeksAfterBirth - substance.weeksAfterBirthLowWindow
                 val maxWeekNumber = substance.weeksAfterBirth + substance.weeksAfterBirthUpWindow
-                if (childAgeInWeeks in minWeekNumber..maxWeekNumber) {
+                if (childAgeInWeeks in minWeekNumber..maxWeekNumber &&
+                    !isSubstanceAlreadyApplied(participantVisits, substance.conceptName)
+                ) {
                     substanceDataModelList.add(
                         getSingleSubstanceData(
                             substance,
@@ -68,9 +49,13 @@ class SubstancesDataUtil {
                 }
             }
 
-            val filteredResultList = applyVaccinesCatchUpSchedule(substanceDataModelList, childAgeInWeeks, participantVisits).toMutableList()
-            handleHepBBDVaccine(filteredResultList, childAgeInWeeks, participantVisits)
-            handleBCGVaccine(filteredResultList, participantVisits)
+            val resultListWithoutDuplicates = substanceDataModelList.distinctBy { it.conceptName }
+            val filteredResultList = applyVaccinesCatchUpSchedule(
+                resultListWithoutDuplicates,
+                childAgeInWeeks,
+                participantVisits,
+                substancesGroupConfig
+            ).toMutableList()
 
             return filteredResultList.filter { it.conceptName != "" }
         }
@@ -107,18 +92,23 @@ class SubstancesDataUtil {
                     )
                 }
             }
-            return substanceDataModelList.filter { it.conceptName != "" }
+            return substanceDataModelList.filter { it.conceptName != "" }.distinctBy { it.conceptName }
         }
 
         @RequiresApi(Build.VERSION_CODES.O)
         fun isTimeIntervalMaintained(
-            previousVaccineConceptName: String,
+            previousDoseConceptName: String?,
             participantVisits: List<VisitDetail>,
-            weeksTimeInterval: Int
+            minimumWeeksNumberAfterPreviousDose: Int?
         ): Boolean {
+
+            if (previousDoseConceptName == null || minimumWeeksNumberAfterPreviousDose == null) {
+                return true
+            }
+
             val vaccineDates = participantVisits.flatMap { visitDetail ->
                 visitDetail.observations.filter { (key, _) ->
-                    key == previousVaccineConceptName + " ${Constants.DATE_STR}"
+                    key == previousDoseConceptName + " ${Constants.DATE_STR}"
                 }.mapNotNull {
                     DateUtil.convertStringToDate(it.value.value, DateFormat.FORMAT_DATE.toString())
                 }
@@ -126,87 +116,29 @@ class SubstancesDataUtil {
 
             val mostRecentVaccineDate = vaccineDates.maxOrNull() ?: return false
             val weeksSinceVaccine = ChronoUnit.WEEKS.between(
-                mostRecentVaccineDate.toInstant().atZone(ZoneId.of("UTC")).toLocalDateTime(),
+                mostRecentVaccineDate.toInstant().atZone(ZoneId.of(Constants.UTC_TIME_ZONE_NAME))
+                    .toLocalDateTime(),
                 LocalDateTime.now()
             )
 
-            return weeksSinceVaccine >= weeksTimeInterval
+            return weeksSinceVaccine >= minimumWeeksNumberAfterPreviousDose
         }
 
         @RequiresApi(Build.VERSION_CODES.O)
         fun applyVaccinesCatchUpSchedule(
             substances: List<SubstanceDataModel>,
             childAgeInWeeks: Int,
-            participantVisits: List<VisitDetail>
+            participantVisits: List<VisitDetail>,
+            substancesGroupConfig: SubstancesGroupConfig
         ): List<SubstanceDataModel> {
             return substances.filter { substance ->
-                when (substance.conceptName) {
-                    HEP_B_BD_VACCINE_CONCEPT_NAME -> {
-                        childAgeInWeeks <= 6
-                    }
-
-                    ROTA_1_VACCINE_CONCEPT_NAME -> {
-                        childAgeInWeeks <= 104
-                    }
-
-                    POLIO_2_VACCINE_CONCEPT_NAME -> {
-                        isTimeIntervalMaintained(POLIO_1_VACCINE_CONCEPT_NAME, participantVisits, 4)
-                    }
-
-                    PCV_2_VACCINE_CONCEPT_NAME -> {
-                        isTimeIntervalMaintained(PCV_1_VACCINE_CONCEPT_NAME, participantVisits, 4)
-                    }
-
-                    DPT_HEB_2_VACCINE_CONCEPT_NAME -> {
+                val previousDoseConceptName = findPreviousDoseName(substance, substancesGroupConfig)
+                (substance.maximumAgeInWeeks == null || childAgeInWeeks <= substance.maximumAgeInWeeks) &&
                         isTimeIntervalMaintained(
-                            DPT_HEB_1_VACCINE_CONCEPT_NAME,
+                            previousDoseConceptName,
                             participantVisits,
-                            4
+                            substance.minimumWeeksNumberAfterPreviousDose
                         )
-                    }
-
-                    ROTA_2_VACCINE_CONCEPT_NAME -> {
-                        childAgeInWeeks <= 208 && isTimeIntervalMaintained(
-                            ROTA_1_VACCINE_CONCEPT_NAME,
-                            participantVisits,
-                            4
-                        )
-                    }
-
-                    POLIO_3_VACCINE_CONCEPT_NAME -> {
-                        isTimeIntervalMaintained(POLIO_2_VACCINE_CONCEPT_NAME, participantVisits, 4)
-                    }
-
-                    PCV_3_VACCINE_CONCEPT_NAME -> {
-                        isTimeIntervalMaintained(PCV_2_VACCINE_CONCEPT_NAME, participantVisits, 4)
-                    }
-
-                    DPT_HEB_3_VACCINE_CONCEPT_NAME -> {
-                        isTimeIntervalMaintained(
-                            DPT_HEB_2_VACCINE_CONCEPT_NAME,
-                            participantVisits,
-                            4
-                        )
-                    }
-
-                    ROTA_3_VACCINE_CONCEPT_NAME -> {
-                        childAgeInWeeks <= 208 && isTimeIntervalMaintained(
-                            ROTA_2_VACCINE_CONCEPT_NAME,
-                            participantVisits,
-                            4
-                        )
-                    }
-
-                    MR_1_VACCINE_CONCEPT_NAME, YELLOW_FEVER_VACCINE_CONCEPT_NAME -> {
-                        childAgeInWeeks <= 36
-                    }
-
-                    MR_2_VACCINE_CONCEPT_NAME -> {
-                        isTimeIntervalMaintained(MR_1_VACCINE_CONCEPT_NAME, participantVisits, 4)
-                    }
-
-                    else -> true
-                }
             }
         }
 
@@ -221,7 +153,10 @@ class SubstancesDataUtil {
                         substance.conceptName,
                         substance.label,
                         substance.category,
-                        substance.routeOfAdministration
+                        substance.routeOfAdministration,
+                        substance.group,
+                        substance.maximumAgeInWeeks,
+                        substance.minimumWeeksNumberAfterPreviousDose
                     )
                 )
             }
@@ -295,15 +230,19 @@ class SubstancesDataUtil {
         ): SubstanceDataModel {
             val group =
                 substancesGroupConfig.find { substanceGroup -> substanceGroup.substanceName == substance.group }
-            val earlierElements =
+            val earlierDoses =
                 group?.options?.takeWhile { it != substance.conceptName }?.toMutableList()
                     ?: mutableListOf()
             if (group?.options?.contains(substance.conceptName) == true) {
-                earlierElements.add(substance.conceptName)
+                earlierDoses.add(substance.conceptName)
             }
             var substanceToBeAdministered = substance.conceptName
-            for (item in earlierElements) {
-                if (participantVisits != null && isSubstanceAlreadyApplied(participantVisits, item)) {
+            for (item in earlierDoses) {
+                if (participantVisits != null && isSubstanceAlreadyApplied(
+                        participantVisits,
+                        item
+                    )
+                ) {
                     substanceToBeAdministered = ""
                 } else {
                     substanceToBeAdministered = item
@@ -318,7 +257,10 @@ class SubstancesDataUtil {
                 substanceToBeAdministeredObject?.conceptName ?: "",
                 substanceToBeAdministeredObject?.label ?: "",
                 substanceToBeAdministeredObject?.category ?: "",
-                substanceToBeAdministeredObject?.routeOfAdministration ?: ""
+                substanceToBeAdministeredObject?.routeOfAdministration ?: "",
+                substanceToBeAdministeredObject?.group ?: "",
+                substanceToBeAdministeredObject?.maximumAgeInWeeks,
+                substanceToBeAdministeredObject?.minimumWeeksNumberAfterPreviousDose
             )
         }
 
@@ -365,27 +307,20 @@ class SubstancesDataUtil {
             return visits.any { visit -> substanceName + " ${Constants.DATE_STR}" in visit.observations }
         }
 
-        private fun handleHepBBDVaccine(
-            substances: MutableList<SubstanceDataModel>,
-            childAgeInWeeks: Int,
-            participantVisits: List<VisitDetail>
-        ) {
-            val isHepBBDVaccineAlreadyApplied =
-                participantVisits.any { visit -> HEP_B_BD_VACCINE_CONCEPT_NAME + " ${Constants.DATE_STR}" in visit.observations }
-            if (isHepBBDVaccineAlreadyApplied || childAgeInWeeks > 6) {
-                substances.removeAll { it.conceptName == HEP_B_BD_VACCINE_CONCEPT_NAME }
-            }
-        }
+        private fun findPreviousDoseName(
+            substance: SubstanceDataModel,
+            substancesGroupConfig: SubstancesGroupConfig
+        ): String? {
+            val group = substancesGroupConfig.find { it.substanceName == substance.group }
+            val index = group?.options?.indexOf(substance.conceptName)
 
-        private fun handleBCGVaccine(
-            substances: MutableList<SubstanceDataModel>,
-            participantVisits: List<VisitDetail>
-        ) {
-            val isBCGVaccineAlreadyApplied =
-                participantVisits.any { visit -> BCG_VACCINE_CONCEPT_NAME + " ${Constants.DATE_STR}" in visit.observations }
-            if (isBCGVaccineAlreadyApplied) {
-                substances.removeAll { it.conceptName == BCG_VACCINE_CONCEPT_NAME }
+            val previousVaccineConceptName = if (index!! > 0) {
+                group.options[index - 1]
+            } else {
+                null
             }
+
+            return previousVaccineConceptName
         }
     }
 }

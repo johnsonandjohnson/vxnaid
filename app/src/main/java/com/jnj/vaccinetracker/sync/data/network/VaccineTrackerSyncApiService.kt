@@ -135,4 +135,7 @@ interface VaccineTrackerSyncApiService {
 
     @GET("$BIOMETRIC/identifiers/{name}")
     suspend fun getParticipantIdentifiers(@Path("name") identifierTypeName: String): List<IdentifierDTO>
+
+    @POST("$BIOMETRIC/updateEncounterObservations/{visitUuid}")
+    suspend fun updateEncounterObservationsByVisit(@Path("visitUuid") visitUuid: String, @Body obsToAdd: Map<String, String>)
 }

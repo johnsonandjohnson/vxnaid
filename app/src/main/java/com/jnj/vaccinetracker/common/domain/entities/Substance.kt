@@ -16,6 +16,8 @@ data class Substance(
     val weeksAfterBirth: Int,
     val weeksAfterBirthLowWindow: Int,
     val weeksAfterBirthUpWindow: Int,
+    val maximumAgeInWeeks: Int?,
+    val minimumWeeksNumberAfterPreviousDose: Int?,
     val group: String,
     val routeOfAdministration: String,
     val category: String

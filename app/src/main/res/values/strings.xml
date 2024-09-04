@@ -396,4 +396,13 @@
     <string name="participant_registration_historic_visits_title">Please complete the data for all past visits:</string>
     <string name="vaccine_never_administered">Never administered</string>
     <string name="participant_registration_historical_data_description">Please capture historical data:</string>
+    <string name="referral_page_title">Refer to clinic</string>
+    <string name="referral_page_refer_button_title">Refer</string>
+    <string name="referral_page_cancel_button_title">Do not refer</string>
+    <string name="referral_page_clinic_title">Select a clinic</string>
+    <string name="referral_page_additional_info_title">Additional information</string>
+    <string name="referral_page_additional_info_hint">Enter an additional information</string>
+    <string name="referral_page_clinic_not_selected_hint">Please select a clinic</string>
+    <string name="referral_page_success_referral_text">Child successfully referred to clinic:</string>
+    <string name="referral_page_failed_referral_text">Error while referring a child</string>
 </resources>
