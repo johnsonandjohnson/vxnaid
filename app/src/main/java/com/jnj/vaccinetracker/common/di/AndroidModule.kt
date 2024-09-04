@@ -168,9 +168,6 @@ interface AndroidModule {
     fun bindRegisterParticipantConfirmNoTelephoneDialog(): RegisterParticipantConfirmNoTelephoneDialog
 
     @ContributesAndroidInjector
-    fun bindRegisterParticipantHasChildEverVaccinatedDialog(): RegisterParticipantHasChildEverVaccinatedDialog
-
-    @ContributesAndroidInjector
     fun bindRegisterParticipantIdNotMatchingDialog(): RegisterParticipantIdNotMatchingDialog
 
     @ContributesAndroidInjector
