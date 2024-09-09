@@ -90,7 +90,7 @@ class HistoricalDataForVisitTypeFragment :
       binding.recyclerView.layoutManager = LinearLayoutManager(requireContext())
       binding.recyclerView.adapter = substanceAdapter
 
-      otherSubstanceAdapter = OtherSubstanceItemAdapter(mutableListOf(), this)
+      otherSubstanceAdapter = OtherSubstanceItemAdapter(mutableListOf(), this, flowViewModel.participant.value!!)
       binding.recyclerViewOtherSubstances.layoutManager = LinearLayoutManager(requireContext())
       binding.recyclerViewOtherSubstances.adapter = otherSubstanceAdapter
    }

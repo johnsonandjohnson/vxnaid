@@ -3,8 +3,8 @@ package com.jnj.vaccinetracker.visit.zscore
 import com.jnj.vaccinetracker.common.domain.entities.Gender
 
 class WeightZScoreCalculator(
-        private val weight: Int?, gender: Gender, birtDayText: String,
-): ZScoreCalculator(gender, birtDayText) {
+        private val weight: String?, gender: Gender, birthDayText: String,
+): ZScoreCalculator(gender, birthDayText) {
     companion object {
         const val SEVERELY_UNDERWEIGHT = "Severely Underweight"
         const val UNDERWEIGHT = "Underweight"

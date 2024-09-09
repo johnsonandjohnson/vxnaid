@@ -99,7 +99,7 @@ class VisitCaptureDataFragment :
     }
 
     private fun setOtherSubstancesRecyclerView() {
-        otherSubstancesAdapter = OtherSubstanceItemAdapter(mutableListOf(), this)
+        otherSubstancesAdapter = OtherSubstanceItemAdapter(mutableListOf(), this, viewModel.participant.value!!)
         binding.recyclerViewOtherSubstances.layoutManager = LinearLayoutManager(requireContext())
         binding.recyclerViewOtherSubstances.adapter = otherSubstancesAdapter
     }

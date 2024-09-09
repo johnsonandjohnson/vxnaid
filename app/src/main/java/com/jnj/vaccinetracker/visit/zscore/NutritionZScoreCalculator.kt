@@ -10,8 +10,8 @@ class NutritionZScoreCalculator(
         private val height: Int?,
         private val isOedema: Boolean?,
         gender: Gender,
-        birtDayText: String
-): ZScoreCalculator(gender, birtDayText) {
+        birthDayText: String
+): ZScoreCalculator(gender, birthDayText) {
    companion object {
       const val NORMAL = "Normal Nutrition Status" // Green
       const val MODERATE = "Moderate Acute Malnutrition" // Yellow

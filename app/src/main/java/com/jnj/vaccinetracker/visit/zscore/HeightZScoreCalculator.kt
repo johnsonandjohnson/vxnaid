@@ -3,8 +3,8 @@ package com.jnj.vaccinetracker.visit.zscore
 import com.jnj.vaccinetracker.common.domain.entities.Gender
 
 class HeightZScoreCalculator(
-        private val height: Int?, gender: Gender, birtDayText: String,
-): ZScoreCalculator(gender, birtDayText) {
+        private val height: Int?, gender: Gender, birthDayText: String,
+): ZScoreCalculator(gender, birthDayText) {
     companion object {
         const val NORMAL = "Normal"
         const val STUNTING = "Stunting"

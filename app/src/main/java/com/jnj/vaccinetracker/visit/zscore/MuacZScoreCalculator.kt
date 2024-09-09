@@ -10,8 +10,8 @@ import java.util.Locale
 import com.jnj.vaccinetracker.common.domain.entities.Gender
 
 class MuacZScoreCalculator(
-        private val muac: Int?, gender: Gender, birtDayText: String,
-) : ZScoreCalculator(gender, birtDayText) {
+        private val muac: Int?, gender: Gender, birthDayText: String,
+) : ZScoreCalculator(gender, birthDayText) {
    companion object {
       const val NORMAL_NUTRITION_STATUS = "Normal Nutrition Status" // green
       const val MODERATE_NUTRITION_STATUS = "Moderate Acute Malnutrition" // yellow
@@ -62,7 +62,7 @@ class MuacZScoreCalculator(
       // Perform calculations based on weight, gender, and age to calculate Z-score
       // Replace the placeholder calculation with actual logic using reference data or models
       if (muac == null) return null
-      if (!shouldCalculateMuacZScore(birtDayText)) return null
+      if (!shouldCalculateMuacZScore(birthDayText)) return null
       return (Math.random() * 8) - 4 // Example Z-score between -4 and +4
    }
 

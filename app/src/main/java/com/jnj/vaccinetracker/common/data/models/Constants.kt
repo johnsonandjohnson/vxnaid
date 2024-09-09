@@ -87,4 +87,6 @@ object Constants {
 
     const val SUBSTANCES_AND_DATES_STR = "substancesAndDates"
     const val OTHER_SUBSTANCES_AND_VALUES_STR = "otherSubstancesAndValues"
+
+    const val CONCEPT_NAME_WEIGHT_FOR_AGE_Z_SCORE = "Weight for age Z score"
 }
