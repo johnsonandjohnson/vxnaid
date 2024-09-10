@@ -101,6 +101,8 @@ interface VaccineTrackerSyncApiDataSource : VaccineTrackerApiDataSourceBase {
     suspend fun updateEncounterObservationsByVisit(visitUuid: String, obsToAdd: Map<String, String>)
 
     suspend fun updateParticipantLocation(participantUuid: String, newLocationUuid: String)
+
+    suspend fun updateVisitAttributes(visitUuid: String, visitAttributes: Map<String, String>)
 }
 
 @Singleton
@@ -324,5 +326,9 @@ class VaccineTrackerSyncApiDataSourceDefault @Inject constructor(
 
     override suspend fun updateParticipantLocation(participantUuid: String, newLocationUuid: String) {
         apiService.updateParticipantLocation(participantUuid, newLocationUuid)
+    }
+
+    override suspend fun updateVisitAttributes(visitUuid: String, visitAttributes: Map<String, String>) {
+        apiService.updateVisitAttributes(visitUuid, visitAttributes)
     }
 }

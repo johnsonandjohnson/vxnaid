@@ -5,7 +5,6 @@ import com.jnj.vaccinetracker.common.data.models.ParticipantMatchDto
 import com.jnj.vaccinetracker.common.data.models.api.request.*
 import com.jnj.vaccinetracker.common.data.models.api.response.*
 import com.jnj.vaccinetracker.common.domain.entities.OtherSubstancesConfig
-import com.jnj.vaccinetracker.common.domain.entities.Substance
 import com.jnj.vaccinetracker.common.domain.entities.SubstancesConfig
 import com.jnj.vaccinetracker.common.domain.entities.SubstancesGroupConfig
 import com.jnj.vaccinetracker.sync.data.models.*
@@ -141,4 +140,7 @@ interface VaccineTrackerSyncApiService {
 
     @POST("$BIOMETRIC/updateParticipantLocation/{participantUuid}")
     suspend fun updateParticipantLocation(@Path("participantUuid") participantUuid: String, @Body newLocationUuid: String)
+
+    @POST("$BIOMETRIC/updateVisitAttributes/{visitUuid}")
+    suspend fun updateVisitAttributes(@Path("visitUuid") visitUuid: String, @Body visitAttributes: Map<String, String>)
 }

@@ -39,6 +39,7 @@ object Constants {
     const val OBSERVATION_TYPE_VISIT_HEIGHT = "Height (cm)"
     const val OBSERVATION_TYPE_VISIT_MUAC = "MUAC"
     const val OBSERVATION_TYPE_VISIT_OEDEMA = "Is Oedema"
+    const val RESCHEDULE_VISIT_REASON_ATTRIBUTE_TYPE_NAME = "Reschedule Visit Reason"
 
     // common attributes
     const val ATTRIBUTE_OPERATOR = "operatorUuid"

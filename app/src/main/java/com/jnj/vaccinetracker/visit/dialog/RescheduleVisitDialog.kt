@@ -28,9 +28,9 @@ import com.jnj.vaccinetracker.common.exceptions.OperatorUuidNotAvailableExceptio
 import com.jnj.vaccinetracker.common.helpers.findParent
 import com.jnj.vaccinetracker.common.ui.BaseDialogFragment
 import com.jnj.vaccinetracker.databinding.DialogRescheduleVisitBinding
-import com.jnj.vaccinetracker.participantflow.ParticipantFlowActivity
 import com.jnj.vaccinetracker.participantflow.model.ParticipantSummaryUiModel
 import com.jnj.vaccinetracker.register.dialogs.ScheduleVisitDatePickerDialog
+import com.jnj.vaccinetracker.sync.data.network.VaccineTrackerSyncApiDataSource
 import com.jnj.vaccinetracker.sync.data.repositories.SyncSettingsRepository
 import com.jnj.vaccinetracker.visit.screens.ContraindicationsViewModel
 import com.jnj.vaccinetracker.visit.screens.ReferralActivity
@@ -52,6 +52,7 @@ class RescheduleVisitDialog @Inject constructor() : BaseDialogFragment(), Schedu
    @Inject lateinit var syncSettingsRepository: SyncSettingsRepository
    @Inject lateinit var configurationManager: ConfigurationManager
    @Inject lateinit var visitManager: VisitManager
+   @Inject lateinit var vaccineTrackerSyncApiDataSource: VaccineTrackerSyncApiDataSource
    private lateinit var currentVisitUuid: String
 
    companion object {
@@ -92,6 +93,12 @@ class RescheduleVisitDialog @Inject constructor() : BaseDialogFragment(), Schedu
                validateDate()
                if (visitDate != null) {
                   createVisitUseCase.createVisit(buildNextVisitObject(participant, Date(visitDate!!.unixMillisLong)))
+
+                  if (rescheduleReasonEditText.text.toString().isNotEmpty()) {
+                     val attributesToAdd = mutableMapOf(Constants.RESCHEDULE_VISIT_REASON_ATTRIBUTE_TYPE_NAME to rescheduleReasonEditText.text.toString())
+                     vaccineTrackerSyncApiDataSource.updateVisitAttributes(currentVisitUuid, attributesToAdd)
+                  }
+
                   dismissAllowingStateLoss()
 
                   val intent = Intent(requireContext(), ReferralActivity::class.java).apply {
@@ -105,7 +112,6 @@ class RescheduleVisitDialog @Inject constructor() : BaseDialogFragment(), Schedu
             }
          }
       }
-
 
       binding.btnFinish.setOnClickListener {
          dismissAllowingStateLoss()
