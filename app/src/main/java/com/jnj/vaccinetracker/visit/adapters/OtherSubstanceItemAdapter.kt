@@ -5,6 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.CheckBox
 import android.widget.EditText
+import android.widget.FrameLayout
 import android.widget.LinearLayout
 import android.widget.RadioButton
 import android.widget.RadioGroup
@@ -14,7 +15,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.jnj.vaccinetracker.R
 import com.jnj.vaccinetracker.participantflow.model.ParticipantSummaryUiModel
 import com.jnj.vaccinetracker.visit.model.OtherSubstanceDataModel
-import com.jnj.vaccinetracker.visit.zscore.HardcodedOtherSubstanceConfig
+import com.jnj.vaccinetracker.visit.zscore.HardcodedZScore
 
 class OtherSubstanceItemAdapter(
     private val items: MutableList<OtherSubstanceDataModel>,
@@ -22,13 +23,24 @@ class OtherSubstanceItemAdapter(
     private val participant: ParticipantSummaryUiModel
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
+    var otherSubstanceValues: MutableMap<String, String>? = mutableMapOf()
+        set(value) {
+            field = value
+            // Notify only the HardcodedZScoreViewHolder items
+            for (i in items.indices) {
+                if (getItemViewType(i) == TYPE_HARDCODED_Z_SCORE) {
+                    notifyItemChanged(i)
+                }
+            }
+        }
+
     companion object {
         const val TYPE_TEXT = 0
         const val TYPE_RADIO = 1
         const val TYPE_MULTIPLE_RADIO = 2
         const val TYPE_NUMBER = 3
         const val TYPE_NUMBER_DECIMAL = 4
-        const val TYPE_HARDCODED = 5
+        const val TYPE_HARDCODED_Z_SCORE = 5
     }
 
     override fun getItemViewType(position: Int): Int {
@@ -38,7 +50,7 @@ class OtherSubstanceItemAdapter(
             "text", "" -> TYPE_TEXT
             "number" -> TYPE_NUMBER
             "numberDecimal" -> TYPE_NUMBER_DECIMAL
-            "hardcoded" -> TYPE_HARDCODED
+            "hardcodedZScore" -> TYPE_HARDCODED_Z_SCORE
             else -> TYPE_TEXT
         }
     }
@@ -65,9 +77,9 @@ class OtherSubstanceItemAdapter(
                 val view = LayoutInflater.from(parent.context).inflate(R.layout.other_substance_number_decimal_input, parent, false)
                 TextViewHolder(view)
             }
-            TYPE_HARDCODED -> {
+            TYPE_HARDCODED_Z_SCORE -> {
                 val view = LayoutInflater.from(parent.context).inflate(R.layout.other_substance_hardcoded_input, parent, false)
-                HardcodedViewHolder(view)
+                HardcodedZScoreViewHolder(view)
             }
             else -> throw IllegalArgumentException("Unknown view type")
         }
@@ -80,7 +92,7 @@ class OtherSubstanceItemAdapter(
             is TextViewHolder -> holder.bind(items[position])
             is RadioViewHolder -> holder.bind(items[position])
             is MultipleRadioViewHolder -> holder.bind(items[position])
-            is HardcodedViewHolder -> holder.bind(items[position])
+            is HardcodedZScoreViewHolder -> holder.bind(items[position])
         }
     }
 
@@ -117,7 +129,15 @@ class OtherSubstanceItemAdapter(
                         holder?.labelTextView?.error = null
                     }
                 }
-                // type hardcoded
+                TYPE_HARDCODED_Z_SCORE -> {
+                    val holder = recyclerView.findViewHolderForAdapterPosition(index) as? HardcodedZScoreViewHolder
+                    if (holder?.isEmpty != true) {
+                        holder?.onEmpty?.let { it() }
+                        hasEmptyItems = true
+                    } else {
+                        holder.onNotEmpty?.let { it() }
+                    }
+                }
             }
         }
         return hasEmptyItems
@@ -136,17 +156,22 @@ class OtherSubstanceItemAdapter(
         }
     }
 
-    inner class HardcodedViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-
+    inner class HardcodedZScoreViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        val frameLayout: FrameLayout = itemView.findViewById(R.id.frameLayout_hardcoded)
+        var isEmpty: Boolean = true
+        var onEmpty: (() -> Unit)? = null
+        var onNotEmpty: (() -> Unit)? = null
         fun bind(item: OtherSubstanceDataModel) {
-            val hardcodedClass: HardcodedOtherSubstanceConfig = HardcodedOtherSubstanceConfig.fromConceptName(item.conceptName)
-            hardcodedClass.setupView(itemView)
-            val input = hardcodedClass.getInput()
-            val value = hardcodedClass.getValue(input, participant.gender, participant.birthDateText)
-            listener.addOtherSubstance(item.conceptName, value)
+            frameLayout.removeAllViews()
+            val hardcodedClass: HardcodedZScore =
+                HardcodedZScore.fromConceptName(item.conceptName, participant.gender, participant.birthDateText)
+            hardcodedClass.setArguments(otherSubstanceValues)
+            hardcodedClass.setupView(itemView, listener)
+            isEmpty = hardcodedClass.isEmpty()
+            onEmpty = { hardcodedClass.onEmpty() }
+            onNotEmpty = { hardcodedClass.onNotEmpty() }
         }
     }
-
     inner class RadioViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val labelTextView: TextView = itemView.findViewById(R.id.label_otherSubstance)
         private val radioGroup: RadioGroup = itemView.findViewById(R.id.radioGroup_otherSubstance)

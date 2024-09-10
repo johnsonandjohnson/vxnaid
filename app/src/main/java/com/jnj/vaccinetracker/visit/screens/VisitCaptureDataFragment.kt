@@ -80,6 +80,9 @@ class VisitCaptureDataFragment :
 
             }
         }
+        viewModel.selectedOtherSubstances.observe(lifecycleOwner) {value ->
+            otherSubstancesAdapter.otherSubstanceValues = value
+        }
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {

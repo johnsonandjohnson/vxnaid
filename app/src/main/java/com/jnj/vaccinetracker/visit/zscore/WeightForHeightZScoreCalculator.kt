@@ -5,10 +5,10 @@ import com.jnj.vaccinetracker.R
 import com.jnj.vaccinetracker.common.domain.entities.Gender
 import kotlin.random.Random
 
-class NutritionZScoreCalculator(
-        private val weight: Int?,
-        private val height: Int?,
-        private val isOedema: Boolean?,
+class WeightForHeightZScoreCalculator(
+        private val weight: String?,
+        private val height: String?,
+        private val isOedema: String?,
         gender: Gender,
         birthDayText: String
 ): ZScoreCalculator(gender, birthDayText) {
@@ -21,7 +21,7 @@ class NutritionZScoreCalculator(
    override fun calculateZScoreAndRating(): ZScoreAndRating? {
       val zScore = this.zScore ?: return null
       val rating = when {
-         (zScore <= -3) && isOedema == true -> SEVERE_WITH_OEDEMA
+         (zScore <= -3) && isOedema.toBoolean() -> SEVERE_WITH_OEDEMA
          zScore <= -3 -> SEVERE_WITHOUT_OEDEMA
          zScore < -2.0 -> MODERATE
          else -> NORMAL
@@ -33,8 +33,8 @@ class NutritionZScoreCalculator(
       // Placeholder calculation (random value for demonstration)
       // Perform calculations based on height, gender, and age to calculate Z-score
       // Replace the placeholder calculation with actual logic using reference data or models
-      if (height == null || weight == null) return null
-      if (weight < 30) return -3.0
+      if (height.isNullOrEmpty() || weight.isNullOrEmpty()) return null
+      if (weight.toDouble() < 30) return -3.0
       return Random.nextDouble(-2.9, 4.0)
    }
 

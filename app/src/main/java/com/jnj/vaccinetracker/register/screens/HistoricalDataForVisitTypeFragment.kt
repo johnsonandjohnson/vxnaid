@@ -102,6 +102,9 @@ class HistoricalDataForVisitTypeFragment :
       viewModel.otherSubstancesData.observe(lifecycleOwner) { otherSubstanceItems ->
          otherSubstanceAdapter.updateItemsList(otherSubstanceItems)
       }
+      viewModel.otherSubstancesAndValues.observe(lifecycleOwner){value ->
+         otherSubstanceAdapter.otherSubstanceValues = value
+      }
    }
 
    private fun setupClickListeners() {
