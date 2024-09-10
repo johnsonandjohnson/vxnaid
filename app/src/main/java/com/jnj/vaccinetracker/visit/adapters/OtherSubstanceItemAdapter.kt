@@ -131,11 +131,11 @@ class OtherSubstanceItemAdapter(
                 }
                 TYPE_HARDCODED_Z_SCORE -> {
                     val holder = recyclerView.findViewHolderForAdapterPosition(index) as? HardcodedZScoreViewHolder
-                    if (holder?.isEmpty != true) {
-                        holder?.onEmpty?.let { it() }
+                    if (holder?.isEmpty == true) {
+                        holder.onEmpty?.invoke()
                         hasEmptyItems = true
                     } else {
-                        holder.onNotEmpty?.let { it() }
+                        holder?.onNotEmpty?.invoke()
                     }
                 }
             }
@@ -152,6 +152,7 @@ class OtherSubstanceItemAdapter(
             inputEditText.addTextChangedListener { editable ->
                 val value = editable.toString()
                 listener.addOtherSubstance(item.conceptName, value)
+                labelTextView.error = null
             }
         }
     }
@@ -168,8 +169,8 @@ class OtherSubstanceItemAdapter(
             hardcodedClass.setArguments(otherSubstanceValues)
             hardcodedClass.setupView(itemView, listener)
             isEmpty = hardcodedClass.isEmpty()
-            onEmpty = { hardcodedClass.onEmpty() }
-            onNotEmpty = { hardcodedClass.onNotEmpty() }
+            onEmpty = hardcodedClass.onEmpty()
+            onNotEmpty = hardcodedClass.onNotEmpty()
         }
     }
     inner class RadioViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -193,6 +194,7 @@ class OtherSubstanceItemAdapter(
                 val selectedIndex = selectedRadioButton.tag as Int
                 val selectedValue = item.options[selectedIndex]
                 listener.addOtherSubstance(item.conceptName, selectedValue)
+                labelTextView.error = null
             }
         }
     }

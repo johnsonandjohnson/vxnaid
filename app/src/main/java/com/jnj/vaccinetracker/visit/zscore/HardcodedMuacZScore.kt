@@ -28,7 +28,9 @@ class HardcodedMuacZScore(
    }
 
    override fun onEmpty(): () -> Unit {
-      return {labelTextView?.error = "Fill data"}
+      return {
+         labelTextView?.error = "Fill data"
+      }
    }
 
    override fun onNotEmpty(): () -> Unit {
