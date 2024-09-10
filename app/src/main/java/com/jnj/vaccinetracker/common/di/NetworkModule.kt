@@ -1,9 +1,9 @@
 package com.jnj.vaccinetracker.common.di
 
 import android.app.Application
-import com.icapps.niddler.core.AndroidNiddler
-import com.icapps.niddler.core.Niddler
-import com.icapps.niddler.interceptor.okhttp.NiddlerOkHttpInterceptor
+import com.chimerapps.niddler.core.AndroidNiddler
+import com.chimerapps.niddler.core.Niddler
+import com.chimerapps.niddler.interceptor.okhttp.NiddlerOkHttpInterceptor
 import com.jnj.vaccinetracker.common.data.network.BaseUrlInterceptor
 import com.jnj.vaccinetracker.common.data.network.DeviceIdInterceptor
 import com.jnj.vaccinetracker.common.data.network.VaccineTrackerApiService

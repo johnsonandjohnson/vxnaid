@@ -81,7 +81,7 @@ class SyncBanner @JvmOverloads constructor(
         }
 
     private fun getSelectableItemBackground(): Drawable? {
-        val a = context.obtainStyledAttributes(intArrayOf(R.attr.selectableItemBackground))
+        val a = context.obtainStyledAttributes(intArrayOf(androidx.appcompat.R.attr.selectableItemBackground))
         return try {
             a.getDrawable(0)
         } finally {

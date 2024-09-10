@@ -1,6 +1,6 @@
 def buildConfig = [
-        compileSdkVersion: 31,
-        targetSdkVersion : 30,
+        compileSdkVersion: 34,
+        targetSdkVersion : 34,
         minSdkVersion    : 21
 ]
 

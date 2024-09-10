@@ -73,7 +73,7 @@ app/src/main/java/com/jnj/vaccinetracker
 | [libphonenumber](https://github.com/google/libphonenumber)                | Phone number parsing and validation   | Apache-2.0                     |
 | [moshi](https://github.com/square/moshi)                                  | JSON parsing                          | Apache-2.0                     |
 | [neurotec](https://www.neurotechnology.com/verieye.html)                  | Neurotechnology SDK for iris scan     | License activation required    |
-| [niddler](https://github.com/icapps/niddler)                              | Network debugging tool (dev only)     | Apache-2.0                     |
+| [niddler](https://github.com/chimerapps/niddler)                          | Network debugging tool (dev only)     | Apache-2.0                     |
 | [retrofit](https://github.com/square/retrofit)                            | HTTP Client                           | Apache-2.0                     |
 | [rxjava](https://github.com/ReactiveX/RxJava)                             | Observable sequences                  | Apache-2.0                     |
 | [zxing](https://github.com/zxing/zxing)                                   | Barcode scanning library              | Apache-2.0                     |

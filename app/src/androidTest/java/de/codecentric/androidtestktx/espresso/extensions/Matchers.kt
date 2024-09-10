@@ -6,7 +6,6 @@ import androidx.test.espresso.matcher.ViewMatchers
 import de.codecentric.androidtestktx.common.appContext
 import de.codecentric.androidtestktx.common.stringOf
 import org.hamcrest.Description
-import org.hamcrest.Factory
 import org.hamcrest.Matcher
 import org.hamcrest.Matchers.allOf
 import org.hamcrest.Matchers.instanceOf
@@ -69,31 +68,9 @@ fun firstVisibleItem(matcher: Matcher<View>): Matcher<View> {
 /**
  * Tests if the argument is a string that contains a substring.
  */
-class StringContainsLowerCase(substring: String) : SubstringMatcher(substring) {
+class StringContainsLowerCase(substring: String) : SubstringMatcher("containing lower case", true, substring) {
     override fun evalSubstringOf(s: String): Boolean {
         return s.toLowerCase(Locale.ROOT).indexOf(substring.toLowerCase(Locale.ROOT)) >= 0
-    }
-
-    override fun relationship(): String {
-        return "containing lower case"
-    }
-
-    companion object {
-        /**
-         * Creates a matcher that matches if the examined [String] contains the specified
-         * [String] anywhere.
-         *
-         *
-         * For example:
-         * <pre>assertThat("myStringOfNote", containsString("ring"))</pre>
-         *
-         * @param substring
-         * the substring that the returned matcher will expect to find within any examined string
-         */
-        @Factory
-        fun containsStringLowerCase(substring: String): Matcher<String> {
-            return StringContainsLowerCase(substring)
-        }
     }
 }
 

@@ -20,7 +20,8 @@ class HeartBeatWakeUpService @Inject constructor(val context: Context) {
         val alarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
         // set alarm to upload the events
         val i = Intent(context, SyncAndroidService::class.java)
-        val pi = PendingIntent.getService(context, HEART_BEAT_REQUEST_CODE, i, PendingIntent.FLAG_CANCEL_CURRENT)
+        val pi = PendingIntent.getService(context, HEART_BEAT_REQUEST_CODE, i,
+            PendingIntent.FLAG_CANCEL_CURRENT or PendingIntent.FLAG_IMMUTABLE)
         alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, triggerStart, triggerInterval, pi)
     }
 

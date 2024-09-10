@@ -24,23 +24,20 @@ class SwappableOpenHelper(
         openHelperDelegate.close()
     }
 
-    override fun getDatabaseName(): String? {
-        return openHelperDelegate.databaseName
-    }
+    override val databaseName: String?
+        get() = openHelperDelegate.databaseName
 
     override fun setWriteAheadLoggingEnabled(enabled: Boolean) {
         openHelperDelegate.setWriteAheadLoggingEnabled(enabled)
     }
 
-    override fun getWritableDatabase(): SupportSQLiteDatabase {
-        return rethrowErrorsAsNative {
+    override val writableDatabase: SupportSQLiteDatabase
+        get() = rethrowErrorsAsNative {
             openHelperDelegate.writableDatabase.withoutSqlCipherException()
         }
-    }
 
-    override fun getReadableDatabase(): SupportSQLiteDatabase {
-        return rethrowErrorsAsNative {
+    override val readableDatabase: SupportSQLiteDatabase
+        get() = rethrowErrorsAsNative {
             openHelperDelegate.readableDatabase.withoutSqlCipherException()
         }
-    }
 }

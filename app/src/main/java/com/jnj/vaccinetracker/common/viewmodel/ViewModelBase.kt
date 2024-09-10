@@ -40,7 +40,7 @@ class EventChannel<E> {
 
     fun asFlow() = channel.receiveAsFlow()
     fun tryEmit(event: E) {
-        channel.offer(event)
+        channel.trySend(event)
     }
 }
 

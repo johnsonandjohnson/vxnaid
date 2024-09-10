@@ -121,7 +121,7 @@ class RegisterParticipantTakePictureFragment : BaseFragment() {
 
     @SuppressLint("ClickableViewAccessibility")
     private fun setupZoomAndTapToFocus() {
-        val scaleGestureDetector = ScaleGestureDetector(context, object : ScaleGestureDetector.SimpleOnScaleGestureListener() {
+        val scaleGestureDetector = ScaleGestureDetector(requireContext(), object : ScaleGestureDetector.SimpleOnScaleGestureListener() {
             override fun onScale(detector: ScaleGestureDetector): Boolean {
                 val scale = camera!!.cameraInfo.zoomState.value!!.zoomRatio * detector.scaleFactor
                 camera!!.cameraControl.setZoomRatio(scale)
